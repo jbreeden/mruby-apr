@@ -3,6 +3,8 @@ mruby-apr
 
 The [Apache Portable Runtime Project]((https://apr.apache.org/)) is a collection of "software libraries that provide a predictable and consistent interface to underlying platform-specific implementations." `mruby-apr` leverages the work done by the APR developers to provide cross-platform functions to mruby without having to repeat this work.
 
+Created as a component of the [lamina project](https://github.com/jbreeden/lamina).
+
 Building
 --------
 
