@@ -116,7 +116,7 @@ mrb_data_type apr_proc_data_type = {
    }
 
 extern "C" {
-   
+
    //<
    // # Class APR::Process
    //>
@@ -229,7 +229,7 @@ extern "C" {
 
       AprProc* data = GET_APR_PROC_DATA(self);
 
-      apr_status_t launch_status = 
+      apr_status_t launch_status =
          apr_proc_create(&data->proc, c_argv[0], c_argv.get(), NULL, data->proc_attr, data->pool);
 
       GUARD_APR_ERRNO(launch_status, c_argv[0]);
@@ -307,7 +307,7 @@ extern "C" {
 
       char* value;
       apr_status_t status = apr_env_get(&value, key_cstr, pool);
-      
+
       mrb_value result;
       if (status == APR_SUCCESS) {
          result = mrb_str_new_cstr(mrb, value);
@@ -397,7 +397,7 @@ extern "C" {
       mrb_define_method(mrb, apr_process_class, "pid", mrb_apr_proc_pid, MRB_ARGS_NONE());
 
       // APR::TCP Methods
-      mrb_define_module_function(mrb, apr_tcp_module, "get_open_tcp_port", mrb_apr_tcp_get_open_port, MRB_ARGS_NONE());
+      mrb_define_module_function(mrb, apr_tcp_module, "get_open_port", mrb_apr_tcp_get_open_port, MRB_ARGS_NONE());
 
       // ENV Object
       auto env = mrb_instance_new(mrb, mrb_obj_value(mrb->object_class));

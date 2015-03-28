@@ -8,16 +8,14 @@ The [Apache Portable Runtime Project]((https://apr.apache.org/) is a collection 
 Building
 --------
 
-NOTE: [APR](https://apr.apache.org/) is not included. You can download it [here](https://apr.apache.org/download.cgi). It uses cmake, so building on any platform should be easy.
-
-Once built, you can configure mruby to use it. This can be accomplished by adding a couple of lines to your `build_config.rb` file:
+To build this gem into your mruby instance, just download the repo and add a couple of lines to your `build_config.rb` file:
 
 ```Ruby
 MRuby::Build.new('host') do |conf|
   # ... Other configurations...
 
   # Include the mruby-apr gem
-  conf.gem "../mrbgems/mruby-apr"
+  conf.gem "PATH/TO/mruby-apr"
 
   # Call configure_muby_apr with the `conf` object
   # (This just sets the required compiler options)
