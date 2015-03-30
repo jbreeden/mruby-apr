@@ -60,6 +60,7 @@ Blocks until the process finishes <br/>
 Returns `self`
 
 # module APR::TCP
+
 ## `::get_open_port`
 Return an open TCP port number
 
@@ -72,4 +73,16 @@ Sets the value of the environemnt variable named `name` to `value`
 
 ## `#delete(name)`
 Deletes the environemnt variable named `name`
+
+# Module APR::System
+
+## `::sleep(count, unit)`
+- Args
+  + `count`: the number of `units` to sleep for (must be an integer)
+  + `unit`: One of
+    - :microseconds
+    - :milliseconds
+    - :seconds
+    - :minutes
+    - :hours
 

@@ -1,5 +1,8 @@
 #include <string>
 #include <memory>
+#include <thread>
+#include <chrono>
+#include <limits>
 #include "mruby_apr.h"
 #include "mruby.h"
 #include "mruby/variable.h"
@@ -434,6 +437,9 @@ extern "C" {
 
    //<
    // # module APR::TCP
+   //>
+
+   //<
    // ## `::get_open_port`
    // Return an open TCP port number
    //>
@@ -531,6 +537,60 @@ extern "C" {
       return result;
    }
 
+   //<
+   // # Module APR::System
+   //>
+
+   //<
+   // ## `::sleep(count, unit)`
+   // - Args
+   //   + `count`: the number of `units` to sleep for (must be an integer)
+   //   + `unit`: One of
+   //     - :microseconds
+   //     - :milliseconds
+   //     - :seconds
+   //     - :minutes
+   //     - :hours
+   //>
+   mrb_value
+   mrb_apr_system_sleep(mrb_state*  mrb, mrb_value self) {
+      mrb_int count;
+      mrb_sym unit;
+      mrb_get_args(mrb, "in", &count, &unit);
+
+      if (count < 0) {
+         mrb_raise(mrb, mrb->eStandardError_class, "Cannot sleep for negative time");
+         return mrb_nil_value();
+      }
+
+      if (count > LONG_MAX) {
+         mrb_raise(mrb, mrb->eStandardError_class, "Count too large to convert to long");
+         return mrb_nil_value();
+      }
+
+      if (SYM_CHECK(unit, microseconds))  {
+         this_thread::sleep_for(chrono::microseconds((long)count));
+      }
+      else if (SYM_CHECK(unit, milliseconds))  {
+         this_thread::sleep_for(chrono::milliseconds((long)count));
+      }
+      else if (SYM_CHECK(unit, seconds))  {
+         this_thread::sleep_for(chrono::seconds((long)count));
+      }
+      else if (SYM_CHECK(unit, minutes))  {
+         this_thread::sleep_for(chrono::minutes((long)count));
+      }
+      else if (SYM_CHECK(unit, hours))  {
+         this_thread::sleep_for(chrono::hours((long)count));
+      }
+      else {
+         mrb_raise(mrb, mrb->eStandardError_class, "Invalid unit parameter");
+         return mrb_nil_value();
+      }
+
+      return self;
+   }
+
    void define_apr_cmdtype_symbols(mrb_state* mrb) {
       mrb_intern_cstr(mrb, "APR_SHELLCMD");
       mrb_intern_cstr(mrb, "APR_PROGRAM");
@@ -556,6 +616,7 @@ extern "C" {
       auto apr_module = mrb_define_module(mrb, "APR");
       auto apr_process_class = mrb_define_class_under(mrb, apr_module, "Process", mrb->object_class);
       auto apr_tcp_module = mrb_define_module_under(mrb, apr_module, "TCP");
+      auto apr_system_module = mrb_define_module_under(mrb, apr_module, "System");
 
       // APR::Process methods
       mrb_define_method(mrb, apr_process_class, "initialize", mrb_apr_proc_init, MRB_ARGS_NONE());
@@ -571,6 +632,9 @@ extern "C" {
 
       // APR::TCP Methods
       mrb_define_module_function(mrb, apr_tcp_module, "get_open_port", mrb_apr_tcp_get_open_port, MRB_ARGS_NONE());
+
+      // APR::System Methods
+      mrb_define_module_function(mrb, apr_system_module, "sleep", mrb_apr_system_sleep, MRB_ARGS_REQ(2));
 
       // ENV Object
       auto env = mrb_instance_new(mrb, mrb_obj_value(mrb->object_class));
