@@ -15,7 +15,7 @@ module Kernel
   #      - cmdname, arg1, ... : command name and one or more arguments (no shell)
   #>
   def system(command)
-    Process.spawn(*command).wait
+    Process.wait Process.spawn(*command)
   end
 
   #<

@@ -21,6 +21,31 @@ Returns the exit code
     - `:APR_PROGRAM_PATH`
     - `:APR_SHELLCMD_ENV`
 
+## `#io_set(in, out, err)`
+- Args
+  + `int`, `out`, and `err`: Each are one of
+    - `:APR_NO_PIPE`: The child inherits the parent's corresponding stdio stream
+    - `:APR_FULL_BLOCK`: Connect a pipe to the child process
+- Notes
+  + After the process is started, an IO object for any pipes 
+    set to `:APR_FULL_BLOCK` can be retrieved by the `Process#in`,
+    `Process#out`, or `Process#err` accessorss
+
+## `#in`
+- Grab the IO object for the standard err of the process
+- Will return nil unless in was set to `:APR_FULL_BLOCK`
+  in a prior call to `#io_set`
+
+## `#out`
+- Grab the IO object for the standard out of the process
+- Will return nil unless out was set to `:APR_FULL_BLOCK`
+  in a prior call to `#io_set`
+
+## `#err`
+- Grab the IO object for the standard err of the process
+- Will return nil unless err was set to `:APR_FULL_BLOCK`
+  in a prior call to `#io_set`
+
 ## `#exec(argv)`
 - Args
   + argv: An array of strings. `argv[0]` should be the process name.
