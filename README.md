@@ -14,6 +14,10 @@ To build this gem into your mruby instance, just download the repo and add a cou
 MRuby::Build.new('host') do |conf|
   # ... Other configurations...
 
+  # mruby-apr depends on these other mrbgems
+  conf.gem :github => 'iij/mruby-io'
+  conf.gem :github => 'iij/mruby-errno'
+
   # Include the mruby-apr gem
   conf.gem "PATH/TO/mruby-apr"
 
