@@ -1,5 +1,12 @@
 # Module Kernel
 
+## `#`(command)`
+Runs a process, waits for it to finish, and returns the exit code.
+- Args
+  + `command`. One of:
+     - commandline : command line string which is passed to the standard shell
+     - cmdname, arg1, ... : command name and one or more arguments (no shell)
+
 ## `#system(*command)`
 Runs a process, waits for it to finish, and returns the exit code.
 - Args

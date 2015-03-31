@@ -27,7 +27,7 @@ Returns the exit code
     - `:APR_NO_PIPE`: The child inherits the parent's corresponding stdio stream
     - `:APR_FULL_BLOCK`: Connect a pipe to the child process
 - Notes
-  + After the process is started, an IO object for any pipes 
+  + After the process is started, an IO object for any pipes
     set to `:APR_FULL_BLOCK` can be retrieved by the `Process#in`,
     `Process#out`, or `Process#err` accessorss
 
@@ -58,31 +58,4 @@ Returns the pid of the process
 ## `#wait()`
 Blocks until the process finishes <br/>
 Returns `self`
-
-# module APR::TCP
-
-## `::get_open_port`
-Return an open TCP port number
-
-# object ENV
-## `#[](name)`
-Returns the value of the environemnt variable named `name`
-
-## `#[]=(name, value)`
-Sets the value of the environemnt variable named `name` to `value`
-
-## `#delete(name)`
-Deletes the environemnt variable named `name`
-
-# Module APR::System
-
-## `::sleep(count, unit)`
-- Args
-  + `count`: the number of `units` to sleep for (must be an integer)
-  + `unit`: One of
-    - :microseconds
-    - :milliseconds
-    - :seconds
-    - :minutes
-    - :hours
 
