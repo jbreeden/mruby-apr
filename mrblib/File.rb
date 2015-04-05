@@ -1,7 +1,7 @@
 #<
 # # Class File
 #>
-class File
+class File < IO
   #<
   # ## `#flock(locking_constant)`
   # Locks or unlocks a file according to locking_constant.
