@@ -1,6 +1,6 @@
 # Module Kernel
 
-## `#`(command)`
+## ``#`(command)``
 Runs a process, waits for it to finish, and returns the exit code.
 - Args
   + `command`. One of:
