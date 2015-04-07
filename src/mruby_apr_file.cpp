@@ -15,10 +15,6 @@ apr_file_t* fd_to_apr_file_t(int fd, apr_pool_t* pool) {
 #if defined(_WIN32) || defined(_WIN64)
    apr_os_file_t os_file = (apr_os_file_t)_get_osfhandle(fd);
 #else
-#error "Flock is only supported on Windows at the moment"
-   // Could just remove the whole function for other platforms,
-   // but I really want a clear reminder to come implement this.
-   // Should look something like this on unix platforms...
    apr_os_file_t os_file = (apr_os_file_t)(fd);
 #endif
    apr_file_t* apr_file;
