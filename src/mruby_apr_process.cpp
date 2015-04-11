@@ -164,13 +164,13 @@ mrb_apr_proc_cmdtype_set(mrb_state* mrb, mrb_value self) {
 //<
 // ## `#io_set(in, out, err)`
 // - Args
-//   + `int`, `out`, and `err`: Each are one of
+//   + `in`, `out`, and `err`: Each are one of
 //     - `:APR_NO_PIPE`: The child inherits the parent's corresponding stdio stream
 //     - `:APR_FULL_BLOCK`: Connect a pipe to the child process
 // - Notes
 //   + After the process is started, an IO object for any pipes
 //     set to `:APR_FULL_BLOCK` can be retrieved by the `Process#in`,
-//     `Process#out`, or `Process#err` accessorss
+//     `Process#out`, or `Process#err` accessors
 //>
 mrb_value
 mrb_apr_proc_io_set(mrb_state* mrb, mrb_value self) {
@@ -201,7 +201,7 @@ mrb_apr_proc_io_set(mrb_state* mrb, mrb_value self) {
    }
 
    AprProc* data = GET_APR_PROC_DATA(self);
-   apr_procattr_io_set(data->proc_attr, in, out, err);
+   apr_procattr_io_set(data->proc_attr, c_in, c_out, c_err);
    return self;
 }
 
@@ -264,7 +264,7 @@ mrb_apr_proc_in(mrb_state* mrb, mrb_value self) {
       return mrb_nil_value();
    }
    AprProc* data = GET_APR_PROC_DATA(self);
-   return mrb_apr_proc_get_stream(mrb, self, data->proc.err, "in", "w");
+   return mrb_apr_proc_get_stream(mrb, self, data->proc.in, "in", "w");
 }
 
 //<
