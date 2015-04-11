@@ -23,13 +23,13 @@ Returns the exit code
 
 ## `#io_set(in, out, err)`
 - Args
-  + `int`, `out`, and `err`: Each are one of
+  + `in`, `out`, and `err`: Each are one of
     - `:APR_NO_PIPE`: The child inherits the parent's corresponding stdio stream
     - `:APR_FULL_BLOCK`: Connect a pipe to the child process
 - Notes
   + After the process is started, an IO object for any pipes
     set to `:APR_FULL_BLOCK` can be retrieved by the `Process#in`,
-    `Process#out`, or `Process#err` accessorss
+    `Process#out`, or `Process#err` accessors
 
 ## `#in`
 - Grab the IO object for the standard err of the process
