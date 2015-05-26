@@ -21,10 +21,10 @@ module Kernel
     end
     result
   end
-  
+
   #<
   # ## `#popen(command, &block)`
-  # Runs the specified command as a subprocess. 
+  # Runs the specified command as a subprocess.
   # The subprocess' standard input will be connected to the returned IO object.
   # - Args
   #   + `command`. One of:
@@ -33,20 +33,33 @@ module Kernel
   #   + `block`. Optional. If supplied, the IO object will be passed into the block as the only param.
   #     If supplied, the return of `popen` will be the return of the block instead of the IO object.
   #>
-  def popen(command, &block)
+  def popen(command, mode="r", &block)
     p, argv = APR::Process.with_ruby_semantics(*command)
-    p.io_set :APR_FULL_BLOCK, :APR_NO_PIPE, :APR_NO_PIPE
+
+    if mode == 'r'
+      p.io_set :APR_NO_PIPE, :APR_FULL_BLOCK, :APR_NO_PIPE
+    elsif mode == 'w'
+      p.io_set :APR_FULL_BLOCK, :APR_NO_PIPE, :APR_NO_PIPE
+    else
+      raise 'popen currently only supports "r" and "w" modes'
+    end
     p.exec(argv)
-    
-    if block_given?
+
+    if block_given? && mode == 'r'
+      value = block[p.out]
+      p.out.close
+      value
+    elsif block_given? && mode == 'w'
       value = block[p.in]
       p.in.close
       value
-    else
+    elsif mode == 'r'
+      p.out
+    elsif mode == 'w'
       p.in
     end
   end
-  
+
   #<
   # ## `#sleep(seconds)`
   # Sleeps for `seconds`
@@ -69,7 +82,7 @@ module Kernel
   def spawn(*command)
     Process.spawn(*command)
   end
-  
+
   #<
   # ## `#system(*command)`
   # Runs a process, waits for it to finish, and returns the exit code.
