@@ -26,8 +26,28 @@ TestFixture.new('Ruby API: File') do
     end
   end
 
+  describe 'File#print(obj, ...)' do
+    it "Writes the given objects to the File" do
+      pending
+    end
+
+    it "If the output field separator ($,) is not nil, it will be inserted between each object." do
+      pending
+    end
+
+    it "If the output record separator ($\) is not nil, it will be appended to the output." do
+      pending
+    end
+  end
+
+  describe 'File#<<(obj)' do
+    it "Writes obj to ios. obj will be converted to a string using to_s." do
+      pending
+    end
+  end
+
   describe 'File#puts(obj, ...)' do
-    it "Writes the given objects to the File, appending the field separator ($\\) between each item" do
+    it "Writes the given objects to the File, appending the output record separator ($\\) between each item" do
       orig_out_sep = $\
       orig_in_sep = $/
       File.open(file_for_writing, 'w') do |f|

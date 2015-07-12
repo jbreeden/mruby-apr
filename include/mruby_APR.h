@@ -393,6 +393,7 @@
 #define BIND_apr_file_getc_FUNCTION TRUE
 #define BIND_apr_file_gets_FUNCTION TRUE
 #define BIND_apr_file_info_get_FUNCTION FALSE
+#define BIND_apr_file_inherit_unset_FUNCTION TRUE
 #define BIND_apr_file_link_FUNCTION TRUE
 #define BIND_apr_file_lock_FUNCTION TRUE
 #define BIND_apr_file_mktemp_FUNCTION FALSE

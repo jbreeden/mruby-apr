@@ -15,7 +15,7 @@ TestFixture.new('Ruby API: Process') do
       assert($?.exitstatus != 0)
     end
 
-    it 'Supports redirecting in, out, & err streams to/from a PipeFile\'s created by IO.pipe' do
+    it 'Supports redirecting in, out, & err streams to/from a Pipe\'s created by IO.pipe' do
       r, w = IO.pipe
       Process.spawn("echo my message", out: w)
       w.close # Close in parent so we can get EOF
@@ -34,6 +34,16 @@ TestFixture.new('Ruby API: Process') do
         read = f.read
       end
       assert(read == "my message\n")
+    end
+  end
+
+  describe 'Process::wait' do
+    it 'Sets $? based on the exit status of the indicated process' do
+      pending
+    end
+
+    it 'If called twice on the same PID, does the right thing... which is...?' do
+      pending
     end
   end
 end

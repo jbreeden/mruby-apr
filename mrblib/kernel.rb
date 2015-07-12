@@ -8,10 +8,11 @@ module Kernel
 
   def `(command)
     r, w = IO.pipe
-    spawn(command, {out: w})
+    pid = spawn(command, {out: w})
     w.close
     result = r.read
     r.close
+    Process.wait(pid)
     result
   end
 end

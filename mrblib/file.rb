@@ -1,25 +1,4 @@
 class File
-  module Util
-    def self.mode_str_to_flags(mode)
-      case mode
-      when 'r'
-        APR::APR_FOPEN_READ
-      when 'w'
-        APR::APR_FOPEN_WRITE | APR::APR_FOPEN_CREATE | APR::APR_FOPEN_TRUNCATE
-      when 'a'
-        APR::APR_FOPEN_WRITE | APR::APR_FOPEN_CREATE | APR::APR_FOPEN_APPEND
-      when 'r+'
-        APR::APR_FOPEN_READ | APR::APR_FOPEN_WRITE
-      when 'w+'
-        APR::APR_FOPEN_READ | APR::APR_FOPEN_WRITE | APR::APR_FOPEN_CREATE | APR::APR_FOPEN_TRUNCATE
-      when 'a+'
-        APR::APR_FOPEN_READ | APR::APR_FOPEN_WRITE | APR::APR_FOPEN_CREATE | APR::APR_FOPEN_APPEND
-      else
-        raise ArgumentError.new("Invalid access mode #{mode}")
-      end
-    end
-  end
-
   # Modes:
   # "r"  Read-only, starts at beginning of file  (default mode).
   #
@@ -52,7 +31,7 @@ class File
     @filename = filename
 
     @flags = APR::APR_FOPEN_BUFFERED # Always at least buffered
-    @flags = File::Util.mode_str_to_flags(mode)
+    @flags = IO::Util.mode_str_to_apr_flags(mode)
 
     if mode.include? 'b'
       @flags = @flags | APR::APR_FOPEN_BINARY
@@ -80,6 +59,10 @@ class File
     end
   end
 
+  def native_file
+    @native_file
+  end
+
   def close
     APR.apr_file_flush(@native_file)
     APR.apr_file_close(@native_file)
@@ -91,10 +74,25 @@ class File
     @closed
   end
 
-  def gets(sep=nil, limit=nil)
-    if ((@flags & APR::APR_FOPEN_READ) == 0)
+  def check_can_read
+    if (!closed? && (@flags & APR::APR_FOPEN_READ) == 0)
       raise IOError.new 'not opened for reading'
     end
+  end
+
+  def check_can_write
+    if (!closed? && (@flags & APR::APR_FOPEN_WRITE) == 0)
+      raise IOError.new 'not opened for writing'
+    end
+  end
+
+  def flush
+    check_can_write
+    APR.apr_file_flush(@native_file)
+  end
+
+  def gets(sep=nil, limit=nil)
+    check_can_read
 
     _sep = $/
     _limit = nil
@@ -143,9 +141,7 @@ class File
   end
 
   def puts(*args)
-    if ((@flags & APR::APR_FOPEN_WRITE) == 0)
-      raise IOError.new 'not opened for reading'
-    end
+    check_can_write
 
     # All array arguments should be flattened such that all elements are written on a new "line"
     args = args.flatten
@@ -168,9 +164,7 @@ class File
   end
 
   def read(length = nil)
-    if ((@flags & APR::APR_FOPEN_READ) == 0)
-      raise IOError.new 'not opened for reading'
-    end
+    check_can_read
 
     read = ""
     if length.nil?
@@ -198,10 +192,7 @@ class File
   end
 
   def write(str)
-    if ((@flags & APR::APR_FOPEN_WRITE) == 0)
-      raise IOError.new 'not opened for writing'
-    end
-
+    check_can_write
     as_str = (str.class == String) ? str : str.to_s
     err, bytes_written = APR.apr_file_write(@native_file, as_str, as_str.length)
     APR.raise_apr_errno(err)
@@ -209,6 +200,7 @@ class File
   end
 
   def each(&block)
+    check_can_read
     if block
       while line = self.gets
         block[line]
@@ -220,6 +212,7 @@ class File
   alias each_line each
 
   def each_byte(&block)
+    check_can_read
     if block
       while b = self.read(1)
         block[b.ord]
@@ -230,6 +223,7 @@ class File
   end
 
   def eof?
+    check_can_read
     is_eof = (APR::APR_EOF == APR.apr_file_eof(@native_file))
     unless is_eof
       # Have to cheat since CRuby returns EOF immediately for an empty file,
@@ -247,18 +241,21 @@ class File
   alias eof eof?
 
   def getc
+    check_can_read
     err, char = APR.apr_file_getc(@native_file)
     APR.raise_apr_errno(err, ignore: APR::APR_EOF)
     char
   end
 
   def getbyte
+    check_can_read
     err, char = APR.apr_file_getc(@native_file)
     APR.raise_apr_errno(err, ignore: APR::APR_EOF)
     char.nil? ? nil : char.ord
   end
 
   def ungetbyte(byte)
+    check_can_read
     if byte.class == String
       byte.reverse.each_char do |ch|
         err = APR.apr_file_ungetc(ch, @native_file)

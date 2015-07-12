@@ -3680,6 +3680,28 @@ mrb_APR_apr_file_info_get(mrb_state* mrb, mrb_value self) {
 }
 #endif
 
+#if BIND_apr_file_inherit_unset_FUNCTION
+#define apr_file_inherit_unset_REQUIRED_ARGC 1
+#define apr_file_inherit_unset_OPTIONAL_ARGC 0
+mrb_value
+mrb_APR_apr_file_inherit_unset(mrb_state* mrb, mrb_value self) {
+  mrb_value thefile;
+  mrb_get_args(mrb, "o", &thefile);
+
+  /* Type checking */
+  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+    return mrb_nil_value();
+  }
+
+  apr_file_t * native_thefile = (mrb_nil_p(thefile) ? NULL : mruby_unbox_apr_file_t(thefile));
+
+  apr_status_t result = apr_file_inherit_unset(native_thefile);
+
+  return mrb_fixnum_value(result);
+}
+#endif
+
 #if BIND_apr_file_link_FUNCTION
 #define apr_file_link_REQUIRED_ARGC 2
 #define apr_file_link_OPTIONAL_ARGC 0
@@ -13658,7 +13680,7 @@ mrb_APR_apr_procattr_child_in_set(mrb_state* mrb, mrb_value self) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, child_in, AprFileT_class(mrb)) && !mrb_nil_p(parent_in)) {
+  if (!mrb_obj_is_kind_of(mrb, child_in, AprFileT_class(mrb)) && !mrb_nil_p(child_in)) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
     return mrb_nil_value();
   }
@@ -13711,7 +13733,7 @@ mrb_APR_apr_procattr_child_out_set(mrb_state* mrb, mrb_value self) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, child_out, AprFileT_class(mrb)) && !mrb_nil_p(parent_out)) {
+  if (!mrb_obj_is_kind_of(mrb, child_out, AprFileT_class(mrb)) && !mrb_nil_p(child_out)) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
     return mrb_nil_value();
   }
@@ -22958,6 +22980,9 @@ void mrb_mruby_apr_gem_init(mrb_state* mrb) {
 #endif
 #if BIND_apr_file_info_get_FUNCTION
   mrb_define_class_method(mrb, APR_module, "apr_file_info_get", mrb_APR_apr_file_info_get, MRB_ARGS_ARG(apr_file_info_get_REQUIRED_ARGC, apr_file_info_get_OPTIONAL_ARGC));
+#endif
+#if BIND_apr_file_inherit_unset_FUNCTION
+  mrb_define_class_method(mrb, APR_module, "apr_file_inherit_unset", mrb_APR_apr_file_inherit_unset, MRB_ARGS_ARG(apr_file_inherit_unset_REQUIRED_ARGC, apr_file_inherit_unset_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_link_FUNCTION
   mrb_define_class_method(mrb, APR_module, "apr_file_link", mrb_APR_apr_file_link, MRB_ARGS_ARG(apr_file_link_REQUIRED_ARGC, apr_file_link_OPTIONAL_ARGC));

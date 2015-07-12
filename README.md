@@ -130,6 +130,14 @@ APR API: Sockets
 
   SUCCESS [0/1 tests failed]
 
+APR API: Time
+-------------
+
+  - APR::apr_time_now(pool: AprPoolT): time: AprTimeT
+    + Gets the current time
+
+  SUCCESS [0/1 tests failed]
+
 Ruby API: File
 --------------
 
@@ -138,8 +146,16 @@ Ruby API: File
     + Raises a SystemCallError if filename does not exist
     + If given a block, it is passed the File, and the File is automatically closed when the block terminates
 
+  - File#print(obj, ...)
+    + [PENDING] Writes the given objects to the File
+    + [PENDING] If the output field separator ($,) is not nil, it will be inserted between each object.
+    + [PENDING] If the output record separator ($) is not nil, it will be appended to the output.
+
+  - File#<<(obj)
+    + [PENDING] Writes obj to ios. obj will be converted to a string using to_s.
+
   - File#puts(obj, ...)
-    + Writes the given objects to the File, appending the field separator ($\) between each item
+    + Writes the given objects to the File, appending the output record separator ($\) between each item
     + Raises an IOError if the file is not open for writing
     + Appends to the file if opened with mode="a"
     + Does not append a record separator after any args that already end with a record separator sequence
@@ -197,7 +213,7 @@ Ruby API: File
   - File#ungetc
     + Pushes back bytes onto a file buffer
 
-  SUCCESS [0/38 tests failed]
+  SUCCESS [0/42 tests failed]
 
 Ruby API: IO
 ------------
@@ -205,7 +221,24 @@ Ruby API: IO
   - IO.pipe
     + Creates a pair of File objects to be used as the read & write ends of the pipe
 
-  SUCCESS [0/1 tests failed]
+  - IO.popen([env,] cmd, mode="r" [, opt])
+    + Runs the specified command as a subprocess, returning an IO like object with a pid member
+    + Connects the returned IO-like object to child's stdin for mode "r"
+    + Connects the returned IO-like object to child's stdout for mode "w"
+    + Connects the returned IO-like object to child's stdin & stdout for mode "r+"
+    + Sends EOF when the output pipe is closed
+    + [PENDING] Yeilds the IO like object instead of returning it if a block is provided
+
+  SUCCESS [0/7 tests failed]
+
+Ruby API: Kernel
+----------------
+
+  - Kernel::` (backquote)
+    + Runs a command and returns it's standard output
+    + Sets $? based on the exit status of the child process
+
+  SUCCESS [0/2 tests failed]
 
 Ruby API: Process
 -----------------
@@ -213,18 +246,14 @@ Ruby API: Process
   - Process::spawn
     + Spawns a shell command if given a string
     + Spawns a program, with no shell, if given argv as multiple args
-    + Supports redirecting in, out, & err streams to/from a PipeFile's created by IO.pipe
+    + Supports redirecting in, out, & err streams to/from a Pipe's created by IO.pipe
     + Supports redirecting to ordinary file objects
 
-  SUCCESS [0/4 tests failed]
+  - Process::wait
+    + [PENDING] Sets $? based on the exit status of the indicated process
+    + [PENDING] If called twice on the same PID, does the right thing... which is...?
 
-APR API: Time
--------------
-
-  - APR::apr_time_now(pool: AprPoolT): time: AprTimeT
-    + Gets the current time
-
-  SUCCESS [0/1 tests failed]
+  SUCCESS [0/6 tests failed]
 ```
 
 APR Function Bindings
@@ -255,10 +284,14 @@ apr_file_flags_get
 apr_file_flush
 apr_file_getc
 apr_file_gets
+apr_file_inherit_unset
 apr_file_link
 apr_file_lock
 apr_file_namedpipe_create
 apr_file_open
+apr_file_open_flags_stderr
+apr_file_open_flags_stdin
+apr_file_open_flags_stdout
 apr_file_open_stderr
 apr_file_open_stdin
 apr_file_open_stdout
