@@ -400,9 +400,9 @@
 #define BIND_apr_file_name_get_FUNCTION FALSE
 #define BIND_apr_file_namedpipe_create_FUNCTION TRUE
 #define BIND_apr_file_open_FUNCTION TRUE
-#define BIND_apr_file_open_flags_stderr_FUNCTION FALSE
-#define BIND_apr_file_open_flags_stdin_FUNCTION FALSE
-#define BIND_apr_file_open_flags_stdout_FUNCTION FALSE
+#define BIND_apr_file_open_flags_stderr_FUNCTION TRUE
+#define BIND_apr_file_open_flags_stdin_FUNCTION TRUE
+#define BIND_apr_file_open_flags_stdout_FUNCTION TRUE
 #define BIND_apr_file_open_stderr_FUNCTION TRUE
 #define BIND_apr_file_open_stdin_FUNCTION TRUE
 #define BIND_apr_file_open_stdout_FUNCTION TRUE

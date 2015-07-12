@@ -4068,28 +4068,24 @@ mrb_APR_apr_file_open(mrb_state* mrb, mrb_value self) {
 #endif
 
 #if BIND_apr_file_open_flags_stderr_FUNCTION
-#define apr_file_open_flags_stderr_REQUIRED_ARGC 3
+#define apr_file_open_flags_stderr_REQUIRED_ARGC 2
 #define apr_file_open_flags_stderr_OPTIONAL_ARGC 0
 /* apr_file_open_flags_stderr
  *
  * Parameters:
- * - thefile: apr_file_t **
  * - flags: int
  * - pool: apr_pool_t *
  * Return Type: apr_status_t
  */
 mrb_value
 mrb_APR_apr_file_open_flags_stderr(mrb_state* mrb, mrb_value self) {
-  mrb_value thefile;
   mrb_value flags;
   mrb_value pool;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "ooo", &thefile, &flags, &pool);
-
+  mrb_get_args(mrb, "oo", &flags, &pool);
 
   /* Type checking */
-  TODO_type_check_apr_file_t_PTR_PTR(thefile);
   if (!mrb_obj_is_kind_of(mrb, flags, mrb->fixnum_class)) {
     mrb_raise(mrb, E_TYPE_ERROR, "Fixnum expected");
     return mrb_nil_value();
@@ -4099,51 +4095,38 @@ mrb_APR_apr_file_open_flags_stderr(mrb_state* mrb, mrb_value self) {
     return mrb_nil_value();
   }
 
-
   /* Unbox parameters */
-  apr_file_t ** native_thefile = TODO_mruby_unbox_apr_file_t_PTR_PTR(thefile);
-
   int native_flags = mrb_fixnum(flags);
-
   apr_pool_t * native_pool = (mrb_nil_p(pool) ? NULL : mruby_unbox_apr_pool_t(pool));
 
   /* Invocation */
-  apr_status_t result = apr_file_open_flags_stderr(native_thefile, native_flags, native_pool);
+  apr_file_t * native_thefile;
+  apr_status_t result = apr_file_open_flags_stderr(&native_thefile, native_flags, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
-  mrb_value return_value = mrb_fixnum_value(result);
-
-  return return_value;
+  RETURN_ERRNO_AND_OUTPUT(result, mruby_box_apr_file_t(mrb, native_thefile));
 }
 #endif
 
 #if BIND_apr_file_open_flags_stdin_FUNCTION
-#define apr_file_open_flags_stdin_REQUIRED_ARGC 3
+#define apr_file_open_flags_stdin_REQUIRED_ARGC 2
 #define apr_file_open_flags_stdin_OPTIONAL_ARGC 0
-/* apr_file_open_flags_stdin
+/* apr_file_open_flags_stderr
  *
  * Parameters:
- * - thefile: apr_file_t **
  * - flags: int
  * - pool: apr_pool_t *
  * Return Type: apr_status_t
  */
 mrb_value
 mrb_APR_apr_file_open_flags_stdin(mrb_state* mrb, mrb_value self) {
-  mrb_value thefile;
   mrb_value flags;
   mrb_value pool;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "ooo", &thefile, &flags, &pool);
-
+  mrb_get_args(mrb, "oo", &flags, &pool);
 
   /* Type checking */
-  TODO_type_check_apr_file_t_PTR_PTR(thefile);
   if (!mrb_obj_is_kind_of(mrb, flags, mrb->fixnum_class)) {
     mrb_raise(mrb, E_TYPE_ERROR, "Fixnum expected");
     return mrb_nil_value();
@@ -4153,51 +4136,38 @@ mrb_APR_apr_file_open_flags_stdin(mrb_state* mrb, mrb_value self) {
     return mrb_nil_value();
   }
 
-
   /* Unbox parameters */
-  apr_file_t ** native_thefile = TODO_mruby_unbox_apr_file_t_PTR_PTR(thefile);
-
   int native_flags = mrb_fixnum(flags);
-
   apr_pool_t * native_pool = (mrb_nil_p(pool) ? NULL : mruby_unbox_apr_pool_t(pool));
 
   /* Invocation */
-  apr_status_t result = apr_file_open_flags_stdin(native_thefile, native_flags, native_pool);
+  apr_file_t * native_thefile;
+  apr_status_t result = apr_file_open_flags_stdin(&native_thefile, native_flags, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
-  mrb_value return_value = mrb_fixnum_value(result);
-
-  return return_value;
+  RETURN_ERRNO_AND_OUTPUT(result, mruby_box_apr_file_t(mrb, native_thefile));
 }
 #endif
 
 #if BIND_apr_file_open_flags_stdout_FUNCTION
-#define apr_file_open_flags_stdout_REQUIRED_ARGC 3
+#define apr_file_open_flags_stdout_REQUIRED_ARGC 2
 #define apr_file_open_flags_stdout_OPTIONAL_ARGC 0
-/* apr_file_open_flags_stdout
+/* apr_file_open_flags_stderr
  *
  * Parameters:
- * - thefile: apr_file_t **
  * - flags: int
  * - pool: apr_pool_t *
  * Return Type: apr_status_t
  */
 mrb_value
 mrb_APR_apr_file_open_flags_stdout(mrb_state* mrb, mrb_value self) {
-  mrb_value thefile;
   mrb_value flags;
   mrb_value pool;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "ooo", &thefile, &flags, &pool);
-
+  mrb_get_args(mrb, "oo", &flags, &pool);
 
   /* Type checking */
-  TODO_type_check_apr_file_t_PTR_PTR(thefile);
   if (!mrb_obj_is_kind_of(mrb, flags, mrb->fixnum_class)) {
     mrb_raise(mrb, E_TYPE_ERROR, "Fixnum expected");
     return mrb_nil_value();
@@ -4207,25 +4177,16 @@ mrb_APR_apr_file_open_flags_stdout(mrb_state* mrb, mrb_value self) {
     return mrb_nil_value();
   }
 
-
   /* Unbox parameters */
-  apr_file_t ** native_thefile = TODO_mruby_unbox_apr_file_t_PTR_PTR(thefile);
-
   int native_flags = mrb_fixnum(flags);
-
   apr_pool_t * native_pool = (mrb_nil_p(pool) ? NULL : mruby_unbox_apr_pool_t(pool));
 
   /* Invocation */
-  apr_status_t result = apr_file_open_flags_stdout(native_thefile, native_flags, native_pool);
+  apr_file_t * native_thefile;
+  apr_status_t result = apr_file_open_flags_stdout(&native_thefile, native_flags, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
-  mrb_value return_value = mrb_fixnum_value(result);
-
-  return return_value;
+  RETURN_ERRNO_AND_OUTPUT(result, mruby_box_apr_file_t(mrb, native_thefile));
 }
 #endif
 
@@ -24151,7 +24112,6 @@ void mrb_mruby_apr_gem_init(mrb_state* mrb) {
 #if BIND_apr_wait_for_io_or_timeout_FUNCTION
   mrb_define_class_method(mrb, APR_module, "apr_wait_for_io_or_timeout", mrb_APR_apr_wait_for_io_or_timeout, MRB_ARGS_ARG(apr_wait_for_io_or_timeout_REQUIRED_ARGC, apr_wait_for_io_or_timeout_OPTIONAL_ARGC));
 #endif
-
 }
 
 void mrb_mruby_apr_gem_final(mrb_state* mrb){

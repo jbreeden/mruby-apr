@@ -18,8 +18,9 @@ TestFixture.new('Ruby API: Process') do
     it 'Supports redirecting in, out, & err streams to/from a PipeFile\'s created by IO.pipe' do
       r, w = IO.pipe
       Process.spawn("echo my message", out: w)
-      w.close # Close in parent so we can get EOF!
+      w.close # Close in parent so we can get EOF
       msg = r.read
+      r.close # Close read when finished so resources are cleaned up
       assert (msg == "my message\n")
     end
 

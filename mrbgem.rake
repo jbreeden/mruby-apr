@@ -2,60 +2,62 @@
 # Most of the configuration here should be done on the gem spec,
 # not on the global conf object.
 
+require 'pp'
+
 $APR_GEM_DIR = File.dirname(__FILE__)
 
-def configure_mruby_apr_win(conf)
+def configure_mruby_apr_win(spec)
   # apr.h is generated specially for each platform when building APR
   # I'm putting these generated headers into "#{$APR_GEM_DIR}/include/apr/PLATFORM"
   # (In this case, PLATFORM == win)
-  conf.cc.include_paths << "#{$APR_GEM_DIR}/include/apr/win"
-  conf.cxx.include_paths << "#{$APR_GEM_DIR}/include/apr/win"
+  spec.cc.include_paths << "#{$APR_GEM_DIR}/include/apr/win"
+  spec.cxx.include_paths << "#{$APR_GEM_DIR}/include/apr/win"
 
   # Pre-built libraries are held under "#{$APR_GEM_DIR}/lib/PLATFORM"
-  conf.linker.library_paths << "#{$APR_GEM_DIR}/lib/win"
+  spec.linker.library_paths << "#{$APR_GEM_DIR}/lib/win"
 
   # I've appended the selected C runtime APR was built with onto the lib file name
-  conf.linker.libraries << "apr-1_md"
-  conf.linker.libraries << "Ws2_32"
-  conf.linker.libraries << "Advapi32"
-  conf.linker.libraries << "Shell32"
-  conf.linker.libraries << "Mswsock"
+  spec.linker.libraries << "apr-1_md"
+  spec.linker.libraries << "Ws2_32"
+  spec.linker.libraries << "Advapi32"
+  spec.linker.libraries << "Shell32"
+  spec.linker.libraries << "Mswsock"
 end
 
-def configure_mruby_apr_lin(conf)
+def configure_mruby_apr_lin(spec)
   unless Dir.exists? '/usr/local/apr'
     puts 'Expected to find APR installed in /usr/local.'
     puts 'To install APR, download the source and run `configure && make && sudo make install`'
     raise 'APR not installed'
   end
   apr_include_dir = `/usr/local/apr/bin/apr-1-config --includes`.sub('-I', '').strip
-  conf.cc.include_paths << apr_include_dir
-  conf.cxx.include_paths << apr_include_dir
-  conf.linker.library_paths << '/usr/local/apr/lib'
-  conf.linker.libraries = conf.linker.libraries.concat `/usr/local/apr/bin/apr-1-config --libs`.
+  spec.cc.include_paths << apr_include_dir
+  spec.cxx.include_paths << apr_include_dir
+  spec.linker.library_paths << '/usr/local/apr/lib'
+  spec.linker.libraries = spec.linker.libraries.concat `/usr/local/apr/bin/apr-1-config --libs`.
     split(' ').
     map { |flag|
       flag.gsub(/^-l/, '').strip
     }
-  conf.linker.libraries << "iconv"
-  conf.linker.flags_before_libraries << '/usr/local/apr/lib/libapr-1.a'
+  spec.linker.libraries << "iconv"
+  spec.linker.flags_before_libraries << '/usr/local/apr/lib/libapr-1.a'
 end
 
-def configure_mruby_apr(conf)
+def configure_mruby_apr(spec)
 
   # Common include path (all platforms)
-  conf.cc.include_paths << "#{$APR_GEM_DIR}/include/apr"
-  conf.cxx.include_paths << "#{$APR_GEM_DIR}/include/apr"
+  spec.cc.include_paths << "#{$APR_GEM_DIR}/include/apr"
+  spec.cxx.include_paths << "#{$APR_GEM_DIR}/include/apr"
 
   # This gem is only setup to build with the static apr lib.
   # To use the static lib, you need to declare this preprocessor macro.
-  conf.cc.defines << "APR_DECLARE_STATIC"
-  conf.cxx.defines << "APR_DECLARE_STATIC"
+  spec.cc.defines << "APR_DECLARE_STATIC"
+  spec.cxx.defines << "APR_DECLARE_STATIC"
 
   if ENV['OS'] =~ /windows/i
-    configure_mruby_apr_win(conf)
+    configure_mruby_apr_win(spec)
   else
-    configure_mruby_apr_lin(conf)
+    configure_mruby_apr_lin(spec)
   end
 end
 
@@ -64,8 +66,13 @@ MRuby::Gem::Specification.new('mruby-apr') do |spec|
   spec.author  = 'Jared Breeden'
   spec.summary = 'Bindings to the APR libraries'
 
+  # Need the gem init file to be compiled last, so push it on the end of the file list
+  gem_init_rb = File.expand_path("#{spec.dir}/mrblib/mrb_apr_gem_init.rb")
+  spec.rbfiles.delete(gem_init_rb)
+  spec.rbfiles.push(gem_init_rb)
+
+  configure_mruby_apr(spec)
+
   spec.cc.flags << [ '-std=c11' ]
   spec.cxx.flags << [ '-std=c++11' ]
-  # TODO: Add dependency on mruby-regexp-pcre (or compatible)
-  # TODO: Add dependency on mruby-errno
 end
