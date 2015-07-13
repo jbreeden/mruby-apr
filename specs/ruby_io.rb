@@ -35,7 +35,7 @@ TestFixture.new('Ruby API: IO') do
       pipe = IO.popen('ruby -e "l = gets; puts l"', "r+")
       pipe.puts('123')
       read = pipe.gets
-      assert(read == "123\n")
+      assert(read.strip == "123")
       pipe.close
     end
 
@@ -44,11 +44,15 @@ TestFixture.new('Ruby API: IO') do
       pipe.write('123')
       pipe.close_write
       read = pipe.read
-      assert(read == "123\n")
+      assert(read.strip == "123")
       pipe.close
     end
 
     it 'Yeilds the IO like object instead of returning it if a block is provided' do
+      pending
+    end
+
+    it 'Handles \\r\\n & \\n line endings in text mode' do
       pending
     end
   end

@@ -2,8 +2,24 @@
 
 void
 mruby_APR_define_macro_constants(mrb_state* mrb) {
-  
-   /* Need to add a few constants that are in system headers, not APR (and so not generated) */
+
+/* START: Added by hand */
+
+  /* OS:
+     Not the best way to identify the system... but good enough for now
+     (really just need to know Windows/non-Windows) */
+#if defined(_WIN32)
+  mrb_define_const(mrb, APR_module(mrb), "OS", mrb_str_new_cstr(mrb, "Windows"));
+#elif defined(__linux__)
+  mrb_define_const(mrb, APR_module(mrb), "OS", mrb_str_new_cstr(mrb, "Linux"));
+#elif defined(__APPLE__)
+  mrb_define_const(mrb, APR_module(mrb), "OS", mrb_str_new_cstr(mrb, "Mac"));
+#elif defined(__unix__)
+  mrb_define_const(mrb, APR_module(mrb), "OS", mrb_str_new_cstr(mrb, "Unix"));
+#else
+  mrb_define_const(mrb, APR_module(mrb), "OS", mrb_str_new_cstr(mrb, "Unidentified"));
+#endif
+
 #ifdef SOCK_STREAM
    mrb_define_const(mrb, APR_module(mrb), "SOCK_STREAM", mrb_fixnum_value(SOCK_STREAM));
 #endif
@@ -19,6 +35,7 @@ mruby_APR_define_macro_constants(mrb_state* mrb) {
 #ifdef SOCK_SEQPACKET
    mrb_define_const(mrb, APR_module(mrb), "SOCK_SEQPACKET", mrb_fixnum_value(SOCK_SEQPACKET));
 #endif
+/* END: Added by hand */
 
 #ifdef _APR_FNMATCH_H_
   /* Ignoring macro with no expansion: _APR_FNMATCH_H_ */

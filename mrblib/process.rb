@@ -22,13 +22,15 @@ module Process
         err, argv = APR.apr_tokenize_to_argv(command[0], pool)
         # TODO: Remove this when this bug is resolved & apr is updated
         # https://bz.apache.org/bugzilla/show_bug.cgi?id=58123
-        argv = argv.map { |a|
-          if a.include?(' ') || a.include?("\t")
-            "\"#{a}\""
-          else
-            a
-          end
-        }
+        unless APR::OS == "Windows"
+          argv = argv.map { |a|
+            if a.include?(' ') || a.include?("\t")
+              "\"#{a}\""
+            else
+              a
+            end
+          }
+        end
 
         { env: env, argv: argv, options: options, cmd_type: APR::AprCmdtypeE::APR_SHELLCMD_ENV }
       elsif command[0].class == Array
@@ -71,6 +73,8 @@ module Process
           err = APR.apr_procattr_child_err_set proc_attr, options[:err].native_file, nil
           APR.raise_apr_errno(err)
         end
+      else
+        APR.apr_procattr_io_set(proc_attr, APR::APR_NO_PIPE, APR::APR_NO_PIPE, APR::APR_NO_PIPE)
       end
 
       err, process = APR.apr_proc_create argv[0], argv, nil, proc_attr, pool

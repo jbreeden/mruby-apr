@@ -13497,12 +13497,12 @@ mrb_APR_apr_proc_wait_all_procs(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_apr_proc_from_pid(mrb_state* mrb, mrb_value self) {
   mrb_int pid;
-   mrb_get_args(mrb, "i", &pid);
+  mrb_get_args(mrb, "i", &pid);
 
-   apr_proc_t* proc = (apr_proc_t*)malloc(sizeof(apr_proc_t));
-   proc->pid = pid;
+  apr_proc_t* proc = (apr_proc_t*)malloc(sizeof(apr_proc_t));
+  proc->pid = pid;
 #if defined(_WIN32) || defined(_WIN64)
-   proc->hproc = OpenProcess(SYNCHRONIZE, false, pid);
+   proc->hproc = OpenProcess(MAXIMUM_ALLOWED, false, pid);
 #endif
 
   /* Wasn't made from an apr pool, so "giftwrap" so the ruby gc free's it */
