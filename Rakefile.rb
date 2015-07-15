@@ -59,3 +59,17 @@ namespace :test do
   end
 
 end
+
+desc "Generate method stubs for a ruby class"
+task :gen_rb do
+  c = eval(ENV['CLASS'])
+  unless c.class == Class
+    $stderr.puts "#{ENV['CLASS']} does not refer to a Ruby class"
+  end
+  c.singleton_methods(false).sort.each do |m|
+    puts "def self.#{m}(*args)\n   raise NotImplementedError.new\nend\n\n"
+  end
+  c.public_instance_methods(false).sort.each do |m|
+    puts "def #{m}(*args)\n   raise NotImplementedError.new\nend\n\n"
+  end
+end
