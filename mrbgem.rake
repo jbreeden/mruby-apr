@@ -39,7 +39,6 @@ def configure_mruby_apr_lin(spec)
     map { |flag|
       flag.gsub(/^-l/, '').strip
     }
-  spec.linker.libraries << "iconv"
   spec.linker.flags_before_libraries << '/usr/local/apr/lib/libapr-1.a'
 end
 
