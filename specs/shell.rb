@@ -120,7 +120,7 @@ test %q[ruby -e "puts(2)"]
 # Nesting quotes, escaped from the shell
 test %q[ruby -e "puts \"3\""]
 # Testing for shell interpretation of the command line
-test %q[ruby -r english -e "puts $INPUT_RECORD_SEPARATOR.length"]
+test %q[ruby -r English -e "puts $INPUT_RECORD_SEPARATOR.length"]
 # Single quote in double quotes
 test %q[ruby -e "puts '3'.class"]
 # Double quotes in single quotes
