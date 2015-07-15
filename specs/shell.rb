@@ -4,7 +4,7 @@ def via_cruby(cmd)
     f.puts "system %q[#{cmd}]"
   end
   if APR::OS == 'Windows'
-    pid = spawn "C:/Ruby22/bin/ruby.exe", 'sandbox/shell.rb'
+    pid = spawn "C:/Ruby22-x64/bin/ruby.EXE", 'sandbox/shell.rb'
   else
     pid = spawn "/usr/bin/ruby", 'sandbox/shell.rb'
   end
@@ -24,7 +24,7 @@ def as_program(cmd)
   if APR::OS == 'Windows'
     argv = ["cmd.exe", '/C', cmd]
   else
-    argv = ["/bin/sh", '-c', cmd]
+    argv = ["sh", '-c', cmd]
   end
   err, process = APR.apr_proc_create argv[0], argv, nil, proc_attr, pool
   APR.raise_apr_errno(err)
@@ -43,7 +43,7 @@ def as_shellcmd_unified(cmd)
   err = APR.apr_procattr_cmdtype_set proc_attr, APR::AprCmdtypeE::APR_SHELLCMD_ENV
   err, argv = APR.apr_tokenize_to_argv cmd, pool
 
-  #puts "Tokenized argv: #{argv}"
+  puts "Tokenized argv: #{argv}"
 
   unless APR::OS == "Windows"
     argv = argv.map { |a|
@@ -56,6 +56,7 @@ def as_shellcmd_unified(cmd)
   end
 
   puts "Quoted argv: #{argv}"
+  puts "#{argv[0]} #{cmd}"
 
   err, process = APR.apr_proc_create argv[0], [cmd], nil, proc_attr, pool
   APR.raise_apr_errno(err)
@@ -66,41 +67,44 @@ rescue Exception => ex
   puts ex
 end
 
-def as_shellcmd_tokenized(cmd)
-  puts "Spawn as SHELLCMD (Tokenized):"
-  err, pool = APR.apr_pool_create(nil)
-  err, proc_attr = APR.apr_procattr_create pool
-
-  err = APR.apr_procattr_cmdtype_set proc_attr, APR::AprCmdtypeE::APR_SHELLCMD_ENV
-  err, argv = APR.apr_tokenize_to_argv cmd, pool
-
-  #puts "Tokenized argv: #{argv}"
-
-  unless APR::OS == "Windows"
-    argv = argv.map { |a|
-      if a.include?(' ') || a.include?("\t")
-        "\"#{a}\""
-      else
-        a
-      end
-    }
-  end
-
-  puts "Quoted argv: #{argv}"
-
-  err, process = APR.apr_proc_create argv[0], argv, nil, proc_attr, pool
-  APR.raise_apr_errno(err)
-  err, exitcode, exitwhy = APR.apr_proc_wait process, APR::AprWaitHowE::APR_WAIT
-  exitcode == 0
-rescue Exception => ex
-  puts ex
-end
+# def as_shellcmd_tokenized(cmd)
+#   puts "Spawn as SHELLCMD (Tokenized):"
+#   err, pool = APR.apr_pool_create(nil)
+#   err, proc_attr = APR.apr_procattr_create pool
+#
+#   err = APR.apr_procattr_cmdtype_set proc_attr, APR::AprCmdtypeE::APR_SHELLCMD_ENV
+#   err, argv = APR.apr_tokenize_to_argv cmd, pool
+#
+#   #puts "Tokenized argv: #{argv}"
+#
+#   unless APR::OS == "Windows"
+#     argv = argv.map { |a|
+#       if a.include?(' ') || a.include?("\t")
+#         "\"#{a}\""
+#       else
+#         a
+#       end
+#     }
+#   end
+#
+#   #puts "Quoted argv: #{argv}"
+#
+#   err, process = APR.apr_proc_create argv[0], argv, nil, proc_attr, pool
+#   APR.raise_apr_errno(err)
+#   err, exitcode, exitwhy = APR.apr_proc_wait process, APR::AprWaitHowE::APR_WAIT
+#   exitcode == 0
+# rescue Exception => ex
+#   puts ex
+# end
 
 def shell(cmd)
   via_cruby(cmd)
   as_program(cmd)
   #as_shellcmd_unified(cmd)
-  as_shellcmd_tokenized(cmd)
+
+  # Clearly not an option, as it interprets and removes symbols that
+  # are significant to the shell
+  #as_shellcmd_tokenized(cmd)
 end
 
 def test(cmd)
@@ -116,12 +120,12 @@ end
 # Simple test
 #test %q[echo 1]
 # Reving up with quotes
-test %q[ruby -e "puts(2)"]
-# Nesting quotes, escaped from the shell
-test %q[ruby -e "puts \"3\""]
-# Testing for shell interpretation of the command line
-test %q[ruby -r English -e "puts $INPUT_RECORD_SEPARATOR.length"]
+test %q[ruby -e "puts(1)"]
 # Single quote in double quotes
-test %q[ruby -e "puts '3'.class"]
+test %q[ruby -e "puts '2'.class"]
 # Double quotes in single quotes
 test %q[ruby -e 'puts "3".class']
+# Nesting quotes, escaped from the shell
+test %q[ruby -e "puts \"4\""]
+# Testing for shell interpretation of the command line
+test %q[ruby -r English -e "puts $LOAD_PATH.first"]

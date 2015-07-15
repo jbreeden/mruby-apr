@@ -1,1 +1,1 @@
-system %q[ruby -e 'puts "3".class']
+system %q[ruby -r English -e "puts $LOAD_PATH.first"]
