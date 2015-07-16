@@ -1,1 +1,1 @@
-system %q[ruby -r English -e "puts $LOAD_PATH.first"]
+system %q[ruby -e "puts '$HOME'"]

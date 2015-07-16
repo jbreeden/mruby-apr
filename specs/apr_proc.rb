@@ -6,7 +6,13 @@ TestFixture.new('APR API: Processes') do
       err, proc_attr = APR.apr_procattr_create @pool
       assert(err == 0)
 
-      err = APR.apr_procattr_cmdtype_set proc_attr, APR::AprCmdtypeE::APR_SHELLCMD_ENV
+      # WORKAROUND:
+      #   Encountering lots of problems when using APR_SHELLCMD directly.
+      #   It attempts to quote arguments in ways that appear unneeded.
+      #   Additionally, the quoting is often wrong.
+      #   So, using APR_PROGRAM_PATH, we can construct the shell command ourselves
+      #   to get around this limitation.
+      err = APR.apr_procattr_cmdtype_set proc_attr, APR::AprCmdtypeE::APR_PROGRAM_PATH
       assert(err == 0)
 
       err, file = APR.apr_file_open "sandbox/echo_out.txt",
@@ -18,11 +24,14 @@ TestFixture.new('APR API: Processes') do
       err = APR.apr_procattr_child_out_set proc_attr, file, nil
       assert(err == 0)
 
-      err, argv = APR.apr_tokenize_to_argv "ruby -e 'puts \\'some string\\''", @pool
-      assert(argv.length == 3)
-      assert(err == 0)
+      argv = nil
+      if APR::OS == 'Windows'
+        argv = ["cmd.exe", '/C', "ruby -e 'puts \\'some string\\''"]
+      else
+        argv = ["sh", '-c', "ruby -e \"puts 'some string'\""]
+      end
 
-      err, process = APR.apr_proc_create "ruby", argv, nil, proc_attr, @pool
+      err, process = APR.apr_proc_create argv[0], argv, nil, proc_attr, @pool
       assert(err == 0)
 
       err, exitcode, exitwhy = APR.apr_proc_wait process, APR::AprWaitHowE::APR_WAIT

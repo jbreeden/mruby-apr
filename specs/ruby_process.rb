@@ -3,24 +3,75 @@ TestFixture.new('Ruby API: Process') do
 
   describe 'Process::spawn' do
     it 'Spawns a shell command if given a string' do
-      pid = Process.spawn 'ruby -e "exit 1"'
-      Process.wait(pid)
-      assert($?.exitstatus == 1)
+      APR.with_pool do |pool|
+        # If there was a shell involved, the command executed below would be
+        # interpretted, and the environment variable expanded. So, if we
+        # correctly bypass the shall, the variable name should be printed
+        # instead of the variable's value.
+        APR.apr_env_set("I_SHOULD_NOT_BE_PRINTED", "I should be printed", pool)
+
+        cmd = nil
+        if APR::OS != 'Windows'
+          cmd = 'ruby -e "puts \"$I_SHOULD_NOT_BE_PRINTED\""'
+        else
+          cmd = 'ruby -e "puts \"%I_SHOULD_NOT_BE_PRINTED%\""'
+        end
+
+        r, w = IO.pipe
+        pid = Process.spawn(*cmd, out: w)
+        w.close
+
+        assert(r.read.strip == 'I should be printed')
+        r.close
+      end
+    end
+
+    it 'Interprets shell command arguments correctly' do
+      capture_out = proc do |cmd|
+        r, w = IO.pipe
+        pid = Process.spawn(*cmd, out: w)
+        w.close
+        result = r.read
+        r.close
+        result.strip
+      end
+
+      # Reving up with quotes
+      assert '1' == capture_out[%q[ruby -e "puts(1)"]]
+      # Single quote in double quotes
+      assert 'String' == capture_out[%q[ruby -e "puts '2'.class"]]
+      # Double quotes in single quotes
+      assert 'String' == capture_out[%q[ruby -e 'puts "3".class']]
+      # Nesting quotes, escaped from the shell (%q does not require escaping \)
+      assert 'String' == capture_out[%q[ruby -e "puts \"4\".class"]]
+      # Command combinations
+      assert 'FAILED'  != capture_out[ %q[ ruby -e "exit 0" || ruby -e "puts 'FAILED'"  ]]
+      assert 'SUCCESS' == capture_out[ %q[ ruby -e "exit 0" && ruby -e "puts 'SUCCESS'" ]]
+      assert 'SUCCESS' == capture_out[ %q[ ruby -e "exit 1" || ruby -e "puts 'SUCCESS'" ]]
+      assert 'FAILED'  != capture_out[ %q[ ruby -e "exit 1" && ruby -e "puts 'FAILED'"  ]]
     end
 
     it 'Spawns a program, with no shell, if given argv as multiple args' do
-      # This will fail, since without the shell "ruby" should be specified as the full path "/usr/bin/ruby"
+      APR.with_pool do |pool|
+        # If there was a shell involved, the command executed below would be
+        # interpretted, and the environment variable expanded. So, if we
+        # correctly bypass the shall, the variable name should be printed
+        # instead of the variable's value.
+        APR.apr_env_set("I_SHOULD_BE_PRINTED", "I should not", pool)
 
-      assert_raises(SystemCallError) do
-        pid = Process.spawn 'ruby', '-e', '"exit 0"'
-        Process.wait(pid)
-        assert($?.exitstatus != 0)
+        cmd = nil
+        if APR::OS != 'Windows'
+          cmd = ['ruby', '-e', 'puts "$I_SHOULD_BE_PRINTED"']
+        else
+          cmd = ['ruby', '-e', 'puts "%I_SHOULD_BE_PRINTED%"']
+        end
+
+        r, w = IO.pipe
+        pid = Process.spawn(*cmd, out: w)
+        w.close
+
+        assert(r.read.include? 'I_SHOULD_BE_PRINTED')
       end
-
-      ## TODO: Need to test on Mac again. This throws SystemCall error on Windows, and that seems right
-      # pid = Process.spawn 'ruby', '-e', '"exit 0"'
-      # Process.wait(pid)
-      # assert($?.exitstatus != 0)
     end
 
     it 'Supports redirecting in, out, & err streams to/from a Pipe\'s created by IO.pipe' do
@@ -36,21 +87,13 @@ TestFixture.new('Ruby API: Process') do
     it 'Supports redirecting to ordinary file objects' do
       out_file = File.open(file_for_writing, 'w')
       pid = Process.spawn("echo my message", out: out_file)
-      Process.wait(pid)
       out_file.close
+      Process.wait(pid)
       read = nil
       File.open(file_for_writing) do |f|
         read = f.read
       end
       assert(read.strip == "my message")
-    end
-
-    it 'No longer needs hack for https://bz.apache.org/bugzilla/show_bug.cgi?id=58123' do
-      # This pending test is just to track a todo in the source.
-      # A workaround has been implemented for a bug in APR.
-      # A patch has been submitted. Once fixed, need to search
-      # for the URL in the source and remove the workaround.
-      pending
     end
   end
 

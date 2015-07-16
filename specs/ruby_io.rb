@@ -56,4 +56,13 @@ TestFixture.new('Ruby API: IO') do
       pending
     end
   end
+
+  describe 'IO.pipe' do
+    it 'Both pipes are closed & freed after each is garbage collected' do
+      # Right now you have to close them manually.
+      # Going to have to track, on the C side, when each is GC'ed
+      # Need to do the same for ordinary files
+      pending
+    end
+  end
 end

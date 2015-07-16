@@ -1,3 +1,8 @@
+# This file was part of an investigation into APR process creation for shell commands.
+# The results have been incorporated into mruby-apr already.
+# The file remains for posterity, and the extension has been changed to avoid
+# executing it during unit tests.
+
 def via_cruby(cmd)
   puts "Spawn via CRuby:"
   File.open('sandbox/shell.rb', 'w') do |f|
@@ -100,6 +105,8 @@ end
 def shell(cmd)
   via_cruby(cmd)
   as_program(cmd)
+
+  # Never wanted to work on Windows
   #as_shellcmd_unified(cmd)
 
   # Clearly not an option, as it interprets and removes symbols that
@@ -115,8 +122,6 @@ def test(cmd)
   puts
 end
 
-# See: http://rxr.whitequark.org/mri/source/win32/win32.c#099
-
 # Simple test
 #test %q[echo 1]
 # Reving up with quotes
@@ -128,4 +133,8 @@ test %q[ruby -e 'puts "3".class']
 # Nesting quotes, escaped from the shell
 test %q[ruby -e "puts \"4\""]
 # Testing for shell interpretation of the command line
-test %q[ruby -r English -e "puts $LOAD_PATH.first"]
+if APR::OS == 'Windows'
+  test %q[ruby -e "puts '%WINDIR%'"]
+else
+  test %q[ruby -e "puts '$HOME'"]
+end

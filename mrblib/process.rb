@@ -19,27 +19,29 @@ module Process
       end
 
       if command.length == 1 && command[0].class == String
-        err, argv = APR.apr_tokenize_to_argv(command[0], pool)
-        # TODO: Remove this when this bug is resolved & apr is updated
-        # https://bz.apache.org/bugzilla/show_bug.cgi?id=58123
-        unless APR::OS == "Windows"
-          argv = argv.map { |a|
-            if a.include?(' ') || a.include?("\t")
-              "\"#{a}\""
-            else
-              a
-            end
-          }
+        err, tokens = APR.apr_tokenize_to_argv(command[0], pool)
+
+        # WORKAROUND:
+        #   Encountering lots of problems when using APR_SHELLCMD directly.
+        #   It attempts to quote arguments in ways that appear unneeded.
+        #   Additionally, the quoting is often wrong.
+        #   So, using APR_PROGRAM_PATH, we can construct the shell command ourselves
+        #   to get around this limitation.
+        argv = nil
+        if APR::OS == 'Windows'
+          argv = ["cmd.exe", '/C', command[0]]
+        else
+          argv = ["sh", '-c', command[0]]
         end
 
-        { env: env, argv: argv, options: options, cmd_type: APR::AprCmdtypeE::APR_SHELLCMD_ENV }
+        { env: env, argv: argv, options: options, cmd_type: APR::AprCmdtypeE::APR_PROGRAM_PATH }
       elsif command[0].class == Array
         if command[0].length != 2
           raise ArgumentError.new('wrong first argument')
         end
         { env: env, argv: [command[0][0], command[0][1]].concat(command[1..(command.length)]), options: options, cmd_type: APR::AprCmdtypeE::APR_PROGRAM_ENV }
       else
-        { env: env, argv: command, options: options, cmd_type: APR::AprCmdtypeE::APR_PROGRAM_ENV }
+        { env: env, argv: command, options: options, cmd_type: APR::AprCmdtypeE::APR_PROGRAM_PATH }
       end
     end
   end
