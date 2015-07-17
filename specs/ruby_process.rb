@@ -4,10 +4,10 @@ TestFixture.new('Ruby API: Process') do
   describe 'Process::spawn' do
     it 'Spawns a shell command if given a string' do
       APR.with_pool do |pool|
-        # If there was a shell involved, the command executed below would be
+        # If there is a shell involved, the command executed below should be
         # interpretted, and the environment variable expanded. So, if we
-        # correctly bypass the shall, the variable name should be printed
-        # instead of the variable's value.
+        # correctly utilize the shall, the variable's value should be printed
+        # instead of the variable's name.
         APR.apr_env_set("I_SHOULD_NOT_BE_PRINTED", "I should be printed", pool)
 
         cmd = nil
@@ -18,7 +18,7 @@ TestFixture.new('Ruby API: Process') do
         end
 
         r, w = IO.pipe
-        pid = Process.spawn(*cmd, out: w)
+        pid = Process.spawn(cmd, out: w)
         w.close
 
         assert(r.read.strip == 'I should be printed')
@@ -36,7 +36,7 @@ TestFixture.new('Ruby API: Process') do
         result.strip
       end
 
-      # Reving up with quotes
+      # Command with double quotes
       assert '1' == capture_out[%q[ruby -e "puts(1)"]]
       # Single quote in double quotes
       assert 'String' == capture_out[%q[ruby -e "puts '2'.class"]]
@@ -51,7 +51,7 @@ TestFixture.new('Ruby API: Process') do
       assert 'FAILED'  != capture_out[ %q[ ruby -e "exit 1" && ruby -e "puts 'FAILED'"  ]]
     end
 
-    it 'Spawns a program, with no shell, if given argv as multiple args' do
+    it 'Spawns a program from the path, with no shell, if given argv as multiple args' do
       APR.with_pool do |pool|
         # If there was a shell involved, the command executed below would be
         # interpretted, and the environment variable expanded. So, if we
@@ -70,8 +70,108 @@ TestFixture.new('Ruby API: Process') do
         pid = Process.spawn(*cmd, out: w)
         w.close
 
-        assert(r.read.include? 'I_SHOULD_BE_PRINTED')
+        result = r.read
+        assert(result.include? 'I_SHOULD_BE_PRINTED')
+
+        # TODO Test commands with slashes not preceding quote, slashes preceding quote, and even/odd number of trailing slashes (because windows sucks)
       end
+    end
+
+    it 'Quotes arguments to non-shell commands correctly' do
+      break unless APR::OS == 'Windows'
+      APR.with_pool do |pool|
+        APR.apr_env_set("I_SHOULD_BE_PRINTED", "I should not", pool)
+
+        # This command is going to be processed by Process.spawn,
+        # subbing '\"' for every '"'. This tests makes sure the argument
+        # still reaches the child command correctly. (CommandLineToArgvW
+        # should be constructing argv for the command, and converting
+        # the escaped quotes into regular quotes)
+        cmd = ['ruby', '-e', 'puts("%I_SHOULD_BE_PRINTED%")']
+
+        r, w = IO.pipe
+        pid = Process.spawn(*cmd, out: w)
+        w.close
+
+        result = r.read
+        assert(result.include? 'I_SHOULD_BE_PRINTED')
+
+        # TODO Test commands with slashes not preceding quote, slashes preceding quote, and even/odd number of trailing slashes (because windows sucks)
+      end
+    end
+
+    it 'Can spawn a non shell command on windows with spaces in the name' do
+      break unless APR::OS == 'Windows'
+      cmd = ["#{$GEM_DIR}/sandbox/windows print three args.exe", 'simple commands don\'t have spaces', '"\'"s', 'or \'"\'s']
+
+      r, w = IO.pipe
+      pid = Process.spawn(*cmd, out: w)
+      w.close
+
+      result = r.read
+      assert(result.strip == %q[simple commands don't have spaces, "'"s, or '"'s])
+
+      # TODO Test commands with slashes not preceding quote, slashes preceding quote, and even/odd number of trailing slashes (because windows sucks)
+    end
+
+    it 'Handles quoted arguments with spaces & an even number of trailing backslashes on windows' do
+      break unless APR::OS == 'Windows'
+      cmd = ["#{$GEM_DIR}/sandbox/windows print three args.exe", '1', '2', '3 \\\\']
+
+      r, w = IO.pipe
+      pid = Process.spawn(*cmd, out: w)
+      w.close
+
+      result = r.read
+      assert(result.strip == %q[1, 2, 3 \\\\])
+    end
+
+    it 'Handles quoted arguments with spaces & an odd number of trailing backslashes on windows' do
+      break unless APR::OS == 'Windows'
+      cmd = ["#{$GEM_DIR}/sandbox/windows print three args.exe", '1', '2', '3 \\\\\\']
+
+      r, w = IO.pipe
+      pid = Process.spawn(*cmd, out: w)
+      w.close
+
+      result = r.read
+      assert(result.strip == %q[1, 2, 3 \\\\\\])
+    end
+
+    it 'Handles arguments with an even number slashes preceding quotes on Windows' do
+      break unless APR::OS == 'Windows'
+      cmd = ["#{$GEM_DIR}/sandbox/windows print three args.exe", '1', '2', '"\\ \\\\"']
+
+      r, w = IO.pipe
+      pid = Process.spawn(*cmd, out: w)
+      w.close
+
+      result = r.read
+      assert(result.strip == %q[1, 2, "\\ \\\\"])
+    end
+
+    it 'Handles arguments with an odd number slashes preceding quotes on Windows' do
+      break unless APR::OS == 'Windows'
+      cmd = ["#{$GEM_DIR}/sandbox/windows print three args.exe", '1', '2', '"\\"']
+
+      r, w = IO.pipe
+      pid = Process.spawn(*cmd, out: w)
+      w.close
+
+      result = r.read
+      assert(result.strip == %q[1, 2, "\\"])
+    end
+
+    it 'Handles arguments with slashes not preceding quotes on windows' do
+      break unless APR::OS == 'Windows'
+      cmd = ["#{$GEM_DIR}/sandbox/windows print three args.exe", '1', '2', '\\']
+
+      r, w = IO.pipe
+      pid = Process.spawn(*cmd, out: w)
+      w.close
+
+      result = r.read
+      assert(result.strip == %q[1, 2, \\])
     end
 
     it 'Supports redirecting in, out, & err streams to/from a Pipe\'s created by IO.pipe' do
@@ -99,7 +199,9 @@ TestFixture.new('Ruby API: Process') do
 
   describe 'Process::wait' do
     it 'Sets $? based on the exit status of the indicated process' do
-      pending
+      pid = Process.spawn('ruby -e "exit 1"')
+      Process.wait pid
+      assert($?.exitstatus == 1)
     end
 
     it 'If called twice on the same PID, does the right thing... which is...?' do

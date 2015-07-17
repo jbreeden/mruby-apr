@@ -26,7 +26,7 @@ TestFixture.new('APR API: Processes') do
 
       argv = nil
       if APR::OS == 'Windows'
-        argv = ["cmd.exe", '/C', "ruby -e 'puts \\'some string\\''"]
+        argv = ["cmd.exe", '/C', "ruby -e \"puts 'some string'\""]
       else
         argv = ["sh", '-c', "ruby -e \"puts 'some string'\""]
       end
