@@ -12488,7 +12488,7 @@ mrb_APR_apr_proc_create(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooooo", &progname, &args, &env, &attr, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, progname, mrb->string_class)) {
+  if (!mrb_obj_is_kind_of(mrb, progname, mrb->string_class) && !mrb_nil_p(progname)) {
     mrb_raise(mrb, E_TYPE_ERROR, "String expected");
     return mrb_nil_value();
   }

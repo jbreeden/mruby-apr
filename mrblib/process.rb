@@ -2,6 +2,52 @@ module Process
   # No real privates in mruby, so use a sub module for some sort of hiding
   module Util
 
+    # Some nasty details below involving proc creation on windows.
+    # For more info, see:
+    # - http://blogs.msdn.com/b/twistylittlepassagesallalike/archive/2011/04/23/everyone-quotes-arguments-the-wrong-way.aspx
+
+    # Only for arguments that are (or will be, by apr) wrapped in double quotes
+    def self.double_backslashes_preceding_quotes(arg)
+      new_arg = ""
+      preceding_quote = true # It's wrapped, so the trailing quotes are preceding a quote
+      arg.reverse.each_char do |c|
+        if preceding_quote
+          if c == '\\'
+            new_arg << '\\\\'
+          else
+            new_arg << c
+            preceding_quote = false unless c == '"'
+          end
+        else
+          new_arg << c
+          preceding_quote = true if c == '"'
+        end
+      end
+      new_arg.reverse
+    end
+
+    def self.quote_windows_argv(argv)
+      new_argv = [argv[0]]
+      if argv.length > 1
+        argv[1..(argv.length - 1)].each do |arg|
+          if arg.include? ' '
+            # APR does it's own quoting if there's a space in the arg
+            # (But it's extremely naive, and doesn't escape contained quotes, so we have to)
+            escaped = double_backslashes_preceding_quotes(arg).gsub('"', '\"')
+            new_argv.push escaped
+          elsif arg.include? '"'
+            # To escape a double quote on windows, you have to be in a double quote,
+            # so we escape and wrap
+            escaped = double_backslashes_preceding_quotes(arg).gsub('"', '\"')
+            new_argv.push "\"#{escaped}\""
+          else
+            new_argv.push(arg)
+          end
+        end
+      end
+      new_argv
+    end
+
     def self.parse_spawn_args(*command, pool)
       env = nil
       options = nil;
@@ -19,27 +65,47 @@ module Process
       end
 
       if command.length == 1 && command[0].class == String
-        err, argv = APR.apr_tokenize_to_argv(command[0], pool)
-        # TODO: Remove this when this bug is resolved & apr is updated
-        # https://bz.apache.org/bugzilla/show_bug.cgi?id=58123
-        unless APR::OS == "Windows"
-          argv = argv.map { |a|
-            if a.include?(' ') || a.include?("\t")
-              "\"#{a}\""
-            else
-              a
-            end
-          }
+        # WORKAROUND:
+        #   Encountering lots of problems when using APR_SHELLCMD directly.
+        #   It attempts to quote arguments in ways that appear unneeded.
+        #   Additionally, the quoting is often wrong.
+        #   So, using APR_PROGRAM_PATH, we can construct the shell command ourselves
+        #   to get around this limitation.
+        argv = nil
+        if APR::OS == 'Windows'
+          # User is aware of shell processing, so they'll escape any quotes themselves.
+          # Note that this goes directly through CreateProcess, so any cmd significant
+          # metacharacters are not interpreted until the child proc (ie there is no outter
+          # cmd shell to worry about)
+          argv = ["cmd.exe", '/C', command[0]]
+        else
+          argv = ["sh", '-c', command[0]]
         end
 
-        { env: env, argv: argv, options: options, cmd_type: APR::AprCmdtypeE::APR_SHELLCMD_ENV }
+        { env: env, argv: argv, options: options, cmd_type: APR::AprCmdtypeE::APR_PROGRAM_PATH }
       elsif command[0].class == Array
         if command[0].length != 2
           raise ArgumentError.new('wrong first argument')
         end
-        { env: env, argv: [command[0][0], command[0][1]].concat(command[1..(command.length)]), options: options, cmd_type: APR::AprCmdtypeE::APR_PROGRAM_ENV }
+        argv = [command[0][0], command[0][1]].concat(command[1..(command.length)])
+        if APR::OS == 'Windows'
+          argv = quote_windows_argv(argv)
+        end
+        { env: env, argv: argv, options: options, cmd_type: APR::AprCmdtypeE::APR_PROGRAM_PATH }
       else
-        { env: env, argv: command, options: options, cmd_type: APR::AprCmdtypeE::APR_PROGRAM_ENV }
+
+        # Unix is simple... the args are passed in an actual vector, so just pass them along
+        argv = command
+        if APR::OS == 'Windows'
+          # Windows is a horrible beast... only accepting a command line that is later processed
+          # into an argv for the target program by CommandLineToArgvW (that is, if the program
+          # doesn't use the command line directly). So we have to quote the args correctly
+          # to allow the constructed command line string to be deconstructed back into the
+          # original argument vector.
+          # (Note that the construction of the commandline string is done with APR itself)
+          argv = quote_windows_argv(command)
+        end
+        { env: env, argv: argv, options: options, cmd_type: APR::AprCmdtypeE::APR_PROGRAM_PATH }
       end
     end
   end
