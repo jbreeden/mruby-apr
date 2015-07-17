@@ -18,9 +18,22 @@ class IO
         raise ArgumentError.new("Invalid access mode #{mode}")
       end
     end
+
+    def self.ruby_seek_to_apr(seek)
+      case seek
+      when :SET, SEEK_SET
+        APR::APR_SET
+      when :CUR, SEEK_CUR
+        APR::APR_CUR
+      when :END, SEEK_END
+        APR::APR_END
+      else
+        raise ArgumentError.new("Invalid seek location #{seek}")
+      end
+    end
+
   end
 
-  # Not using these yet... but here they are, ripped from CRuby
   SEEK_SET = 0
   SEEK_CUR = 1
   SEEK_END = 2

@@ -140,6 +140,21 @@ class File
     result
   end
 
+  def <<(obj)
+    as_str = obj.class == String ? obj : obj.to_s
+    APR.apr_file_write(@native_file, as_str, as_str.length)
+  end
+
+  def print(*objs)
+    check_can_write
+    objs.each_with_index do |obj, i|
+      as_str = obj.class == String ? obj : obj.to_s
+      APR.apr_file_write(@native_file, $,.to_s, $,.to_s.length) if i > 0  && !$,.nil?
+      APR.apr_file_write(@native_file, as_str, as_str.length)
+    end
+    APR.apr_file_write(@native_file, $\.to_s, $\.to_s.length) unless $\.nil?
+  end
+
   def puts(*args)
     check_can_write
 
@@ -269,4 +284,10 @@ class File
     end
   end
   alias ungetc ungetbyte # No difference between byte & char in mruby
+
+  def seek(amount, whence=IO::SEEK_SET)
+    whence = IO::Util.ruby_seek_to_apr(whence)
+    err, pos = APR.apr_file_seek(@native_file, whence, amount)
+    APR.raise_apr_errno(err)
+  end
 end

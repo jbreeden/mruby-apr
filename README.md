@@ -42,7 +42,6 @@ Test Output
 The tests directly or indirectly cover most of the API, so this is a good indicator of progress.
 
 ```
-
 APR API: Directories
 --------------------
 
@@ -147,12 +146,14 @@ Ruby API: File
     + If given a block, it is passed the File, and the File is automatically closed when the block terminates
 
   - File#print(obj, ...)
-    + [PENDING] Writes the given objects to the File
-    + [PENDING] If the output field separator ($,) is not nil, it will be inserted between each object.
-    + [PENDING] If the output record separator ($) is not nil, it will be appended to the output.
+    + Writes the given objects to the File
+    + If the output field separator ($,) is nil, nothing is inserted between each object.
+    + If the output field separator ($,) is not nil, it will be inserted between each object.
+    + If the output record separator ($) is not nil, it will be appended to the output.
+    + Objects that aren’t strings will be converted by calling their to_s method
 
   - File#<<(obj)
-    + [PENDING] Writes obj to ios. obj will be converted to a string using to_s.
+    + Writes obj to ios. obj will be converted to a string using to_s.
 
   - File#puts(obj, ...)
     + Writes the given objects to the File, appending the output record separator ($\) between each item
@@ -213,7 +214,12 @@ Ruby API: File
   - File#ungetc
     + Pushes back bytes onto a file buffer
 
-  SUCCESS [0/42 tests failed]
+  - File#seek(amount, whence=IO::SEEK_SET)
+    + Seeks `amount` bytes from the beginning of the file when given `whenc=IO::SEEK_SET` (the default)
+    + Seeks `amount` bytes from the end of the file when given `whenc=IO::SEEK_END`
+    + Seeks `amount` bytes from the current position of the file when given `whenc=IO::SEEK_CUR`
+
+  SUCCESS [0/47 tests failed]
 
 Ruby API: IO
 ------------
@@ -251,13 +257,6 @@ Ruby API: Process
     + Spawns a shell command if given a string
     + Interprets shell command arguments correctly
     + Spawns a program from the path, with no shell, if given argv as multiple args
-    + Quotes arguments to non-shell commands correctly
-    + Can spawn a non shell command on windows with spaces in the name
-    + Handles quoted arguments with spaces & an even number of trailing backslashes on windows
-    + Handles quoted arguments with spaces & an odd number of trailing backslashes on windows
-    + Handles arguments with an even number slashes preceding quotes on Windows
-    + Handles arguments with an odd number slashes preceding quotes on Windows
-    + Handles arguments with slashes not preceding quotes on windows
     + Supports redirecting in, out, & err streams to/from a Pipe's created by IO.pipe
     + Supports redirecting to ordinary file objects
 
@@ -265,7 +264,7 @@ Ruby API: Process
     + Sets $? based on the exit status of the indicated process
     + [PENDING] If called twice on the same PID, does the right thing... which is...?
 
-  SUCCESS [0/14 tests failed]
+  SUCCESS [0/7 tests failed]
 ```
 
 APR Function Bindings

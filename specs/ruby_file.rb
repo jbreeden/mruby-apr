@@ -28,21 +28,89 @@ TestFixture.new('Ruby API: File') do
 
   describe 'File#print(obj, ...)' do
     it "Writes the given objects to the File" do
-      pending
+      File.open(file_for_writing, 'w') do |f|
+        f.print('my message')
+      end
+      result = nil
+      File.open(file_for_writing) do |f|
+        result = f.read.strip
+      end
+      assert result.strip == 'my message'
+    end
+
+    it "If the output field separator ($,) is nil, nothing is inserted between each object." do
+      File.open(file_for_writing, 'w') do |f|
+        f.print('my', 'message')
+      end
+      result = nil
+      File.open(file_for_writing) do |f|
+        result = f.read.strip
+      end
+      assert result.strip == 'mymessage'
     end
 
     it "If the output field separator ($,) is not nil, it will be inserted between each object." do
-      pending
+      original_field_sep = $,
+      $, = "\t"
+      File.open(file_for_writing, 'w') do |f|
+        f.print('my', 'message')
+      end
+      result = nil
+      File.open(file_for_writing) do |f|
+        result = f.read.strip
+      end
+      assert result.strip == "my\tmessage"
+      $, = original_field_sep
     end
 
     it "If the output record separator ($\) is not nil, it will be appended to the output." do
-      pending
+      original_out_record_sep = $\
+      $\ = "EOF"
+      File.open(file_for_writing, 'w') do |f|
+        f.print('my message')
+      end
+      result = nil
+      File.open(file_for_writing) do |f|
+        result = f.read.strip
+      end
+      assert result.strip == "my messageEOF"
+      $\ = original_out_record_sep
+    end
+
+    it 'Objects that aren’t strings will be converted by calling their to_s method' do
+      o = Object.new
+      class << o
+        def to_s
+          'to_s result'
+        end
+      end
+      File.open(file_for_writing, 'w') do |f|
+        f.print(o, o)
+      end
+      result = nil
+      File.open(file_for_writing) do |f|
+        result = f.read.strip
+      end
+      assert result.strip == 'to_s resultto_s result'
     end
   end
 
   describe 'File#<<(obj)' do
     it "Writes obj to ios. obj will be converted to a string using to_s." do
-      pending
+      o = Object.new
+      class << o
+        def to_s
+          'to_s result'
+        end
+      end
+      File.open(file_for_writing, 'w') do |f|
+        f << o
+      end
+      result = nil
+      File.open(file_for_writing) do |f|
+        result = f.read.strip
+      end
+      assert result == 'to_s result'
     end
   end
 
@@ -452,6 +520,36 @@ TestFixture.new('Ruby API: File') do
         read.push f.getc
       end
       assert(read[0] == 'a' && read[1] == 'A')
+    end
+  end
+
+  describe 'File#seek(amount, whence=IO::SEEK_SET)' do
+    it 'Seeks `amount` bytes from the beginning of the file when given `whenc=IO::SEEK_SET` (the default)' do
+      result = nil
+      File.open(two_line_file) do |f|
+        f.seek(5)
+        result = f.read(4)
+      end
+      assert result == 'file'
+    end
+
+    it 'Seeks `amount` bytes from the end of the file when given `whenc=IO::SEEK_END`' do
+      result = nil
+      File.open(two_line_file) do |f|
+        f.seek(-7, IO::SEEK_END)
+        result = f.read.strip
+      end
+      assert result == 'line.'
+    end
+
+    it 'Seeks `amount` bytes from the current position of the file when given `whenc=IO::SEEK_CUR`' do
+      result = nil
+      File.open(two_line_file) do |f|
+        f.read(5)
+        f.seek(5, IO::SEEK_CUR)
+        result = f.read(3)
+      end
+      assert result == 'has'
     end
   end
 end
