@@ -39,7 +39,7 @@ useful when embedding mruby as a scripting language in a desktop or mobile app.
 Spec
 ----
 
-[The spec](/spec.md) is generated from the tests and covers most of the API. It should serve as a decent (if no verbose) reference.
+[The spec](/spec.md) is generated from the tests and covers most of the API. It should serve as a decent (if not verbose) reference.
 
 APR Function Bindings
 ---------------------

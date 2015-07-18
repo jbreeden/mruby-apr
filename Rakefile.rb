@@ -52,7 +52,7 @@ namespace :test do
   task :all do
     with_mruby do |mruby|
       exec_file(mruby, 'specs/fixture.rb')
-      Dir['specs/*.rb'].reject { |f| File.basename(f) == 'specs/fixture.rb' }.each do |f|
+      Dir['specs/*.rb'].reject { |f| File.basename(f) == 'specs/fixture.rb' }.sort.each do |f|
         exec_file(mruby, f)
       end
     end
