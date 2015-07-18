@@ -123,8 +123,6 @@ mrb_APR_AprFinfoT_get_valid(mrb_state* mrb, mrb_value self) {
     return mrb_nil_value();
   }
   mrb_value ruby_field = mrb_fixnum_value(native_field);
-  /* Store the ruby object to prevent garage collection of the underlying native object */
-  mrb_iv_set(mrb, self, mrb_intern_cstr(mrb, "@valid_box"), ruby_field);
 
   return ruby_field;
 }

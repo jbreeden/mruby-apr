@@ -392,7 +392,7 @@
 #define BIND_apr_file_flush_FUNCTION TRUE
 #define BIND_apr_file_getc_FUNCTION TRUE
 #define BIND_apr_file_gets_FUNCTION TRUE
-#define BIND_apr_file_info_get_FUNCTION FALSE
+#define BIND_apr_file_info_get_FUNCTION TRUE
 #define BIND_apr_file_inherit_unset_FUNCTION TRUE
 #define BIND_apr_file_link_FUNCTION TRUE
 #define BIND_apr_file_lock_FUNCTION TRUE
@@ -686,7 +686,7 @@
 #define BIND_apr_socket_timeout_get_FUNCTION TRUE
 #define BIND_apr_socket_timeout_set_FUNCTION TRUE
 #define BIND_apr_socket_type_get_FUNCTION TRUE
-#define BIND_apr_stat_FUNCTION FALSE
+#define BIND_apr_stat_FUNCTION TRUE
 #define BIND_apr_strerror_FUNCTION TRUE
 #define BIND_apr_to_os_error_FUNCTION TRUE
 #define BIND_apr_strfsize_FUNCTION FALSE
@@ -764,6 +764,7 @@
 #define BIND_apr_time_exp_lt_FUNCTION FALSE
 #define BIND_apr_time_exp_tz_FUNCTION FALSE
 #define BIND_apr_time_now_FUNCTION TRUE
+#define BIND_apr_time_sec_FUNCTION TRUE /* This is a macro in APR */
 #define BIND_apr_tokenize_to_argv_FUNCTION TRUE
 #define BIND_apr_uid_compare_FUNCTION FALSE
 #define BIND_apr_uid_current_FUNCTION FALSE

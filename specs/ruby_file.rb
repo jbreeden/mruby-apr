@@ -3,6 +3,9 @@ TestFixture.new('Ruby API: File') do
   two_line_file = "#{$GEM_DIR}/sandbox/two_line_file.txt"
   file_for_writing = "#{$GEM_DIR}/sandbox/file_for_writing.txt"
 
+  # Class methods
+  # -------------
+
   describe 'File::open(filename, mode="r" [, &block])' do
     it 'Returns an open File object, if filename exists' do
       f = File.open(two_line_file)
@@ -25,6 +28,169 @@ TestFixture.new('Ruby API: File') do
       assert(file.closed?)
     end
   end
+
+  describe 'File::absolute_path' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::atime' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::basename' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  ## Not really cross platform. May implement later
+  # describe 'File::chmod' do
+  #   it 'Is implemented' do
+  #     pending
+  #   end
+  # end
+  #
+  # describe 'File::chown' do
+  #   it 'Is implemented' do
+  #     pending
+  #   end
+  # end
+
+  describe 'File::copy_stream' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::ctime' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::delete(path[, path]...)' do
+    it 'Deletes the file named by the path argument' do
+      name = 'sandbox/create_and_delete.txt'
+      f = File.open(name, 'w')
+      f.close
+      assert File.exists?(name)
+      File.delete(name)
+      assert !File.exists?(name)
+    end
+
+    it 'Accepts multiple path parameters and deletes them all' do
+      name1 = 'sandbox/create_and_delete1.txt'
+      name2 = 'sandbox/create_and_delete2.txt'
+      names = [name1, name2]
+      names.each do |name|
+        f = File.open(name, 'w')
+        f.close
+        assert File.exists?(name)
+      end
+
+      File.delete(*names)
+
+      names.each do |name|
+        assert !File.exists?(name)
+      end
+    end
+
+    it 'Raises a system call error if the file does not exist' do
+      assert_raises(SystemCallError) do
+        File.delete('sandbox/does_not.exist')
+      end
+    end
+  end
+
+  describe 'File::directory?' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::dirname' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::exist? | exists?' do
+    it 'Returns true if the file exists' do
+      assert File.exists?(two_line_file)
+      assert File.exist?(two_line_file)
+    end
+
+    it 'Returns true if the file exists, even if it\'s a directory' do
+      assert File.exists?('.')
+      assert File.exist?('.')
+    end
+
+    it 'Returns false if the file does not exist' do
+      assert !File.exists?('does_not_exist.txt')
+      assert !File.exist?('neither_does_this.txt')
+    end
+  end
+
+  describe 'File::exists?' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::expand_path' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::extname' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::file?' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::fnmatch' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::fnmatch?' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::link' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::lstat' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  describe 'File::mtime' do
+    it 'Is implemented' do
+      pending
+    end
+  end
+
+  # Instance methods
+  # ----------------
 
   describe 'File#print(obj, ...)' do
     it "Writes the given objects to the File" do

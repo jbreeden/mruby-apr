@@ -3624,59 +3624,45 @@ mrb_APR_apr_file_gets(mrb_state* mrb, mrb_value self) {
 #endif
 
 #if BIND_apr_file_info_get_FUNCTION
-#define apr_file_info_get_REQUIRED_ARGC 3
+#define apr_file_info_get_REQUIRED_ARGC 2
 #define apr_file_info_get_OPTIONAL_ARGC 0
 /* apr_file_info_get
  *
  * Parameters:
- * - finfo: apr_finfo_t *
- * - wanted: int
- * - thefile: apr_file_t *
- * Return Type: apr_status_t
+ * - wanted: Fixnum
+ * - thefile: AprFileT
+ * Return Type: [errno: Fixnum, stat: AprStatusT]
  */
 mrb_value
 mrb_APR_apr_file_info_get(mrb_state* mrb, mrb_value self) {
-  mrb_value finfo;
-  mrb_value wanted;
+  mrb_int native_wanted;
   mrb_value thefile;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "ooo", &finfo, &wanted, &thefile);
-
+  mrb_get_args(mrb, "io", &native_wanted, &thefile);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, finfo, AprFinfoT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFinfoT expected");
-    return mrb_nil_value();
-  }
-  if (!mrb_obj_is_kind_of(mrb, wanted, mrb->fixnum_class)) {
-    mrb_raise(mrb, E_TYPE_ERROR, "Fixnum expected");
-    return mrb_nil_value();
-  }
   if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
     return mrb_nil_value();
   }
 
-
   /* Unbox parameters */
-  apr_finfo_t * native_finfo = (mrb_nil_p(finfo) ? NULL : mruby_unbox_apr_finfo_t(finfo));
-
-  int native_wanted = mrb_fixnum(wanted);
-
   apr_file_t * native_thefile = (mrb_nil_p(thefile) ? NULL : mruby_unbox_apr_file_t(thefile));
 
   /* Invocation */
+  apr_finfo_t * native_finfo = (apr_finfo_t*)malloc(sizeof(apr_finfo_t));
   apr_status_t result = apr_file_info_get(native_finfo, native_wanted, native_thefile);
 
-  /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
+  /* Box the return */
+  mrb_value results = mrb_ary_new(mrb);
+  mrb_ary_push(mrb, results, mrb_fixnum_value(result));
+  if (result == APR_SUCCESS || result == APR_INCOMPLETE) {
+    mrb_ary_push(mrb, results, mruby_giftwrap_apr_finfo_t(mrb, native_finfo));
+  } else {
+    mrb_ary_push(mrb, results, mrb_nil_value());
   }
-  mrb_value return_value = mrb_fixnum_value(result);
-
-  return return_value;
+  return results;
 }
 #endif
 
@@ -5532,51 +5518,34 @@ mrb_APR_apr_filepath_encoding(mrb_state* mrb, mrb_value self) {
 /* apr_filepath_get
  *
  * Parameters:
- * - path: char **
- * - flags: int
- * - p: apr_pool_t *
- * Return Type: apr_status_t
+ * - path: String
+ * - flags: Fixnum
+ * - p: AprPoolT
+ * Return Type: [errno: Fixnum, path: String]
  */
 mrb_value
 mrb_APR_apr_filepath_get(mrb_state* mrb, mrb_value self) {
-  mrb_value path;
-  mrb_value flags;
+  char* path;
+  int path_len;
+  mrb_int flags;
   mrb_value p;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "ooo", &path, &flags, &p);
-
+  mrb_get_args(mrb, "sio", &path, &path_len, &flags, &p);
 
   /* Type checking */
-  TODO_type_check_char_PTR_PTR(path);
-  if (!mrb_obj_is_kind_of(mrb, flags, mrb->fixnum_class)) {
-    mrb_raise(mrb, E_TYPE_ERROR, "Fixnum expected");
-    return mrb_nil_value();
-  }
   if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
     return mrb_nil_value();
   }
 
-
   /* Unbox parameters */
-  char ** native_path = TODO_mruby_unbox_char_PTR_PTR(path);
-
-  int native_flags = mrb_fixnum(flags);
-
   apr_pool_t * native_p = (mrb_nil_p(p) ? NULL : mruby_unbox_apr_pool_t(p));
 
   /* Invocation */
-  apr_status_t result = apr_filepath_get(native_path, native_flags, native_p);
+  apr_status_t result = apr_filepath_get(&path, flags, native_p);
 
-  /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
-  mrb_value return_value = mrb_fixnum_value(result);
-
-  return return_value;
+  RETURN_ERRNO_AND_OUTPUT(result, mrb_str_new_cstr(mrb, path));
 }
 #endif
 
@@ -18151,12 +18120,11 @@ mrb_APR_apr_socket_type_get(mrb_state* mrb, mrb_value self) {
 #endif
 
 #if BIND_apr_stat_FUNCTION
-#define apr_stat_REQUIRED_ARGC 4
+#define apr_stat_REQUIRED_ARGC 3
 #define apr_stat_OPTIONAL_ARGC 0
 /* apr_stat
  *
  * Parameters:
- * - finfo: apr_finfo_t *
  * - fname: const char *
  * - wanted: int
  * - pool: apr_pool_t *
@@ -18164,54 +18132,35 @@ mrb_APR_apr_socket_type_get(mrb_state* mrb, mrb_value self) {
  */
 mrb_value
 mrb_APR_apr_stat(mrb_state* mrb, mrb_value self) {
-  mrb_value finfo;
-  mrb_value fname;
-  mrb_value wanted;
+  char* native_fname;
+  mrb_int native_wanted;
   mrb_value pool;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "oooo", &finfo, &fname, &wanted, &pool);
-
+  mrb_get_args(mrb, "zio", &native_fname, &native_wanted, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, finfo, AprFinfoT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFinfoT expected");
-    return mrb_nil_value();
-  }
-  if (!mrb_obj_is_kind_of(mrb, fname, mrb->string_class)) {
-    mrb_raise(mrb, E_TYPE_ERROR, "String expected");
-    return mrb_nil_value();
-  }
-  if (!mrb_obj_is_kind_of(mrb, wanted, mrb->fixnum_class)) {
-    mrb_raise(mrb, E_TYPE_ERROR, "Fixnum expected");
-    return mrb_nil_value();
-  }
   if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
     return mrb_nil_value();
   }
 
-
   /* Unbox parameters */
-  apr_finfo_t * native_finfo = (mrb_nil_p(finfo) ? NULL : mruby_unbox_apr_finfo_t(finfo));
-
-  const char * native_fname = mrb_string_value_cstr(mrb, &fname);
-
-  int native_wanted = mrb_fixnum(wanted);
-
   apr_pool_t * native_pool = (mrb_nil_p(pool) ? NULL : mruby_unbox_apr_pool_t(pool));
 
   /* Invocation */
+  apr_finfo_t * native_finfo = (apr_finfo_t*)malloc(sizeof(apr_finfo_t));
   apr_status_t result = apr_stat(native_finfo, native_fname, native_wanted, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
+  mrb_value results = mrb_ary_new(mrb);
+  mrb_ary_push(mrb, results, mrb_fixnum_value(result));
+  if (result == APR_SUCCESS || result == APR_INCOMPLETE) {
+    mrb_ary_push(mrb, results, mruby_giftwrap_apr_finfo_t(mrb, native_finfo));
+  } else {
+    mrb_ary_push(mrb, results, mrb_nil_value());
   }
-  mrb_value return_value = mrb_fixnum_value(result);
-
-  return return_value;
+  return results;
 }
 #endif
 
@@ -21803,6 +21752,34 @@ mrb_APR_apr_time_now(mrb_state* mrb, mrb_value self) {
 }
 #endif
 
+#if BIND_apr_time_sec_FUNCTION
+#define apr_time_sec_REQUIRED_ARGC 1
+#define apr_time_sec_OPTIONAL_ARGC 0
+/* apr_time_now
+ *
+ * Parameters: AprTimeT
+ * Return Type: Float
+ */
+mrb_value
+mrb_APR_apr_time_sec(mrb_state* mrb, mrb_value self) {
+  mrb_value time;
+  mrb_get_args(mrb, "o", &time);
+
+  /* Type checking */
+  if (!mrb_obj_is_kind_of(mrb, time, AprTimeT_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "AprTimeT expected");
+  }
+
+  apr_time_t native_time = *mruby_unbox_apr_time_t(time);
+
+  /* Invocation */
+  apr_time_t result = apr_time_sec(native_time);
+
+  /* Box the return value */
+  return mrb_float_value(mrb, result);
+}
+#endif
+
 #if BIND_apr_tokenize_to_argv_FUNCTION
 #define apr_tokenize_to_argv_REQUIRED_ARGC 2
 #define apr_tokenize_to_argv_OPTIONAL_ARGC 0
@@ -24094,6 +24071,9 @@ void mrb_mruby_apr_gem_init(mrb_state* mrb) {
 #endif
 #if BIND_apr_time_now_FUNCTION
   mrb_define_class_method(mrb, APR_module, "apr_time_now", mrb_APR_apr_time_now, MRB_ARGS_ARG(apr_time_now_REQUIRED_ARGC, apr_time_now_OPTIONAL_ARGC));
+#endif
+#if BIND_apr_time_sec_FUNCTION
+  mrb_define_class_method(mrb, APR_module, "apr_time_sec", mrb_APR_apr_time_sec, MRB_ARGS_ARG(apr_time_sec_REQUIRED_ARGC, apr_time_sec_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_tokenize_to_argv_FUNCTION
   mrb_define_class_method(mrb, APR_module, "apr_tokenize_to_argv", mrb_APR_apr_tokenize_to_argv, MRB_ARGS_ARG(apr_tokenize_to_argv_REQUIRED_ARGC, apr_tokenize_to_argv_OPTIONAL_ARGC));

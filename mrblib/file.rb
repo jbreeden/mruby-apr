@@ -59,6 +59,28 @@ class File
     end
   end
 
+  def self.delete(*paths)
+    APR.with_pool do |pool|
+      paths.each do |path|
+        err = APR.apr_file_remove(path, pool)
+        APR.raise_apr_errno(err)
+      end
+    end
+  end
+
+  def self.exists?(path)
+    exists = true
+    APR.with_pool do |pool|
+      err, f = APR.apr_file_open(path, APR::APR_FOPEN_READ, 0, pool)
+      exists = false if err == APR::APR_ENOENT
+      APR.apr_file_close(f) if f
+    end
+    exists
+  end
+  class << self
+    alias exist? exists?
+  end
+
   def native_file
     @native_file
   end

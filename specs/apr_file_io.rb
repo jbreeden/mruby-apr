@@ -205,5 +205,27 @@ TestFixture.new('APR API: File IO') do
     end
   end
 
+  describe 'APR::apr_file_info_get(wanted: Fixnum, file: AprFileT)' do
+    it 'Gets the finfo (fstat - like structure) for an open file' do
+      APR.with_pool do |pool|
+        err, f = APR.apr_file_open('sandbox/two_line_file.txt', APR::APR_FOPEN_READ, APR::APR_OS_DEFAULT, pool)
+        APR.raise_apr_errno(err)
+        err, finfo = APR.apr_file_info_get(APR::APR_FINFO_DEFAULT, f)
+        APR.raise_apr_errno(err, ignore: APR::APR_INCOMPLETE)
+        assert finfo.class == APR::AprFinfoT
+      end
+    end
+  end
+
+  describe 'APR::apr_stat(file_name: String, wanted: Fixnum, pool: AprPoolT)' do
+    it 'Gets the finfo (fstat - like structure) for an open file' do
+      APR.with_pool do |pool|
+        err, finfo = APR.apr_stat('sandbox/two_line_file.txt', APR::APR_FINFO_DEFAULT, pool)
+        APR.raise_apr_errno(err, ignore: APR::APR_INCOMPLETE)
+        assert finfo.class == APR::AprFinfoT
+      end
+    end
+  end
+
   APR::apr_pool_destroy(@pool)
 end

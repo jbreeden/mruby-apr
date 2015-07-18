@@ -1,0 +1,79 @@
+TestFixture.new('Ruby API: File') do
+  empty_file = "#{$GEM_DIR}/sandbox/empty_file.txt"
+  two_line_file = "#{$GEM_DIR}/sandbox/two_line_file.txt"
+  file_for_writing = "#{$GEM_DIR}/sandbox/file_for_writing.txt"
+
+  describe 'Stat#atime' do
+    it 'Gives the access time of the file as a Time' do
+      # Unfortunately have to sleep for a second to guarantee atime > "now"
+      APR.apr_sleep 1000000 # micro seconds
+      stat = File::Stat.new(empty_file)
+      t_first = stat.atime
+      File.open(empty_file) do |f|
+        # Have to read or write to update atime
+        f.read
+      end
+      stat = File::Stat.new(empty_file)
+      t_second = stat.atime
+      assert (t_second > t_first)
+    end
+  end
+
+  describe 'Stat#ctime' do
+    it 'Gives the creation time of the file as a Time' do
+      created_file = 'sandbox/created_file.txt'
+      now = Time.now
+      # Unfortunately have to sleep for a second to guarantee ctime > "now"
+      APR.apr_sleep 1000000 # micro seconds
+      File.open(created_file, 'w') do |f|
+        f.puts "Created after #{now}"
+      end
+      stat = File::Stat.new(created_file)
+      ctime = stat.ctime
+      assert(ctime > now)
+    end
+  end
+
+  describe 'Stat#mtime' do
+    it 'Gives the creation time of the file as a Time' do
+      stat1 = File::Stat.new(file_for_writing)
+      File.open(file_for_writing, 'w') do |f|
+        f.puts "Modification"
+      end
+      stat2 = File::Stat.new(file_for_writing)
+      assert(stat2.mtime > stat1.mtime)
+    end
+  end
+
+  describe 'Stat#size' do
+    it 'Gives the size of the file in bytes' do
+      stat = File::Stat.new(two_line_file)
+      # File hase 2 24-char lines, size depends on line endings
+      assert(50 <= stat.size && stat.size <= 52)
+    end
+  end
+
+  describe 'Stat#directory?' do
+    it 'Returns true if the file is a directory' do
+      stat = File::Stat.new('sandbox')
+      assert(stat.directory?)
+    end
+
+    it 'Returns false for non-directory files' do
+      stat = File::Stat.new('sandbox/empty_file.txt')
+      assert(!stat.directory?)
+    end
+  end
+
+  describe 'Stat#file?' do
+    it 'Returns true if the file is a regular file' do
+      stat = File::Stat.new('sandbox/empty_file.txt')
+      assert(stat.file?)
+    end
+
+    it 'Returns false for non-regular files' do
+      stat = File::Stat.new('sandbox')
+      assert(!stat.file?)
+    end
+  end
+end
