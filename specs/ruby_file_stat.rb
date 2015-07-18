@@ -1,4 +1,4 @@
-TestFixture.new('Ruby API: File') do
+TestFixture.new('Ruby API: File::Stat') do
   empty_file = "#{$GEM_DIR}/sandbox/empty_file.txt"
   two_line_file = "#{$GEM_DIR}/sandbox/two_line_file.txt"
   file_for_writing = "#{$GEM_DIR}/sandbox/file_for_writing.txt"

@@ -242,8 +242,8 @@ Ruby API: File
 
   SUCCESS [0/69 tests failed]
 
-Ruby API: File
---------------
+Ruby API: File::Stat
+--------------------
 
   - Stat#atime
     + Gives the access time of the file as a Time
