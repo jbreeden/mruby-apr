@@ -267,6 +267,17 @@ Ruby API: File::Stat
 
   SUCCESS [0/8 tests failed]
 
+Ruby API: Forwardable
+---------------------
+
+  - Forwardable#delegate
+    + Creates delegate methods on classes
+    + Creates delegate methods on instances
+    + Passes arguments along
+    + Passes blocks along
+
+  SUCCESS [0/4 tests failed]
+
 Ruby API: IO
 ------------
 

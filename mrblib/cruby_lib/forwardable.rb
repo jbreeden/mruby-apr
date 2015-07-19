@@ -188,12 +188,16 @@ module Forwardable
           if block.nil?
             self.instance_eval(accessor.to_s).send(method, *args)
           else
-            self.instance_eval(accessor.to_s).send(method, *args, block)
+            self.instance_eval(accessor.to_s).send(method, *args, &block)
           end
         end
 
         def __temp_forwarder_method__(*args, &block)
-          self.send("_forward_#{__method__}_", args, block)
+          if block.nil?
+            self.send("_forward_#{__method__}_", args, nil)
+          else
+            self.send("_forward_#{__method__}_", args, block)
+          end
         end
         alias_method ali, '__temp_forwarder_method__'
         undef :__temp_forwarder_method__
