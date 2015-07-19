@@ -2154,10 +2154,9 @@ mrb_APR_apr_env_delete(mrb_state* mrb, mrb_value self) {
 /* apr_env_get
  *
  * Parameters:
- * - value: char **
- * - envvar: const char *
- * - pool: apr_pool_t *
- * Return Type: [apr_status_t, string]
+ * - envvar: String
+ * - pool: AprPoolT
+ * Return Type: [errno: Fixnum, value: String]
  */
 mrb_value
 mrb_APR_apr_env_get(mrb_state* mrb, mrb_value self) {
@@ -2212,8 +2211,8 @@ mrb_APR_apr_env_get(mrb_state* mrb, mrb_value self) {
 /* apr_env_set
  *
  * Parameters:
- * - envvar: const char *
- * - value: const char *
+ * - envvar: String
+ * - value: String
  * - pool: apr_pool_t *
  * Return Type: apr_status_t
  */

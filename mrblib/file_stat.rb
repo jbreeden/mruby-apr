@@ -28,6 +28,7 @@ class File
     attr_reader :name
     attr_reader :nlink
     attr_reader :size
+    alias size? size
 
     # def blksize
     #   raise NotImplementedError.new('File::Stat#blksize is not yet implemented')
@@ -144,10 +145,6 @@ class File
     # def setuid?
     #   raise NotImplementedError.new('File::Stat#setuid? is not yet implemented')
     # end
-    #
-    # def size?
-    #   raise NotImplementedError.new('File::Stat#size? is not yet implemented')
-    # end
 
     def socket?
       @filetype == APR::AprFiletypeE::APR_SOCKET
@@ -181,8 +178,8 @@ class File
     #   raise NotImplementedError.new('File::Stat#writable_real? is not yet implemented')
     # end
     #
-    # def zero?
-    #   raise NotImplementedError.new('File::Stat#zero? is not yet implemented')
-    # end
+    def zero?
+      size == 0
+    end
   end
 end

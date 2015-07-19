@@ -59,15 +59,6 @@ class File
     end
   end
 
-  def close
-    APR.apr_file_close(@native_file)
-    @closed = true
-  end
-
-  def closed?
-    @closed
-  end
-
   def self.delete(*paths)
     APR.with_pool do |pool|
       paths.each do |path|
@@ -77,17 +68,13 @@ class File
     end
   end
 
-  def self.exists?(path)
-    exists = true
-    APR.with_pool do |pool|
-      err, f = APR.apr_file_open(path, APR::APR_FOPEN_READ, 0, pool)
-      exists = false if err == APR::APR_ENOENT
-      APR.apr_file_close(f) if f
-    end
-    exists
+  def close
+    APR.apr_file_close(@native_file)
+    @closed = true
   end
-  class << self
-    alias exist? exists?
+
+  def closed?
+    @closed
   end
 
   def native_file

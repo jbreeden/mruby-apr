@@ -553,7 +553,7 @@ TestFixture.new('Ruby API: File') do
     end
 
     it 'Returns an Enumerator if no block is given' do
-      f = File.open('sandbox/two_line_file0.txt')
+      f = File.open('sandbox/two_line_file.txt')
       result = f.each
       assert(result.class == Enumerator)
       assert(result.next.strip == "This file has two lines.")
