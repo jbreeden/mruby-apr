@@ -65,6 +65,11 @@ MRuby::Gem::Specification.new('mruby-apr') do |spec|
   spec.author  = 'Jared Breeden'
   spec.summary = 'Bindings to the APR libraries'
 
+  Dir["#{$APR_GEM_DIR}/mrblib/cruby_lib/**/*.rb"].each do |file|
+    puts file
+    spec.rbfiles.push(File.expand_path(file))
+  end
+
   # Need the gem init file to be compiled last, so push it on the end of the file list
   gem_init_rb = File.expand_path("#{spec.dir}/mrblib/mrb_apr_gem_init.rb")
   spec.rbfiles.delete(gem_init_rb)
