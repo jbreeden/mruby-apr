@@ -2577,4 +2577,3 @@ mruby_unbox_apr_vformatter_buff_t(mrb_value boxed) {
   return (apr_vformatter_buff_t *)((mruby_to_native_ref *)DATA_PTR(boxed))->obj;
 }
 #endif
-

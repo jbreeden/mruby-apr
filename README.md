@@ -45,3 +45,17 @@ APR Function Bindings
 ---------------------
 
 For a complete list of APR functions for which bindings have been created, see [apr_functions.txt](/apr_functions.txt)
+
+Development Guidelines
+----------------------
+
+### Using APR Pools for Resource Management
++ An APR pool created by MRuby is "owned" by MRuby.
+  * That is, the pool will be destroyed when the reference to it is GC'ed by MRuby.
++ APR registers cleanup functions for the system resources it provides.
+  * So, for example, apr_file_t objects are closed when the APR pool they belong to is destroyed.
++ The above has several implications.
+  * Any MRuby object (such as a File) that contains resources allocated by a pool MUST
+    retain a reference to that pool.
+  * Once all objects in a pool are GC'ed, there will no longer be a reference to the pool.
+    Therefore, the pool will be destroyed, which will clean up all allocated resources.

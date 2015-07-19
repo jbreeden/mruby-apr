@@ -4023,13 +4023,13 @@ mrb_APR_apr_file_namedpipe_create(mrb_state* mrb, mrb_value self) {
  */
 mrb_value
 mrb_APR_apr_file_open(mrb_state* mrb, mrb_value self) {
-  mrb_value fname;
+  const char* native_fname;
   mrb_value flag;
   mrb_value perm;
   mrb_value pool;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "oooo", &fname, &flag, &perm, &pool);
+  mrb_get_args(mrb, "zooo", &native_fname, &flag, &perm, &pool);
 
   /* Type checking */
   if (!mrb_obj_is_kind_of(mrb, flag, mrb->fixnum_class)) {
@@ -4046,7 +4046,6 @@ mrb_APR_apr_file_open(mrb_state* mrb, mrb_value self) {
   }
 
   /* Unbox parameters */
-  const char * native_fname = mrb_string_value_cstr(mrb, &fname);
   int native_flag = mrb_fixnum(flag);
   int native_perm = mrb_fixnum(perm);
   apr_pool_t * native_pool = (mrb_nil_p(pool) ? NULL : mruby_unbox_apr_pool_t(pool));
