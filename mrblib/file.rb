@@ -59,6 +59,15 @@ class File
     end
   end
 
+  def close
+    APR.apr_file_close(@native_file)
+    @closed = true
+  end
+
+  def closed?
+    @closed
+  end
+
   def self.delete(*paths)
     APR.with_pool do |pool|
       paths.each do |path|
@@ -83,17 +92,6 @@ class File
 
   def native_file
     @native_file
-  end
-
-  def close
-    APR.apr_file_flush(@native_file)
-    APR.apr_file_close(@native_file)
-    APR.apr_pool_destroy(@pool)
-    @closed = true
-  end
-
-  def closed?
-    @closed
   end
 
   def check_can_read
@@ -175,6 +173,7 @@ class File
       APR.apr_file_write(@native_file, as_str, as_str.length)
     end
     APR.apr_file_write(@native_file, $\.to_s, $\.to_s.length) unless $\.nil?
+    nil
   end
 
   def puts(*args)
@@ -198,6 +197,7 @@ class File
       err, bytes_written = APR.apr_file_write(@native_file, sep, sep.length)
       APR.raise_apr_errno(err)
     end
+    nil
   end
 
   def read(length = nil)
@@ -243,7 +243,7 @@ class File
         block[line]
       end
     else
-      self.to_enum(:each)
+      enum = self.to_enum(:each)
     end
   end
   alias each_line each

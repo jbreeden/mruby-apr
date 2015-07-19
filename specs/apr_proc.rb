@@ -1,5 +1,5 @@
 TestFixture.new('APR API: Processes') do
-  err, @pool = APR::apr_pool_create nil
+  err, @pool = APR.apr_pool_create(nil)
 
   describe 'APR::apr_proc_create(command: String, argv: Array<String>, env: Array<String>, proc_attr: AprProcattrT, pool: AprPoolT): [errno: Fixnum, proc: AprProcT]' do
     it 'Can run a shell command and redirect output to a file' do

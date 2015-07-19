@@ -1,6 +1,4 @@
 module APR
-  APR.apr_initialize
-
   module AprCmdtypeE
     APR_SHELLCMD = 0
     APR_PROGRAM = 1

@@ -62,15 +62,13 @@ class IO
   FNM_SYSCASE = 0
 
   def self.pipe
-    shared_pool = APR::SharedPool.new
+    err, pool = APR.apr_pool_create(nil)
 
-    err, readEnd, writeEnd = APR.apr_file_pipe_create shared_pool.pool
+    err, readEnd, writeEnd = APR.apr_file_pipe_create pool
     APR.raise_apr_errno(err)
 
-    read_file = Pipe.new(readEnd, 'r', shared_pool)
-    write_file = Pipe.new(writeEnd, 'w', shared_pool)
-    read_file.sibling = write_file
-    write_file.sibling = read_file
+    read_file = Pipe.new(readEnd, 'r', pool)
+    write_file = Pipe.new(writeEnd, 'w', pool)
 
     [read_file, write_file]
   end

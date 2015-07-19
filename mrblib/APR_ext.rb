@@ -2,6 +2,7 @@
 # This file contains hand-written extensions to the module.
 
 module APR
+
   def self.raise_apr_errno(apr_errno, opt = {ignore: []})
     Array(opt[:ignore]).each do |err|
       return if apr_errno == err

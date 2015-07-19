@@ -1,5 +1,5 @@
 TestFixture.new('APR API: Time') do
-  err, @pool = APR::apr_pool_create nil
+  err, @pool = APR.apr_pool_create(nil)
 
   def check_errno(errno)
     unless assert(errno == 0)

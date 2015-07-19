@@ -11522,6 +11522,14 @@ mrb_value
 mrb_APR_apr_pool_create(mrb_state* mrb, mrb_value self) {
    mrb_value parent;
 
+   /*
+    * APR likes to give you back the same pool when you "create" a new one.
+    * (So far, this is happening consistently on the third creation.)
+    * To avoid this, use a new allocator for each pool.
+    */
+   apr_allocator_t* allocator = NULL;
+   apr_allocator_create(&allocator);
+
    /* Fetch the args */
    mrb_get_args(mrb, "o", &parent);
 
@@ -11536,7 +11544,7 @@ mrb_APR_apr_pool_create(mrb_state* mrb, mrb_value self) {
 
    /* Invocation */
    apr_pool_t * native_newpool = NULL;
-   apr_status_t result = apr_pool_create_ex(&native_newpool, native_parent, NULL, NULL);
+   apr_status_t result = apr_pool_create_ex(&native_newpool, native_parent, NULL, allocator);
 
    /* Box the return value */
    if (result > MRB_INT_MAX) {
@@ -11548,11 +11556,11 @@ mrb_APR_apr_pool_create(mrb_state* mrb, mrb_value self) {
    mrb_value results = mrb_ary_new(mrb);
    mrb_ary_push(mrb, results, return_value);
    if (result == 0) {
-      /* Not 'giftwrappng' because we don't want the pool to be garbage collected,
-       * and end up taking a bunch of other objects with it. Instead, the client
-       * must explicitly call apr_pool_destroy
+      /*
+       * Giftwrapping the pool ensures it is destroyed when all references to
+       * the pool from MRuby are GC'ed
        */
-      mrb_ary_push(mrb, results, mruby_box_apr_pool_t(mrb, native_newpool));
+      mrb_ary_push(mrb, results, mruby_giftwrap_apr_pool_t(mrb, native_newpool));
    }
    else {
       mrb_ary_push(mrb, results, mrb_nil_value());
@@ -11924,13 +11932,11 @@ mrb_APR_apr_pool_destroy(mrb_state* mrb, mrb_value self) {
   /* Fetch the args */
   mrb_get_args(mrb, "o", &p);
 
-
   /* Type checking */
   if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
     return mrb_nil_value();
   }
-
 
   /* Unbox parameters */
   apr_pool_t * native_p = (mrb_nil_p(p) ? NULL : mruby_unbox_apr_pool_t(p));

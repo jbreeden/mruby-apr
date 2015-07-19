@@ -1266,11 +1266,8 @@ mruby_unbox_apr_pollset_t(mrb_value boxed) {
 static void free_apr_pool_t(mrb_state* mrb, void* ptr) {
   mruby_to_native_ref* box = (mruby_to_native_ref*)ptr;
   if (box->belongs_to_ruby) {
-    /* TODO: free is the default. Should be changed if a type-specific
-     *       destructor is provided for this type.
-     */
     if (box->obj != NULL) {
-      free(box->obj);
+      apr_pool_destroy((apr_pool_t*)box->obj);
       box->obj = NULL;
     }
   }

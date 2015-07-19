@@ -128,6 +128,9 @@ module Process
 
       if options
         if options[:in]
+          # Pass nil as the parent file, or else APR tries to create a new pipe
+          # between the two files. If a pipe is required for the child process,
+          # it will have been created by IO.pipe already by the client.
           err = APR.apr_procattr_child_in_set proc_attr, options[:in].native_file, nil
           APR.raise_apr_errno(err)
         end

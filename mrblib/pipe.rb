@@ -1,15 +1,22 @@
 class IO
+  # Pipe is essentially a File, the only difference is that
+  # it exposed a constructor that takes an AprFileT to wrap.
+  # This was required to allow results of apr_file_pipe_create
+  # to be wrapped in a File object, without changing the standard
+  # API of the File class.
+  #
+  # Note:
+  # The mode & pool MUST be the same that the file was created with.
   class Pipe < File
-    def initialize(apr_file, mode, shared_pool)
+    def initialize(apr_file, mode, pool)
       if apr_file.class != APR::AprFileT
         raise ArgumentError.new("AprFileT expected in first arg")
       end
-      if shared_pool.class != APR::SharedPool
-        raise ArgumentError.new("SharedPool expected in third arg")
+      if pool.class != APR::AprPoolT
+        raise ArgumentError.new("AprPoolT expected in third arg")
       end
       @native_file = apr_file
-      @shared_pool = shared_pool
-      @shared_pool.join(self)
+      @pool = pool
 
       if mode.class == Fixnum
         @flags = mode
@@ -18,20 +25,13 @@ class IO
       end
       @closed = false
     end
-
-    attr_accessor :sibling
-
-    def close
-      APR.apr_file_flush(@native_file)
-      APR.apr_file_close(@native_file)
-      @shared_pool.leave(self)
-      @closed = true
-    end
   end
 
   # IO like object returned by IO.popen
   # This simply directs read methods to one pipe,
   # and write methods to another.
+  # The `close` method closes both ends.
+  # Use `close_read` and `close_write` to close one end only.
   class BidirectionalPipe
     # Expects a hash of the form { pid: Fixnum, read: Pipe, write: Pipe }
     # Either pipe may be nil, but not both
@@ -53,7 +53,7 @@ class IO
     def close
       @write_pipe.close unless (@write_pipe.nil? || @write_pipe.closed?)
       @read_pipe.close unless (@read_pipe.nil? || @read_pipe.closed?)
-      Process.wait(@pid) # Sets $? (what if this happens twice? So far, not so good)
+      Process.wait(@pid) # Sets $? (TODO what if this happens twice? So far, not so good)
       nil
     end
 
