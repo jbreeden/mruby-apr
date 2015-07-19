@@ -1,5 +1,6 @@
 # MRuby patches:
-# Removed all references to $@, __FILE__ & __LINE__
+# - Removed all references to $@, __FILE__ & __LINE__
+# - class_eval w/ string isn't supported
 
 #
 #   forwardable.rb -
@@ -178,27 +179,31 @@ module Forwardable
   #   q.push 23  #=> NoMethodError
   #
   def def_instance_delegator(accessor, method, ali = method)
-    definer = proc do
-      define_method "_forward_#{ali}_" do |args, block|
-        if block.nil?
-          self.instance_eval(accessor.to_s).send(method, *args)
-        else
-          self.instance_eval(accessor.to_s).send(method, *args, block)
-        end
-      end
-
-      def __temp_forwarder_method__(*args, &block)
-        self.send("_forward_#{__method__}_", args, block)
-      end
-      alias_method ali, '__temp_forwarder_method__'
-      undef :__temp_forwarder_method__
-    end
-
     # If it's not a class or module, it's an instance
     if self.kind_of? Module
-      class_eval &definer
+      # MRuby Patch:
+      # class_eval doesn't support strings. This is a workaround
+      class_eval do
+        define_method "_forward_#{ali}_" do |args, block|
+          if block.nil?
+            self.instance_eval(accessor.to_s).send(method, *args)
+          else
+            self.instance_eval(accessor.to_s).send(method, *args, block)
+          end
+        end
+
+        def __temp_forwarder_method__(*args, &block)
+          self.send("_forward_#{__method__}_", args, block)
+        end
+        alias_method ali, '__temp_forwarder_method__'
+        undef :__temp_forwarder_method__
+      end
     else
-      instance_eval &definer
+      instance_eval %{
+        def #{ali}(*args, &block)
+          #{accessor}.__send__(:#{method}, *args, &block)
+        end
+      }
     end
   end
 
@@ -275,21 +280,11 @@ module SingleForwardable
   # the method of the same name in _accessor_).  If _new_name_ is
   # provided, it is used as the name for the delegate method.
   def def_single_delegator(accessor, method, ali = method)
-    instance_eval do
-      define_method "_forward_#{ali}_" do |args, block|
-        if block.nil?
-          self.instance_eval(accessor.to_s).send(method, *args)
-        else
-          self.instance_eval(accessor.to_s).send(method, *args, block)
-        end
+    instance_eval %{
+      def #{ali}(*args, &block)
+        #{accessor}.__send__(:#{method}, *args, &block)
       end
-
-      def __temp_forwarder_method__(*args, &block)
-        self.send("_forward_#{__method__}_", args, block)
-      end
-      alias_method ali, '__temp_forwarder_method__'
-      undef :__temp_forwarder_method__
-    end
+    }
   end
 
   alias delegate single_delegate
