@@ -836,6 +836,17 @@
 #include "apr_user.h"
 #include "apr_version.h"
 
+#if defined(_WIN32) || defined(_WIN64)
+  /* Actually much larger than Window's max path length, but whatevs */
+  #define PATH_MAX 1024
+  #include <direct.h>
+  #define getcwd _getcwd
+  #define chdir _chdir
+#else
+  #include <limits.h>
+  #include <unistd.h>
+#endif
+
 /*
  * Class initialization function declarations
  * ------------------------------------------

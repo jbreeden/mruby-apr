@@ -27,7 +27,7 @@ TestFixture.new('APR API: Directories') do
 
       found_cwd = false
       found_parnet = false
-      while err == 0 || err == 70008
+      while err == 0 || err == APR::APR_INCOMPLETE
         # Just checking the access, modification, and creation times, since these should be available
         assert(0 == APR.apr_fnmatch(time_pattern, APR.apr_ctime(finfo.atime)[1], 0))
         assert(0 == APR.apr_fnmatch(time_pattern, APR.apr_ctime(finfo.mtime)[1], 0))

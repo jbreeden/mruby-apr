@@ -1535,6 +1535,37 @@ mrb_APR_apr_ctime(mrb_state* mrb, mrb_value self) {
 }
 #endif
 
+#define chdir_REQUIRED_ARGC 1
+#define chdir_OPTIONAL_ARGC 0
+mrb_value
+mrb_APR_dir_chdir(mrb_state* mrb, mrb_value self) {
+  char* native_thedir;
+  mrb_get_args(mrb, "z", &native_thedir);
+  int result = APR_FROM_OS_ERROR(chdir(native_thedir));
+  mrb_value return_value = mrb_fixnum_value(result);
+  return return_value;
+}
+
+#define getcwd_REQUIRED_ARGC 0
+#define getcwd_OPTIONAL_ARGC 0
+mrb_value
+mrb_APR_dir_getcwd(mrb_state* mrb, mrb_value self) {
+  char* buf = (char*)malloc(sizeof(char) * PATH_MAX + 1);
+  char* cwd = getcwd(buf, PATH_MAX);
+
+  mrb_value results = mrb_ary_new(mrb);
+  if (cwd == NULL) {
+    free(buf);
+    mrb_ary_push(mrb, results, mrb_fixnum_value(APR_FROM_OS_ERROR(errno)));
+    mrb_ary_push(mrb, results, mrb_nil_value());
+  } else {
+    mrb_ary_push(mrb, results, mrb_fixnum_value(APR_SUCCESS));
+    mrb_ary_push(mrb, results, mrb_str_new_cstr(mrb, cwd));
+    free(cwd);
+  }
+  return results;
+}
+
 #if BIND_apr_dir_close_FUNCTION
 #define apr_dir_close_REQUIRED_ARGC 1
 #define apr_dir_close_OPTIONAL_ARGC 0
@@ -7205,7 +7236,7 @@ mrb_APR_apr_hash_this(mrb_state* mrb, mrb_value self) {
 #endif
 
 #if BIND_apr_hash_this_key_FUNCTION
-#define apr_hash_this_key_REQUIRED_ARGC 1
+#define appr_hash_this_key_REQUIRED_ARGC 1
 #define apr_hash_this_key_OPTIONAL_ARGC 0
 /* apr_hash_this_key
  *
@@ -22848,6 +22879,8 @@ void mrb_mruby_apr_gem_init(mrb_state* mrb) {
 #if BIND_apr_ctime_FUNCTION
   mrb_define_class_method(mrb, APR_module, "apr_ctime", mrb_APR_apr_ctime, MRB_ARGS_ARG(apr_ctime_REQUIRED_ARGC, apr_ctime_OPTIONAL_ARGC));
 #endif
+mrb_define_class_method(mrb, APR_module, "apr_dir_chdir", mrb_APR_dir_chdir, MRB_ARGS_ARG(chdir_REQUIRED_ARGC, chdir_OPTIONAL_ARGC));
+mrb_define_class_method(mrb, APR_module, "apr_dir_getcwd", mrb_APR_dir_getcwd, MRB_ARGS_ARG(getcwd_REQUIRED_ARGC, getcwd_OPTIONAL_ARGC));
 #if BIND_apr_dir_close_FUNCTION
   mrb_define_class_method(mrb, APR_module, "apr_dir_close", mrb_APR_apr_dir_close, MRB_ARGS_ARG(apr_dir_close_REQUIRED_ARGC, apr_dir_close_OPTIONAL_ARGC));
 #endif
