@@ -21,9 +21,9 @@ class Parser
     lex do |token|
       # puts "Lexed: #{token}"
       push(token)
-      reduce
+      apply_reductions
     end
-    block[]
+    block[] if block
     @stack = []
     @input = nil
   end
@@ -38,95 +38,97 @@ class Parser
 
   private
 
-  def reduce
-    begin
-      reduced = false
-      @reductions.each do |reduction|
-        to_reduce = nil
-
-        if reduction[RED_LA_IDX].nil?
-          to_reduce = pop(reduction[RED_EXPECTED_IDX])
-        else
-          if reduction[RED_LA_IDX][:is]
-            to_reduce = pop_positive_la(reduction[RED_EXPECTED_IDX], reduction[RED_LA_IDX][:is])
-          elsif reduction[RED_LA_IDX][:not]
-            to_reduce = pop_negative_la(reduction[RED_EXPECTED_IDX], reduction[RED_LA_IDX][:not])
-          else
-            raise "Invalid lookahead. Must be {is: kind(s)} or {not: kind(s)}"
-          end
-        end
-
-        if to_reduce
-          puts "Reducing: #{to_reduce}"
-          new_node = node(kind: reduction[RED_KIND_IDX])
-          reduction[RED_BLOCK_IDX][new_node, to_reduce]
-          push new_node
-          puts "Reduced to: #{new_node}"
-          reduced ||= true
-        end
-      end
-    end while reduced
-  end
-
   def lex(&block)
     # TODO: Default implementation
   end
 
-  def push(new_node)
-    if new_node.class == OpenStruct
-      @stack.push(new_node)
-    else
-      @stack.push(node(new_node))
-    end
+  def apply_reductions
+    begin
+      reduced = false
+      @reductions.each do |reduction|
+        reduced ||= try_reduce(reduction)
+      end
+    end while reduced
   end
 
-  def pop_positive_la(kinds, lookaheads)
-    kinds = Array(kinds)
-    lookaheads = Array(lookaheads)
-    pop(kinds) do |la|
-      lookaheads.find { |la_kind| la_kind == la.kind }
-    end
-  end
+  def try_reduce(reduction)
+    kinds_expected = reduction[RED_EXPECTED_IDX]
+    lookahead_needed = !(reduction[RED_LA_IDX].nil?)
 
-  def pop_negative_la(kinds, lookaheads)
-    kinds = Array(kinds)
-    lookaheads = Array(lookaheads)
-    pop(kinds) do |la|
-      lookaheads.find { |la_kind| la_kind == la.kind }.nil?
-    end
-  end
+    match = pop(kinds_expected, lookahead: lookahead_needed)
+    return false unless match
 
-  def pop(args, &lookahead)
-    args = Array(args)
-    matched = true
+    puts "Reducing: #{match.map { |m| m.kind }.join(', ')} #{'(lookahead)' if lookahead_needed}"
+
+    to_reduce = lookahead_needed ? match[0...-1] : match
+    lookahead = lookahead_needed ? match.last : nil
+
+    if lookahead_needed && reduction[RED_LA_IDX][:is]
+      unless lookahead.kind == reduction[RED_LA_IDX][:is]
+        push(match)
+        return false
+      end
+    elsif lookahead_needed && reduction[RED_LA_IDX][:not]
+      unless lookahead.kind != reduction[RED_LA_IDX][:not]
+        push(match)
+        return false
+      end
+    elsif lookahead_needed
+      raise "Invalid lookahead. Must be {is: kind(s)} or {not: kind(s)} (was #{reduction[RED_LA_IDX]})"
+    end
+
+    new_node = Node.new(kind: reduction[RED_KIND_IDX])
+    reduction[RED_BLOCK_IDX][new_node, to_reduce]
+    puts "Reduced: #{new_node.kind}"
+    push(new_node)
     if lookahead
-      return nil if @stack.length < (args.length + 1)
-      checkset = @stack[(-(args.length + 1))..(@stack.length)]
-    else
-      return nil if @stack.length < (args.length)
-      checkset = @stack[(-args.length)..(@stack.length)]
+      puts "Pushing back lookahead #{lookahead.kind}"
+      push(lookahead)
     end
-    (0..(args.length - 1)).each do |i|
-      matched &&= (Array(args[i]).find { |kind| kind == checkset[i].kind } != nil)
+    true
+  end
+
+  def push(new_nodes)
+    new_nodes = Array(new_nodes)
+    new_nodes.each do |new_node|
+      if new_node.class == Node
+        @stack.push(new_node)
+      else
+        @stack.push(Node.new(new_node))
+      end
+    end
+  end
+
+  def pop(kinds_expected, opt = { lookahead: false })
+    lookahead = opt[:lookahead] || opt == true
+    kinds_expected = Array(kinds_expected)
+    matched = true
+
+    # Check that enough nodes are on the stack to perform the match
+    if lookahead
+      return nil if @stack.length < (kinds_expected.length + 1)
+      checkset = @stack[(-(kinds_expected.length + 1))..(@stack.length)]
+    else
+      return nil if @stack.length < (kinds_expected.length)
+      checkset = @stack[(-kinds_expected.length)..(@stack.length)]
     end
 
-    if matched && lookahead
-      matched = lookahead[checkset.last]
+    # Perform the match (only on kinds_expected length, ignore the lookahead)
+    (0..(kinds_expected.length - 1)).each do |i|
+      # If a members of kinds_expected is an array, it denotes `or`, so match if any is found
+      matched &&= (Array(kinds_expected[i]).find { |kind| kind == checkset[i].kind } != nil)
     end
 
     if matched
-      result = []
-      (args.length).times do
-        result.unshift @stack.pop
+      if lookahead
+        @stack = @stack[0...(-(kinds_expected.length + 1))]
+      else
+        @stack = @stack[0...(-kinds_expected.length)]
       end
-      result
+      checkset
     else
       nil
     end
-  end
-
-  def node(opts)
-    Node.new(opts)
   end
 
   def print_stack

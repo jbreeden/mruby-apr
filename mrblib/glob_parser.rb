@@ -22,23 +22,23 @@ class Parser
     def lex(&block)
       # TODO: Ever heard of Regular Expressions?
       i = 0
-      block[node(kind: :start)]
+      block[Node.new(kind: :start)]
       while i < @input.length
         case @input[i]
         when '{'
-          block[node(kind: :open_group)]
+          block[Node.new(kind: :open_group)]
           i += 1
         when '}'
-          block[node(kind: :close_group)]
+          block[Node.new(kind: :close_group)]
           i += 1
         when ','
-          block[node(kind: :comma)]
+          block[Node.new(kind: :comma)]
           i += 1
         when '\\'
-          block[node(kind: :backslash)]
+          block[Node.new(kind: :backslash)]
           i += 1
         when '/'
-          block[node(kind: :slash)]
+          block[Node.new(kind: :slash)]
           i += 1
         else
           str = @input[i]
@@ -47,19 +47,20 @@ class Parser
             str += @input[i]
             i += 1
           end
-          block[node(kind: :string, value: str)]
+          block[Node.new(kind: :string, value: str)]
         end
       end
-      block[node(kind: :end)]
+      block[Node.new(kind: :end)]
     end
 
     # GLOB = PARTLIST '$'
     # ROOTED_SEGMENT_LIST = #TODO
-    # SEGMENT_LIST = # TODO
     #
-    # SEGMENT = start EXPR !!end
-    #   | start EXPR !!slash
-    #   | slash EXPR !!end
+    # SEGMENT_LIST = SEGMENT SEGMENT
+    #   | SEGMENT_LIST SEGMENT
+    #
+    # SEGMENT = EXPR !!end
+    #   | EXPR slash
     #
     # EXPR = STRING
     #   | GROUP
@@ -135,10 +136,12 @@ class Parser
       reduced.children = nodes[0].children.concat(nodes[1].children)
     end
 
-    # SEGMENT = start EXPR !!
-    #   | ^ EXPR !!slash
-    #   | slash EXPR !!slash
-    #   | slash EXPR !!end
-    reduction(:SEGMNET, [:])
+    reduction(:SEGMENT, [:EXPR], is: :end) do |reduced, nodes|
+      reduced.children = nodes[0]
+    end
+
+    reduction(:SEGMENT, [:EXPR, :slash]) do |reduced, nodes|
+      reduced.children = nodes[0]
+    end
   end
 end
