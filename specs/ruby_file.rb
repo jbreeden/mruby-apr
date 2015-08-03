@@ -1,10 +1,8 @@
 TestFixture.new('Ruby API: File') do
+  sandbox_dir = "#{$GEM_DIR}/sandbox"
   empty_file = "#{$GEM_DIR}/sandbox/empty_file.txt"
   two_line_file = "#{$GEM_DIR}/sandbox/two_line_file.txt"
   file_for_writing = "#{$GEM_DIR}/sandbox/file_for_writing.txt"
-
-  # Class methods
-  # -------------
 
   describe 'File::open(filename, mode="r" [, &block])' do
     it 'Returns an open File object, if filename exists' do
@@ -135,12 +133,6 @@ TestFixture.new('Ruby API: File') do
     end
   end
 
-  describe 'File::exists?' do
-    it 'Is implemented' do
-      pending
-    end
-  end
-
   describe 'File::expand_path' do
     it 'Is implemented' do
       pending
@@ -154,8 +146,9 @@ TestFixture.new('Ruby API: File') do
   end
 
   describe 'File::file?' do
-    it 'Is implemented' do
-      pending
+    it 'Returns true if the given path is a normal file' do
+      assert File.file?(empty_file)
+      assert !File.file?(sandbox_dir)
     end
   end
 
@@ -188,9 +181,6 @@ TestFixture.new('Ruby API: File') do
       pending
     end
   end
-
-  # Instance methods
-  # ----------------
 
   describe 'File#print(obj, ...)' do
     it "Writes the given objects to the File" do

@@ -7,8 +7,8 @@ Thus far, `mruby-apr` provides access to
 
 - Files (APR & Ruby APIs)
   + Create, delete, read, write, status, lock
-- Directories (APR APIs only so far)
-  + Create, delete, read, write
+- Directories (APR & Ruby APIs)
+  + Create, delete, read, write, glob
 - Processes (APR & Ruby APIs)
   + Spawning & waiting
 - Pipes (APR & Ruby APIs)
@@ -16,6 +16,13 @@ Thus far, `mruby-apr` provides access to
 - Sockets (APR APIs)
   + Client & server
 - Time functions (APR APIs)
+
+Additionally, some of the CRuby standard library has been included (with some light patching).
+
+- Forwardable
+- Observer
+- OpenStruct
+- Shellwords
 
 Description
 -----------

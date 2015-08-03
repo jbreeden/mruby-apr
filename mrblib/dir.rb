@@ -112,7 +112,8 @@ class Dir
 
         dirs.each do |dir|
           files = Dir.entries(dir)
-          files = files.reject { |e| e == '.' } unless part == '.'
+          # '**' matches 0 or more directories, so inlcude '.'
+          files = files.reject { |e| e == '.' } unless part == '.' || part == '**'
           files = files.reject { |e| e == '..' } unless part == '..'
           files.each do |entry|
             next if entry[0] == '.' && !(entry == '.' || entry == '..')
@@ -134,9 +135,12 @@ class Dir
         # all with the remainder of the glob. Afterwards, the glob matching
         # will be finished
         if part == '**' && current_part != last_part
+          if current_part == 0
+            prev_dirs = [from]
+          end
           prev_dirs.each do |dir|
             subdirs(dir, recurse: true).each do |subdir|
-              results = results.concat(
+              results.concat(
                 Dir::Util.glob(subdir, parts[(current_part + 1)..last_part].join('/'), true)
               )
             end
@@ -153,7 +157,9 @@ class Dir
       if recursing
         results
       else
-        results.uniq.map { |r| r.sub(from + '/', '')}
+        results.uniq.map { |r|
+          r.sub(from + '/', '')
+        }
       end
     end
 
