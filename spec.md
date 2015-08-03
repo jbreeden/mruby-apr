@@ -139,9 +139,6 @@ Ruby API: File
     + Returns true if the file exists, even if it's a directory
     + Returns false if the file does not exist
 
-  - File::exists?
-    + [PENDING] Is implemented
-
   - File::expand_path
     + [PENDING] Is implemented
 
@@ -149,7 +146,7 @@ Ruby API: File
     + [PENDING] Is implemented
 
   - File::file?
-    + [PENDING] Is implemented
+    + Returns true if the given path is a normal file
 
   - File::fnmatch
     + [PENDING] Is implemented
@@ -240,7 +237,7 @@ Ruby API: File
     + Seeks `amount` bytes from the end of the file when given `whenc=IO::SEEK_END`
     + Seeks `amount` bytes from the current position of the file when given `whenc=IO::SEEK_CUR`
 
-  SUCCESS [0/69 tests failed]
+  SUCCESS [0/68 tests failed]
 
 Ruby API: File::Stat
 --------------------
