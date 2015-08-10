@@ -68,6 +68,14 @@ class File < IO
     end
   end
 
+  def self.read(path)
+    result = nil
+    File.open(path) do |f|
+      result = f.read
+    end
+    result
+  end
+
   #<
   # ## `#flock(locking_constant)`
   # Locks or unlocks a file according to locking_constant.
