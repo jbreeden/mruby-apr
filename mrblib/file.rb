@@ -104,7 +104,14 @@ class File < IO
     end
 
     apr_lock_type = apr_flags.inject(0) { |acc, cur| (acc | cur) }
-    APR.apr_file_lock(@native_file, apr_lock_type)
+    err = APR.apr_file_lock(@native_file, apr_lock_type)
+    APR.raise_apr_errno(err, ignore: APR::APR_EAGAIN)
+
+    if err == APR::APR_EAGAIN
+      false
+    else
+      0
+    end
   end
 
   def close
