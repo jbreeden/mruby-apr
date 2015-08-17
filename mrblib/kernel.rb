@@ -6,6 +6,12 @@ module Kernel
     Process.spawn(*command)
   end
 
+  def system(cmd)
+    pid = spawn(cmd)
+    Process.wait(pid)
+    $?.exitstatus == 0
+  end
+
   def `(command)
     r, w = IO.pipe
     pid = spawn(command, {out: w})
@@ -30,7 +36,7 @@ module Kernel
 end
 
 class LoadError < ScriptError
-  def initialize
+  def initialize(msg = nil)
     super
   end
 end

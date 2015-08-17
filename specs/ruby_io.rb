@@ -62,6 +62,8 @@ TestFixture.new('Ruby API: IO') do
       # Right now you have to close them manually.
       # Going to have to track, on the C side, when each is GC'ed
       # Need to do the same for ordinary files
+      # TODO: Verify, but I'm pretty sure APR pool GC has been implemented,
+      #       and covers this case.
       pending
     end
   end

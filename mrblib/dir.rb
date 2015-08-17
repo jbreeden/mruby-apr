@@ -97,8 +97,15 @@ class Dir
   end
 
   module Util
+    # TODO: This doesn't work
     def self.glob(from, pattern, recursing = false)
       results = []
+      rooted = false
+      if pattern[0] == '/'
+        rooted = true unless from == "/"
+        from = '/'
+        pattern = pattern[1..-1]
+      end
       dirs = [from]
       next_dirs = []
       prev_dirs = []
@@ -108,24 +115,36 @@ class Dir
       recursed = false
 
       parts.each do |part|
-        next if part == '' # double slash in pattern, treat it as one
+        # Double slash in pattern, treat it as one
+        # (Leading slash is handled above)
+        next if part == ''
 
         dirs.each do |dir|
-          files = Dir.entries(dir)
+          begin
+            files = Dir.entries(dir)
+          rescue SystemCallError
+            next
+          end
           # '**' matches 0 or more directories, so inlcude '.'
           files = files.reject { |e| e == '.' } unless part == '.' || part == '**'
           files = files.reject { |e| e == '..' } unless part == '..'
           files.each do |entry|
             next if entry[0] == '.' && !(entry == '.' || entry == '..')
-            relative_path = "#{dir}/#{entry}"
+            relative_path = (rooted && current_part == 0) ? "/#{entry}" : "#{dir}/#{entry}"
+            $stderr.puts "Testing #{part} against #{entry} in #{relative_path}"
             if APR::APR_SUCCESS == APR.apr_fnmatch(part, entry, 0)
+              $stderr.puts "Match"
               if current_part == last_part
+                $stderr.puts "At last part. Pushing result"
                 results.push(relative_path)
               else
                 if File.directory? relative_path
+                  $stderr.puts "Not at last part. Pushing dir"
                   next_dirs.push(relative_path)
                 end
               end
+            else
+              # $stderr.puts "No match"
             end
           end
         end
@@ -158,7 +177,11 @@ class Dir
         results
       else
         results.uniq.map { |r|
-          r.sub(from + '/', '')
+          if rooted
+            r
+          else
+            r.sub(from + '/', '')
+          end
         }
       end
     end
