@@ -1,3 +1,7 @@
+# Load path
+$: = []
+$LOAD_PATH = $:
+
 # Input record separator
 $/ = "\n"
 

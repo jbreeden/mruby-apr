@@ -28,9 +28,14 @@ module Kernel
     if File.exist?(path)
       eval(File.read(path))
     else
+      $LOAD_PATH.each do |dir|
+        if File.exist?("#{dir}/#{path}")
+          eval(File.read("#{dir}/#{path}"))
+          return true
+        end
+      end
       raise LoadError.new "File not found -- #{path}"
     end
-
     true
   end
 end
