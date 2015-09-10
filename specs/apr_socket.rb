@@ -1,3 +1,5 @@
+load 'fixture.rb'
+
 TestFixture.new('APR API: Sockets') do
   err, @pool = APR.apr_pool_create(nil)
 
@@ -6,7 +8,7 @@ TestFixture.new('APR API: Sockets') do
     APR.raise_apr_errno(err)
 
     APR.apr_procattr_cmdtype_set proc_attr, APR::AprCmdtypeE::APR_SHELLCMD
-    err, argv = APR.apr_tokenize_to_argv "ruby ./specs/helpers/tcp_server.rb", @pool
+    err, argv = APR.apr_tokenize_to_argv "ruby ./helpers/tcp_server.rb", @pool
     err, proc = APR.apr_proc_create "ruby", argv, nil, proc_attr, @pool
     APR.raise_apr_errno(err)
   end
@@ -15,8 +17,8 @@ TestFixture.new('APR API: Sockets') do
     it 'Creates a socket' do
       run_server
 
-      #                                            Host         Family         Port  Flags Pool
-      err, server_addr = APR.apr_sockaddr_info_get "localhost", APR::APR_INET, 8888, 0,    @pool
+      #                                            Host         Family         Port  Flags
+      err, server_addr = APR.apr_sockaddr_info_get "localhost", APR::APR_INET, 8888, 0, @pool
       APR.raise_apr_errno(err)
 
       err, client = APR.apr_socket_create(APR::APR_INET, APR::SOCK_STREAM, APR::APR_PROTO_TCP, @pool)

@@ -1,3 +1,5 @@
+$GEM_DIR = '..'
+
 class TestFixture
 
   def initialize(label, &block)

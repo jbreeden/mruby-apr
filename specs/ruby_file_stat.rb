@@ -1,7 +1,10 @@
+load 'fixture.rb'
+
 TestFixture.new('Ruby API: File::Stat') do
-  empty_file = "#{$GEM_DIR}/sandbox/empty_file.txt"
-  two_line_file = "#{$GEM_DIR}/sandbox/two_line_file.txt"
-  file_for_writing = "#{$GEM_DIR}/sandbox/file_for_writing.txt"
+  sandbox = "#{$GEM_DIR}/sandbox"
+  empty_file = "#{sandbox}/empty_file.txt"
+  two_line_file = "#{sandbox}/two_line_file.txt"
+  file_for_writing = "#{sandbox}/file_for_writing.txt"
 
   describe 'Stat#atime' do
     it 'Gives the access time of the file as a Time' do
@@ -55,24 +58,24 @@ TestFixture.new('Ruby API: File::Stat') do
 
   describe 'Stat#directory?' do
     it 'Returns true if the file is a directory' do
-      stat = File::Stat.new('sandbox')
+      stat = File::Stat.new(sandbox)
       assert(stat.directory?)
     end
 
     it 'Returns false for non-directory files' do
-      stat = File::Stat.new('sandbox/empty_file.txt')
+      stat = File::Stat.new(empty_file)
       assert(!stat.directory?)
     end
   end
 
   describe 'Stat#file?' do
     it 'Returns true if the file is a regular file' do
-      stat = File::Stat.new('sandbox/empty_file.txt')
+      stat = File::Stat.new(empty_file)
       assert(stat.file?)
     end
 
     it 'Returns false for non-regular files' do
-      stat = File::Stat.new('sandbox')
+      stat = File::Stat.new(sandbox)
       assert(!stat.file?)
     end
   end

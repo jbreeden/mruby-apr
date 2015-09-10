@@ -1,3 +1,5 @@
+load 'fixture.rb'
+
 class TestForwardee
   def return_one
     1
@@ -13,7 +15,7 @@ class TestForwardee
 end
 
 class TestForwarder
-  extend Forwardable
+  extend ::Forwardable
   delegate [:return_one, :return_arg, :run_block] => :@forwardee
 
   def initialize

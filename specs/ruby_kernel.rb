@@ -1,3 +1,5 @@
+load 'fixture.rb'
+
 TestFixture.new("Ruby API: Kernel") do
   describe 'Kernel::` (backquote)' do
     it 'Runs a command and returns it\'s standard output' do

@@ -9,19 +9,6 @@ def test_file_name(test_file)
   File.basename(test_file).sub(/\.rb$/, '')
 end
 
-def with_mruby(&block)
-  IO.popen("../../mruby/bin/mruby", 'w', &block)
-end
-
-def exec_file(mruby, path)
-  File.open(path, 'r') do |test|
-    mruby.puts "$GEM_DIR = '#{File.expand_path('.')}'"
-    test.each_line do |line|
-      mruby.puts line
-    end
-  end
-end
-
 # Tasks
 # -----
 
@@ -41,19 +28,17 @@ namespace :test do
     test = test_file_name(test_file)
     desc "Run the #{test} tests"
     task (test) do
-      with_mruby do |mruby|
-        exec_file(mruby, 'specs/fixture.rb')
-        exec_file(mruby, test_file)
+      Dir.chdir 'specs' do
+        system "../../../mruby/bin/mruby #{test_file}"
       end
     end
   end
 
   desc "Run all of the tests"
   task :all do
-    with_mruby do |mruby|
-      exec_file(mruby, 'specs/fixture.rb')
-      Dir['specs/*.rb'].reject { |f| File.basename(f) == 'specs/fixture.rb' }.sort.each do |f|
-        exec_file(mruby, f)
+    Dir.chdir 'specs' do
+      Dir['*.rb'].reject { |f| File.basename(f) == 'specs/fixture.rb' }.sort.each do |f|
+        system "../../../mruby/bin/mruby #{f}"
       end
     end
   end

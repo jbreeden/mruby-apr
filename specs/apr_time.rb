@@ -1,3 +1,5 @@
+load 'fixture.rb'
+
 TestFixture.new('APR API: Time') do
   err, @pool = APR.apr_pool_create(nil)
 
