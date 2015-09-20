@@ -5,20 +5,21 @@
 require 'pp'
 
 $APR_GEM_DIR = File.dirname(__FILE__)
+$APR_HOME = ENV['APR_HOME'] || "#{$APR_GEM_DIR}/../../apr_source/apr-1.5.2/build"
 $APR_CONFIGURED = false
 
 def configure_mruby_apr_win(spec)
   # apr.h is generated specially for each platform when building APR
   # I'm putting these generated headers into "#{$APR_GEM_DIR}/include/apr/PLATFORM"
   # (In this case, PLATFORM == win)
-  spec.cc.include_paths << "#{$APR_GEM_DIR}/include/apr/win"
-  spec.cxx.include_paths << "#{$APR_GEM_DIR}/include/apr/win"
+  spec.cc.include_paths << "#{$APR_HOME}"
+  spec.cxx.include_paths << "#{$APR_HOME}"
 
   # Pre-built libraries are held under "#{$APR_GEM_DIR}/lib/PLATFORM"
-  spec.linker.library_paths << "#{$APR_GEM_DIR}/lib/win"
+  spec.linker.library_paths << "#{$APR_HOME}/x64/Release"
 
-  # I've appended the selected C runtime APR was built with onto the lib file name
-  spec.linker.libraries << "apr-1_md"
+  spec.linker.libraries << "apr-1"
+  spec.linker.libraries << "Rpcrt4"
   spec.linker.libraries << "Ws2_32"
   spec.linker.libraries << "Advapi32"
   spec.linker.libraries << "Shell32"
@@ -44,7 +45,9 @@ def configure_mruby_apr_lin(spec)
 end
 
 def configure_mruby_apr(spec)
+  return if $APR_CONFIGURED
   $APR_CONFIGURED = true
+
   # Common include path (all platforms)
   spec.cc.include_paths << "#{$APR_GEM_DIR}/include/apr"
   spec.cxx.include_paths << "#{$APR_GEM_DIR}/include/apr"
@@ -79,10 +82,10 @@ MRuby::Gem::Specification.new('mruby-apr') do |spec|
   spec.rbfiles.delete(gem_init_rb)
   spec.rbfiles.push(gem_init_rb)
 
-  configure_mruby_apr(spec) unless $APR_CONFIGURED
+  configure_mruby_apr(spec)
 
-  spec.cc.flags << [ '-std=c11' ]
-  spec.cxx.flags << [ '-std=c++11' ]
-
-  puts spec.rbfiles
+  unless OS.windows?
+    spec.cc.flags << [ '-std=c11' ]
+    spec.cxx.flags << [ '-std=c++11' ]
+  end
 end
