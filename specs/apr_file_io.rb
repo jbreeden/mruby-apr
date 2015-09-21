@@ -5,9 +5,8 @@ load 'fixture.rb'
 
 TestFixture.new('APR API: File IO') do
 
-  sandbox = "#{$GEM_DIR}/specs/sandbox"
-  test_txt = "#{sandbox}/test.txt"
-  two_line_file = "#{sandbox}/two_line_file.txt"
+  test_txt = "#{$sandbox}/test.txt"
+  two_line_file = "#{$sandbox}/two_line_file.txt"
 
   err, @pool = APR.apr_pool_create(nil)
   @ug_rw = 0x660 # Probably going to be "umasked" to 640
@@ -159,10 +158,10 @@ TestFixture.new('APR API: File IO') do
 
   describe 'APR::apr_file_copy(from_path: String, to_path: String, perms: int, pool: AprPoolType): errno: Fixnum' do
     it 'Copies files by name' do
-      err = APR.apr_file_copy("#{sandbox}/test.txt", "sandbox/test_copy.txt", @ug_rw, @pool)
+      err = APR.apr_file_copy("#{$sandbox}/test.txt", "#{$sandbox}/test_copy.txt", @ug_rw, @pool)
       check_errno(err)
 
-      err, file = APR::apr_file_open("#{sandbox}/test_copy.txt", APR::APR_FOPEN_READ, 0, @pool)
+      err, file = APR::apr_file_open("#{$sandbox}/test_copy.txt", APR::APR_FOPEN_READ, 0, @pool)
       check_errno(err)
 
       APR.apr_file_close(file)
@@ -172,10 +171,10 @@ TestFixture.new('APR API: File IO') do
 
   describe 'APR::apr_file_rename(from_path: String, to_path: String, pool: AprPoolType): errno: Fixnum' do
     it 'Renames a file' do
-      err = APR.apr_file_rename("#{sandbox}/test_copy.txt", "sandbox/test_renamed.txt", @pool)
+      err = APR.apr_file_rename("#{$sandbox}/test_copy.txt", "#{$sandbox}/test_renamed.txt", @pool)
       check_errno(err)
 
-      err, file = APR::apr_file_open("#{sandbox}/test_renamed.txt", APR::APR_FOPEN_READ, 0, @pool)
+      err, file = APR::apr_file_open("#{$sandbox}/test_renamed.txt", APR::APR_FOPEN_READ, 0, @pool)
       check_errno(err)
 
       APR.apr_file_close(file)
@@ -185,10 +184,10 @@ TestFixture.new('APR API: File IO') do
 
   describe 'APR::apr_file_remove(from_path: String, to_path: String, perms: int, pool: AprPoolType): errno: Fixnum' do
     it 'Removes a file' do
-      err = APR.apr_file_remove("#{sandbox}/test_renamed.txt", @pool)
+      err = APR.apr_file_remove("#{$sandbox}/test_renamed.txt", @pool)
       check_errno(err)
 
-      err, file = APR::apr_file_open("#{sandbox}/test_renamed.txt", APR::APR_FOPEN_READ, 0, @pool)
+      err, file = APR::apr_file_open("#{$sandbox}/test_renamed.txt", APR::APR_FOPEN_READ, 0, @pool)
       assert (err != 0)
       APR.apr_pool_clear(@pool)
     end

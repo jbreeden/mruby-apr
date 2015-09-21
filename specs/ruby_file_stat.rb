@@ -1,44 +1,48 @@
 load 'fixture.rb'
 
 TestFixture.new('Ruby API: File::Stat') do
-  sandbox = "#{$GEM_DIR}/sandbox"
-  empty_file = "#{sandbox}/empty_file.txt"
-  two_line_file = "#{sandbox}/two_line_file.txt"
-  file_for_writing = "#{sandbox}/file_for_writing.txt"
+  empty_file = "#{$sandbox}/empty_file.txt"
+  two_line_file = "#{$sandbox}/two_line_file.txt"
+  file_for_writing = "#{$sandbox}/file_for_writing.txt"
 
   describe 'Stat#atime' do
     it 'Gives the access time of the file as a Time' do
       # Unfortunately have to sleep for a second to guarantee atime > "now"
-      APR.apr_sleep 1000000 # micro seconds
+      APR.apr_sleep 2000000 # micro seconds
       stat = File::Stat.new(empty_file)
       t_first = stat.atime
+      APR.apr_sleep 2000000 # micro seconds
       File.open(empty_file) do |f|
         # Have to read or write to update atime
         f.read
       end
       stat = File::Stat.new(empty_file)
       t_second = stat.atime
+      puts "#{t_first.to_i}, #{t_second.to_i}"
       assert (t_second > t_first)
     end
   end
 
   describe 'Stat#ctime' do
     it 'Gives the creation time of the file as a Time' do
-      created_file = 'sandbox/created_file.txt'
+      created_file = "#{$sandbox}/created_file.txt"
       now = Time.now
       # Unfortunately have to sleep for a second to guarantee ctime > "now"
-      APR.apr_sleep 1000000 # micro seconds
+      APR.apr_sleep 2000000 # micro seconds
+      puts created_file
+      # File.delete(created_file) if File.exists?(created_file)
       File.open(created_file, 'w') do |f|
         f.puts "Created after #{now}"
       end
       stat = File::Stat.new(created_file)
       ctime = stat.ctime
+      puts "#{now}, #{ctime}"
       assert(ctime > now)
     end
   end
 
   describe 'Stat#mtime' do
-    it 'Gives the creation time of the file as a Time' do
+    it 'Gives the last modified time of the file as a Time' do
       stat1 = File::Stat.new(file_for_writing)
       File.open(file_for_writing, 'w') do |f|
         f.puts "Modification"
@@ -58,7 +62,7 @@ TestFixture.new('Ruby API: File::Stat') do
 
   describe 'Stat#directory?' do
     it 'Returns true if the file is a directory' do
-      stat = File::Stat.new(sandbox)
+      stat = File::Stat.new($sandbox)
       assert(stat.directory?)
     end
 
@@ -75,7 +79,7 @@ TestFixture.new('Ruby API: File::Stat') do
     end
 
     it 'Returns false for non-regular files' do
-      stat = File::Stat.new(sandbox)
+      stat = File::Stat.new($sandbox)
       assert(!stat.file?)
     end
   end

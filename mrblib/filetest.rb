@@ -31,7 +31,7 @@ module FileTest
     exists = true
     APR.with_pool do |pool|
       err, f = APR.apr_file_open(path, APR::APR_FOPEN_READ, 0, pool)
-      exists = false if err == APR::APR_ENOENT
+      exists = false if APR::APR_STATUS_IS_ENOENT(err)
       APR.apr_file_close(f) if f
     end
     exists
