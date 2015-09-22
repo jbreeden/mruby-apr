@@ -22639,10 +22639,10 @@ mrb_APR_apr_wait_for_io_or_timeout(mrb_state* mrb, mrb_value self) {
 
 #define STATUS_CHECK(err) \
   mrb_value\
-  mrb_APR_APR_STATUS_IS_ ## err ## (mrb_state* mrb, mrb_value self) {\
+  mrb_APR_APR_STATUS_IS_ ## err (mrb_state* mrb, mrb_value self) {\
     mrb_int status;\
     mrb_get_args(mrb, "i", &status);\
-    if (APR_STATUS_IS_ ## err ## ((apr_status_t)status)) {\
+    if (APR_STATUS_IS_ ## err ((apr_status_t)status)) {\
       return mrb_true_value();\
     } else {\
       return mrb_false_value();\
