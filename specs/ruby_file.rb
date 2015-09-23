@@ -107,8 +107,10 @@ TestFixture.new('Ruby API: File') do
   end
 
   describe 'File::directory?' do
-    it 'Is implemented' do
-      pending
+    it 'Returns true if the given path is a directory' do
+      assert(File.directory?('.') == true)
+      assert(File.directory?('./dne_dne_dne_dne_dne') == false)
+      assert(File.directory?(empty_file) == false)
     end
   end
 
@@ -142,7 +144,7 @@ TestFixture.new('Ruby API: File') do
   end
 
   describe 'File::extname' do
-    it 'Is implemented' do
+    it 'Returns the extension name of the given path, including the dot' do
       assert(File.extname("test.rb")       == ".rb")
       assert(File.extname("a/b/d/test.rb") == ".rb")
       assert(File.extname("test")          == "")
