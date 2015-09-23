@@ -59,6 +59,16 @@ class File < IO
     end
   end
 
+  def self.atime(path)
+    stat = File::Stat.new(path)
+    stat.atime
+  end
+
+  def self.ctime(path)
+    stat = File::Stat.new(path)
+    stat.ctime
+  end
+
   def self.delete(*paths)
     APR.with_pool do |pool|
       paths.each do |path|

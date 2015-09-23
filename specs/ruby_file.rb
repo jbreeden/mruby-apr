@@ -36,8 +36,8 @@ TestFixture.new('Ruby API: File') do
   end
 
   describe 'File::atime' do
-    it 'Is implemented' do
-      pending
+    it 'Returns the access time of the file' do
+      assert(File.atime(empty_file).class == Time)
     end
   end
 
@@ -67,8 +67,8 @@ TestFixture.new('Ruby API: File') do
   end
 
   describe 'File::ctime' do
-    it 'Is implemented' do
-      pending
+    it 'Returns the creation time of the file' do
+      assert(File.ctime(empty_file).class == Time)
     end
   end
 
