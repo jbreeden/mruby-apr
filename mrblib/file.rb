@@ -68,6 +68,22 @@ class File < IO
     end
   end
 
+  def self.extname(path)
+    path = path.gsub('\\', '/')
+    dot_idx = path.rindex(".")
+    return "" unless dot_idx
+    slash_idx = path.rindex("/")
+    slash_idx ||= -1
+    # no . in the last component of the path
+    return "" if dot_idx < slash_idx
+    # last component starts with a .
+    return "" if dot_idx == slash_idx + 1
+    # last component ends with a .
+    return "" if dot_idx == path.length - 1
+
+    return path[dot_idx..(path.length)]
+  end
+
   def self.read(path)
     result = nil
     File.open(path) do |f|

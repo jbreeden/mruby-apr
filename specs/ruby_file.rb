@@ -143,7 +143,14 @@ TestFixture.new('Ruby API: File') do
 
   describe 'File::extname' do
     it 'Is implemented' do
-      pending
+      assert(File.extname("test.rb")       == ".rb")
+      assert(File.extname("a/b/d/test.rb") == ".rb")
+      assert(File.extname("test")          == "")
+      assert(File.extname(".profile")      == "")
+      assert(File.extname("a\\b\\c\\test.rb") == ".rb")
+      assert(File.extname("a\\b\\c.\\test") == "")
+      assert(File.extname("a\\b\\c.d\\test") == "")
+      assert(File.extname("a\\b\\c.d\\.test") == "")
     end
   end
 
