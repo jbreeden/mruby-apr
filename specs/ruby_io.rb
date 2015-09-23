@@ -51,7 +51,27 @@ TestFixture.new('Ruby API: IO') do
     end
 
     it 'Yeilds the IO like object instead of returning it if a block is provided' do
-      pending
+      data = 'failed'
+      IO.popen('ruby -e "data = STDIN.read; puts data"', "r+") do |io|
+        io.puts('success')
+        io.close_write
+        data = io.gets.strip
+      end
+      assert(data == 'success')
+    end
+
+    it 'Closes the IO object after yielding to a block' do
+      io_ref = nil
+      IO.popen('ruby -e "data = STDIN.read; puts data"', "r+") do |io|
+        io_ref = io
+        def io.close
+          @i_closed = true
+        end
+        def io.did_you_close?
+          @i_closed ||= false
+        end
+      end
+      assert(io_ref.did_you_close?)
     end
 
     it 'Handles \\r\\n & \\n line endings in text mode' do

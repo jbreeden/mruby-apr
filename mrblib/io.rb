@@ -79,6 +79,10 @@ class IO
     mode = "r"
     opt = {}
 
+    READ_END = 0
+    WRITE_END = 1
+
+
     if command.length == 0 || command.length > 4
       raise ArgumentError.new("Wrong number of arguments. #{command.length} for 1..4")
     end
@@ -100,16 +104,16 @@ class IO
     read_pipe = nil  # These are set while interpretting the mode
     write_pipe = nil # string, and used to construct the BidirectionalPipe
     if (flags & APR::APR_FOPEN_WRITE) != 0
-      child_in_pipe_ends = IO.pipe       # => [read, write]
-      opt[:in]   = child_in_pipe_ends[0] # Give child read end
-      write_pipe = child_in_pipe_ends[1] # We keep the write end
+      child_in_pipe_ends = IO.pipe
+      opt[:in]   = child_in_pipe_ends[READ_END]
+      write_pipe = child_in_pipe_ends[WRITE_END]
       # Don't let the child inherit our side of the pipe
       APR.apr_file_inherit_unset(write_pipe.native_file)
     end
     if (flags & APR::APR_FOPEN_READ) != 0
-      child_out_pipe_ends = IO.pipe      # => [read, write]
-      opt[:out] = child_out_pipe_ends[1] # Give child write end
-      read_pipe = child_out_pipe_ends[0] # We keep the read end
+      child_out_pipe_ends = IO.pipe
+      opt[:out] = child_out_pipe_ends[WRITE_END]
+      read_pipe = child_out_pipe_ends[READ_END]
       # Don't let the child inherit our side of the pipe
       APR.apr_file_inherit_unset(read_pipe.native_file)
     end
@@ -121,13 +125,13 @@ class IO
     #  closes their end of stdout )
     if read_pipe
       # We're "reading" the output, so close the write end of the ouput
-      child_out_pipe_ends[1].close
+      child_out_pipe_ends[WRITE_END].close
       # Don't let the child inherit our side of the pipe
       APR.apr_file_inherit_unset(read_pipe.native_file)
     end
     if write_pipe
       # We're "writing" to the input, so close the read end of the input
-      child_in_pipe_ends[0].close
+      child_in_pipe_ends[READ_END].close
     end
 
     bidirectional_pipe = BidirectionalPipe.new({
@@ -137,7 +141,7 @@ class IO
     })
 
     if block_given?
-      yield[bidirectional_pipe]
+      yield bidirectional_pipe
       bidirectional_pipe.close
     else
       return bidirectional_pipe

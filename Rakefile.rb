@@ -29,7 +29,7 @@ namespace :test do
     desc "Run the #{test} tests"
     task (test) do
       Dir.chdir 'specs' do
-        system "mruby #{test_file.sub(/^specs\//, '')}"
+        sh "mruby #{test_file.sub(/^specs\//, '')}"
       end
     end
   end
@@ -38,7 +38,7 @@ namespace :test do
   task :all do
     Dir.chdir 'specs' do
       Dir['*.rb'].reject { |f| File.basename(f) == 'specs/fixture.rb' }.sort.each do |f|
-        system "mruby #{f}"
+        sh "mruby #{f}"
       end
     end
   end
