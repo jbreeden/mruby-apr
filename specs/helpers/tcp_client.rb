@@ -2,6 +2,6 @@
 
 require 'socket'
 
-client = TCPSocket.new 'localhost', 8888
-client.puts "socket data"
+client = TCPSocket.new 'localhost', 8889
+client.print "socket data"
 client.close

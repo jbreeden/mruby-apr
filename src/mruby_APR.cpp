@@ -16944,7 +16944,7 @@ mrb_APR_apr_sockaddr_is_wildcard(mrb_state* mrb, mrb_value self) {
  * Parameters:
  * - sock: apr_socket_t *
  * - connection_pool: apr_pool_t *
- * Return Type: apr_status_t
+ * Return Type: [apr_status_t, apr_socket_t]
  */
 mrb_value
 mrb_APR_apr_socket_accept(mrb_state* mrb, mrb_value self) {

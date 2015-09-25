@@ -4,17 +4,16 @@ TestFixture.new('APR API: Sockets') do
   err, @pool = APR.apr_pool_create(nil)
 
   def run_server
-    err, proc_attr = APR.apr_procattr_create @pool
-    APR.raise_apr_errno(err)
-
-    APR.apr_procattr_cmdtype_set proc_attr, APR::AprCmdtypeE::APR_SHELLCMD
-    err, argv = APR.apr_tokenize_to_argv "ruby ./helpers/tcp_server.rb", @pool
-    err, proc = APR.apr_proc_create "ruby", argv, nil, proc_attr, @pool
-    APR.raise_apr_errno(err)
+    spawn "ruby ./helpers/tcp_server.rb"
+    `sleep 1`
   end
 
-  describe 'APR::apr_sockaddr_info_get' do
-    it 'Creates a socket' do
+  def run_client
+    spawn "sleep 1 && ruby ./helpers/tcp_client.rb"
+  end
+
+  describe 'APR::apr_socket_connect(socket, addr)' do
+    it 'Connects a client socket to a server' do
       run_server
 
       #                                            Host         Family         Port  Flags
@@ -24,22 +23,62 @@ TestFixture.new('APR API: Sockets') do
       err, client = APR.apr_socket_create(APR::APR_INET, APR::SOCK_STREAM, APR::APR_PROTO_TCP, @pool)
       APR.raise_apr_errno(err)
 
-      try_count = 0
-      begin
-        err = APR.apr_socket_connect(client, server_addr)
-        APR.raise_apr_errno(err)
-      rescue Exception => ex
-        if try_count < 5
-          try_count += 1
-          retry
-        end
-        raise ex
-      end
+      err = APR.apr_socket_connect(client, server_addr)
+      APR.raise_apr_errno(err)
 
       err, buf = APR.apr_socket_recv(client, 100)
       APR.raise_apr_errno(err)
 
       assert (buf == 'socket data')
+    end
+  end
+
+  describe 'APR::apr_socket_send(socket, message, length)' do
+    it 'Returns a APR::APR_EOF when the connection is closed' do
+      err, server_addr = APR.apr_sockaddr_info_get "www.google.com", APR::APR_INET, 80,   0,    @pool
+      APR.raise_apr_errno(err)
+
+      err, client = APR.apr_socket_create(APR::APR_INET, APR::SOCK_STREAM, APR::APR_PROTO_TCP, @pool)
+      APR.raise_apr_errno(err)
+
+      err = APR.apr_socket_connect(client, server_addr)
+      APR.raise_apr_errno(err)
+
+      msg = "GET http://www.google.com/ HTTP/1.1\nConnection: close\n\n"
+      APR.apr_socket_send(client, msg, msg.length)
+
+      err = 0
+      while err == 0
+        err, buf = APR.apr_socket_recv(client, 1000)
+        APR.raise_apr_errno(err, ignore: APR::APR_EOF)
+      end
+
+      assert (err == APR::APR_EOF)
+    end
+  end
+
+  describe 'APR::apr_socket_bind(socket, addr)' do
+    it 'Binds a server socket to an address' do
+      #                                            Host         Family         Port  Flags
+      err, server_addr = APR.apr_sockaddr_info_get "localhost", APR::APR_INET, 8889, 0, @pool
+      APR.raise_apr_errno(err)
+
+      err, server = APR.apr_socket_create(APR::APR_INET, APR::SOCK_STREAM, APR::APR_PROTO_TCP, @pool)
+      APR.raise_apr_errno(err)
+
+      err = APR.apr_socket_bind(server, server_addr)
+      APR.raise_apr_errno(err)
+
+      run_client
+
+      APR.apr_socket_listen(server, 100)
+      err, client = APR.apr_socket_accept(server, @pool)
+      APR.raise_apr_errno(err)
+
+      err, msg = APR::apr_socket_recv(client, 1000)
+      APR.raise_apr_errno(err, ignore: APR::APR_EOF)
+
+      assert (msg == 'socket data')
     end
   end
 end
