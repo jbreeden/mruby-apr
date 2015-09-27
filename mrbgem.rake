@@ -68,6 +68,12 @@ MRuby::Gem::Specification.new('mruby-apr') do |spec|
   spec.rbfiles = [
     "io.rb",
     "file.rb",
+    "basic_socket.rb",
+    "ipsocket.rb",
+    "tcpsocket.rb",
+    "tcpserver.rb",
+    "udpsocket.rb",
+    "socket_error.rb"
   ].map { |name| "#{$APR_GEM_DIR}/mrblib/#{name}" }
     .concat(Dir["#{$APR_GEM_DIR}/mrblib/**/*.rb"])
     .map { |f| File.expand_path(f) }

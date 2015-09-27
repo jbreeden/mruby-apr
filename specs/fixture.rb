@@ -27,7 +27,7 @@ class TestFixture
     @current_test_pending = false
     exc = nil
     begin
-      self.instance_eval(&block)
+      self.instance_eval(&block) if block
     rescue StandardError => ex
       exc = ex
       @current_test_passed = false

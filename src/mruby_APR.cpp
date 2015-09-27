@@ -16759,7 +16759,7 @@ mrb_APR_apr_sockaddr_info_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooooo", &hostname, &family, &port, &flags, &p);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, hostname, mrb->string_class)) {
+  if (!(mrb_obj_is_kind_of(mrb, hostname, mrb->string_class) || mrb_nil_p(hostname))) {
     mrb_raise(mrb, E_TYPE_ERROR, "String expected");
     return mrb_nil_value();
   }
@@ -16781,7 +16781,7 @@ mrb_APR_apr_sockaddr_info_get(mrb_state* mrb, mrb_value self) {
   }
 
   /* Unbox parameters */
-  const char * native_hostname = mrb_string_value_cstr(mrb, &hostname);
+  const char * native_hostname = mrb_nil_p(hostname) ? NULL : mrb_string_value_cstr(mrb, &hostname);
   int native_family = mrb_fixnum(family);
   unsigned short native_port = mrb_fixnum(port);
   int native_flags = mrb_fixnum(flags);

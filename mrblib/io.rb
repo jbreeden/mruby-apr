@@ -147,4 +147,8 @@ class IO
       return bidirectional_pipe
     end
   end
+
+  # Default implementation of some IO functions
+  # - All expect the subclass to provide `read(len = nil)` & `write(str)`
+  
 end

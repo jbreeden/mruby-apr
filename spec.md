@@ -68,7 +68,7 @@ APR API: File IO
     + Gets the finfo (fstat - like structure) for an open file
 
   - APR::apr_stat(file_name: String, wanted: Fixnum, pool: AprPoolT)
-    + Gets the finfo (fstat - like structure) for an open file
+    + Gets the finfo (fstat - like structure) for a file by name
 
   SUCCESS [0/18 tests failed]
 
@@ -87,16 +87,30 @@ APR API: Processes
 APR API: Sockets
 ----------------
 
-  - APR::apr_sockaddr_info_get
-    + Creates a socket
+  - APR::apr_socket_connect(socket, addr)
+    + Connects a client socket to a server
 
-  SUCCESS [0/1 tests failed]
+  - APR::apr_socket_send(socket, message, length)
+    + Returns a APR::APR_EOF when the connection is closed
+
+  - APR::apr_socket_bind(socket, addr)
+    + Binds a server socket to an address
+
+  SUCCESS [0/3 tests failed]
 
 APR API: Time
 -------------
 
   - APR::apr_time_now(pool: AprPoolT): time: AprTimeT
     + Gets the current time
+
+  SUCCESS [0/1 tests failed]
+
+Ruby API: Dir
+-------------
+
+  - Dir
+    + [PENDING] Is implemented, but needs tests
 
   SUCCESS [0/1 tests failed]
 
@@ -112,7 +126,7 @@ Ruby API: File
     + [PENDING] Is implemented
 
   - File::atime
-    + [PENDING] Is implemented
+    + Returns the access time of the file
 
   - File::basename
     + [PENDING] Is implemented
@@ -121,7 +135,7 @@ Ruby API: File
     + [PENDING] Is implemented
 
   - File::ctime
-    + [PENDING] Is implemented
+    + Returns the creation time of the file
 
   - File::delete(path[, path]...)
     + Deletes the file named by the path argument
@@ -129,7 +143,7 @@ Ruby API: File
     + Raises a system call error if the file does not exist
 
   - File::directory?
-    + [PENDING] Is implemented
+    + Returns true if the given path is a directory
 
   - File::dirname
     + [PENDING] Is implemented
@@ -143,7 +157,7 @@ Ruby API: File
     + [PENDING] Is implemented
 
   - File::extname
-    + [PENDING] Is implemented
+    + Returns the extension name of the given path, including the dot
 
   - File::file?
     + Returns true if the given path is a normal file
@@ -243,13 +257,16 @@ Ruby API: File::Stat
 --------------------
 
   - Stat#atime
+1443314006, 1443314010
     + Gives the access time of the file as a Time
 
   - Stat#ctime
+../sandbox/created_file.txt
+Sat Sep 26 17:33:30 2015, Sat Sep 26 17:33:32 2015
     + Gives the creation time of the file as a Time
 
   - Stat#mtime
-    + Gives the creation time of the file as a Time
+    + Gives the last modified time of the file as a Time
 
   - Stat#size
     + Gives the size of the file in bytes
@@ -287,13 +304,14 @@ Ruby API: IO
     + Connects the returned IO-like object to child's stdout for mode "w"
     + Connects the returned IO-like object to child's stdin & stdout for mode "r+"
     + Sends EOF when the output pipe is closed
-    + [PENDING] Yeilds the IO like object instead of returning it if a block is provided
+    + Yeilds the IO like object instead of returning it if a block is provided
+    + Closes the IO object after yielding to a block
     + [PENDING] Handles \r\n & \n line endings in text mode
 
   - IO.pipe
     + [PENDING] Both pipes are closed & freed after each is garbage collected
 
-  SUCCESS [0/9 tests failed]
+  SUCCESS [0/10 tests failed]
 
 Ruby API: Kernel
 ----------------
@@ -319,3 +337,43 @@ Ruby API: Process
     + [PENDING] If called twice on the same PID, does the right thing... which is...?
 
   SUCCESS [0/7 tests failed]
+
+Ruby API: BasicSocket, TCPSocket, & TCPServer
+---------------------------------------------
+
+  - TCPSocket::new(remote_host, remote_port, local_host=nil, local_port=nil)
+    + Creates a connected TCP socket when given remote host & port
+
+  - BasicSocket#write(str)
+    + Writes the given str to the socket
+
+  - BasicSocket#read(len=nil)
+    + Reads from the socket until EOF (when the socket is closed)
+    + Reads at most len bytes if len is provided
+    + Returns the empty string after EOF has been encountered, if length is not provided
+    + Returns nil after EOF has been encountered, if length is provided
+
+  - BasicSocket#close_read
+    + Closes a socket for reading
+
+  - BasicSocket#close_write
+    + Closes a socket for writing
+
+  - BasicSocket#close
+    + Closes a socket for reading & writing
+
+  - TCPServer::new([hostname], port)
+    + Creates a new TCPServer on the given port
+
+  SUCCESS [0/10 tests failed]
+
+Ruby API: UDPSocket & UDPServer
+-------------------------------
+
+  - UDPSocket::read(length=nil)
+    + Reads at most length bytes from a bound UDPSocket
+
+  - UDPSocket::write(str)
+    + Writes the given string to a connected UDPSocket
+
+  SUCCESS [0/2 tests failed]

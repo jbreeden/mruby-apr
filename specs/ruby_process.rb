@@ -5,27 +5,25 @@ TestFixture.new('Ruby API: Process') do
 
   describe 'Process::spawn' do
     it 'Spawns a shell command if given a string' do
-      APR.with_pool do |pool|
-        # If there is a shell involved, the command executed below should be
-        # interpretted, and the environment variable expanded. So, if we
-        # correctly utilize the shall, the variable's value should be printed
-        # instead of the variable's name.
-        APR.apr_env_set("I_SHOULD_NOT_BE_PRINTED", "I should be printed", pool)
+      # If there is a shell involved, the command executed below should be
+      # interpretted, and the environment variable expanded. So, if we
+      # correctly utilize the shall, the variable's value should be printed
+      # instead of the variable's name.
+      ENV["I_SHOULD_NOT_BE_PRINTED"] = "I should be printed"
 
-        cmd = nil
-        if APR::OS != 'Windows'
-          cmd = 'ruby -e "puts \"$I_SHOULD_NOT_BE_PRINTED\""'
-        else
-          cmd = 'ruby -e "puts \"%I_SHOULD_NOT_BE_PRINTED%\""'
-        end
-
-        r, w = IO.pipe
-        pid = Process.spawn(cmd, out: w)
-        w.close
-
-        assert(r.read.strip == 'I should be printed')
-        r.close
+      cmd = nil
+      unless /windows/i =~ ENV['OS']
+        cmd = 'ruby -e "puts \"$I_SHOULD_NOT_BE_PRINTED\""'
+      else
+        cmd = 'ruby -e "puts \"%I_SHOULD_NOT_BE_PRINTED%\""'
       end
+
+      r, w = IO.pipe
+      pid = Process.spawn(cmd, out: w)
+      w.close
+
+      assert(r.read.strip == 'I should be printed')
+      r.close
     end
 
     it 'Interprets shell command arguments correctly' do
@@ -54,56 +52,52 @@ TestFixture.new('Ruby API: Process') do
     end
 
     it 'Spawns a program from the path, with no shell, if given argv as multiple args' do
-      APR.with_pool do |pool|
-        # If there was a shell involved, the command executed below would be
-        # interpretted, and the environment variable expanded. So, if we
-        # correctly bypass the shall, the variable name should be printed
-        # instead of the variable's value.
-        APR.apr_env_set("I_SHOULD_BE_PRINTED", "I should not", pool)
+      # If there was a shell involved, the command executed below would be
+      # interpretted, and the environment variable expanded. So, if we
+      # correctly bypass the shall, the variable name should be printed
+      # instead of the variable's value.
+      ENV["I_SHOULD_BE_PRINTED"] = "I should not"
 
-        cmd = nil
-        if APR::OS != 'Windows'
-          cmd = ['ruby', '-e', 'puts "$I_SHOULD_BE_PRINTED"']
-        else
-          cmd = ['ruby', '-e', 'puts "%I_SHOULD_BE_PRINTED%"']
-        end
-
-        r, w = IO.pipe
-        pid = Process.spawn(*cmd, out: w)
-        w.close
-
-        result = r.read
-        assert(result.include? 'I_SHOULD_BE_PRINTED')
-
-        # TODO Test commands with slashes not preceding quote, slashes preceding quote, and even/odd number of trailing slashes (because windows sucks)
+      cmd = nil
+      unless /windows/i =~ ENV['OS']
+        cmd = ['ruby', '-e', 'puts "$I_SHOULD_BE_PRINTED"']
+      else
+        cmd = ['ruby', '-e', 'puts "%I_SHOULD_BE_PRINTED%"']
       end
+
+      r, w = IO.pipe
+      pid = Process.spawn(*cmd, out: w)
+      w.close
+
+      result = r.read
+      assert(result.include? 'I_SHOULD_BE_PRINTED')
+
+      # TODO Test commands with slashes not preceding quote, slashes preceding quote, and even/odd number of trailing slashes (because windows sucks)
     end
 
     it 'Quotes arguments to non-shell commands correctly' do
-      break unless APR::OS == 'Windows'
-      APR.with_pool do |pool|
-        APR.apr_env_set("I_SHOULD_BE_PRINTED", "I should not", pool)
+      break unless /windows/i =~ ENV['OS']
+      ENV["I_SHOULD_BE_PRINTED"] = "I should not"
 
-        # This command is going to be processed by Process.spawn,
-        # subbing '\"' for every '"'. This tests makes sure the argument
-        # still reaches the child command correctly. (CommandLineToArgvW
-        # should be constructing argv for the command, and converting
-        # the escaped quotes into regular quotes)
-        cmd = ['ruby', '-e', 'puts("%I_SHOULD_BE_PRINTED%")']
+      # This command is going to be processed by Process.spawn,
+      # subbing '\"' for every '"'. This tests makes sure the argument
+      # still reaches the child command correctly. (CommandLineToArgvW
+      # should be constructing argv for the command, and converting
+      # the escaped quotes into regular quotes)
+      cmd = ['ruby', '-e', 'puts("%I_SHOULD_BE_PRINTED%")']
 
-        r, w = IO.pipe
-        pid = Process.spawn(*cmd, out: w)
-        w.close
+      r, w = IO.pipe
+      pid = Process.spawn(*cmd, out: w)
+      w.close
 
-        result = r.read
-        assert(result.include? 'I_SHOULD_BE_PRINTED')
+      result = r.read
+      assert(result.include? 'I_SHOULD_BE_PRINTED')
 
-        # TODO Test commands with slashes not preceding quote, slashes preceding quote, and even/odd number of trailing slashes (because windows sucks)
-      end
+      # TODO Test commands with slashes not preceding quote, slashes preceding quote, and even/odd number of trailing slashes (because windows sucks)
     end
 
     it 'Can spawn a non shell command on windows with spaces in the name' do
-      break unless APR::OS == 'Windows'
+      break unless /windows/i =~ ENV['OS']
       cmd = ["#{$GEM_DIR}/sandbox/windows print three args.exe", 'simple commands don\'t have spaces', '"\'"s', 'or \'"\'s']
 
       r, w = IO.pipe
@@ -117,7 +111,7 @@ TestFixture.new('Ruby API: Process') do
     end
 
     it 'Handles quoted arguments with spaces & an even number of trailing backslashes on windows' do
-      break unless APR::OS == 'Windows'
+      break unless /windows/i =~ ENV['OS']
       cmd = ["#{$GEM_DIR}/sandbox/windows print three args.exe", '1', '2', '3 \\\\']
 
       r, w = IO.pipe
@@ -129,7 +123,7 @@ TestFixture.new('Ruby API: Process') do
     end
 
     it 'Handles quoted arguments with spaces & an odd number of trailing backslashes on windows' do
-      break unless APR::OS == 'Windows'
+      break unless /windows/i =~ ENV['OS']
       cmd = ["#{$GEM_DIR}/sandbox/windows print three args.exe", '1', '2', '3 \\\\\\']
 
       r, w = IO.pipe
@@ -141,7 +135,7 @@ TestFixture.new('Ruby API: Process') do
     end
 
     it 'Handles arguments with an even number slashes preceding quotes on Windows' do
-      break unless APR::OS == 'Windows'
+      break unless /windows/i =~ ENV['OS']
       cmd = ["#{$GEM_DIR}/sandbox/windows print three args.exe", '1', '2', '"\\ \\\\"']
 
       r, w = IO.pipe
@@ -153,7 +147,7 @@ TestFixture.new('Ruby API: Process') do
     end
 
     it 'Handles arguments with an odd number slashes preceding quotes on Windows' do
-      break unless APR::OS == 'Windows'
+      break unless /windows/i =~ ENV['OS']
       cmd = ["#{$GEM_DIR}/sandbox/windows print three args.exe", '1', '2', '"\\"']
 
       r, w = IO.pipe
@@ -165,7 +159,7 @@ TestFixture.new('Ruby API: Process') do
     end
 
     it 'Handles arguments with slashes not preceding quotes on windows' do
-      break unless APR::OS == 'Windows'
+      break unless /windows/i =~ ENV['OS']
       cmd = ["#{$GEM_DIR}/sandbox/windows print three args.exe", '1', '2', '\\']
 
       r, w = IO.pipe
