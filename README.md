@@ -13,7 +13,7 @@ Thus far, `mruby-apr` provides access to
   + Spawning & waiting
 - Pipes (APR & Ruby APIs)
   + Create, read, write, share with child processes
-- Sockets (APR APIs)
+- Sockets (APR APIs & Ruby APIs)
   + Client & server
 - Time functions (APR APIs)
 
@@ -55,6 +55,18 @@ For a complete list of APR functions for which bindings have been created, see [
 
 Development Guidelines
 ----------------------
+
+### Testing
++ APR API Wrappers
+  * Nothing special, just writing unit tests
++ Ruby API Implementations
+  * Each test file should run from the command line in the specs/ directory
+  * The test file should run on MRI & MRuby (`ruby ./ruby_file.rb` & `mruby ./ruby_file.rb`)
+    + This is not the case for all existing files ATM, but they should be updated as they are touched
+    + Just need to check for the existence of "MRUBY_VERSION" constant & add requires if on MRI
+  * Running from the rake tasks runs MRuby tests only
+    + MRuby will need to be on your path
+    + Any new tests should be run on MRI as well to verify the behavior being tested is correct.
 
 ### Using APR Pools for Resource Management
 + An APR pool created by MRuby is "owned" by MRuby.

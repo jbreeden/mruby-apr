@@ -18,7 +18,6 @@ TestFixture.new('Ruby API: File::Stat') do
       end
       stat = File::Stat.new(empty_file)
       t_second = stat.atime
-      puts "#{t_first.to_i}, #{t_second.to_i}"
       assert (t_second > t_first)
     end
   end
@@ -29,14 +28,12 @@ TestFixture.new('Ruby API: File::Stat') do
       now = Time.now
       # Unfortunately have to sleep for a second to guarantee ctime > "now"
       APR.apr_sleep 2000000 # micro seconds
-      puts created_file
       # File.delete(created_file) if File.exists?(created_file)
       File.open(created_file, 'w') do |f|
         f.puts "Created after #{now}"
       end
       stat = File::Stat.new(created_file)
       ctime = stat.ctime
-      puts "#{now}, #{ctime}"
       assert(ctime > now)
     end
   end

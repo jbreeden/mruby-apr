@@ -1,4 +1,8 @@
 class IO
+
+  # Semi-Private Util Functions
+  # ---------------------------
+
   module Util
     def self.mode_str_to_apr_flags(mode)
       case mode
@@ -34,6 +38,9 @@ class IO
 
   end
 
+  # Constants
+  # ---------
+
   SEEK_SET = 0
   SEEK_CUR = 1
   SEEK_END = 2
@@ -60,6 +67,9 @@ class IO
   FNM_CASEFOLD = 8
   FNM_EXTGLOB = 16
   FNM_SYSCASE = 0
+
+  # Class Methods
+  # -------------
 
   def self.pipe
     err, pool = APR.apr_pool_create(nil)
@@ -148,7 +158,152 @@ class IO
     end
   end
 
-  # Default implementation of some IO functions
-  # - All expect the subclass to provide `read(len = nil)` & `write(str)`
-  
+  # Default Implementation of IO Instance Methods
+  # ---------------------------------------------
+
+  # - Subclasses must provide:
+  #   + `read(len = nil)`
+  #   + `write(str)`
+  #   + `eof?`
+  #   + `assert_can_read`
+  #   + `assert_can_write`
+
+  def <<(obj)
+    self.write(obj)
+  end
+
+  def eof
+    self.eof?
+  end
+
+  def gets(sep=nil, limit=nil)
+    # Input Normalization
+    _sep = $/
+    _limit = nil
+    # - Either nothing is provided
+    if sep.nil? && limit.nil?
+      # Just continue
+    # - Or sep is provided
+    elsif sep.class == String && limit.nil?
+      _sep = sep
+    # - Or limit
+    elsif sep.class == Fixnum && limit.nil?
+      _limit = sep
+    # - Or both
+    elsif sep.class == String && limit.class == Fixnum
+      _sep = sep
+      _limit = limit
+    # - Or the call is invalid
+    else
+      raise ArgumentError.new "Invalid arguments"
+    end
+
+    # Short Circuits
+    assert_can_read
+    raise ArgumentError.new("Limit param must be >= 0") if _limit.to_i < 0
+    return "" if _limit == 0
+
+    # Normal Path
+    result = nil  # Default for reads at EOF unless limit == 0 (above)
+    count = 0
+    loop {
+      str = self.read(1)
+      break if str == nil
+
+      if result.nil?
+        result = str
+      else
+        result += str
+      end
+
+      count += 1
+      break if result.end_with?(_sep) || (!_limit.nil? && count >= _limit)
+    }
+
+    result
+  end
+
+  def each(&block)
+    assert_can_read
+    if block
+      while line = self.gets
+        block[line]
+      end
+    else
+      enum = self.to_enum(:each)
+    end
+  end
+  alias each_line each
+
+  def each_byte(&block)
+    assert_can_read
+    if block
+      while b = self.read(1)
+        block[b.ord]
+      end
+    else
+      self.to_enum(:each_byte)
+    end
+  end
+
+  def each_char(&block)
+    assert_can_read
+    if block
+      while b = self.read(1)
+        block[b]
+      end
+    else
+      self.to_enum(:each_byte)
+    end
+  end
+
+  def getc
+    assert_can_read
+    self.read(1)
+  end
+
+  def getbyte
+    assert_can_read
+    char = self.read(1)
+    char.nil? ? nil : char.ord
+  end
+
+  def print(*objs)
+    assert_can_write
+    objs.each_with_index do |obj, i|
+      self.write($,.to_s) if i > 0  && !$,.nil?
+      self.write(obj)
+    end
+    self.write($\.to_s) unless $\.nil?
+    nil
+  end
+
+  def puts(*args)
+    assert_can_write
+
+    # All array arguments should be flattened such that all elements are written on a new "line"
+    args = args.flatten
+
+    # On MRI, $\ is nil by default, but puts still defaults to newlines
+    sep = $\.nil? ? "\n" : $\
+
+    if args.length > 0
+      args.each do |arg|
+        as_str = arg.to_s
+        unless as_str.end_with?(sep)
+          as_str += sep
+        end
+        self.write(as_str)
+      end
+    else
+      self.write(sep)
+    end
+    nil
+  end
+
+  def seek(amount, whence=IO::SEEK_SET)
+    # If seek is not overridden by the subclass,
+    # just default to considering it invalid.
+    raise SystemCallError.new("Illegal seek")
+  end
 end

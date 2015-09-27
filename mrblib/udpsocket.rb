@@ -18,6 +18,35 @@ class UDPSocket < IPSocket
     APR.raise_apr_errno(err)
   end
 
+  # Base Class Overrides
+  # --------------------
+
+  def read(limit=nil)
+    assert_can_read
+
+    # Handle limit == 0 case up front. Now all calls
+    # delegated to super `read` will return nil at EOF
+    return "" if limit == 0
+
+    # The default read for basic socket delegates to apr_socket_read,
+    # which returns after a UDP packet is finished. In Ruby style, we should
+    # instead treat consecutive UDP packets as a stream when `read` is called.
+    result = nil
+    bytes_read = 0
+    loop {
+      part = super(limit && limit - bytes_read)
+      break if part.nil?
+      result = result.to_s + part
+      bytes_read += part.length
+      break if bytes_read >= limit
+    }
+
+    result
+  end
+
+  # Instance Methods
+  # ----------------
+
   def bind(host, port)
     err, @apr_local_addrinfo = APR.apr_sockaddr_info_get(host, APR::APR_INET, port, 0, @pool)
     APR.raise_apr_errno(err)

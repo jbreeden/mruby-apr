@@ -17068,48 +17068,36 @@ mrb_APR_apr_socket_atmark(mrb_state* mrb, mrb_value self) {
 #endif
 
 #if BIND_apr_socket_atreadeof_FUNCTION
-#define apr_socket_atreadeof_REQUIRED_ARGC 2
+#define apr_socket_atreadeof_REQUIRED_ARGC 1
 #define apr_socket_atreadeof_OPTIONAL_ARGC 0
 /* apr_socket_atreadeof
  *
  * Parameters:
  * - sock: apr_socket_t *
- * - atreadeof: int *
- * Return Type: apr_status_t
+ * Return Type: [err: AprStatusT, at_eof: Boolean]
  */
 mrb_value
 mrb_APR_apr_socket_atreadeof(mrb_state* mrb, mrb_value self) {
   mrb_value sock;
-  mrb_value atreadeof;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "oo", &sock, &atreadeof);
-
+  mrb_get_args(mrb, "o", &sock);
 
   /* Type checking */
   if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
     return mrb_nil_value();
   }
-  TODO_type_check_int_PTR(atreadeof);
-
 
   /* Unbox parameters */
   apr_socket_t * native_sock = (mrb_nil_p(sock) ? NULL : mruby_unbox_apr_socket_t(sock));
 
-  int * native_atreadeof = TODO_mruby_unbox_int_PTR(atreadeof);
-
   /* Invocation */
-  apr_status_t result = apr_socket_atreadeof(native_sock, native_atreadeof);
+  int native_atreadeof = 0;
+  apr_status_t result = apr_socket_atreadeof(native_sock, &native_atreadeof);
 
-  /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
-
-  return return_value;
+  RETURN_ERRNO_AND_OUTPUT(result, mrb_bool_value(native_atreadeof));
 }
 #endif
 

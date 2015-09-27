@@ -17,15 +17,40 @@ TestFixture.new('Ruby API: UDPSocket') do
       io = IO.popen("ruby", 'w')
       io.write(<<-EOS)
         require 'socket'
-        sleep 0.2
         client = UDPSocket.new()
-        sent = client.send('#{msg}', 0, 'localhost', 9999)
+        client.connect('localhost', 9999)
+        client.write('#{msg}')
         client.close
       EOS
       io.close
 
       result = server.read(msg.length)
       assert (result == msg)
+      server.close
+    end
+
+    it "Reads consecutive packets as a stream" do
+      server = UDPSocket.new()
+      server.bind('localhost', 9999)
+
+      io = IO.popen("ruby", 'w')
+      io.write(<<-EOS)
+        require 'socket'
+        
+        client = UDPSocket.new()
+        client.connect('localhost', 9999)
+        client.write('one')
+        client.close
+
+        client2 = UDPSocket.new()
+        client2.connect('localhost', 9999)
+        client2.write('two')
+        client2.close
+      EOS
+      io.close
+
+      result = server.read(6)
+      assert (result == 'onetwo')
       server.close
     end
   end
@@ -39,8 +64,7 @@ TestFixture.new('Ruby API: UDPSocket') do
         client = UDPSocket.new()
         client.bind('localhost', 9999)
         client.connect('localhost', 9998)
-        new_msg = client.read(#{msg.length}).reverse
-        client.write new_msg
+        client.write client.read(#{msg.length}).reverse
         client.close
       EOS
       io.close_write

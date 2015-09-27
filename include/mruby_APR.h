@@ -665,7 +665,7 @@
 #define BIND_apr_socket_accept_FUNCTION TRUE
 #define BIND_apr_socket_addr_get_FUNCTION TRUE
 #define BIND_apr_socket_atmark_FUNCTION FALSE
-#define BIND_apr_socket_atreadeof_FUNCTION FALSE
+#define BIND_apr_socket_atreadeof_FUNCTION TRUE
 #define BIND_apr_socket_bind_FUNCTION TRUE
 #define BIND_apr_socket_close_FUNCTION TRUE
 #define BIND_apr_socket_connect_FUNCTION TRUE

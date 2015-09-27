@@ -25,7 +25,23 @@ class File < IO
   #    specified.
   #
   # "t"  Text file mode
-  def initialize(filename, mode='r', perm=APR::APR_FPROT_OS_DEFAULT)
+  def initialize(filename, mode='r', perm=APR::APR_FPROT_OS_DEFAULT, apr_pool=nil)
+    # Wrapper semantics
+    if (filename.kind_of?(APR::AprFileT))
+      @native_file = filename
+      @flags = APR::APR_FOPEN_BUFFERED # Always at least buffered
+      @flags = IO::Util.mode_str_to_apr_flags(mode)
+      if perm.kind_of?(APR::AprPoolT)
+        @perm_bits = APR::APR_FPROT_OS_DEFAULT
+        @pool = perm
+      else
+        @perm_bits = perm
+        @pool = apr_pool
+      end
+      raise "Must pass apr pool param when wrapping an AprFileT" unless @pool
+      return
+    end
+
     err, @pool = APR.apr_pool_create(nil)
     APR.raise_apr_errno(err)
     @filename = filename
@@ -153,114 +169,28 @@ class File < IO
     @native_file
   end
 
-  def check_can_read
+  def assert_can_read
     if (!closed? && (@flags & APR::APR_FOPEN_READ) == 0)
       raise IOError.new 'not opened for reading'
     end
   end
 
-  def check_can_write
+  def assert_can_write
     if (!closed? && (@flags & APR::APR_FOPEN_WRITE) == 0)
       raise IOError.new 'not opened for writing'
     end
   end
 
   def flush
-    check_can_write
+    assert_can_write
     APR.apr_file_flush(@native_file)
   end
 
-  def gets(sep=nil, limit=nil)
-    check_can_read
-
-    _sep = $/
-    _limit = nil
-
-    # Either nothing is provided
-    if sep.nil? && limit.nil?
-      # Just continue
-    # Or sep is provided
-    elsif sep.class == String && limit.nil?
-      _sep = sep
-    # Or limit
-    elsif sep.class == Fixnum && limit.nil?
-      _limit = sep
-    # Or both
-    elsif sep.class == String && limit.class == Fixnum
-      _sep = sep
-      _limit = limit
-    # Or the call is invalid
-    else
-      raise ArgumentError.new "Invalid arguments"
-    end
-
-    result = nil
-    count = 0
-    loop do
-      if !_limit.nil? && _limit <= count
-        result = "" if result == nil
-        break
-      end
-
-      err, str = APR::apr_file_read(@native_file, 1)
-      APR.raise_apr_errno(err, ignore: APR::APR_EOF)
-
-      break if err == APR::APR_EOF
-
-      if result.nil?
-        result = str
-      else
-        result += str
-      end
-      count += 1
-      break if result.end_with? _sep
-    end
-
-    result
-  end
-
-  def <<(obj)
-    as_str = obj.class == String ? obj : obj.to_s
-    APR.apr_file_write(@native_file, as_str, as_str.length)
-  end
-
-  def print(*objs)
-    check_can_write
-    objs.each_with_index do |obj, i|
-      as_str = obj.class == String ? obj : obj.to_s
-      APR.apr_file_write(@native_file, $,.to_s, $,.to_s.length) if i > 0  && !$,.nil?
-      APR.apr_file_write(@native_file, as_str, as_str.length)
-    end
-    APR.apr_file_write(@native_file, $\.to_s, $\.to_s.length) unless $\.nil?
-    nil
-  end
-
-  def puts(*args)
-    check_can_write
-
-    # All array arguments should be flattened such that all elements are written on a new "line"
-    args = args.flatten
-
-    sep = $\.nil? ? "\n" : $\
-
-    if args.length > 0
-      args.each do |arg|
-        as_str = arg.to_s
-        unless as_str.end_with?(sep)
-          as_str += sep
-        end
-        err, bytes_written = APR.apr_file_write(@native_file, as_str, as_str.length)
-        APR.raise_apr_errno(err)
-      end
-    else
-      err, bytes_written = APR.apr_file_write(@native_file, sep, sep.length)
-      APR.raise_apr_errno(err)
-    end
-    nil
-  end
+  # IO Subclass Contract Implementation
+  # -----------------------------------
 
   def read(length = nil)
-    check_can_read
+    assert_can_read
 
     read = ""
     if length.nil?
@@ -288,38 +218,15 @@ class File < IO
   end
 
   def write(str)
-    check_can_write
+    assert_can_write
     as_str = (str.class == String) ? str : str.to_s
     err, bytes_written = APR.apr_file_write(@native_file, as_str, as_str.length)
     APR.raise_apr_errno(err)
     bytes_written
   end
 
-  def each(&block)
-    check_can_read
-    if block
-      while line = self.gets
-        block[line]
-      end
-    else
-      enum = self.to_enum(:each)
-    end
-  end
-  alias each_line each
-
-  def each_byte(&block)
-    check_can_read
-    if block
-      while b = self.read(1)
-        block[b.ord]
-      end
-    else
-      self.to_enum(:each_byte)
-    end
-  end
-
   def eof?
-    check_can_read
+    assert_can_read
     is_eof = (APR::APR_EOF == APR.apr_file_eof(@native_file))
     unless is_eof
       # Have to cheat since CRuby returns EOF immediately for an empty file,
@@ -336,22 +243,25 @@ class File < IO
   end
   alias eof eof?
 
+  # IO Default Overrides
+  # --------------------
+
   def getc
-    check_can_read
+    assert_can_read
     err, char = APR.apr_file_getc(@native_file)
     APR.raise_apr_errno(err, ignore: APR::APR_EOF)
     char
   end
 
   def getbyte
-    check_can_read
+    assert_can_read
     err, char = APR.apr_file_getc(@native_file)
     APR.raise_apr_errno(err, ignore: APR::APR_EOF)
     char.nil? ? nil : char.ord
   end
 
   def ungetbyte(byte)
-    check_can_read
+    assert_can_read
     if byte.class == String
       byte.reverse.each_char do |ch|
         err = APR.apr_file_ungetc(ch, @native_file)
@@ -370,5 +280,6 @@ class File < IO
     whence = IO::Util.ruby_seek_to_apr(whence)
     err, pos = APR.apr_file_seek(@native_file, whence, amount)
     APR.raise_apr_errno(err)
+    # TODO: Verify expected return value
   end
 end

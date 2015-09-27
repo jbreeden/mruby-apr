@@ -87,8 +87,11 @@ APR API: Processes
 APR API: Sockets
 ----------------
 
-  - APR::apr_socket_connect(socket, addr)
+  - APR::apr_socket_connect(socket: AprSocketT, addr: AprSockaddrT)
     + Connects a client socket to a server
+
+  - APR::apr_socket_atreadeof(socket: AprSocketT)
+    + Returns [APR::APR_SUCCESS, true] when the read buffer is empty and the socket has been closed by the peer
 
   - APR::apr_socket_send(socket, message, length)
     + Returns a APR::APR_EOF when the connection is closed
@@ -96,7 +99,7 @@ APR API: Sockets
   - APR::apr_socket_bind(socket, addr)
     + Binds a server socket to an address
 
-  SUCCESS [0/3 tests failed]
+  SUCCESS [0/4 tests failed]
 
 APR API: Time
 -------------
@@ -257,12 +260,9 @@ Ruby API: File::Stat
 --------------------
 
   - Stat#atime
-1443314006, 1443314010
     + Gives the access time of the file as a Time
 
   - Stat#ctime
-../sandbox/created_file.txt
-Sat Sep 26 17:33:30 2015, Sat Sep 26 17:33:32 2015
     + Gives the creation time of the file as a Time
 
   - Stat#mtime
@@ -338,42 +338,49 @@ Ruby API: Process
 
   SUCCESS [0/7 tests failed]
 
-Ruby API: BasicSocket, TCPSocket, & TCPServer
----------------------------------------------
+Ruby API: TCPSocket, & TCPServer
+--------------------------------
 
   - TCPSocket::new(remote_host, remote_port, local_host=nil, local_port=nil)
     + Creates a connected TCP socket when given remote host & port
 
-  - BasicSocket#write(str)
+  - TCPSocket#write(str)
     + Writes the given str to the socket
 
-  - BasicSocket#read(len=nil)
+  - TCPSocket#read(len=nil)
     + Reads from the socket until EOF (when the socket is closed)
     + Reads at most len bytes if len is provided
     + Returns the empty string after EOF has been encountered, if length is not provided
     + Returns nil after EOF has been encountered, if length is provided
 
-  - BasicSocket#close_read
+  - TCPSocket#close_read
     + Closes a socket for reading
 
-  - BasicSocket#close_write
+  - TCPSocket#close_write
     + Closes a socket for writing
 
-  - BasicSocket#close
+  - TCPSocket#close
     + Closes a socket for reading & writing
+
+  - TCPSocket#eof?
+    + Returns true if the socket has been closed by the peer
+
+  - TCPSocket#gets
+    + Read from the socket one line at a time
 
   - TCPServer::new([hostname], port)
     + Creates a new TCPServer on the given port
 
-  SUCCESS [0/10 tests failed]
+  SUCCESS [0/12 tests failed]
 
-Ruby API: UDPSocket & UDPServer
--------------------------------
+Ruby API: UDPSocket
+-------------------
 
   - UDPSocket::read(length=nil)
     + Reads at most length bytes from a bound UDPSocket
+    + Reads consecutive packets as a stream
 
   - UDPSocket::write(str)
     + Writes the given string to a connected UDPSocket
 
-  SUCCESS [0/2 tests failed]
+  SUCCESS [0/3 tests failed]

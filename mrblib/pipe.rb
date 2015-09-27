@@ -71,7 +71,7 @@ class IO
       @write_pipe.close
     end
 
-    def check_can_write
+    def assert_can_write
       if @write_pipe.nil? || @write_pipe.closed?
         raise IOError.new('not open for writing')
       end
@@ -82,52 +82,52 @@ class IO
     #  so they will raise an exception)
 
     def flush(*args)
-      check_can_write
+      assert_can_write
       @write_pipe.flush(*args)
     end
 
     def <<(*args)
-      check_can_write
+      assert_can_write
       @write_pipe.<<(*args)
     end
 
     def flush(*args)
-      check_can_write
+      assert_can_write
       @write_pipe.flush(*args)
     end
 
     def print(*args)
-      check_can_write
+      assert_can_write
       @write_pipe.print(*args)
     end
 
     def printf(*args)
-      check_can_write
+      assert_can_write
       @write_pipe.printf(*args)
     end
 
     def putc(*args)
-      check_can_write
+      assert_can_write
       @write_pipe.putc(*args)
     end
 
     def puts(*args)
-      check_can_write
+      assert_can_write
       @write_pipe.puts(*args)
     end
 
     def syswrite(*args)
-      check_can_write
+      assert_can_write
       @write_pipe.syswrite(*args)
     end
 
     def write(*args)
-      check_can_write
+      assert_can_write
       @write_pipe.write(*args)
     end
 
     def write_nonblock(*args)
-      check_can_write
+      assert_can_write
       @write_pipe.write_nonblock(*args)
     end
 
@@ -136,124 +136,124 @@ class IO
     # (Some of these aren't actually implemented in the Pipe/File classes yet,
     #  so they will raise an exception)
 
-    def check_can_read
+    def assert_can_read
       if @read_pipe.nil? || @read_pipe.closed?
         raise IOError.new('not open for reading')
       end
     end
 
     def eof
-      check_can_read
+      assert_can_read
       @read_pipe.eof
     end
 
     def eof?
-      check_can_read
+      assert_can_read
       @read_pipe.eof?
     end
 
     def bytes(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.bytes(*args)
     end
 
     def chars(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.chars(*args)
     end
 
     def codepoints(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.codepoints(*args)
     end
 
     def each(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.each(*args)
     end
 
     def each_byte(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.each_byte(*args)
     end
 
     def each_char(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.each_char(*args)
     end
 
     def each_codepoint(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.each_codepoint(*args)
     end
 
     def each_line(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.each_line(*args)
     end
 
     def getbyte(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.getbyte(*args)
     end
 
     def getc(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.getc(*args)
     end
 
     def gets(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.gets(*args)
     end
 
     def read(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.read(*args)
     end
 
     def read_nonblock(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.read_nonblock(*args)
     end
 
     def readbyte(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.readbyte(*args)
     end
 
     def readchar(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.readchar(*args)
     end
 
     def readline(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.readline(*args)
     end
 
     def readlines(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.readlines(*args)
     end
 
     def readpartial(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.readpartial(*args)
     end
 
     def sysread(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.sysread(*args)
     end
 
     def ungetbyte(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.ungetbyte(*args)
     end
 
     def ungetc(*args)
-      check_can_read
+      assert_can_read
       @read_pipe.ungetc(*args)
     end
   end

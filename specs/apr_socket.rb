@@ -12,7 +12,7 @@ TestFixture.new('APR API: Sockets') do
     spawn "sleep 1 && ruby ./helpers/tcp_client.rb"
   end
 
-  describe 'APR::apr_socket_connect(socket, addr)' do
+  describe 'APR::apr_socket_connect(socket: AprSocketT, addr: AprSockaddrT)' do
     it 'Connects a client socket to a server' do
       run_server
 
@@ -30,6 +30,29 @@ TestFixture.new('APR API: Sockets') do
       APR.raise_apr_errno(err)
 
       assert (buf == 'socket data')
+    end
+  end
+
+  describe 'APR::apr_socket_atreadeof(socket: AprSocketT)' do
+    it 'Returns [APR::APR_SUCCESS, true] when the read buffer is empty and the socket has been closed by the peer' do
+      run_server
+
+      #                                            Host         Family         Port  Flags
+      err, server_addr = APR.apr_sockaddr_info_get "localhost", APR::APR_INET, 8888, 0, @pool
+      APR.raise_apr_errno(err)
+
+      err, client = APR.apr_socket_create(APR::APR_INET, APR::SOCK_STREAM, APR::APR_PROTO_TCP, @pool)
+      APR.raise_apr_errno(err)
+
+      err = APR.apr_socket_connect(client, server_addr)
+      APR.raise_apr_errno(err)
+
+      eof_check = APR::apr_socket_atreadeof(client)
+      assert (eof_check[0] == APR::APR_SUCCESS && eof_check[1] == false)
+      err, buf = APR.apr_socket_recv(client, 100)
+      APR.raise_apr_errno(err)
+      eof_check = APR::apr_socket_atreadeof(client)
+      assert (eof_check[0] == APR::APR_SUCCESS && eof_check[1] == true)
     end
   end
 

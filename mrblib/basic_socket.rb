@@ -1,23 +1,32 @@
 class BasicSocket < IO
 
+  # BasicSocket Subclass Contract
+  # -----------------------------
+
+  # A subclass of BasicSocket must provide the following instance variables:
+  # - @apr_socket: An APR::AprSocketT instance
+
   def initialize
+    # Sockets always open in duplex mode.
+    # When the client calls `close`, `close_read`, or `close_write`
+    # these values will be overwritten.
     @can_read = true
     @can_write = true
   end
 
-  # BasicSocket Subclass Contract
-  # -----------------------------
-
-  # A subclass of BasicSocket must provide several instance variables
-  # - @apr_socket: An APR::AprSocketT instance
-  # - @apr_local_addrinfo: An APR::AprSockaddrT (only required if binding to a local address)
-  # - @apr_remote_addrinfo: An APR::AprSockaddrT (only required if connecting to a remote address)
-
   # IO Subclass Contract Implementation
   # -----------------------------------
 
-  def read(length=nil)
+  def assert_can_read
     raise IOError.new("Not open for reading") unless @can_read
+  end
+
+  def assert_can_write
+    raise IOError.new("Not open for writing") unless @can_write
+  end
+
+  def read(length=nil)
+    assert_can_read
 
     msg = ""
 
@@ -47,11 +56,17 @@ class BasicSocket < IO
   end
 
   def write(str)
-    raise IOError.new("Not open for writing") unless @can_write
+    assert_can_write
 
     # Todo: check for socket connection
     str = str.to_s unless str.class == String
     APR::apr_socket_send(@apr_socket, str, str.length)
+  end
+
+  def eof?
+    err, at_eof = APR::apr_socket_atreadeof(@apr_socket)
+    APR.raise_apr_errno(err)
+    at_eof
   end
 
   # Semi-Private Utility Methods

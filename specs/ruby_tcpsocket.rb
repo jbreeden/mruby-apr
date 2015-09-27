@@ -7,7 +7,7 @@ rescue
   require 'socket'
 end
 
-TestFixture.new('Ruby API: BasicSocket, TCPSocket, & TCPServer') do
+TestFixture.new('Ruby API: TCPSocket, & TCPServer') do
   describe "TCPSocket::new(remote_host, remote_port, local_host=nil, local_port=nil)" do
     it "Creates a connected TCP socket when given remote host & port" do
       s = TCPSocket.new("www.google.com", 80)
@@ -17,12 +17,12 @@ TestFixture.new('Ruby API: BasicSocket, TCPSocket, & TCPServer') do
     end
   end
 
-  describe "BasicSocket#write(str)" do
+  describe "TCPSocket#write(str)" do
     # Tested by TCPSocket::new
     it "Writes the given str to the socket"
   end
 
-  describe "BasicSocket#read(len=nil)" do
+  describe "TCPSocket#read(len=nil)" do
     # Tested by TCPSocket::new
     it "Reads from the socket until EOF (when the socket is closed)"
 
@@ -50,8 +50,7 @@ TestFixture.new('Ruby API: BasicSocket, TCPSocket, & TCPServer') do
     end
   end
 
-  describe "BasicSocket#close_read" do
-    # Tested by TCPSocket::new
+  describe "TCPSocket#close_read" do
     it "Closes a socket for reading" do
       exc = nil
       begin
@@ -67,8 +66,7 @@ TestFixture.new('Ruby API: BasicSocket, TCPSocket, & TCPServer') do
     end
   end
 
-  describe "BasicSocket#close_write" do
-    # Tested by TCPSocket::new
+  describe "TCPSocket#close_write" do
     it "Closes a socket for writing" do
       exc = nil
       begin
@@ -83,8 +81,7 @@ TestFixture.new('Ruby API: BasicSocket, TCPSocket, & TCPServer') do
     end
   end
 
-  describe "BasicSocket#close" do
-    # Tested by TCPSocket::new
+  describe "TCPSocket#close" do
     it "Closes a socket for reading & writing" do
       exc = nil
       s = TCPSocket.new("www.google.com", 80)
@@ -103,6 +100,29 @@ TestFixture.new('Ruby API: BasicSocket, TCPSocket, & TCPServer') do
         exc = e
       end
       assert (exc.class == IOError)
+    end
+  end
+
+  describe "TCPSocket#eof?" do
+    it "Returns true if the socket has been closed by the peer" do
+      s = TCPSocket.new("www.google.com", 80)
+      s.write("GET http://www.google.com/ HTTP/1.1\nConnection: close\n\n")
+      assert(!s.eof?)
+      s.read
+      assert(s.eof?)
+    end
+  end
+
+  describe "TCPSocket#gets" do
+    it "Read from the socket one line at a time" do
+      s = TCPSocket.new("www.google.com", 80)
+      s.write("GET http://www.google.com/ HTTP/1.1\nConnection: close\n\n")
+      assert (s.gets =~ /200 OK\s+$/)
+      hit_content_type = false
+      while line = s.gets
+        hit_content_type = true if line =~ /^Content-Type:/
+      end
+      assert(hit_content_type)
     end
   end
 

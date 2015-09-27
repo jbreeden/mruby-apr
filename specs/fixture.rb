@@ -44,7 +44,7 @@ class TestFixture
     @fail_count += 1 unless @current_test_passed
 
     if exc
-      puts "    Uncaught #{exc.class.to_s}: #{exc}\n#{exc.backtrace.join("\n")}"
+      $stderr.puts "    Uncaught #{exc.class.to_s}: #{exc}\n#{exc.backtrace.join("\n")}"
     end
   end
 

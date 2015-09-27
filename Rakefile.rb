@@ -43,6 +43,15 @@ namespace :test do
     end
   end
 
+  desc "Run all the tests and print a summary"
+  task :summary do
+    IO.popen("rake test:all", "r") do |io|
+      while s = io.gets
+        puts s if /(^[a-z])|tests failed/i =~ s
+      end
+    end
+  end
+
 end
 
 desc "Generate method stubs for a ruby class"
