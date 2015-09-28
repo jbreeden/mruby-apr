@@ -64,6 +64,7 @@ MRuby::Gem::Specification.new('mruby-apr') do |spec|
   spec.license = 'Apache Version 2'
   spec.author  = 'Jared Breeden'
   spec.summary = 'Bindings to the APR libraries'
+  spec.add_dependency('mruby-regexp-pcre', ">= 0.0.0", github: "iij/mruby-regexp-pcre")
 
   spec.rbfiles = [
     "io.rb",
@@ -86,7 +87,7 @@ MRuby::Gem::Specification.new('mruby-apr') do |spec|
 
   configure_mruby_apr(spec)
 
-  unless OS.windows?
+  unless /windows/i =~ ENV['OS']
     spec.cc.flags << [ '-std=c11' ]
     spec.cxx.flags << [ '-std=c++11' ]
   end
