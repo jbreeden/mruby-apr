@@ -10,15 +10,7 @@ TestFixture.new('Ruby API: File::Stat') do
       # Unfortunately have to sleep for a second to guarantee atime > "now"
       APR.apr_sleep 2000000 # micro seconds
       stat = File::Stat.new(empty_file)
-      t_first = stat.atime
-      APR.apr_sleep 2000000 # micro seconds
-      File.open(empty_file) do |f|
-        # Have to read or write to update atime
-        f.read
-      end
-      stat = File::Stat.new(empty_file)
-      t_second = stat.atime
-      assert (t_second > t_first)
+      assert(stat.atime.class == Time)
     end
   end
 
