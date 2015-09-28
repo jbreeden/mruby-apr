@@ -78,3 +78,5 @@ Development Guidelines
     retain a reference to that pool.
   * Once all objects in a pool are GC'ed, there will no longer be a reference to the pool.
     Therefore, the pool will be destroyed, which will clean up all allocated resources.
+
+_Note: When building with mruby-apr, you may need to add `-fexceptions` to your `conf.cc.flags` and `conf.cxx.flags` in your mruby build_config.rb file. If you see errors like "Terminate called after throwing instance of 'int'," this is likely the issue._
