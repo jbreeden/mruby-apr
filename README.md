@@ -3,22 +3,25 @@ mruby-apr
 
 Bindings to the Apache APR library, providing a portable runtime library for mruby.
 
-Thus far, `mruby-apr` provides access to
+`mruby-apr` implements the following components from MRI's standard library
 
-- Files (APR & Ruby APIs)
-  + Create, delete, read, write, status, lock
-- Directories (APR & Ruby APIs)
-  + Create, delete, read, write, glob
-- Processes (APR & Ruby APIs)
-  + Spawning & waiting
-- Pipes (APR & Ruby APIs)
-  + Create, read, write, share with child processes
-- Sockets (APR APIs & Ruby APIs)
-  + Client & server
-- Time functions (APR APIs)
-
-Additionally, some of the CRuby standard library has been included (with some light patching).
-
+- IO
+  + `::popen`, `::pipe`, plus methods like `read`, `write`, `gets`, and `puts`.
+  + Instance methods works with files & sockets.
+- File, FileTest, File::Stat
+  + CRUD operations & `flock`
+- Dir
+  + `entries`, `chdir`, `mkdir`, `exists?`, `delete`, etc.
+- BasicSocket, UDPSocket, TCPSocket, TCPServer
+  + Inherit `read`, `write`, etc. from IO.
+  + `recv` & `send` family of functions not yet implemented.
+- ENV
+  + `[]`, `[]=`, & `delete`
+- Kernel
+  + `` ` ``, `system`, `spawn`, `load`
+- Process
+  + `spawn`, `wait`
+- Process::Status
 - Forwardable
 - Observer
 - OpenStruct
