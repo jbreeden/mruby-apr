@@ -40,8 +40,10 @@ These bindings are provided at 2 distinct levels:
   + This provides a familiar and idiomatic API to system resources for ruby programmers.
   + As with the Rubinius implementation, this should make it easier for Ruby programmers to hack on the stdlib.
 
-`mruby-apr` is intended for mruby builds targeting the platforms supported by libapr. This includes Windows, Mac, Linux, and other fairly common operating systems. So, while some limited embedded targets may be out of the question, this mrbgem could be
-useful when embedding mruby as a scripting language in a desktop or mobile app.
+Platform Support
+----------------
+
+`mruby-apr` is intended for mruby builds targeting the platforms supported by libapr. This includes Windows, Mac, Linux, and other fairly common operating systems. So, while some limited embedded targets may be out of the question, this mrbgem could be useful when embedding mruby as a scripting language in a desktop or mobile app. It does work on the Raspberry Pi, which pairs well with mruby given its small footprint.
 
 Spec
 ----
