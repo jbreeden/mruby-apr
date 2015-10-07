@@ -3,22 +3,25 @@ mruby-apr
 
 Bindings to the Apache APR library, providing a portable runtime library for mruby.
 
-Thus far, `mruby-apr` provides access to
+`mruby-apr` implements the following components from MRI's standard library
 
-- Files (APR & Ruby APIs)
-  + Create, delete, read, write, status, lock
-- Directories (APR & Ruby APIs)
-  + Create, delete, read, write, glob
-- Processes (APR & Ruby APIs)
-  + Spawning & waiting
-- Pipes (APR & Ruby APIs)
-  + Create, read, write, share with child processes
-- Sockets (APR APIs & Ruby APIs)
-  + Client & server
-- Time functions (APR APIs)
-
-Additionally, some of the CRuby standard library has been included (with some light patching).
-
+- IO
+  + `::popen`, `::pipe`, plus methods like `read`, `write`, `gets`, and `puts`.
+  + Instance methods works with files & sockets.
+- File, FileTest, File::Stat
+  + CRUD operations & `flock`
+- Dir
+  + `entries`, `chdir`, `mkdir`, `exists?`, `delete`, etc.
+- BasicSocket, UDPSocket, TCPSocket, TCPServer
+  + Inherit `read`, `write`, etc. from IO.
+  + `recv` & `send` family of functions not yet implemented.
+- ENV
+  + `[]`, `[]=`, & `delete`
+- Kernel
+  + `` ` ``, `system`, `spawn`, `load`
+- Process
+  + `spawn`, `wait`
+- Process::Status
 - Forwardable
 - Observer
 - OpenStruct
@@ -40,8 +43,10 @@ These bindings are provided at 2 distinct levels:
   + This provides a familiar and idiomatic API to system resources for ruby programmers.
   + As with the Rubinius implementation, this should make it easier for Ruby programmers to hack on the stdlib.
 
-`mruby-apr` is intended for mruby builds targeting the platforms supported by libapr. This includes Windows, Mac, Linux, and other fairly common operating systems. So, while some limited embedded targets may be out of the question, this mrbgem could be
-useful when embedding mruby as a scripting language in a desktop or mobile app.
+Platform Support
+----------------
+
+`mruby-apr` is intended for mruby builds targeting the platforms supported by libapr. This includes Windows, Mac, Linux, and other fairly common operating systems. So, while some limited embedded targets may be out of the question, this mrbgem could be useful when embedding mruby as a scripting language in a desktop or mobile app. It does work on the Raspberry Pi, which pairs well with mruby given its small footprint.
 
 Spec
 ----
@@ -78,3 +83,5 @@ Development Guidelines
     retain a reference to that pool.
   * Once all objects in a pool are GC'ed, there will no longer be a reference to the pool.
     Therefore, the pool will be destroyed, which will clean up all allocated resources.
+
+_Note: When building with mruby-apr, you may need to add `-fexceptions` to your `conf.cc.flags` and `conf.cxx.flags` in your mruby build_config.rb file. If you see errors like "Terminate called after throwing instance of 'int'," this is likely the issue._

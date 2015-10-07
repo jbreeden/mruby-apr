@@ -4,12 +4,20 @@ TestFixture.new('APR API: Sockets') do
   err, @pool = APR.apr_pool_create(nil)
 
   def run_server
-    spawn "ruby ./helpers/tcp_server.rb"
+    @server_pid = spawn "ruby ./helpers/tcp_server.rb"
     `sleep 1`
   end
 
+  def wait_for_server
+    Process.wait(@server_pid)
+  end
+
   def run_client
-    spawn "sleep 1 && ruby ./helpers/tcp_client.rb"
+    @client_pid = spawn "sleep 1 && ruby ./helpers/tcp_client.rb"
+  end
+
+  def wait_for_client
+    Process.wait(@client_pid)
   end
 
   describe 'APR::apr_socket_connect(socket: AprSocketT, addr: AprSockaddrT)' do
@@ -51,6 +59,8 @@ TestFixture.new('APR API: Sockets') do
       assert (eof_check[0] == APR::APR_SUCCESS && eof_check[1] == false)
       err, buf = APR.apr_socket_recv(client, 100)
       APR.raise_apr_errno(err)
+      
+      wait_for_server
       eof_check = APR::apr_socket_atreadeof(client)
       assert (eof_check[0] == APR::APR_SUCCESS && eof_check[1] == true)
     end
