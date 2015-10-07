@@ -50,6 +50,15 @@ TestFixture.new('Ruby API: TCPSocket, & TCPServer') do
     end
   end
 
+  describe "TCPSocket#recv(maxlen)" do
+    it "Reads at most maxlen bytes" do
+      s = TCPSocket.new("www.google.com", 80)
+      s.write("GET http://www.google.com/ HTTP/1.1\n\n")
+      msg = s.recv(100)
+      assert (msg =~ /200 OK/ && msg.length == 100)
+    end
+  end
+
   describe "TCPSocket#close_read" do
     it "Closes a socket for reading" do
       exc = nil

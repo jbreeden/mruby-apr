@@ -155,11 +155,13 @@ class BasicSocket < IO
   # def local_address
   #
   # end
-  #
-  # def recv
-  #
-  # end
-  #
+
+  def recv(maxlen)
+    err, msg = APR.apr_socket_recv(@apr_socket, maxlen)
+    APR.raise_apr_errno(err)
+    msg
+  end
+
   # def recv_nonblock
   #
   # end

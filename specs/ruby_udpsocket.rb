@@ -36,7 +36,7 @@ TestFixture.new('Ruby API: UDPSocket') do
       io = IO.popen("ruby", 'w')
       io.write(<<-EOS)
         require 'socket'
-        
+
         client = UDPSocket.new()
         client.connect('localhost', 9999)
         client.write('one')
@@ -51,6 +51,28 @@ TestFixture.new('Ruby API: UDPSocket') do
 
       result = server.read(6)
       assert (result == 'onetwo')
+      server.close
+    end
+  end
+
+  describe "UDPSocket::recv(maxlen)" do
+    it "Reads at most maxlen bytes from a bound UDPSocket" do
+      server = UDPSocket.new()
+      server.bind('localhost', 9999)
+
+      msg = 'client to server'
+      io = IO.popen("ruby", 'w')
+      io.write(<<-EOS)
+        require 'socket'
+        client = UDPSocket.new()
+        client.connect('localhost', 9999)
+        client.write('#{msg}')
+        client.close
+      EOS
+      io.close
+
+      result = server.recv(msg.length)
+      assert (result == msg)
       server.close
     end
   end
