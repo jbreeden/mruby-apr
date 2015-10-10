@@ -60,7 +60,9 @@ class BasicSocket < IO
 
     # Todo: check for socket connection
     str = str.to_s unless str.class == String
-    APR::apr_socket_send(@apr_socket, str, str.length)
+    err, bytes_sent = APR::apr_socket_send(@apr_socket, str, str.length)
+    APR.raise_apr_errno(err)
+    bytes_sent
   end
 
   def eof?
@@ -250,11 +252,16 @@ class BasicSocket < IO
   # def remote_address
   #
   # end
-  #
-  # def send
-  #
-  # end
-  #
+
+  def send(msg)
+    assert_can_write
+
+    msg = msg.to_s unless msg.class == String
+    err, bytes_sent = APR::apr_socket_send(@apr_socket, msg, msg.length)
+    APR.raise_apr_errno(err)
+    bytes_sent
+  end
+
   # def sendmsg
   #
   # end
