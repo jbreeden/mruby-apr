@@ -6051,126 +6051,74 @@ mrb_APR_apr_generate_random_bytes(mrb_state* mrb, mrb_value self) {
 #endif
 
 #if BIND_apr_gethostname_FUNCTION
-#define apr_gethostname_REQUIRED_ARGC 3
+#define apr_gethostname_REQUIRED_ARGC 1
 #define apr_gethostname_OPTIONAL_ARGC 0
 /* apr_gethostname
  *
  * Parameters:
- * - buf: char *
- * - len: int
  * - cont: apr_pool_t *
  * Return Type: apr_status_t
  */
 mrb_value
 mrb_APR_apr_gethostname(mrb_state* mrb, mrb_value self) {
-  mrb_value buf;
-  mrb_value len;
-  mrb_value cont;
+  mrb_value pool;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "ooo", &buf, &len, &cont);
-
+  mrb_get_args(mrb, "o", &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, buf, mrb->string_class)) {
-    mrb_raise(mrb, E_TYPE_ERROR, "String expected");
-    return mrb_nil_value();
-  }
-  if (!mrb_obj_is_kind_of(mrb, len, mrb->fixnum_class)) {
-    mrb_raise(mrb, E_TYPE_ERROR, "Fixnum expected");
-    return mrb_nil_value();
-  }
-  if (!mrb_obj_is_kind_of(mrb, cont, AprPoolT_class(mrb))) {
+  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
     return mrb_nil_value();
   }
 
-
-  /* Unbox parameters */
-  /* WARNING: Allocating new memory to create 'char *' from 'const char *'.
-   *          Please verify that this memory is cleaned up correctly.
-   *
-   *          Has this been verified? [No]
-   */
-  char * native_buf = strdup(mrb_string_value_cstr(mrb, &buf));
-
-  int native_len = mrb_fixnum(len);
-
-  apr_pool_t * native_cont = (mrb_nil_p(cont) ? NULL : mruby_unbox_apr_pool_t(cont));
+  apr_pool_t * native_pool = (mrb_nil_p(pool) ? NULL : mruby_unbox_apr_pool_t(pool));
 
   /* Invocation */
-  apr_status_t result = apr_gethostname(native_buf, native_len, native_cont);
+  int native_len = APRMAXHOSTLEN;
+  char* native_buf = (char*)malloc(native_len * (sizeof(char)));
+  apr_status_t result = apr_gethostname(native_buf, native_len, native_pool);
 
-  /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
-  mrb_value return_value = mrb_fixnum_value(result);
-
-  /* WARNING: Assuming that the new string can be deallocated after the function call.
-   *          Please verify that this is correct (the function does not save this parameter).
-   *
-   *          Has this been verified? [No]
-   */
+  mrb_value hostname = mrb_str_new_cstr(mrb, native_buf);
   free(native_buf);
-  native_buf = NULL;
-
-  return return_value;
+  RETURN_ERRNO_AND_OUTPUT(result, hostname);
 }
 #endif
 
 #if BIND_apr_getnameinfo_FUNCTION
-#define apr_getnameinfo_REQUIRED_ARGC 3
+#define apr_getnameinfo_REQUIRED_ARGC 1
 #define apr_getnameinfo_OPTIONAL_ARGC 0
 /* apr_getnameinfo
  *
  * Parameters:
- * - hostname: char **
  * - sa: apr_sockaddr_t *
- * - flags: int
  * Return Type: apr_status_t
  */
 mrb_value
 mrb_APR_apr_getnameinfo(mrb_state* mrb, mrb_value self) {
-  mrb_value hostname;
   mrb_value sa;
-  mrb_value flags;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "ooo", &hostname, &sa, &flags);
-
+  mrb_get_args(mrb, "o", &sa);
 
   /* Type checking */
-  TODO_type_check_char_PTR_PTR(hostname);
   if (!mrb_obj_is_kind_of(mrb, sa, AprSockaddrT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, flags, mrb->fixnum_class)) {
-    mrb_raise(mrb, E_TYPE_ERROR, "Fixnum expected");
-    return mrb_nil_value();
-  }
-
 
   /* Unbox parameters */
-  char ** native_hostname = TODO_mruby_unbox_char_PTR_PTR(hostname);
-
   apr_sockaddr_t * native_sa = (mrb_nil_p(sa) ? NULL : mruby_unbox_apr_sockaddr_t(sa));
 
-  int native_flags = mrb_fixnum(flags);
-
   /* Invocation */
-  apr_status_t result = apr_getnameinfo(native_hostname, native_sa, native_flags);
+  char * native_hostname;
+  apr_status_t result = apr_getnameinfo(&native_hostname, native_sa, 0);
 
-  /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
+  if (result == APR_SUCCESS) {
+    RETURN_ERRNO_AND_OUTPUT(result, mrb_str_new_cstr(mrb, native_hostname));
+  } else {
+    RETURN_ERRNO_AND_OUTPUT(result, mrb_nil_value());
   }
-  mrb_value return_value = mrb_fixnum_value(result);
-
-  return return_value;
 }
 #endif
 
@@ -16800,7 +16748,6 @@ mrb_APR_apr_sockaddr_info_get(mrb_state* mrb, mrb_value self) {
 /* apr_sockaddr_ip_get
  *
  * Parameters:
- * - addr: char **
  * - sockaddr: apr_sockaddr_t *
  * Return Type: apr_status_t
  */
@@ -16821,9 +16768,15 @@ mrb_APR_apr_sockaddr_ip_get(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_sockaddr = (mrb_nil_p(sockaddr) ? NULL : mruby_unbox_apr_sockaddr_t(sockaddr));
 
   /* Invocation */
-  char * native_addr = NULL;
+  char* native_addr;
   apr_status_t result = apr_sockaddr_ip_get(&native_addr, native_sockaddr);
-  RETURN_ERRNO_AND_OUTPUT(result, mrb_str_new_cstr(mrb, native_addr));
+  if (result == APR_SUCCESS) {
+    mrb_value ruby_addr = mrb_str_new_cstr(mrb, native_addr);
+    RETURN_ERRNO_AND_OUTPUT(result, ruby_addr);
+  } else {
+    free(native_addr);
+    RETURN_ERRNO_AND_OUTPUT(result, mrb_nil_value());
+  }
 }
 #endif
 
@@ -16846,7 +16799,6 @@ mrb_APR_apr_sockaddr_ip_getbuf(mrb_state* mrb, mrb_value self) {
 
   /* Fetch the args */
   mrb_get_args(mrb, "ooo", &buf, &buflen, &sockaddr);
-
 
   /* Type checking */
   if (!mrb_obj_is_kind_of(mrb, buf, mrb->string_class)) {
@@ -17701,7 +17653,14 @@ mrb_APR_apr_socket_recvfrom(mrb_state* mrb, mrb_value self) {
   free(native_buf);
   native_buf = NULL;
 
+  /* The APR functions that operate on a sockaddr tend to require
+   * a functioning `pool` member, but they don't come out with one.
+   * So, create one, and reference it from the Ruby object so the GC
+   * can take care of cleaning it up later.
+   */
   mrb_value from = mruby_giftwrap_apr_sockaddr_t(mrb, native_from);
+  apr_pool_create(&(native_from->pool), NULL);
+  mrb_iv_set(mrb, from, mrb_intern_cstr(mrb, "@pool"), mruby_giftwrap_apr_pool_t(mrb, native_from->pool));
 
   mrb_value results = mrb_ary_new(mrb);
   mrb_ary_push(mrb, results, return_value);

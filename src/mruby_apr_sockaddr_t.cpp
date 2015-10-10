@@ -117,10 +117,18 @@ mrb_APR_AprSockaddrT_get_hostname(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
 
   char * native_field = native_self->hostname;
+  fprintf(stderr, "hostname ptr: %p\n", native_self->hostname);
+  if (native_self->hostname) {
+    fprintf(stderr, "hostname 3: %s\n", strndup(native_self->hostname, 1));
+    fprintf(stderr, "hostname: %s\n", native_field);
+  }
 
-  mrb_value ruby_field = mrb_str_new_cstr(mrb, native_field);
-  /* Store the ruby object to prevent garage collection of the underlying native object */
-  mrb_iv_set(mrb, self, mrb_intern_cstr(mrb, "@hostname_box"), ruby_field);
+  mrb_value ruby_field;
+  if (native_field == NULL) {
+    ruby_field = mrb_nil_value();
+  } else {
+    ruby_field = mrb_str_new_cstr(mrb, native_field);
+  }
 
   return ruby_field;
 }
@@ -219,14 +227,9 @@ mrb_APR_AprSockaddrT_set_servname(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_AprSockaddrT_get_port(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
-
   apr_port_t native_field = native_self->port;
-
-  mrb_value ruby_field = TODO_mruby_box_apr_port_t(mrb, native_field);
-  /* Store the ruby object to prevent garage collection of the underlying native object */
-  mrb_iv_set(mrb, self, mrb_intern_cstr(mrb, "@port_box"), ruby_field);
-
-  return ruby_field;
+  mrb_int ruby_field = native_field;
+  return mrb_fixnum_value(ruby_field);
 }
 
 /* set_port
@@ -237,21 +240,11 @@ mrb_APR_AprSockaddrT_get_port(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_AprSockaddrT_set_port(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
-  mrb_value ruby_field;
-
-  mrb_get_args(mrb, "o", &ruby_field);
-
-  /* type checking */
-  TODO_type_check_apr_port_t(ruby_field);
-
-  /* Store the ruby object to prevent garage collection of the underlying native object */
-  mrb_iv_set(mrb, self, mrb_intern_cstr(mrb, "@port_box"), ruby_field);
-
-  apr_port_t native_field = TODO_mruby_unbox_apr_port_t(ruby_field);
-
+  mrb_int ruby_field;
+  mrb_get_args(mrb, "i", &ruby_field);
+  apr_port_t native_field = ruby_field;
   native_self->port = native_field;
-
-  return ruby_field;
+  return mrb_fixnum_value(ruby_field);
 }
 #endif
 
@@ -263,18 +256,9 @@ mrb_APR_AprSockaddrT_set_port(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_AprSockaddrT_get_family(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
-
   apr_int32_t native_field = native_self->family;
-
-  if (native_field > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
-  mrb_value ruby_field = mrb_fixnum_value(native_field);
-  /* Store the ruby object to prevent garage collection of the underlying native object */
-  mrb_iv_set(mrb, self, mrb_intern_cstr(mrb, "@family_box"), ruby_field);
-
-  return ruby_field;
+  mrb_int ruby_field = native_field;
+  return mrb_fixnum_value(ruby_field);
 }
 
 /* set_family
@@ -285,24 +269,10 @@ mrb_APR_AprSockaddrT_get_family(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_AprSockaddrT_set_family(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
-  mrb_value ruby_field;
-
-  mrb_get_args(mrb, "o", &ruby_field);
-
-  /* type checking */
-  if (!mrb_obj_is_kind_of(mrb, ruby_field, mrb->fixnum_class)) {
-    mrb_raise(mrb, E_TYPE_ERROR, "Fixnum expected");
-    return mrb_nil_value();
-  }
-
-  /* Store the ruby object to prevent garage collection of the underlying native object */
-  mrb_iv_set(mrb, self, mrb_intern_cstr(mrb, "@family_box"), ruby_field);
-
-  int native_field = mrb_fixnum(ruby_field);
-
-  native_self->family = native_field;
-
-  return ruby_field;
+  mrb_int ruby_field;
+  mrb_get_args(mrb, "i", &ruby_field);
+  native_self->family = ruby_field;
+  return mrb_fixnum_value(ruby_field);
 }
 #endif
 

@@ -100,6 +100,79 @@ class BasicSocket < IO
         raise SocketError("Unrecognized socket type: #{st}")
       end
     end
+
+    def self.address_family_to_s(af)
+      case af
+      when Socket::AF_APPLETALK
+        'AF_APPLETALK'
+      when Socket::AF_CCITT
+        'AF_CCITT'
+      when Socket::AF_CHAOS
+        'AF_CHAOS'
+      when Socket::AF_CNT
+        'AF_CNT'
+      when Socket::AF_COIP
+        'AF_COIP'
+      when Socket::AF_DATAKIT
+        'AF_DATAKIT'
+      when Socket::AF_DLI
+        'AF_DLI'
+      when Socket::AF_E164
+        'AF_E164'
+      when Socket::AF_ECMA
+        'AF_ECMA'
+      when Socket::AF_HYLINK
+        'AF_HYLINK'
+      when Socket::AF_IMPLINK
+        'AF_IMPLINK'
+      when Socket::AF_INET
+        'AF_INET'
+      when Socket::AF_INET6
+        'AF_INET6'
+      when Socket::AF_IPX
+        'AF_IPX'
+      when Socket::AF_ISDN
+        'AF_ISDN'
+      when Socket::AF_ISO
+        'AF_ISO'
+      when Socket::AF_LAT
+        'AF_LAT'
+      when Socket::AF_LINK
+        'AF_LINK'
+      when Socket::AF_LOCAL
+        'AF_LOCAL'
+      when Socket::AF_MAX
+        'AF_MAX'
+      when Socket::AF_NATM
+        'AF_NATM'
+      when Socket::AF_NDRV
+        'AF_NDRV'
+      when Socket::AF_NETBIOS
+        'AF_NETBIOS'
+      when Socket::AF_NS
+        'AF_NS'
+      when Socket::AF_OSI
+        'AF_OSI'
+      when Socket::AF_PPP
+        'AF_PPP'
+      when Socket::AF_PUP
+        'AF_PUP'
+      when Socket::AF_ROUTE
+        'AF_ROUTE'
+      when Socket::AF_SIP
+        'AF_SIP'
+      when Socket::AF_SNA
+        'AF_SNA'
+      when Socket::AF_SYSTEM
+        'AF_SYSTEM'
+      when Socket::AF_UNIX
+        'AF_UNIX'
+      when Socket::AF_UNSPEC
+        'AF_UNSPEC'
+      else
+        raise ArgumentError.new("Unrecognized APR address family constant")
+      end
+    end
   end
 
   # Instance Methods
@@ -158,7 +231,7 @@ class BasicSocket < IO
 
   def recv(maxlen)
     err, msg = APR.apr_socket_recv(@apr_socket, maxlen)
-    APR.raise_apr_errno(err)
+    APR.raise_apr_errno(err, ignore: APR::APR_EOF)
     msg
   end
 

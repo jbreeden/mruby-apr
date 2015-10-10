@@ -239,13 +239,13 @@
 #define BIND_AprSockaddrT_TYPE TRUE
 #define BIND_AprSockaddrT_INITIALIZE FALSE
 #define BIND_AprSockaddrT_addr_str_len_FIELD FALSE
-#define BIND_AprSockaddrT_family_FIELD FALSE
-#define BIND_AprSockaddrT_hostname_FIELD FALSE
+#define BIND_AprSockaddrT_family_FIELD TRUE
+#define BIND_AprSockaddrT_hostname_FIELD TRUE
 #define BIND_AprSockaddrT_ipaddr_len_FIELD FALSE
 #define BIND_AprSockaddrT_ipaddr_ptr_FIELD FALSE
 #define BIND_AprSockaddrT_next_FIELD FALSE
 #define BIND_AprSockaddrT_pool_FIELD FALSE
-#define BIND_AprSockaddrT_port_FIELD FALSE
+#define BIND_AprSockaddrT_port_FIELD TRUE
 #define BIND_AprSockaddrT_sa_FIELD FALSE
 #define BIND_AprSockaddrT_salen_FIELD FALSE
 #define BIND_AprSockaddrT_servname_FIELD FALSE
@@ -440,8 +440,8 @@
 #define BIND_apr_fnmatch_FUNCTION TRUE
 #define BIND_apr_fnmatch_test_FUNCTION TRUE
 #define BIND_apr_generate_random_bytes_FUNCTION FALSE
-#define BIND_apr_gethostname_FUNCTION FALSE
-#define BIND_apr_getnameinfo_FUNCTION FALSE
+#define BIND_apr_gethostname_FUNCTION TRUE
+#define BIND_apr_getnameinfo_FUNCTION TRUE
 #define BIND_apr_getopt_FUNCTION FALSE
 #define BIND_apr_getopt_init_FUNCTION FALSE
 #define BIND_apr_getopt_long_FUNCTION FALSE
