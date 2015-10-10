@@ -353,6 +353,9 @@ Ruby API: TCPSocket, & TCPServer
     + Returns the empty string after EOF has been encountered, if length is not provided
     + Returns nil after EOF has been encountered, if length is provided
 
+  - TCPSocket#recv(maxlen)
+    + Reads at most maxlen bytes
+
   - TCPSocket#close_read
     + Closes a socket for reading
 
@@ -371,7 +374,7 @@ Ruby API: TCPSocket, & TCPServer
   - TCPServer::new([hostname], port)
     + Creates a new TCPServer on the given port
 
-  SUCCESS [0/12 tests failed]
+  SUCCESS [0/13 tests failed]
 
 Ruby API: UDPSocket
 -------------------
@@ -380,7 +383,13 @@ Ruby API: UDPSocket
     + Reads at most length bytes from a bound UDPSocket
     + Reads consecutive packets as a stream
 
+  - UDPSocket::recv(maxlen)
+    + Reads at most maxlen bytes from a bound UDPSocket
+
+  - UDPSocket::recvfrom(maxlen)
+    + Reads from a bound UDPSocket, returning the sender's address
+
   - UDPSocket::write(str)
     + Writes the given string to a connected UDPSocket
 
-  SUCCESS [0/3 tests failed]
+  SUCCESS [0/5 tests failed]

@@ -77,6 +77,30 @@ TestFixture.new('Ruby API: UDPSocket') do
     end
   end
 
+  describe "UDPSocket::recvfrom(maxlen)" do
+    it "Reads from a bound UDPSocket, returning the sender's address" do
+      server = UDPSocket.new()
+      server.bind('localhost', 9999)
+
+      msg = 'client to server'
+      io = IO.popen("ruby", 'w')
+      io.write(<<-EOS)
+        require 'socket'
+        client = UDPSocket.new()
+        client.connect('localhost', 9999)
+        client.write('#{msg}')
+        client.close
+      EOS
+      io.close
+
+      received, addrinfo = server.recvfrom(msg.length)
+      assert (received == msg)
+      assert (addrinfo[0] == 'AF_INET')
+      assert (addrinfo[2] == 'localhost')
+      server.close
+    end
+  end
+
   describe "UDPSocket::write(str)" do
     it "Writes the given string to a connected UDPSocket" do
       msg = 'client to server'

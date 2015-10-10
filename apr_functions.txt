@@ -47,6 +47,8 @@ apr_file_write
 apr_filepath_name_get
 apr_fnmatch
 apr_fnmatch_test
+apr_gethostname
+apr_getnameinfo
 apr_initialize
 apr_os_default_encoding
 apr_os_locale_encoding
@@ -75,6 +77,7 @@ apr_sockaddr_ip_get
 apr_sockaddr_is_wildcard
 apr_socket_accept
 apr_socket_addr_get
+apr_socket_atreadeof
 apr_socket_bind
 apr_socket_close
 apr_socket_connect
