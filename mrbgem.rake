@@ -1,21 +1,20 @@
-# TODO:
-# Most of the configuration here should be done on the gem spec,
-# not on the global conf object.
-
-require 'pp'
-
 $APR_GEM_DIR = File.dirname(__FILE__)
-$APR_HOME = ENV['APR_HOME'] || "#{$APR_GEM_DIR}/../../apr_source/apr-1.5.2/build"
+$APR_HOME = ENV['APR_HOME']
 
 def configure_mruby_apr_win(spec)
-  # apr.h is generated specially for each platform when building APR
-  # I'm putting these generated headers into "#{$APR_GEM_DIR}/include/apr/PLATFORM"
-  # (In this case, PLATFORM == win)
-  spec.cc.include_paths << "#{$APR_HOME}"
-  spec.cxx.include_paths << "#{$APR_HOME}"
+  # TODO: This default is here because of this mrbgem's origins in rubium.
+  #       Should update rubium's build_config to set ENV['APR_HOME'] instead.
+  apr_home = ($APR_HOME && Dir.exists?($APR_HOME)) ? $APR_HOME : "#{$APR_GEM_DIR}/../../apr_source/apr-1.5.2/build"
+  unless Dir.exists?(apr_home)
+    $stderr.puts "On Windows, APR_HOME env variable should be set to libapr build directory."
+    raise 'APR not found'
+  end
+
+  spec.cc.include_paths << apr_home
+  spec.cxx.include_paths << apr_home
 
   # Pre-built libraries are held under "#{$APR_GEM_DIR}/lib/PLATFORM"
-  spec.linker.library_paths << "#{$APR_HOME}/x64/Release"
+  spec.linker.library_paths << "#{apr_home}/x64/Release"
 
   spec.linker.libraries << "apr-1"
   spec.linker.libraries << "Rpcrt4"
@@ -27,9 +26,9 @@ end
 
 def configure_mruby_apr_lin(spec)
   unless Dir.exists? '/usr/local/apr'
-    puts 'Expected to find APR installed in /usr/local.'
-    puts 'To install APR, download the source and run `configure && make && sudo make install`'
-    raise 'APR not installed'
+    $stderr.puts 'Expected to find APR installed in /usr/local.'
+    $stderr.puts 'To install APR, download the source and run `configure && make && sudo make install`'
+    raise 'APR not found'
   end
   apr_include_dir = `/usr/local/apr/bin/apr-1-config --includes`.sub('-I', '').strip
   spec.cc.include_paths << apr_include_dir
