@@ -27,8 +27,48 @@ Bindings to the Apache APR library, providing a portable runtime library for mru
 - OpenStruct
 - Shellwords
 
-Description
------------
+Building
+--------
+
+`mruby-apr` will try to link statically against libapr. You will have to install the libapr binaries, or build
+the library yourself.
+
+### On Mac and Linux
+
+`mruby-apr` will expect to find libapr in the default `make install` target directory (/usr/local/apr).
+If found, it will use the `apr-1-config` tool to set compiler and linker search paths. The process would look something
+like this:
+
+- Download libapr version 1.5.2 from [Apache's website](https://apr.apache.org/download.cgi)
+- `configure`, `make`, && `sudo make install`
+- Download/clone `mruby`
+- Download/clone `mruby-apr`, and add `conf.gem 'PATH/TO/mruby-apr'` to your MRuby build_config.rb file.
+  + Alternatively, you can skip downloading `mruby-apr` manually and use `conf.gem :github => 'jbreeden/mruby-apr'`,
+    the MRuby build system will take care of cloning `mruby-apr` for you at build time.
+- Run `rake` in the root director of MRuby.
+
+### On windows
+
+The environment variable `APR_HOME` should be set to the directory where libapr was built. There are various
+ways to build libapr on Windows. The approach used to test `mruby-apr` on Windows is as follows:
+
+- Download libapr version 1.5.2 from [Apache's website](https://apr.apache.org/download.cgi)
+- Using `cmake`, generate the visual studio project files.
+- Open the solution, create a 64-bit build target, and build libapr.
+- Download/clone `mruby`
+- In MRuby's build_config.rb file, set `ENV['APR_HOME'] = "PATH/TO/LIBAPR/BUILD/DIR"`
+  + Make sure this appears before the `conf.gem ...` declaration for `mruby-apr`
+- Download/clone `mruby-apr`, and add `conf.gem 'PATH/TO/mruby-apr'` to your MRuby build_config.rb file.
+  + Alternatively, you can skip downloading `mruby-apr` manually and use `conf.gem :github => 'jbreeden/mruby-apr'`,
+    the MRuby build system will take care of cloning `mruby-apr` for you at build time.
+- Run `rake` in the root director of MRuby.
+
+This assumes you're using the visual studio toolchain for compiling MRuby on Windows. It is possible to use nmake for the
+build instead of Visual Studio project files, or even to use gcc via MinGW. Whatever your choice, just make sure to
+update `mruby-apr`'s mrbgem.rake file to use the correct search paths and compiler options for your build.
+
+Overview
+--------
 
 Apache APR provides a cross platform runtime library for C, allowing portable access to system resources
 (eg processes, files, sockets, etc.). `mruby-apr` provides bindings to this library to bring these capabilities
