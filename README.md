@@ -45,7 +45,7 @@ like this:
 - Download/clone `mruby-apr`, and add `conf.gem 'PATH/TO/mruby-apr'` to your MRuby build_config.rb file.
   + Alternatively, you can skip downloading `mruby-apr` manually and use `conf.gem :github => 'jbreeden/mruby-apr'`,
     the MRuby build system will take care of cloning `mruby-apr` for you at build time.
-- Run `rake` in the root director of MRuby.
+- Run `rake` in the root directory of MRuby.
 
 ### On windows
 
@@ -61,7 +61,7 @@ ways to build libapr on Windows. The approach used to test `mruby-apr` on Window
 - Download/clone `mruby-apr`, and add `conf.gem 'PATH/TO/mruby-apr'` to your MRuby build_config.rb file.
   + Alternatively, you can skip downloading `mruby-apr` manually and use `conf.gem :github => 'jbreeden/mruby-apr'`,
     the MRuby build system will take care of cloning `mruby-apr` for you at build time.
-- Run `rake` in the root director of MRuby.
+- Run `rake` in the root directory of MRuby.
 
 This assumes you're using the visual studio toolchain for compiling MRuby on Windows. It is possible to use nmake for the
 build instead of Visual Studio project files, or even to use gcc via MinGW. Whatever your choice, just make sure to
