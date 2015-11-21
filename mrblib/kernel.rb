@@ -26,11 +26,11 @@ module Kernel
     raise TypeError unless path.class == String
 
     if File.exist?(path)
-      eval(File.read(path))
+      eval(File.read(path), nil, path, 0)
     else
       $LOAD_PATH.each do |dir|
         if File.exist?("#{dir}/#{path}")
-          eval(File.read("#{dir}/#{path}"))
+          eval(File.read("#{dir}/#{path}"), nil, path, 0)
           return true
         end
       end
