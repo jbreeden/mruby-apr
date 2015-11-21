@@ -58,7 +58,7 @@ class File < IO
     err, @native_file = APR.apr_file_open(@filename, @flags, @perm_bits, @pool)
     if err != 0
       # Disown so the GC doesn't try to destroy again
-      APR.AprPoolT.disown(@pool)
+      APR::AprPoolT.disown(@pool)
       APR.apr_pool_destroy(@pool)
       APR.raise_apr_errno(err)
     end
