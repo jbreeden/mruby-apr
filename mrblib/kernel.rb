@@ -30,7 +30,7 @@ module Kernel
     else
       $LOAD_PATH.each do |dir|
         if File.exist?("#{dir}/#{path}")
-          eval(File.read("#{dir}/#{path}"), nil, path, 0)
+          eval(File.read("#{dir}/#{path}"), nil, "#{dir}/#{path}", 0)
           return true
         end
       end
