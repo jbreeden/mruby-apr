@@ -53,7 +53,12 @@ class IO
     def close
       @write_pipe.close unless (@write_pipe.nil? || @write_pipe.closed?)
       @read_pipe.close unless (@read_pipe.nil? || @read_pipe.closed?)
-      Process.wait(@pid) # Sets $? (TODO what if this happens twice? So far, not so good)
+      begin
+        Process.wait(@pid) # Sets $?
+      rescue SystemCallError
+        # When simply closing the pipe, we don't care if somebody else
+        # has already called `Process.wait` on our PID.
+      end
       nil
     end
 
