@@ -65,7 +65,7 @@ rake
 Platform Support
 ----------------
 
-Primary development and testing done on Windows, Mac, Linux, and Raspbian. However, it should work anywhere you can compile [Apache APR](https://apr.apache.org).
+Primary development and testing done on Windows, Mac, Ubuntu, and Raspbian. However, it should work anywhere you can compile [Apache APR](https://apr.apache.org).
 
 Implementation Details
 ----------------------
