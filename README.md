@@ -25,27 +25,42 @@ Building
 
 ### On Mac and Linux
 
+**Grab the dependencies**
 - Download libapr version 1.5.2 from [Apache's website](https://apr.apache.org/download.cgi)
-- `/path/to/apr$ configure && make && sudo make install`
-- Download `mruby-apr`
-- Add `conf.gem 'path/to/mruby-apr'` to your MRuby `build_config.rb` file.
-- `/path/to/mruby$ rake`
+- Download `mruby-apr` [here](https://github.com/jbreeden/mruby-apr).
+- Add `conf.gem 'path/to/mruby-apr'` to your MRuby's `build_config.rb` file.
+
+**Then open your shell**
+```sh
+cd /path/to/apr
+configure && make && sudo make install
+cd /path/to/mruby
+rake
+```
 
 ### On windows
 
+**Grab the dependencies**
 - Download libapr version 1.5.2 from [Apache's website](https://apr.apache.org/download.cgi)
-- Using `cmake`, generate the visual studio project files.
-- Open the solution, create a 64-bit build target, and build libapr.
-- Download/clone `mruby`
-- Download `mruby-apr`
+- Download `mruby-apr` [here](https://github.com/jbreeden/mruby-apr).
 - Add the following lines to your MRuby build_config.rb file.
-  + `ENV['APR_HOME'] = "/path/to/your/libapr/build/dir"`
-  + `conf.gem '/path/to/mruby-apr'`
-- `/path/to/mruby$ rake`
+```Ruby
+ENV['APR_HOME'] = "/path/to/your/libapr/build/dir"
+conf.gem '/path/to/mruby-apr'
+```
+*Notice that on windows, you must set APR_HOME to tell this gem where to find headers & lib files*
 
-This assumes you're using the visual studio toolchain for compiling MRuby on Windows. It is possible to use nmake for the
-build instead of Visual Studio project files, or even to use gcc via MinGW. Whatever your choice, just make sure to
-update `mruby-apr`'s mrbgem.rake file to use the correct search paths and compiler options for your build.
+**Step 3... profit**
+
+APR comes with `cmake` scripts. You can use `cmake` to generate different kinds of project files for building APR.
+To name a few, Visual Studio, MinGW, and NMake are supported. Just use the same compiler you're using for MRuby.
+
+Once APR is built
+
+```
+cd /path/to/mruby
+rake
+```
 
 Platform Support
 ----------------
