@@ -50,7 +50,7 @@ update `mruby-apr`'s mrbgem.rake file to use the correct search paths and compil
 Platform Support
 ----------------
 
-`mruby-apr` is intended for mruby builds targeting the platforms supported by libapr. This includes Windows, Mac, Linux, and other fairly common operating systems. So, while some limited embedded targets may be out of the question, this mrbgem could be useful when embedding mruby as a scripting language in a desktop or mobile app. It does work on the Raspberry Pi, which pairs well with mruby given its small footprint.
+Primary development and testing done on Windows, Mac, Linux, and Raspbian. However, it should work anywhere you can compile [Apache APR](https://apr.apache.org).
 
 Implementation Details
 ----------------------
