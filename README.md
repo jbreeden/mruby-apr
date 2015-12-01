@@ -23,24 +23,24 @@ Check [the spec](/spec.md) to see the list of methods supported. (You'll need to
 Building
 --------
 
-### On Mac and Linux
+### Mac and Linux
 
-**Grab the dependencies**
+**1. Setup the dependencies**
 - Download libapr version 1.5.2 from [Apache's website](https://apr.apache.org/download.cgi)
 - Download `mruby-apr` [here](https://github.com/jbreeden/mruby-apr).
 - Add `conf.gem 'path/to/mruby-apr'` to your MRuby's `build_config.rb` file.
 
-**Then open your shell**
-```sh
+**2. Make & Rake**
+```
 cd /path/to/apr
 configure && make && sudo make install
 cd /path/to/mruby
 rake
 ```
 
-### On windows
+### Windows
 
-**Grab the dependencies**
+**1. Setup the dependencies**
 - Download libapr version 1.5.2 from [Apache's website](https://apr.apache.org/download.cgi)
 - Download `mruby-apr` [here](https://github.com/jbreeden/mruby-apr).
 - Add the following lines to your MRuby build_config.rb file.
@@ -50,7 +50,7 @@ conf.gem '/path/to/mruby-apr'
 ```
 *Notice that on windows, you must set APR_HOME to tell this gem where to find headers & lib files*
 
-**Step 3... profit**
+**2. CMake & Rake**
 
 APR comes with `cmake` scripts. You can use `cmake` to generate different kinds of project files for building APR.
 To name a few, Visual Studio, MinGW, and NMake are supported. Just use the same compiler you're using for MRuby.
