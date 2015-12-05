@@ -42,8 +42,10 @@ class GlobCursor
   # "current" queue is confused with the tail of the next queue.
   #
   # TODO: ASCIIFLOW
-  def add_cursor(node)
-    raise "Tried to add a node that already had a 'next' node" if node.next
+  def enqueue_possible_match(node)
+    ## Debug
+    # raise "Tried to add a node that already had a 'next' node" if node.next
+    # raise "Enqueing node_pool #{node}" if node == @node_pool
     if @next_last # Already some node on the "next" queue
       @next_last.next = node
       @next_last = node
@@ -53,13 +55,13 @@ class GlobCursor
     end
   end
 
-  def rotate_cursors
+  def rotate_heads
     @first = @next_first
     @next_first = nil
     @next_last = nil
   end
 
-  def each_cursor
+  def each_match
     if @first
       node = @first
       while node
@@ -75,23 +77,23 @@ class GlobCursor
   # ------
 
   def immediate_match(pattern)
-    rotate_cursors
-    each_cursor do |node|
+    rotate_heads
+    each_match do |node|
       node.immediate_match(pattern)
     end
   end
 
   def deep_match(pattern)
-    rotate_cursors
-    each_cursor do |node|
+    rotate_heads
+    each_match do |node|
       node.deep_match(pattern)
     end
   end
 
   def finish
-    rotate_cursors
+    rotate_heads
     result = []
-    each_cursor do |node|
+    each_match do |node|
       result.push(node.path)
     end
     result
@@ -99,13 +101,12 @@ class GlobCursor
 end
 
 class GlobNode
-  attr_accessor :name, :path, :next
+  attr_accessor :path, :next
 
   def initialize(name, cursor, parent=nil)
     @next = nil
     @cursor = cursor
-    # Caching this has a _huge_ impact on speed... though memory is an issue
-    @path ||= if parent && parent.path
+    @path = if parent && parent.path
       ## Debug
       # raise "Cannot add a node with nil name to a parent" if name = nil
       if parent.path == '/'
@@ -129,7 +130,7 @@ class GlobNode
 
     Dir.entries(explicit_path).each { |e|
       if match_file(pattern, e)
-        @cursor.add_cursor @cursor.get_node(e, @cursor, self)
+        @cursor.enqueue_possible_match @cursor.get_node(e, @cursor, self)
       end
     }
   end
@@ -144,7 +145,7 @@ class GlobNode
     entries.each do |e|
       child = @cursor.get_node(e, @cursor, self)
       if match_file(pattern, e)
-        @cursor.add_cursor child
+        @cursor.enqueue_possible_match child
       end
       child.deep_match(pattern, true) unless e[0] == '.'
     end
@@ -165,7 +166,7 @@ def glob(pattern)
   tokens.inject([tokens[0]]) { |acc, cur| acc.push(cur) unless acc.last == '**' && cur == '**'; acc}
   cursor = GlobCursor.new
   root_node = GlobNode.new(nil, cursor)
-  cursor.add_cursor(root_node)
+  cursor.enqueue_possible_match(root_node)
 
   @just_epsiloned = false
   (0...tokens.length).each do |i|
