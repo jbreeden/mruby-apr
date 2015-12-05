@@ -42,7 +42,7 @@ module FileTest
 
   def exists?(path)
     exists = true
-    APR.stack_pool do |pool|
+    APR.with_stack_pool do |pool|
       err, f = APR.apr_file_open(path, APR::APR_FOPEN_READ, 0, pool)
       exists = false if APR::APR_STATUS_IS_ENOENT(err)
       APR.apr_file_close(f) if f

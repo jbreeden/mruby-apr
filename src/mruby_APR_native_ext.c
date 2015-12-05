@@ -23,36 +23,60 @@ extern "C" {
 #endif
 
 #define RAISE_APR_ERRNO(err) mrb_funcall(mrb, mrb_obj_value(APR_module(mrb)), "raise_apr_errno", 1, mrb_fixnum_value(err));
-#define APR_STACK_POOL() mruby_unbox_apr_pool_t(mrb_iv_get(mrb, mrb_obj_value(APR_module(mrb)), mrb_intern_lit(mrb, "@stack_pool")))
-#define APR_STACK_POOL_ENTER_COUNT() mrb_fixnum(mrb_iv_get(mrb, mrb_obj_value(APR_module(mrb)), mrb_intern_lit(mrb, "@stack_pool_enter_count")))
-#define APR_STACK_POOL_ENTER_COUNT_SET(i) mrb_iv_set(mrb, mrb_obj_value(APR_module(mrb)), mrb_intern_lit(mrb, "@stack_pool_enter_count"), mrb_fixnum_value(i))
 
-apr_pool_t *
-mruby_apr_stack_pool_enter(mrb_state* mrb) {
-  APR_STACK_POOL_ENTER_COUNT_SET(APR_STACK_POOL_ENTER_COUNT() + 1);
-  return APR_STACK_POOL();
+/*
+ * Stack Pool Implementation
+ */
+
+static apr_pool_t* stack_pool = NULL;
+static int stack_pool_enter_count = 0;
+
+mrb_value
+mruby_APR_stack_pool(mrb_state* mrb, mrb_value self) {
+  return mruby_box_apr_pool_t(mrb, stack_pool);
 }
 
 void
-mruby_apr_stack_pool_leave(mrb_state* mrb) {
-  mrb_int enter_count = APR_STACK_POOL_ENTER_COUNT() - 1;
-  if (enter_count == 0) {
-    apr_pool_clear(APR_STACK_POOL());
-  }
-  APR_STACK_POOL_ENTER_COUNT_SET(enter_count);
+stack_pool_enter() {
+  stack_pool_enter_count += stack_pool_enter_count + 1;
 }
+
+mrb_value
+mruby_APR_stack_pool_enter(mrb_state* mrb, mrb_value self) {
+  stack_pool_enter();
+  return mrb_nil_value();
+}
+
+void
+stack_pool_leave() {
+  mrb_int enter_count = stack_pool_enter_count - 1;
+  if (enter_count == 0) {
+    apr_pool_clear(stack_pool);
+  }
+  stack_pool_enter_count = enter_count;
+}
+
+mrb_value
+mruby_APR_stack_pool_leave(mrb_state* mrb, mrb_value self) {
+  stack_pool_leave();
+  return mrb_nil_value();
+}
+
+/*
+ * END: Stack Pool Implementation
+ */
 
 mrb_value
 mruby_Dir_entries(mrb_state* mrb, mrb_value self) {
   char* path;
-  apr_pool_t* pool = mruby_apr_stack_pool_enter(mrb);
+  stack_pool_enter();
   mrb_get_args(mrb, "z", &path);
   mrb_value results = mrb_ary_new(mrb);
 
   apr_dir_t* dir;
-  apr_status_t err = apr_dir_open(&dir, path, pool);
+  apr_status_t err = apr_dir_open(&dir, path, stack_pool);
   if (err != APR_SUCCESS) {
-    mruby_apr_stack_pool_leave(mrb);
+    stack_pool_leave(mrb);
     RAISE_APR_ERRNO(err);
     return mrb_nil_value();
   }
@@ -63,7 +87,7 @@ mruby_Dir_entries(mrb_state* mrb, mrb_value self) {
     mrb_ary_push(mrb, results, mrb_str_new_cstr(mrb, finfo.name));
     status = apr_dir_read(&finfo, APR_FINFO_NAME, dir);
   }
-  mruby_apr_stack_pool_leave(mrb);
+  stack_pool_leave(mrb);
   return results;
 }
 
@@ -73,11 +97,11 @@ mruby_FilteTest_is_type(mrb_state* mrb, mrb_value self) {
   mrb_int type;
   mrb_value result = mrb_nil_value();
 
-  apr_pool_t* pool = mruby_apr_stack_pool_enter(mrb);
+  stack_pool_enter();
   mrb_get_args(mrb, "zi", &path, &type);
 
   apr_finfo_t finfo;
-  apr_status_t err = apr_stat(&finfo, path, APR_FINFO_TYPE, pool);
+  apr_status_t err = apr_stat(&finfo, path, APR_FINFO_TYPE, stack_pool);
   if (err == APR_SUCCESS) {
     result = finfo.filetype == type
       ? mrb_true_value()
@@ -85,12 +109,18 @@ mruby_FilteTest_is_type(mrb_state* mrb, mrb_value self) {
   } else {
     RAISE_APR_ERRNO(err);
   }
-  mruby_apr_stack_pool_leave(mrb);
+  stack_pool_leave();
   return result;
 }
 
 void
 mruby_APR_init_native_ext(mrb_state* mrb) {
+  apr_pool_create(&stack_pool, NULL);
+
+  mrb_define_class_method(mrb, APR_module(mrb), "stack_pool", mruby_APR_stack_pool, MRB_ARGS_ARG(0, 0));
+  mrb_define_class_method(mrb, APR_module(mrb), "stack_pool_enter", mruby_APR_stack_pool_enter, MRB_ARGS_ARG(0, 0));
+  mrb_define_class_method(mrb, APR_module(mrb), "stack_pool_leave", mruby_APR_stack_pool_leave, MRB_ARGS_ARG(0, 0));
+
   struct RClass* Dir_class = mrb_define_class(mrb, "Dir", mrb->object_class);
   mrb_define_class_method(mrb, Dir_class, "entries", mruby_Dir_entries, MRB_ARGS_ARG(1, 0));
 

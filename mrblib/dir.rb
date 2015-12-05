@@ -34,7 +34,7 @@ class Dir
   # end
 
   def self.delete(path)
-    APR.stack_pool do |pool|
+    APR.with_stack_pool do |pool|
       err = APR.apr_dir_remove(path, pool)
       APR.raise_apr_errno(err)
     end
@@ -46,7 +46,7 @@ class Dir
 
   # def self.entries(path)
   #   results = []
-  #   APR.stack_pool do |pool|
+  #   APR.with_stack_pool do |pool|
   #     err, dir = APR.apr_dir_open path, pool
   #     APR.raise_apr_errno(err)
   #
@@ -90,7 +90,7 @@ class Dir
   # end
 
   def self.mkdir(path)
-    APR.stack_pool do |pool|
+    APR.with_stack_pool do |pool|
       err = APR.apr_dir_make path, APR::APR_FPROT_OS_DEFAULT, pool
       APR.raise_apr_errno(err)
     end

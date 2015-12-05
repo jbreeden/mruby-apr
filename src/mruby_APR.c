@@ -22658,6 +22658,8 @@ STATUS_CHECK(ENOTEMPTY);
 STATUS_CHECK(EAFNOSUPPORT);
 
 void mrb_mruby_apr_gem_init(mrb_state* mrb) {
+  apr_initialize();
+  
   struct RClass* APR_module = mrb_define_module(mrb, "APR");
   mruby_APR_define_macro_constants(mrb);
   mruby_APR_init_native_ext(mrb);

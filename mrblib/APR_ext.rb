@@ -29,12 +29,11 @@ module APR
 
   # Make sure the stack pool exists, even before requested from ruby,
   # since the C code may use this as well.
-  def self.stack_pool(&block)
-    @stack_pool_enter_count += 1
-    yield @stack_pool
-    @stack_pool_enter_count -= 1
-    APR.apr_pool_clear(@stack_pool) if @stack_pool_enter_count == 0
-    return nil
+  def self.with_stack_pool(&block)
+    @stack_pool_handle ||= stack_pool
+    stack_pool_enter
+    yield @stack_pool_handle
+    stack_pool_leave
   end
 
   # APR_FINFO_* Flags

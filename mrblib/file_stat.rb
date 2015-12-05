@@ -1,7 +1,7 @@
 class File
   class Stat
     def initialize(file_name, apr_wanted=nil)
-      APR.stack_pool do |pool|
+      APR.with_stack_pool do |pool|
         APR.raise_apr_errno(APR::APR_ENOENT) unless File.exists?(file_name)
         err, native_finfo = APR.apr_stat(file_name, apr_wanted || APR::APR_FINFO_DEFAULT, pool)
 

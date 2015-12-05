@@ -114,7 +114,7 @@ module Process
     # Going to mutate this, don't want to mess with client's copy
     command = command.dup
 
-    APR.stack_pool do |pool|
+    APR.with_stack_pool do |pool|
       err, proc_attr = APR.apr_procattr_create pool
       args = Util.parse_spawn_args(*command, pool)
       env = args[:env]
