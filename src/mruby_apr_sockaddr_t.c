@@ -117,11 +117,6 @@ mrb_APR_AprSockaddrT_get_hostname(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
 
   char * native_field = native_self->hostname;
-  fprintf(stderr, "hostname ptr: %p\n", native_self->hostname);
-  if (native_self->hostname) {
-    fprintf(stderr, "hostname 3: %s\n", strndup(native_self->hostname, 1));
-    fprintf(stderr, "hostname: %s\n", native_field);
-  }
 
   mrb_value ruby_field;
   if (native_field == NULL) {

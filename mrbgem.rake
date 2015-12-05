@@ -85,9 +85,4 @@ MRuby::Gem::Specification.new('mruby-apr') do |spec|
   spec.rbfiles.push(gem_init_rb)
 
   configure_mruby_apr(spec)
-
-  unless /windows/i =~ ENV['OS']
-    spec.cc.flags << [ '-std=c11' ]
-    spec.cxx.flags << [ '-std=c++11' ]
-  end
 end

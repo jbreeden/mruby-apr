@@ -2,6 +2,11 @@
 #ifndef APR_HEADER
 #define APR_HEADER
 
+#if defined(__gnu_linux__) || defined(__linux) || defined(__linux__) || defined(linux)
+  #define MRUBY_APR_LINUX 1
+#endif
+
+
 /*
  * RClass Macros
  * -------------
@@ -790,6 +795,21 @@
  * they should be commented out.
  */
 
+ #if defined(_WIN32) || defined(_WIN64)
+   /* Actually much larger than Window's max path length, but whatevs */
+   #define PATH_MAX 1024
+   #include <direct.h>
+   #define getcwd _getcwd
+   #define chdir _chdir
+ #else
+   #include <limits.h>
+   #include <unistd.h>
+   #if !defined(PATH_MAX) && defined(MRUBY_APR_LINUX)
+     #include <linux/limits.h>
+   #endif
+ #endif
+
+#include <string.h>
 #include <stdlib.h>
 #include "mruby.h"
 #include "mruby/array.h"
@@ -835,17 +855,6 @@
 #include "apr_time.h"
 #include "apr_user.h"
 #include "apr_version.h"
-
-#if defined(_WIN32) || defined(_WIN64)
-  /* Actually much larger than Window's max path length, but whatevs */
-  #define PATH_MAX 1024
-  #include <direct.h>
-  #define getcwd _getcwd
-  #define chdir _chdir
-#else
-  #include <limits.h>
-  #include <unistd.h>
-#endif
 
 /*
  * Class initialization function declarations
