@@ -3,6 +3,26 @@ class GlobCursor
     @first = nil
     @next_first = nil
     @next_last = nil
+    @node_pool = nil
+  end
+
+  # Maintain a pool of old nodes to reuse, rather than allocating new ones
+  # ----------------------------------------------------------------------
+
+  def get_node(name, cursor, parent=nil)
+    if @node_pool
+      result = @node_pool
+      @node_pool = @node_pool.next
+      result.initialize(name, cursor, parent)
+      result
+    else
+      GlobNode.new(name, cursor, parent)
+    end
+  end
+
+  def return_node(node)
+    node.next = @node_pool
+    @node_pool = node
   end
 
   # Called from nodes
@@ -12,12 +32,15 @@ class GlobCursor
   # During iteration, each node is visited,
   # and it's "next" pointer is reused to simulate two queues:
   # The current nodes being traversed, and the next nodes to be traversed.
+  #
   # (During glob, you're always looking at an existing set of directories,
   #  and building a list of their decendants that match the next part of the
-  #  glob - in a loop. )
-  # If you add yourself back to the cursor, you go become the tail of the next
+  #  glob - in a loop.)
+  #
+  # If you add yourself back to the cursor, you go become the tail of the "next"
   # queue. if another node is added, it replaces your "next" pointer, and the
   # "current" queue is confused with the tail of the next queue.
+  #
   # TODO: ASCIIFLOW
   def add_cursor(node)
     raise "Tried to add a node that already had a 'next' node" if node.next
@@ -29,7 +52,6 @@ class GlobCursor
       @next_last = @next_first
     end
   end
-  alias keep_alive add_cursor
 
   def rotate_cursors
     @first = @next_first
@@ -37,12 +59,14 @@ class GlobCursor
     @next_last = nil
   end
 
-  def each_node
+  def each_cursor
     if @first
-      l = @first
-      while l
-        yield l
-        l = l.next
+      node = @first
+      while node
+        yield node
+        node_next = node.next
+        return_node(node) # Modifies the "next" pointer
+        node = node_next
       end
     end
   end
@@ -52,22 +76,22 @@ class GlobCursor
 
   def immediate_match(pattern)
     rotate_cursors
-    each_node do |node|
+    each_cursor do |node|
       node.immediate_match(pattern)
     end
   end
 
-  def deep_match(lookahead)
+  def deep_match(pattern)
     rotate_cursors
-    each_node do |node|
-      node.deep_match(lookahead)
+    each_cursor do |node|
+      node.deep_match(pattern)
     end
   end
 
   def finish
     rotate_cursors
     result = []
-    each_node do |node|
+    each_cursor do |node|
       result.push(node.path)
     end
     result
@@ -78,6 +102,7 @@ class GlobNode
   attr_accessor :name, :path, :next
 
   def initialize(name, cursor, parent=nil)
+    @next = nil
     @cursor = cursor
     # Caching this has a _huge_ impact on speed... though memory is an issue
     @path ||= if parent && parent.path
@@ -104,7 +129,7 @@ class GlobNode
 
     Dir.entries(explicit_path).each { |e|
       if match_file(pattern, e)
-        @cursor.add_cursor GlobNode.new(e, @cursor, self)
+        @cursor.add_cursor @cursor.get_node(e, @cursor, self)
       end
     }
   end
@@ -117,7 +142,7 @@ class GlobNode
     entries = Dir.entries(explicit_path)
 
     entries.each do |e|
-      child = GlobNode.new(e, @cursor, self)
+      child = @cursor.get_node(e, @cursor, self)
       if match_file(pattern, e)
         @cursor.add_cursor child
       end
@@ -158,4 +183,4 @@ def glob(pattern)
   cursor.finish
 end
 
-puts glob('**/*').length
+puts glob('*/*/*').length
