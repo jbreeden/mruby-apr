@@ -1,11 +1,4 @@
 class GlobCursor
-  class Link
-    attr_accessor :next, :node
-    def initialize(node)
-      @node = node
-    end
-  end
-
   def initialize
     @first = nil
     @next_first = nil
@@ -15,19 +8,47 @@ class GlobCursor
   # Called from nodes
   # -----------------
 
+  # A node must never add itself back to the cursor!
+  # During iteration, each node is visited,
+  # and it's "next" pointer is reused to simulate two queues:
+  # The current nodes being traversed, and the next nodes to be traversed.
+  # (During glob, you're always looking at an existing set of directories,
+  #  and building a list of their decendants that match the next part of the
+  #  glob - in a loop. )
+  # If you add yourself back to the cursor, you go become the tail of the next
+  # queue. if another node is added, it replaces your "next" pointer, and the
+  # "current" queue is confused with the tail of the next queue.
+  # TODO: ASCIIFLOW
   def add_cursor(node)
-    if @next_last
-      @next_last.next = Link.new(node)
-      @next_last = @next_last.next
+    raise "Tried to add a node that already had a 'next' node" if node.next
+    if @next_last # Already some node on the "next" queue
+      @next_last.next = node
+      @next_last = node
     else
-      @next_first = Link.new(node)
+      @next_first = node
       @next_last = @next_first
     end
   end
   alias keep_alive add_cursor
 
-  # Called from driver
-  # ------------------
+  def rotate_cursors
+    @first = @next_first
+    @next_first = nil
+    @next_last = nil
+  end
+
+  def each_node
+    if @first
+      l = @first
+      while l
+        yield l
+        l = l.next
+      end
+    end
+  end
+
+  # Public
+  # ------
 
   def immediate_match(pattern)
     rotate_cursors
@@ -51,29 +72,10 @@ class GlobCursor
     end
     result
   end
-
-  # Private
-  # -------
-
-  def rotate_cursors
-    @first = @next_first
-    @next_first = nil
-    @next_last = nil
-  end
-
-  def each_node
-    if @first
-      l = @first
-      while l
-        yield l.node
-        l = l.next
-      end
-    end
-  end
 end
 
 class GlobNode
-  attr_accessor :name, :path
+  attr_accessor :name, :path, :next
 
   def initialize(name, cursor, parent=nil)
     @cursor = cursor
