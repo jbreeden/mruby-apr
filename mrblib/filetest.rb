@@ -1,33 +1,33 @@
 module FileTest
-  module Util
-    # OPTIMIZATION: This is much faster than creating a fule File::Stat object
-    #               for each test, which significantly impacts globbing with
-    #               large search area.
-    def self.is_type?(path, type)
-      result = nil
-      APR.with_pool do |pool|
-        err, native_finfo = APR.apr_stat(path, APR::APR_FINFO_TYPE, pool)
-        if err == APR::APR_SUCCESS
-          result = native_finfo.filetype == type
-        end
-      end
-      result
-    end
-  end
+  # module Util
+  #   # OPTIMIZATION: This is much faster than creating a fule File::Stat object
+  #   #               for each test, which significantly impacts globbing with
+  #   #               large search area.
+  #   def self.FileTest.is_type?(path, type)
+  #     result = nil
+  #     APR.with_pool do |pool|
+  #       err, native_finfo = APR.apr_stat(path, APR::APR_FINFO_TYPE, pool)
+  #       if err == APR::APR_SUCCESS
+  #         result = native_finfo.filetype == type
+  #       end
+  #     end
+  #     result
+  #   end
+  # end
 
   # Define module's own methods as module functions
   extend FileTest
 
   def blockdev?(path)
-    Util.is_type?(path, APR::AprFiletypeE::APR_BLK)
+    FileTest.is_type?(path, APR::AprFiletypeE::APR_BLK)
   end
 
   def chardev?(path)
-    Util.is_type?(path, APR::AprFiletypeE::APR_CHR)
+    FileTest.is_type?(path, APR::AprFiletypeE::APR_CHR)
   end
 
   def directory?(path)
-    Util.is_type?(path, APR::AprFiletypeE::APR_DIR)
+    FileTest.is_type?(path, APR::AprFiletypeE::APR_DIR)
   end
 
   # def executable?(path)
@@ -52,7 +52,7 @@ module FileTest
   alias exist? exists?
 
   def file?(path)
-    Util::is_type?(path, APR::AprFiletypeE::APR_REG)
+    FileTest.is_type?(path, APR::AprFiletypeE::APR_REG)
   end
 
   # def grpowned?(path)
@@ -70,7 +70,7 @@ module FileTest
   # end
 
   def pipe?(path)
-    Util::is_type?(path, APR::AprFiletypeE::APR_PIPE)
+    FileTest.is_type?(path, APR::AprFiletypeE::APR_PIPE)
   end
 
   # def readable?(path)
@@ -100,7 +100,7 @@ module FileTest
   alias size? size
 
   def socket?(path)
-    Util.is_type?(path, APR::AprFiletypeE::APR_SOCKET)
+    FileTest.is_type?(path, APR::AprFiletypeE::APR_SOCKET)
   end
 
   # def sticky?(path)
@@ -109,7 +109,7 @@ module FileTest
   # end
 
   def symlink?(path)
-    Util.is_type?(path, APR::AprFiletypeE::APR_LNK)
+    FileTest.is_type?(path, APR::AprFiletypeE::APR_LNK)
   end
 
   # def world_readable?(path)

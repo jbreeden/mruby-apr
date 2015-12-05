@@ -81,16 +81,28 @@ class GlobNode
     @cursor = cursor
     # Caching this has a _huge_ impact on speed... though memory is an issue
     @path ||= if parent && parent.path
-      "#{parent.path}/#{name}"
+      ## Debug
+      # raise "Cannot add a node with nil name to a parent" if name = nil
+      if parent.path == '/'
+        "/#{name}"
+      else
+        "#{parent.path}/#{name}"
+      end
     else
       name
     end
   end
 
-  def immediate_match(pattern)
-    return unless File.directory?(path)
+  def explicit_path
+    # if name is nil, this signifies the implicit '.', which should
+    # not be included in the results string.
+    @path || '.'
+  end
 
-    Dir.entries(path).each { |e|
+  def immediate_match(pattern)
+    return unless File.directory?(explicit_path)
+
+    Dir.entries(explicit_path).each { |e|
       if match_file(pattern, e)
         @cursor.add_cursor GlobNode.new(e, @cursor, self)
       end
@@ -101,8 +113,8 @@ class GlobNode
     # Deep match is only called if there is a following immediate_match,
     # So this entry will definitely be removed if it's not a directory.
 
-    return unless File.directory?(path)
-    entries = Dir.entries(path)
+    return unless File.directory?(explicit_path)
+    entries = Dir.entries(explicit_path)
 
     entries.each do |e|
       child = GlobNode.new(e, @cursor, self)
@@ -127,7 +139,7 @@ def glob(pattern)
   return [] if tokens.length == 0
   tokens.inject([tokens[0]]) { |acc, cur| acc.push(cur) unless acc.last == '**' && cur == '**'; acc}
   cursor = GlobCursor.new
-  root_node = GlobNode.new('.', cursor)
+  root_node = GlobNode.new(nil, cursor)
   cursor.add_cursor(root_node)
 
   @just_epsiloned = false

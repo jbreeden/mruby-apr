@@ -2,7 +2,6 @@
 # This file contains hand-written extensions to the module.
 
 module APR
-
   def self.raise_apr_errno(apr_errno, opt = {ignore: []})
     Array(opt[:ignore]).each do |err|
       return if apr_errno == err
@@ -27,19 +26,14 @@ module APR
   # TODO: Make a better temp pool management system. This is just a twinkle of an idea.
   # TODO: Set max free size, or APR will never return memory to the system.
   # TODO: Create more temp pools on demand during high load and destroy them later?
+
+  # Make sure the stack pool exists, even before requested from ruby,
+  # since the C code may use this as well.
   def self.stack_pool(&block)
-    @enter_count ||= 0
-
-    unless @stack_pool
-      err, @stack_pool = apr_pool_create(nil)
-    end
-
-    @in_stack_pool = true
-    @enter_count += 1
+    @stack_pool_enter_count += 1
     yield @stack_pool
-    @enter_count -= 1
-    APR.apr_pool_clear(@stack_pool) if @enter_count == 0
-    @in_stack_pool = false
+    @stack_pool_enter_count -= 1
+    APR.apr_pool_clear(@stack_pool) if @stack_pool_enter_count == 0
     return nil
   end
 

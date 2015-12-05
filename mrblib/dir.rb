@@ -44,20 +44,20 @@ class Dir
     alias unlink rmdir
   end
 
-  def self.entries(path)
-    results = []
-    APR.stack_pool do |pool|
-      err, dir = APR.apr_dir_open path, pool
-      APR.raise_apr_errno(err)
-
-      err, finfo = APR.apr_dir_read APR::APR_FINFO_NAME, dir
-      while err == 0 || err == APR::APR_INCOMPLETE
-        results.push(finfo.name)
-        err, finfo = APR.apr_dir_read APR::APR_FINFO_NAME, dir
-      end
-    end
-    results
-  end
+  # def self.entries(path)
+  #   results = []
+  #   APR.stack_pool do |pool|
+  #     err, dir = APR.apr_dir_open path, pool
+  #     APR.raise_apr_errno(err)
+  #
+  #     err, finfo = APR.apr_dir_read APR::APR_FINFO_NAME, dir
+  #     while err == 0 || err == APR::APR_INCOMPLETE
+  #       results.push(finfo.name)
+  #       err, finfo = APR.apr_dir_read APR::APR_FINFO_NAME, dir
+  #     end
+  #   end
+  #   results
+  # end
 
   def self.exists?(path)
     File.directory?(path)

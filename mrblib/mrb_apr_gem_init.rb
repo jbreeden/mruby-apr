@@ -1,4 +1,9 @@
 APR.apr_initialize
+module APR
+  temp = apr_pool_create(nil)
+  @stack_pool = temp[1]
+  @stack_pool_enter_count = 0
+end
 
 proc { # Creates a local scope (like IIFE in JavaScript)
   err, std_streams_pool = APR.apr_pool_create(nil)
