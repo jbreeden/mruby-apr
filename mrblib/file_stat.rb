@@ -1,21 +1,19 @@
 class File
   class Stat
-    def initialize(file_name)
-      APR.raise_apr_errno(APR::APR_ENOENT) unless File.exists?(file_name)
-      APR.with_pool do |pool|
-        err, @native_finfo = APR.apr_stat(file_name, APR::APR_FINFO_DEFAULT, pool)
-        # This requires calling into c & boxing the result, so just cache it
-        @valid = @native_finfo.valid
-      end
+    def initialize(file_name, apr_wanted=nil)
+      APR.stack_pool do |pool|
+        APR.raise_apr_errno(APR::APR_ENOENT) unless File.exists?(file_name)
+        err, native_finfo = APR.apr_stat(file_name, apr_wanted || APR::APR_FINFO_DEFAULT, pool)
 
-      @atime = APR::Convert.apr_time_to_rb(@native_finfo.atime) if (@native_finfo.valid & APR::APR_FINFO_ATIME) != 0
-      @ctime = APR::Convert.apr_time_to_rb(@native_finfo.ctime) if (@native_finfo.valid & APR::APR_FINFO_CTIME) != 0
-      @mtime = APR::Convert.apr_time_to_rb(@native_finfo.mtime) if (@native_finfo.valid & APR::APR_FINFO_MTIME) != 0
-      @name  = @native_finfo.name if (@native_finfo.valid & APR::APR_FINFO_NAME) != 0
-      @nlink = @native_finfo.nlink if (@native_finfo.valid & APR::APR_FINFO_NLINK) != 0
-      @size  = @native_finfo.size if (@native_finfo.valid & APR::APR_FINFO_SIZE) != 0
-      @protection = @native_finfo.protection if (@native_finfo.valid & APR::APR_FINFO_PROT) != 0
-      @filetype = @native_finfo.filetype if (@native_finfo.valid & APR::APR_FINFO_PROT) != 0
+        @atime = APR::Convert.apr_time_to_rb(native_finfo.atime) if (native_finfo.valid & APR::APR_FINFO_ATIME) != 0
+        @ctime = APR::Convert.apr_time_to_rb(native_finfo.ctime) if (native_finfo.valid & APR::APR_FINFO_CTIME) != 0
+        @mtime = APR::Convert.apr_time_to_rb(native_finfo.mtime) if (native_finfo.valid & APR::APR_FINFO_MTIME) != 0
+        @name  = native_finfo.name if (native_finfo.valid & APR::APR_FINFO_NAME) != 0
+        @nlink = native_finfo.nlink if (native_finfo.valid & APR::APR_FINFO_NLINK) != 0
+        @size  = native_finfo.size if (native_finfo.valid & APR::APR_FINFO_SIZE) != 0
+        @protection = native_finfo.protection if (native_finfo.valid & APR::APR_FINFO_PROT) != 0
+        @filetype = native_finfo.filetype if (native_finfo.valid & APR::APR_FINFO_PROT) != 0
+      end
     end
 
     def <=>

@@ -88,7 +88,7 @@ class File < IO
   end
 
   def self.delete(*paths)
-    APR.with_pool do |pool|
+    APR.stack_pool do |pool|
       paths.each do |path|
         err = APR.apr_file_remove(path, pool)
         APR.raise_apr_errno(err)

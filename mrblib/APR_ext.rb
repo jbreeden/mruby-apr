@@ -19,6 +19,30 @@ module APR
     APR.apr_pool_destroy(pool)
   end
 
+  # Creating pools is slow. If you don't need to keep any native handles
+  # from the pool around, use this method instead. It re-uses a pool,
+  # clearing the contents after each use.
+  # DANGEROUS: Memory will stack up until the topmost frame returns (get it? stack pool?)
+  #            DO NOT CALL IF YIELDING TO CLIENT CODE OR THIS COULD BLOW UP
+  # TODO: Make a better temp pool management system. This is just a twinkle of an idea.
+  # TODO: Set max free size, or APR will never return memory to the system.
+  # TODO: Create more temp pools on demand during high load and destroy them later?
+  def self.stack_pool(&block)
+    @enter_count ||= 0
+
+    unless @stack_pool
+      err, @stack_pool = apr_pool_create(nil)
+    end
+
+    @in_stack_pool = true
+    @enter_count += 1
+    yield @stack_pool
+    @enter_count -= 1
+    APR.apr_pool_clear(@stack_pool) if @enter_count == 0
+    @in_stack_pool = false
+    return nil
+  end
+
   # APR_FINFO_* Flags
   # -----------------
   #

@@ -115,15 +115,8 @@ mrb_APR_AprFinfoT_get_pool(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_AprFinfoT_get_valid(mrb_state* mrb, mrb_value self) {
   apr_finfo_t * native_self = mruby_unbox_apr_finfo_t(self);
-
   apr_int32_t native_field = native_self->valid;
-
-  if (native_field > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value ruby_field = mrb_fixnum_value(native_field);
-
   return ruby_field;
 }
 
