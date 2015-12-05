@@ -6,7 +6,9 @@ module APR
     Array(opt[:ignore]).each do |err|
       return if apr_errno == err
     end
-    raise SystemCallError.new("ERROR: #{apr_errno} #{APR.apr_strerror(apr_errno)}", APR.apr_to_os_error(apr_errno)) if apr_errno != APR::APR_SUCCESS
+    if apr_errno != APR::APR_SUCCESS
+      raise SystemCallError.new("ERROR: #{apr_errno} #{APR.apr_strerror(apr_errno)}", APR.apr_to_os_error(apr_errno))
+    end
   end
 
   def self.with_pool(&block)
@@ -32,8 +34,9 @@ module APR
   def self.with_stack_pool(&block)
     @stack_pool_handle ||= stack_pool
     stack_pool_enter
-    yield @stack_pool_handle
+    result = yield @stack_pool_handle
     stack_pool_leave
+    result
   end
 
   # APR_FINFO_* Flags

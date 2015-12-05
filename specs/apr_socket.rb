@@ -59,7 +59,7 @@ TestFixture.new('APR API: Sockets') do
       assert (eof_check[0] == APR::APR_SUCCESS && eof_check[1] == false)
       err, buf = APR.apr_socket_recv(client, 100)
       APR.raise_apr_errno(err)
-      
+
       wait_for_server
       eof_check = APR::apr_socket_atreadeof(client)
       assert (eof_check[0] == APR::APR_SUCCESS && eof_check[1] == true)

@@ -102,13 +102,9 @@ mruby_FilteTest_is_type(mrb_state* mrb, mrb_value self) {
 
   apr_finfo_t finfo;
   apr_status_t err = apr_stat(&finfo, path, APR_FINFO_TYPE, stack_pool);
-  if (err == APR_SUCCESS) {
-    result = finfo.filetype == type
-      ? mrb_true_value()
-      : mrb_false_value();
-  } else {
-    RAISE_APR_ERRNO(err);
-  }
+  result = (err == APR_SUCCESS && finfo.filetype == type)
+    ? mrb_true_value()
+    : mrb_false_value();
   stack_pool_leave();
   return result;
 }
