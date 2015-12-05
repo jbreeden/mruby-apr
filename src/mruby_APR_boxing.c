@@ -15,6 +15,7 @@ static void free_apr_time_t(mrb_state* mrb, void* ptr) {
          box->obj = NULL;
       }
    }
+  free(box);
 }
 
 static const mrb_data_type apr_time_t_data_type = {
@@ -74,6 +75,7 @@ static void free_apr_allocator_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_allocator_t_data_type = {
@@ -134,6 +136,7 @@ static void free_apr_array_header_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_array_header_t_data_type = {
@@ -194,6 +197,7 @@ static void free_apr_crypto_hash_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_crypto_hash_t_data_type = {
@@ -254,6 +258,7 @@ static void free_apr_dir_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_dir_t_data_type = {
@@ -314,6 +319,7 @@ static void free_apr_dso_handle_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_dso_handle_t_data_type = {
@@ -374,6 +380,7 @@ static void free_apr_file_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_file_t_data_type = {
@@ -434,6 +441,7 @@ static void free_apr_finfo_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_finfo_t_data_type = {
@@ -494,6 +502,7 @@ static void free_apr_getopt_option_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_getopt_option_t_data_type = {
@@ -554,6 +563,7 @@ static void free_apr_getopt_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_getopt_t_data_type = {
@@ -614,6 +624,7 @@ static void free_apr_hash_index_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_hash_index_t_data_type = {
@@ -674,6 +685,7 @@ static void free_apr_hash_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_hash_t_data_type = {
@@ -734,6 +746,7 @@ static void free_apr_hdtr_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_hdtr_t_data_type = {
@@ -794,6 +807,7 @@ static void free_apr_ipsubnet_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_ipsubnet_t_data_type = {
@@ -854,6 +868,7 @@ static void free_apr_memnode_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_memnode_t_data_type = {
@@ -914,6 +929,7 @@ static void free_apr_mmap_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_mmap_t_data_type = {
@@ -974,6 +990,7 @@ static void free_apr_os_sock_info_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_os_sock_info_t_data_type = {
@@ -1034,6 +1051,7 @@ static void free_apr_other_child_rec_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_other_child_rec_t_data_type = {
@@ -1094,6 +1112,7 @@ static void free_apr_pollcb_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_pollcb_t_data_type = {
@@ -1154,6 +1173,7 @@ static void free_apr_pollfd_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_pollfd_t_data_type = {
@@ -1214,6 +1234,7 @@ static void free_apr_pollset_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_pollset_t_data_type = {
@@ -1271,6 +1292,7 @@ static void free_apr_pool_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_pool_t_data_type = {
@@ -1331,6 +1353,7 @@ static void free_apr_proc_mutex_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_proc_mutex_t_data_type = {
@@ -1391,6 +1414,7 @@ static void free_apr_proc_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_proc_t_data_type = {
@@ -1451,6 +1475,7 @@ static void free_apr_procattr_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_procattr_t_data_type = {
@@ -1511,6 +1536,7 @@ static void free_apr_random_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_random_t_data_type = {
@@ -1571,6 +1597,7 @@ static void free_apr_shm_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_shm_t_data_type = {
@@ -1631,6 +1658,7 @@ static void free_apr_skiplist(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_skiplist_data_type = {
@@ -1691,6 +1719,7 @@ static void free_apr_skiplistnode(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_skiplistnode_data_type = {
@@ -1751,6 +1780,7 @@ static void free_apr_sockaddr_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_sockaddr_t_data_type = {
@@ -1811,6 +1841,7 @@ static void free_apr_socket_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_socket_t_data_type = {
@@ -1871,6 +1902,7 @@ static void free_apr_table_entry_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_table_entry_t_data_type = {
@@ -1931,6 +1963,7 @@ static void free_apr_table_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_table_t_data_type = {
@@ -1991,6 +2024,7 @@ static void free_apr_thread_cond_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_thread_cond_t_data_type = {
@@ -2051,6 +2085,7 @@ static void free_apr_thread_mutex_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_thread_mutex_t_data_type = {
@@ -2111,6 +2146,7 @@ static void free_apr_thread_once_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_thread_once_t_data_type = {
@@ -2171,6 +2207,7 @@ static void free_apr_thread_rwlock_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_thread_rwlock_t_data_type = {
@@ -2231,6 +2268,7 @@ static void free_apr_thread_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_thread_t_data_type = {
@@ -2291,6 +2329,7 @@ static void free_apr_threadattr_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_threadattr_t_data_type = {
@@ -2351,6 +2390,7 @@ static void free_apr_threadkey_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_threadkey_t_data_type = {
@@ -2411,6 +2451,7 @@ static void free_apr_time_exp_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_time_exp_t_data_type = {
@@ -2471,6 +2512,7 @@ static void free_apr_version_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_version_t_data_type = {
@@ -2531,6 +2573,7 @@ static void free_apr_vformatter_buff_t(mrb_state* mrb, void* ptr) {
       box->obj = NULL;
     }
   }
+  free(box);
 }
 
 static const mrb_data_type apr_vformatter_buff_t_data_type = {
