@@ -3,6 +3,79 @@
 #define APR_HEADER
 
 /*
+ * Header Files
+ * ------------
+ *
+ * These are the header files that defined the
+ * classes and functions for which bindings have
+ * been generated. If any of these are not needed
+ * they should be commented out.
+ */
+
+#include <stdlib.h>
+#include "mruby.h"
+#include "mruby/array.h"
+#include "mruby/class.h"
+#include "mruby/data.h"
+#include "mruby/string.h"
+#include "mruby/value.h"
+#include "mruby/variable.h"
+#include "apr.h"
+#include "apr_allocator.h"
+#include "apr_atomic.h"
+#include "apr_dso.h"
+#include "apr_env.h"
+#include "apr_errno.h"
+#include "apr_escape.h"
+#include "apr_file_info.h"
+#include "apr_file_io.h"
+#include "apr_fnmatch.h"
+#include "apr_general.h"
+#include "apr_getopt.h"
+#include "apr_global_mutex.h"
+#include "apr_hash.h"
+#include "apr_inherit.h"
+#include "apr_lib.h"
+#include "apr_mmap.h"
+#include "apr_network_io.h"
+#include "apr_poll.h"
+#include "apr_pools.h"
+#include "apr_portable.h"
+#include "apr_proc_mutex.h"
+#include "apr_random.h"
+#include "apr_ring.h"
+#include "apr_shm.h"
+#include "apr_signal.h"
+#include "apr_skiplist.h"
+#include "apr_strings.h"
+#include "apr_support.h"
+#include "apr_tables.h"
+#include "apr_thread_cond.h"
+#include "apr_thread_mutex.h"
+#include "apr_thread_proc.h"
+#include "apr_thread_rwlock.h"
+#include "apr_time.h"
+#include "apr_user.h"
+#include "apr_version.h"
+
+#if defined(_WIN32) || defined(_WIN64)
+  /* Actually much larger than Window's max path length, but whatevs */
+  #define PATH_MAX 1024
+  #include <direct.h>
+  #define getcwd _getcwd
+  #define chdir _chdir
+#else
+  #include <limits.h>
+  #include <unistd.h>
+#endif
+
+/*
+ * Native portions of the Ruby Standard Library implementation
+ */
+#define Dir_class(mrb) mrb_class_get("Dir")
+void mruby_APR_init_native_ext(mrb_state* mrb);
+
+/*
  * RClass Macros
  * -------------
  *
@@ -779,73 +852,6 @@
 #define BIND_apr_vformatter_FUNCTION FALSE
 #define BIND_apr_vsnprintf_FUNCTION FALSE
 #define BIND_apr_wait_for_io_or_timeout_FUNCTION FALSE
-
-/*
- * Header Files
- * ------------
- *
- * These are the header files that defined the
- * classes and functions for which bindings have
- * been generated. If any of these are not needed
- * they should be commented out.
- */
-
-#include <stdlib.h>
-#include "mruby.h"
-#include "mruby/array.h"
-#include "mruby/class.h"
-#include "mruby/data.h"
-#include "mruby/string.h"
-#include "mruby/value.h"
-#include "mruby/variable.h"
-#include "apr.h"
-#include "apr_allocator.h"
-#include "apr_atomic.h"
-#include "apr_dso.h"
-#include "apr_env.h"
-#include "apr_errno.h"
-#include "apr_escape.h"
-#include "apr_file_info.h"
-#include "apr_file_io.h"
-#include "apr_fnmatch.h"
-#include "apr_general.h"
-#include "apr_getopt.h"
-#include "apr_global_mutex.h"
-#include "apr_hash.h"
-#include "apr_inherit.h"
-#include "apr_lib.h"
-#include "apr_mmap.h"
-#include "apr_network_io.h"
-#include "apr_poll.h"
-#include "apr_pools.h"
-#include "apr_portable.h"
-#include "apr_proc_mutex.h"
-#include "apr_random.h"
-#include "apr_ring.h"
-#include "apr_shm.h"
-#include "apr_signal.h"
-#include "apr_skiplist.h"
-#include "apr_strings.h"
-#include "apr_support.h"
-#include "apr_tables.h"
-#include "apr_thread_cond.h"
-#include "apr_thread_mutex.h"
-#include "apr_thread_proc.h"
-#include "apr_thread_rwlock.h"
-#include "apr_time.h"
-#include "apr_user.h"
-#include "apr_version.h"
-
-#if defined(_WIN32) || defined(_WIN64)
-  /* Actually much larger than Window's max path length, but whatevs */
-  #define PATH_MAX 1024
-  #include <direct.h>
-  #define getcwd _getcwd
-  #define chdir _chdir
-#else
-  #include <limits.h>
-  #include <unistd.h>
-#endif
 
 /*
  * Class initialization function declarations

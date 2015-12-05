@@ -1807,10 +1807,6 @@ mrb_APR_apr_dir_read(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_dir_read(&native_finfo, native_wanted, native_thedir);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
@@ -5942,10 +5938,6 @@ mrb_APR_apr_fnmatch(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_fnmatch(native_pattern, native_strings, native_flags);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -11505,8 +11497,8 @@ mrb_APR_apr_pool_create(mrb_state* mrb, mrb_value self) {
     * (So far, this is happening consistently on the third creation.)
     * To avoid this, use a new allocator for each pool.
     */
-   apr_allocator_t* allocator = NULL;
-   apr_allocator_create(&allocator);
+  //  apr_allocator_t* allocator = NULL;
+  //  apr_allocator_create(&allocator);
 
    /* Fetch the args */
    mrb_get_args(mrb, "o", &parent);
@@ -11522,13 +11514,9 @@ mrb_APR_apr_pool_create(mrb_state* mrb, mrb_value self) {
 
    /* Invocation */
    apr_pool_t * native_newpool = NULL;
-   apr_status_t result = apr_pool_create_ex(&native_newpool, native_parent, NULL, allocator);
+   apr_status_t result = apr_pool_create_ex(&native_newpool, native_parent, NULL, NULL);
 
    /* Box the return value */
-   if (result > MRB_INT_MAX) {
-      mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-      return mrb_nil_value();
-   }
    mrb_value return_value = mrb_fixnum_value(result);
 
    mrb_value results = mrb_ary_new(mrb);
@@ -22672,6 +22660,7 @@ STATUS_CHECK(EAFNOSUPPORT);
 void mrb_mruby_apr_gem_init(mrb_state* mrb) {
   struct RClass* APR_module = mrb_define_module(mrb, "APR");
   mruby_APR_define_macro_constants(mrb);
+  mruby_APR_init_native_ext(mrb);
 
   mrb_define_class_under(mrb, APR_module, "AprTimeT", mrb->object_class);
 

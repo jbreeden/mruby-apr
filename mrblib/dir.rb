@@ -34,7 +34,7 @@ class Dir
   # end
 
   def self.delete(path)
-    APR.with_pool do |pool|
+    APR.stack_pool do |pool|
       err = APR.apr_dir_remove(path, pool)
       APR.raise_apr_errno(err)
     end
@@ -46,14 +46,14 @@ class Dir
 
   def self.entries(path)
     results = []
-    APR.with_pool do |pool|
+    APR.stack_pool do |pool|
       err, dir = APR.apr_dir_open path, pool
       APR.raise_apr_errno(err)
 
-      err, finfo = APR.apr_dir_read APR::APR_FINFO_DEFAULT, dir
+      err, finfo = APR.apr_dir_read APR::APR_FINFO_NAME, dir
       while err == 0 || err == APR::APR_INCOMPLETE
         results.push(finfo.name)
-        err, finfo = APR.apr_dir_read APR::APR_FINFO_DEFAULT, dir
+        err, finfo = APR.apr_dir_read APR::APR_FINFO_NAME, dir
       end
     end
     results
@@ -90,7 +90,7 @@ class Dir
   # end
 
   def self.mkdir(path)
-    APR.with_pool do |pool|
+    APR.stack_pool do |pool|
       err = APR.apr_dir_make path, APR::APR_FPROT_OS_DEFAULT, pool
       APR.raise_apr_errno(err)
     end
