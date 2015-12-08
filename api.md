@@ -1,8 +1,6 @@
 MRuby-APR
 =========
 
----
-
 BasicSocket
 -----------
 
@@ -22,10 +20,8 @@ Instance Methods:
   - `#shutdown`
   - `#write`
 
----
-
 Dir
----
+----
 
 Class Methods:
   - `::[]`
@@ -44,8 +40,6 @@ Class Methods:
   - `::tmpdir`
   - `::unlink`
 
-
----
 
 File
 ----
@@ -79,8 +73,6 @@ Instance Methods:
   - `#ungetc`
   - `#write`
 
----
-
 File::Stat
 ----------
 
@@ -104,8 +96,6 @@ Instance Methods:
   - `#symlink?`
   - `#zero?`
 
----
-
 FileTest
 --------
 
@@ -126,8 +116,6 @@ Instance Methods:
   - `#symlink?`
   - `#zero?`
 
----
-
 Forwardable
 -----------
 
@@ -142,8 +130,6 @@ Instance Methods:
   - `#def_instance_delegators`
   - `#delegate`
   - `#instance_delegate`
-
----
 
 IO
 --
@@ -166,8 +152,6 @@ Instance Methods:
   - `#puts`
   - `#seek`
 
----
-
 IPSocket
 --------
 
@@ -175,8 +159,6 @@ Ancestors: `BasicSocket`, `IO`
 
 Instance Methods:
   - `#recvfrom`
-
----
 
 Kernel
 ------
@@ -186,8 +168,6 @@ Instance Methods:
   - `#load`
   - `#spawn`
   - `#system`
-
----
 
 Observable
 ----------
@@ -200,8 +180,6 @@ Instance Methods:
   - `#delete_observer`
   - `#delete_observers`
   - `#notify_observers`
-
----
 
 OpenStruct
 ----------
@@ -226,8 +204,6 @@ Instance Methods:
   - `#to_h`
   - `#to_s`
 
----
-
 Shellwords
 ----------
 
@@ -246,8 +222,6 @@ Instance Methods:
   - `#shellsplit`
   - `#shellwords`
 
----
-
 IO::Pipe
 --------
 
@@ -255,8 +229,6 @@ Ancestors: `File`, `IO`
 
 Instance Methods:
   - `#initialize`
-
----
 
 Process
 -------
@@ -267,13 +239,9 @@ Class Methods:
   - `::wait`
 
 
----
-
 Socket
 ------
 
-
----
 
 Process::Status
 ---------------
@@ -287,8 +255,6 @@ Instance Methods:
   - `#signaled?`
   - `#success?`
 
----
-
 TCPServer
 ---------
 
@@ -299,8 +265,6 @@ Instance Methods:
   - `#initialize`
   - `#listen`
 
----
-
 TCPSocket
 ---------
 
@@ -308,8 +272,6 @@ Ancestors: `IPSocket`, `BasicSocket`, `IO`
 
 Instance Methods:
   - `#initialize`
-
----
 
 UDPSocket
 ---------
