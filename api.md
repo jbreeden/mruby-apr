@@ -242,6 +242,7 @@ Class Methods:
 Socket
 ------
 
+(Constants only)
 
 Process::Status
 ---------------
