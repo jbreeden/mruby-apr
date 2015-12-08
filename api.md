@@ -1,9 +1,14 @@
 MRuby-APR
 =========
 
+---
+
 BasicSocket
 -----------
 
+Ancestors: `IO`
+
+Instance Methods:
   - `#assert_can_read`
   - `#assert_can_write`
   - `#close`
@@ -17,9 +22,12 @@ BasicSocket
   - `#shutdown`
   - `#write`
 
+---
+
 Dir
 ---
 
+Class Methods:
   - `::[]`
   - `::chdir`
   - `::delete`
@@ -36,15 +44,23 @@ Dir
   - `::tmpdir`
   - `::unlink`
 
+
+---
+
 File
 ----
 
+Ancestors: `IO`
+
+Class Methods:
   - `::atime`
   - `::ctime`
   - `::delete`
   - `::extname`
   - `::open`
   - `::read`
+
+Instance Methods:
   - `#assert_can_read`
   - `#assert_can_write`
   - `#close`
@@ -63,9 +79,12 @@ File
   - `#ungetc`
   - `#write`
 
+---
+
 File::Stat
 ----------
 
+Instance Methods:
   - `#<=>`
   - `#atime`
   - `#blockdev?`
@@ -85,10 +104,15 @@ File::Stat
   - `#symlink?`
   - `#zero?`
 
+---
+
 FileTest
 --------
 
+Class Methods:
   - `::is_type?`
+
+Instance Methods:
   - `#blockdev?`
   - `#chardev?`
   - `#directory?`
@@ -102,11 +126,16 @@ FileTest
   - `#symlink?`
   - `#zero?`
 
+---
+
 Forwardable
 -----------
 
+Class Methods:
   - `::debug`
   - `::debug=`
+
+Instance Methods:
   - `#def_delegator`
   - `#def_delegators`
   - `#def_instance_delegator`
@@ -114,11 +143,16 @@ Forwardable
   - `#delegate`
   - `#instance_delegate`
 
+---
+
 IO
 --
 
+Class Methods:
   - `::pipe`
   - `::popen`
+
+Instance Methods:
   - `#<<`
   - `#each`
   - `#each_byte`
@@ -132,102 +166,33 @@ IO
   - `#puts`
   - `#seek`
 
+---
+
 IPSocket
 --------
 
+Ancestors: `BasicSocket`, `IO`
+
+Instance Methods:
   - `#recvfrom`
+
+---
 
 Kernel
 ------
 
-  - `::Array`
-  - `::Float`
-  - `::Hash`
-  - `::Integer`
-  - `::String`
-  - `::block_given?`
-  - `::eval`
-  - `::fail`
-  - `::global_variables`
-  - `::iterator?`
-  - `::lambda`
-  - `::local_variables`
-  - `::proc`
-  - `::raise`
-  - `#!=`
-  - `#!~`
-  - `#==`
-  - `#===`
-  - `#Array`
-  - `#Float`
-  - `#Hash`
-  - `#Integer`
-  - `#String`
-  - `#__case_eqq`
-  - `#__id__`
-  - `#__method__`
-  - `#__printstr__`
-  - `#__send__`
-  - `#_inspect`
-  - `#``
-  - `#block_given?`
-  - `#class`
-  - `#clone`
-  - `#define_singleton_method`
-  - `#dup`
-  - `#enum_for`
-  - `#eql?`
-  - `#equal?`
-  - `#eval`
-  - `#exit`
-  - `#extend`
-  - `#fail`
-  - `#format`
-  - `#global_variables`
-  - `#hash`
-  - `#initialize_copy`
-  - `#inspect`
-  - `#instance_eval`
-  - `#instance_of?`
-  - `#instance_variable_defined?`
-  - `#instance_variable_get`
-  - `#instance_variable_set`
-  - `#instance_variables`
-  - `#is_a?`
-  - `#iterator?`
-  - `#kind_of?`
-  - `#lambda`
+Instance Methods:
+  - \` (Backtick)
   - `#load`
-  - `#local_variables`
-  - `#loop`
-  - `#methods`
-  - `#nil?`
-  - `#object_id`
-  - `#p`
-  - `#print`
-  - `#printf`
-  - `#private_methods`
-  - `#proc`
-  - `#protected_methods`
-  - `#public_methods`
-  - `#puts`
-  - `#raise`
-  - `#rand`
-  - `#remove_instance_variable`
-  - `#respond_to?`
-  - `#send`
-  - `#singleton_class`
-  - `#singleton_methods`
   - `#spawn`
-  - `#sprintf`
-  - `#srand`
   - `#system`
-  - `#to_enum`
-  - `#to_s`
+
+---
 
 Observable
 ----------
 
+Instance Methods:
   - `#add_observer`
   - `#changed`
   - `#changed?`
@@ -236,9 +201,12 @@ Observable
   - `#delete_observers`
   - `#notify_observers`
 
+---
+
 OpenStruct
 ----------
 
+Instance Methods:
   - `#==`
   - `#[]`
   - `#[]=`
@@ -258,9 +226,12 @@ OpenStruct
   - `#to_h`
   - `#to_s`
 
+---
+
 Shellwords
 ----------
 
+Class Methods:
   - `::escape`
   - `::join`
   - `::shellescape`
@@ -268,30 +239,46 @@ Shellwords
   - `::shellsplit`
   - `::shellwords`
   - `::split`
+
+Instance Methods:
   - `#shellescape`
   - `#shelljoin`
   - `#shellsplit`
   - `#shellwords`
 
+---
+
 IO::Pipe
 --------
 
+Ancestors: `File`, `IO`
+
+Instance Methods:
   - `#initialize`
+
+---
 
 Process
 -------
 
+Class Methods:
   - `::pid`
   - `::spawn`
   - `::wait`
+
+
+---
 
 Socket
 ------
 
 
+---
+
 Process::Status
 ---------------
 
+Instance Methods:
   - `#coredump?`
   - `#exited?`
   - `#exitstatus`
@@ -300,23 +287,37 @@ Process::Status
   - `#signaled?`
   - `#success?`
 
+---
+
 TCPServer
 ---------
 
+Ancestors: `TCPSocket`, `IPSocket`, `BasicSocket`, `IO`
+
+Instance Methods:
   - `#accept`
   - `#initialize`
   - `#listen`
 
+---
+
 TCPSocket
 ---------
 
+Ancestors: `IPSocket`, `BasicSocket`, `IO`
+
+Instance Methods:
   - `#initialize`
+
+---
 
 UDPSocket
 ---------
 
+Ancestors: `IPSocket`, `BasicSocket`, `IO`
+
+Instance Methods:
   - `#bind`
   - `#connect`
   - `#initialize`
   - `#read`
-
