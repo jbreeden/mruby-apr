@@ -3,7 +3,13 @@ mruby-apr
 
 A cross-platform MRuby port of the core system libraries from CRuby.
 
-Notably, mruby-apr includes
+API Documentation
+-----------------
+
+[api.md](/api.md) lists all of the supported classes & methods. The interfaces match, as closely as possible, those of CRuby.
+
+At a glance
+-----------
 
 - IO (read, write, pipe, popen)
 - File, FileTest, File::Stat
@@ -17,8 +23,6 @@ Notably, mruby-apr includes
 - Observer
 - OpenStruct
 - Shellwords
-
-Check [the spec](/spec.md) to see the list of methods supported. (You'll need to scroll down to the sections marked "Ruby API".)
 
 Building
 --------
