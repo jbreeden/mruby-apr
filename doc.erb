@@ -1,0 +1,51 @@
+<%
+classes = [
+  # [Addrinfo, "Addrinfo"],
+  BasicSocket,
+  Dir,
+  File,
+  File::Stat,
+  FileTest,
+  Forwardable,
+  IO,
+  IPSocket,
+  Kernel,
+  Observable,
+  OpenStruct,
+  Shellwords,
+  IO::Pipe,
+  Process,
+  Socket,
+  Process::Status,
+  TCPServer,
+  TCPSocket,
+  UDPSocket
+]
+-%>
+MRuby-APR
+=========
+
+<% classes.each do |cls| -%>
+<%= cls %>
+<%= '-' * cls.to_s.length %>
+
+<% ancestors = cls.ancestors[1...-3]
+   unless ancestors.empty? -%>
+Ancestors: <%= ancestors.map { |m| "`#{m}`"}.join(', ') %>
+
+<% end -%>
+<% unless cls.methods(false).empty? -%>
+Class Methods:
+<%   cls.methods(false).sort.each do |meth| -%>
+  - `::<%= meth %>`
+<%   end -%>
+
+<% end -%>
+<% unless cls.instance_methods(false).empty? -%>
+Instance Methods:
+<%   cls.instance_methods(false).sort.each do |meth| -%>
+  - `#<%= meth %>`
+<%   end -%>
+<% end -%>
+
+<% end -%>
