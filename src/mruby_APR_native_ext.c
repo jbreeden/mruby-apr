@@ -17,6 +17,12 @@
 
 
 #include "mruby_APR.h"
+#if defined(_WIN32)
+  #include <process.h> /* _getpid */
+  #define getpid _getpid
+#else
+  #include <unistd.h> /* getpid */
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -109,6 +115,11 @@ mruby_FilteTest_is_type(mrb_state* mrb, mrb_value self) {
   return result;
 }
 
+mrb_value
+mruby_Process_pid(mrb_state* mrb, mrb_value self) {
+  return mrb_fixnum_value(getpid());
+}
+
 void
 mruby_APR_init_native_ext(mrb_state* mrb) {
   apr_pool_create(&stack_pool, NULL);
@@ -122,6 +133,9 @@ mruby_APR_init_native_ext(mrb_state* mrb) {
 
   struct RClass* FileTest_module = mrb_define_module(mrb, "FileTest");
   mrb_define_class_method(mrb, FileTest_module, "is_type?", mruby_FilteTest_is_type, MRB_ARGS_ARG(2, 0));
+
+  struct RClass* Process_module = mrb_define_module(mrb, "Process");
+  mrb_define_class_method(mrb, Process_module, "pid", mruby_Process_pid, MRB_ARGS_ARG(0, 0));
 }
 
 #ifdef __cplusplus

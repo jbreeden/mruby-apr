@@ -44,6 +44,7 @@ class Dir
     alias unlink rmdir
   end
 
+  ########################### Ported to C
   # def self.entries(path)
   #   results = []
   #   APR.with_stack_pool do |pool|
@@ -58,6 +59,7 @@ class Dir
   #   end
   #   results
   # end
+  ###########################
 
   def self.exists?(path)
     File.directory?(path)
@@ -96,7 +98,68 @@ class Dir
     end
   end
 
+  def self.tmpdir
+    APR.with_stack_pool do |pool|
+      err, dirname = APR.apr_temp_dir_get(pool)
+      dirname
+    end
+  end
+
+  def self.mktmpdir(prefix_suffix = nil, parent = nil)
+    if block_given?
+      raise "Cannot securely delete temp dir contents, so mktmpdir does not yet support a block parameter"
+      # Need FileUtils::remove_entry_secure to fix
+    end
+    
+    prefix_suffix = case prefix_suffix
+    when NilClass
+      ['d', '']
+    when String
+      [prefix_suffix, '']
+    when Array
+      prefix_suffix
+    else
+      raise ArgumentError.new("Invalid first parameter to Dir.mktmpdir")
+    end
+
+    parent = case parent
+    when String
+      parent[parent.length - 1] == '/' ? parent : "#{parent}/"
+    when NilClass
+      Dir.tmpdir
+    else
+      raise ArgumentError.new("Invalid second parameter to Dir.mktmpdir")
+    end
+
+    now = Time.now
+    random_string = (0..5).map { (rand(26) + 'a'.ord).chr }.join('')
+
+    dirname = "%{parent}%{prefix}%{date}-%{pid}-%{rand}%{suffix}" % {
+      parent: parent,
+      prefix: prefix_suffix.first,
+      date: now.year.to_s + ('%02d' % now.month) + ('%02d' % now.day),
+      pid: Process.pid,
+      rand: random_string,
+      suffix: prefix_suffix.last
+    }
+
+    self.mkdir(dirname)
+    dirname
+  end
+
   module Util
+    def self.depth_first(dir, &block)
+      files = []
+      Dir.entries(dir).each do |entry|
+        next if entry == '.' || entry == '..'
+        path = "#{dir}/#{entry}"
+        files.push(path) if FileTest.file?(path)
+        depth_first(path, &block) if FileTest.directory?(path)
+      end
+      files.each { |f| yield f, :file }
+      yield dir, :directory
+    end
+
     # TODO: This doesn't work
     def self.glob(from, pattern, recursing = false)
       results = []

@@ -22,6 +22,18 @@ task "tell_functions" do
   end
 end
 
+namespace :docs do
+  run = proc { |ruby_cmd| system "echo \"puts ERB.new(File.read('doc.erb'), nil, '-').result\" | #{ruby_cmd}" }
+  desc 'Print the MRuby APIs'
+  task :mruby do
+    run["mruby"]
+  end
+  desc 'Print the CRuby APIs'
+  task :cruby do
+    run["ruby -r erb"]
+  end
+end
+
 namespace :test do
 
   each_test_file do |test_file|
