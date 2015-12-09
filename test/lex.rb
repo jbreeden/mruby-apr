@@ -1,103 +1,182 @@
-class FileMatch
-  def initialize
-    @alternatives = ['']
+class GlobAST
+  class ParserError < StandardError
   end
 
-  def alternatives
-    if @err
-      []
-    else
-      @alternatives
+  class Node
+    attr_accessor :parent, :children
+
+    def initialize(parent)
+      @parent = parent
+      @children = []
     end
   end
 
-  def start_alt
-    @root = @alternatives.map { |a| a.dup }
-    @alternatives = []
+  class Root < Node
+    def initialize
+      super(nil)
+    end
+
+    def accept(token)
+      case token
+      when :'{'
+        child = Alternation.new(self)
+        @children.push(child)
+        child
+      when :'}'
+        raise ParserError.new("Unmatched closing brace")
+      when :'/'
+        @children.push(token)
+        self
+      when :'$'
+        # Do nothing
+        self
+      else
+        # Everything else is a string at the root level
+        if @children.last.kind_of?(String)
+          @children.last.concat(token.to_s)
+        else
+          @children.push(token.to_s)
+        end
+        self
+      end
+    end
+
+    def to_a
+      parts = [['']]
+      @children.each do |child|
+        case child
+        when :'/'
+          parts.push([''])
+        when String
+          parts.last.each do |str|
+            str.concat(child)
+          end
+        when Alternation
+          replacement = []
+          last_part = parts.pop
+          last_part.each do |str|
+            child.to_a.each do |alt|
+              replacement.push "#{str}#{alt}"
+            end
+          end
+          parts.push(replacement)
+        end
+      end
+      parts
+    end
+
   end
 
-  def end_alt
-    @root = nil
+  class Alternation < Node
+    def initialize(*args)
+      super
+      @children.push('')
+    end
+
+    def accept(token)
+      case token
+      when :'{'
+        child = Alternation.new(self)
+        children.push(child)
+        child
+      when :'}'
+        parent
+      when :','
+        @children.push(:',')
+        @children.push('')
+        self
+      when :'$'
+        raise ParserError.new("Unmatched open brace")
+      else
+        # Everything else is considered a string in alternation,
+        # so append it onto the most recent alternative
+        @children.push(token.to_s)
+        self
+      end
+    end
+
+    def to_a
+      alts = [['']]
+      @children.each do |child|
+        case child
+        when String
+          alts.last.each { |alt| alt.concat(child) }
+        when :','
+          alts.push([''])
+        when Alternation
+          replacement = []
+          last_alt = alts.pop
+          last_alt.each do |alt|
+            child.to_a.each do |child_alt|
+              replacement.push "#{alt}#{child_alt}"
+            end
+          end
+          alts.push(replacement)
+        end
+      end
+      alts.flatten
+    end
   end
 
-  def add_alt(str)
-    @alternatives.concat @root.map { |r| r.dup.concat(str) }
+  def initialize(str)
+    @root = Root.new
+    @rooted = str[0] == ?/
+    @table = nil
+    parse(str)
   end
 
-  def concat(str)
-    @alternatives.each { |a| a.concat str }
-  end
-
-  def self.from(str)
-    match = FileMatch.new
-    result = match.parse(str)
-    match
+  def each_segment(&block)
+    @table.each_with_index do |segment, i|
+      if @rooted && i == 0
+        next # Skip the leading [''] segment
+      else
+        block[segment]
+      end
+    end
   end
 
   private
 
   def parse(str)
-    text = ''
-
-    brace_level = 0
-
+    current_node = @root
     lex(str) do |token|
-      # Normalize out-of-choice commas to strings
-      if token.kind_of?(String) || (brace_level == 0 && token == :',')
-        text.concat token.to_s
-        next
-      end
-
-      if token == :'{'
-        self.concat(text)
-        text = ''
-        self.start_alt if brace_level == 0
-        brace_level += 1
-      elsif token == :'}'
-        self.add_alt(text)
-        text = ''
-        brace_level -= 1
-        self.end_alt if brace_level == 0
-        if brace_level < 0
-          @err = true
-          return
-        end
-      elsif token == :','
-        self.add_alt(text)
-        text = ''
-      elsif token == :'$'
-        self.concat(text)
-        text = ''
-      end
+      current_node = current_node.accept(token)
     end
-
-    if brace_level > 0
-      @err = true
-    end
+    @table = @root.to_a
   end
 
   def lex(str)
     match = nil
+    token = nil
 
-    while str && !str.empty?
-      if match = str[/^\\\\/]
-        yield match
-      elsif match = str[/^\\./]
-        yield match[1]
-      elsif match = str[/^\{/]
-        yield :'{'
-      elsif match = str[/^\}/]
-        yield :'}'
-      elsif match = str[/^,/]
-        yield :','
-      else match = str[0]
-        yield match
+    while str && !str.empty? && str != ?/ && str != ?\\
+      step = 1
+      if str.start_with?(?\\)
+        token = str[1]
+        step = 2
+      elsif "{},".include?(str[0])
+        token = str[0].to_sym
+        step = 1
+      elsif str[0] == ?/
+        # Collapse consecutive /'s
+        token = :/
+        step = str[/^\/*/].length
+      elsif str[0] == ?[
+        # passthrough the character sets
+        token = str[/^(\\.|[^\\])+\]/]
+        step = token.length
+      else
+        i = 1
+        i += 1 until "{},/\\".include?(str[i]) || str[i].nil?
+        token = str[0...i]
+        step = token.length
       end
-      str = str[(match.length)...(str.length)]
+
+      str = str[(step)...(str.length)]
+      yield token
     end
     yield :'$'
   end
-
 end
 
-puts FileMatch.from(ARGV[0]).alternatives
+GlobAST.new(ARGV[0]).each_segment { |segment| puts segment.join('|')}
