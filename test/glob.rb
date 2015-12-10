@@ -30,7 +30,7 @@ class GlobAST
         @children.push(token)
         self
       when :'**'
-        if @children[@children.length - 2] != '**'
+        if @children[@children.length - 2] != :'**'
           @children.push(token)
         end
         self
@@ -170,12 +170,12 @@ class GlobAST
     match = nil
     token = nil
 
-    # Special case:
-    # leading ** doens't need to be surrounded by /'s to be significant
-    if str[0..1] == '**'
-      yield :'**'
-      str = str[2..str.length]
-    end
+    # # Special case:
+    # # leading ** doens't need to be surrounded by /'s to be significant
+    # if str[0..1] == '**'
+    #   yield :'**'
+    #   str = str[2..str.length]
+    # end
 
     while str && !str.empty? && str != ?/ && str != ?\\
       step = 1
@@ -185,10 +185,10 @@ class GlobAST
       elsif "{},".include?(str[0])
         token = str[0].to_sym
         step = 1
-      elsif str[0..3] == '/**/'
+      elsif str[0..2] == '**/'
         # ** is only significant if it stands alone
-        token = [:/, :'**', :/]
-        step = str[/^\/(\*\*\/)+/].length
+        token = [:'**', :/]
+        step = str[/^(\*\*\/)+/].length
       elsif str[0] == ?/
         # Collapse consecutive /'s
         token = :/
@@ -211,55 +211,80 @@ class GlobAST
   end
 end
 
-def match_file(pattern, file)
-  if file[0] == '.'
-    return false unless pattern[0] == '.'
+class Globber
+  def initialize
+    @match_num = 0
   end
-  return true if pattern == '.' && file == '.'
-  return true if pattern == '..' && file == '..'
-  return true if pattern == '*'
-  APR::APR_SUCCESS == APR.apr_fnmatch(pattern, file, 0)
-end
 
-def glob_recurse(dir, segments)
-  result = []
-  if segments.length == 1
-    segments[0].each do |pattern|
-      Dir.entries(dir).each do |e|
-        full = "#{dir}/#{e}"
-        # puts "Final match #{full} ~ #{pattern}"
-        result.push(full) if match_file(pattern, e)
-      end
+  def glob(pattern, &block)
+    ast = GlobAST.new(pattern) rescue nil
+    return nil unless ast
+    segments = ast.segments
+    glob_recurse(ast.rooted? ? '/' : '', ast.segments, &block)
+  end
+
+  def explicit(dir)
+    dir.empty? ? '.' : dir
+  end
+
+  def join(dir, file)
+    if dir[dir.length - 1] == ?/
+      "#{dir}#{file}"
+    elsif dir.empty?
+      file
+    else
+      "#{dir}/#{file}"
     end
-  elsif segments[0] == [:'**']
-    Dir.entries(dir).each do |e|
-      full = "#{dir}/#{e}"
-      # puts "Deep match #{full}"
-      if e[0] != '.' && File.directory?(full)
-        result.concat(glob_recurse(full, segments))
+  end
+
+  def glob_recurse(dir, segments, &block)
+    if segments.length == 1
+      segments[0].each do |pattern|
+        Dir.entries(explicit(dir)).each do |e|
+          full = join(dir, e)
+          if match_file(pattern, e)
+            block[full, @match_num]
+            @match_num += 1
+          end
+        end
       end
-    end
-    result.concat(glob_recurse(dir, segments[1..segments.length]))
-  else
-    segments[0].each do |pattern|
-      Dir.entries(dir).each do |e|
-        full = "#{dir}/#{e}"
-        # puts "Partial #{full} ~ #{pattern}"
-        result.concat(glob_recurse(full, segments[1..segments.length])) if match_file(pattern, e)
+    elsif segments[0] == [:'**']
+      Dir.entries(explicit(dir)).each do |e|
+        full = join(dir, e)
+        if e[0] != '.' && File.directory?(full)
+          glob_recurse(full, segments, &block)
+        end
+      end
+      glob_recurse(dir, segments[1..segments.length], &block)
+    else
+      segments[0].each do |pattern|
+        Dir.entries(explicit(dir)).each do |e|
+          full = join(dir, e)
+          if File.directory?(full) && match_file(pattern, e)
+            glob_recurse(full, segments[1..segments.length], &block)
+          end
+        end
       end
     end
   end
-  result
+
+  def match_file(pattern, file)
+    return false if file[0] == '.' unless pattern[0] == '.'
+    return true if pattern == '.' && file == '.'
+    return true if pattern == '..' && file == '..'
+    return true if pattern == '*'
+    APR::APR_SUCCESS == APR.apr_fnmatch(pattern, file, 0)
+  end
 end
 
 def glob(pattern)
-  ast = GlobAST.new(pattern) rescue nil
-  return [] unless ast
-  segments = ast.segments
-  glob_recurse(ast.rooted? ? '/' : '.', segments)
+  results = []
+  globber = Globber.new
+  globber.glob(pattern) do |match, match_num|
+    results.push(match)
+  end
+  results
 end
 
 # GlobAST.new(ARGV[0]).each_segment { |segment| puts segment.map { |pattern| "/#{pattern}/(#{pattern.class})"}}
-$t_match = 0
-puts glob(ARGV[0])
-puts $t_match
+puts glob(ARGV[0]).length
