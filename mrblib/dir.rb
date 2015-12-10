@@ -7,13 +7,6 @@ class Dir
   #
   # end
 
-  def self.[](pattern)
-    Util.glob(pwd, pattern)
-  end
-  class << self
-    alias glob []
-  end
-
   def self.chdir(path, &block)
     if block.nil?
       err = APR.apr_dir_chdir(path)
@@ -110,7 +103,7 @@ class Dir
       raise "Cannot securely delete temp dir contents, so mktmpdir does not yet support a block parameter"
       # Need FileUtils::remove_entry_secure to fix
     end
-    
+
     prefix_suffix = case prefix_suffix
     when NilClass
       ['d', '']
@@ -145,120 +138,5 @@ class Dir
 
     self.mkdir(dirname)
     dirname
-  end
-
-  module Util
-    def self.depth_first(dir, &block)
-      files = []
-      Dir.entries(dir).each do |entry|
-        next if entry == '.' || entry == '..'
-        path = "#{dir}/#{entry}"
-        files.push(path) if FileTest.file?(path)
-        depth_first(path, &block) if FileTest.directory?(path)
-      end
-      files.each { |f| yield f, :file }
-      yield dir, :directory
-    end
-
-    # TODO: This doesn't work
-    def self.glob(from, pattern, recursing = false)
-      results = []
-      rooted = false
-      if pattern[0] == '/'
-        rooted = true unless from == "/"
-        from = '/'
-        pattern = pattern[1..-1]
-      end
-      dirs = [from]
-      next_dirs = []
-      prev_dirs = []
-      parts = pattern.split('/')
-      current_part = 0
-      last_part = parts.length - 1
-      recursed = false
-
-      parts.each do |part|
-        # Double slash in pattern, treat it as one
-        # (Leading slash is handled above)
-        next if part == ''
-
-        dirs.each do |dir|
-          begin
-            files = Dir.entries(dir)
-          rescue SystemCallError
-            next
-          end
-          # '**' matches 0 or more directories, so inlcude '.'
-          files = files.reject { |e| e == '.' } unless part == '.' || part == '**'
-          files = files.reject { |e| e == '..' } unless part == '..'
-          files.each do |entry|
-            next if entry[0] == '.' && !(entry == '.' || entry == '..')
-            relative_path = (rooted && current_part == 0) ? "/#{entry}" : "#{dir}/#{entry}"
-            $stderr.puts "Testing #{part} against #{entry} in #{relative_path}"
-            if APR::APR_SUCCESS == APR.apr_fnmatch(part, entry, 0)
-              $stderr.puts "Match"
-              if current_part == last_part
-                $stderr.puts "At last part. Pushing result"
-                results.push(relative_path)
-              else
-                if File.directory? relative_path
-                  $stderr.puts "Not at last part. Pushing dir"
-                  next_dirs.push(relative_path)
-                end
-              end
-            else
-              # $stderr.puts "No match"
-            end
-          end
-        end
-
-        # Once we get here, the ** should have matched all directories
-        # under all paths listed in `dirs`. Now we can recurse on them
-        # all with the remainder of the glob. Afterwards, the glob matching
-        # will be finished
-        if part == '**' && current_part != last_part
-          if current_part == 0
-            prev_dirs = [from]
-          end
-          prev_dirs.each do |dir|
-            subdirs(dir, recurse: true).each do |subdir|
-              results.concat(
-                Dir::Util.glob(subdir, parts[(current_part + 1)..last_part].join('/'), true)
-              )
-            end
-          end
-          recursed = true
-        end
-
-        break if recursed
-        prev_dirs = dirs
-        dirs = next_dirs
-        next_dirs = []
-        current_part += 1
-      end
-      if recursing
-        results
-      else
-        results.uniq.map { |r|
-          if rooted
-            r
-          else
-            r.sub(from + '/', '')
-          end
-        }
-      end
-    end
-
-    def self.subdirs(path, opt = {})
-      results = []
-      Dir.entries(path).reject { |d| d[0] == '.' }.each do |entry|
-        rel_path = "#{path}/#{entry}"
-        if File.directory? rel_path
-          results.push rel_path
-          results = results.concat(subdirs(rel_path, opt)) if opt[:recurse]
-        end
-      end
-      results.uniq
-    end
   end
 end
