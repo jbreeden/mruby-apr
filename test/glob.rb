@@ -322,5 +322,5 @@ class Dir
     results
   end
 end
-# GlobAST.new(ARGV[0]).each_segment { |segment| puts segment.map { |pattern| "/#{pattern}/(#{pattern.class})"}}
+# Dir::GlobAST.new(ARGV[0]).each_segment { |segment| puts segment.map { |pattern| "/#{pattern}/(#{pattern.class})"}}
 puts Dir.glob(ARGV[0]).length

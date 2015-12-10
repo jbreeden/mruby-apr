@@ -59,7 +59,7 @@ mruby_APR_stack_pool(mrb_state* mrb, mrb_value self) {
 
 void
 stack_pool_enter() {
-  _stack_pool_enter_count += _stack_pool_enter_count + 1;
+  ++_stack_pool_enter_count;
 }
 
 mrb_value
@@ -70,11 +70,12 @@ mruby_APR_stack_pool_enter(mrb_state* mrb, mrb_value self) {
 
 void
 stack_pool_leave() {
-  mrb_int enter_count = _stack_pool_enter_count - 1;
-  if (enter_count == 0) {
-    apr_pool_clear(_stack_pool);
+  if (_stack_pool_enter_count > 0) {
+    --_stack_pool_enter_count;
+    if (_stack_pool_enter_count == 0) {
+      apr_pool_clear(_stack_pool);
+    }
   }
-  _stack_pool_enter_count = enter_count;
 }
 
 mrb_value
@@ -170,18 +171,10 @@ path_join(const char* dir, const char* file) {
 
 static int
 fnmatch_file(const char* pattern, const char* file) {
-  fprintf(stderr, "enter fnmatch\n");
   if (file[0] == '.' && !(pattern[0] == '.')) {
     return FALSE;
-  } else if (strcmp(".", pattern) == 0 && strcmp(".", file) == 0) {
-    return TRUE;
-  } else if (strcmp("..", pattern) == 0 && strcmp("..", file) == 0) {
-    return TRUE;
-  } else if (strcmp("*", pattern) == 0) {
-    return TRUE;
   } else {
     int status = apr_fnmatch(pattern, file, 0);
-    fprintf(stderr, "exit fnmatch\n");
     return status == APR_SUCCESS;
   }
 }
@@ -203,57 +196,55 @@ glob_recurse(struct glob_context *context, mrb_state* mrb, mrb_value self, char*
   while (1) { \
     apr_finfo_t finfo; \
     int status = apr_dir_read(&finfo, APR_FINFO_NAME | APR_FINFO_TYPE, dir); \
-    const char* entry = finfo.name; \
-    apr_filetype_e type = finfo.filetype; \
     if (!(status == APR_SUCCESS || status == APR_INCOMPLETE)) { \
       break; \
-    }
+    } \
+    const char* entry = finfo.name; \
+    apr_filetype_e type = finfo.filetype; \
 
 #define EACH_PATTERN(pattern) \
-  for (int i = 0; i < pattern_count - 1; ++i) { \
+  for (int i = 0; i < pattern_count; ++i) { \
     mrb_value ruby_pattern = ary_ref(segment, i); \
-    const char* pattern = string_value_cstr(&ruby_pattern);
+    const char* pattern = string_value_cstr(&ruby_pattern); \
 
 #define END() }
 
   if (segment_num == context->segments_length - 1) {
-    fprintf(stderr, "first\n");
     EACH_ENTRY(entry, type)
+      char* joined = path_join(root, entry);
       EACH_PATTERN(pattern)
         if (fnmatch_file(pattern, entry)) {
-          /* Space for root, separator, file, and null terminator */
-          char* joined = path_join(root, entry);
           funcall(context->block, "call", 2, str_new_cstr(joined), mrb_fixnum_value(context->match_num));
           context->match_num += 1;
-          free(joined);
           break;
         }
       END()
+      free(joined);
     END()
   } else if (pattern_count == 1
       && obj_is_kind_of(ary_ref(segment, 0), mrb->symbol_class)
       && mrb_symbol(ary_ref(segment, 0)) == intern_cstr("**")) {
-    fprintf(stderr, "second\n");
     EACH_ENTRY(entry, type)
+      char* joined = path_join(root, entry);
       if (entry[0] != '.' && type == APR_DIR) {
-        char* joined = path_join(root, entry);
         glob_recurse(context, mrb, self, joined, segment_num);
-        free(joined);
       }
+      free(joined);
     END()
+    glob_recurse(context, mrb, self, root, segment_num + 1);
   } else {
-    fprintf(stderr, "third\n");
     EACH_ENTRY(entry, type)
+      char* joined = path_join(root, entry);
       EACH_PATTERN(pattern)
-        char* joined = path_join(root, entry);
         if (type == APR_DIR && fnmatch_file(pattern, entry)) {
           glob_recurse(context, mrb, self, joined, segment_num + 1);
         }
-        free(joined);
       END()
+      free(joined);
     END()
   }
 
+  apr_dir_close(dir);
   stack_pool_leave();
 }
 
