@@ -182,12 +182,15 @@ fnmatch_file(const char* pattern, const char* file) {
 static void
 glob_recurse(struct glob_context *context, mrb_state* mrb, mrb_value self, char* root, mrb_int segment_num) {
   stack_pool_enter();
+  apr_pool_t* temp_pool;
+  apr_pool_create(&temp_pool, stack_pool());
   mrb_value segment = ary_ref(context->segments, segment_num);
   mrb_int pattern_count = ary_len(segment);
 
   apr_dir_t* dir;
-  apr_status_t err = apr_dir_open(&dir, explicit_path(root), stack_pool());
+  apr_status_t err = apr_dir_open(&dir, explicit_path(root), temp_pool);
   if (err != APR_SUCCESS) {
+    apr_pool_destroy(temp_pool);
     stack_pool_leave();
     return;
   }
@@ -245,6 +248,7 @@ glob_recurse(struct glob_context *context, mrb_state* mrb, mrb_value self, char*
   }
 
   apr_dir_close(dir);
+  apr_pool_destroy(temp_pool);
   stack_pool_leave();
 }
 
@@ -266,6 +270,11 @@ mruby_Dir_Globber_glob_recurse(mrb_state* mrb, mrb_value self) {
 void
 mruby_APR_init_native_ext(mrb_state* mrb) {
   apr_pool_create(&_stack_pool, NULL);
+  apr_allocator_t* pa = apr_pool_allocator_get(_stack_pool);
+  if (pa) {
+    /* Stack pool should be small. Return all but 2 free blocks on clear. */
+    apr_allocator_max_free_set(pa, 2);
+  }
 
   mrb_define_class_method(mrb, APR_module(mrb), "stack_pool", mruby_APR_stack_pool, MRB_ARGS_ARG(0, 0));
   mrb_define_class_method(mrb, APR_module(mrb), "stack_pool_enter", mruby_APR_stack_pool_enter, MRB_ARGS_ARG(0, 0));
