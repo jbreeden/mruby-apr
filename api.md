@@ -166,6 +166,7 @@ Kernel
 Instance Methods:
   - \` (Backtick)
   - `#load`
+  - `#sleep`
   - `#spawn`
   - `#system`
 
