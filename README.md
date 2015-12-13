@@ -1,6 +1,8 @@
 mruby-apr
 =========
 
+[![Join the chat at https://gitter.im/jbreeden/mruby-apr](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jbreeden/mruby-apr?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A cross-platform MRuby port of the core system libraries from CRuby.
 
 API Documentation
