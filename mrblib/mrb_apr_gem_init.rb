@@ -12,7 +12,8 @@ STDIN = $stdin
 STDOUT = $stdout
 STDERR = $stderr
 
-# The default `puts` in mruby isn't quite like MRI, so lets replace it.
 module Kernel
   def puts(*a); $stdout.puts(*a); end
+  def print(*a); $stdout.print(*a); end
+  def gets(*a); $stdin.gets(*a); end
 end

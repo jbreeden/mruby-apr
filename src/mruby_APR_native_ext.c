@@ -16,6 +16,7 @@
  */
 
 
+#include <math.h>
 #include "mruby_APR.h"
 #if defined(_WIN32)
   #include <process.h> /* _getpid */
@@ -267,6 +268,17 @@ mruby_Dir_Globber_glob_recurse(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 
+mrb_value
+mruby_Kernel_sleep(mrb_state* mrb, mrb_value self) {
+  mrb_float seconds;
+  mrb_get_args(mrb, "f", &seconds);
+  apr_time_t sleep_start = apr_time_now();
+  apr_sleep(seconds * 1000000); /* Convert seconds to microseconds */
+  double slept = (apr_time_now() - sleep_start) / 1000000.0;
+  slept = (slept - floor(slept)) < 0.5 ? floor(slept) : ceil(slept);
+  return mrb_fixnum_value(slept);
+}
+
 void
 mruby_APR_init_native_ext(mrb_state* mrb) {
   apr_pool_create(&_stack_pool, NULL);
@@ -291,6 +303,9 @@ mruby_APR_init_native_ext(mrb_state* mrb) {
 
   struct RClass* Process_module = mrb_define_module(mrb, "Process");
   mrb_define_class_method(mrb, Process_module, "pid", mruby_Process_pid, MRB_ARGS_ARG(0, 0));
+  
+  struct RClass* Kernel_module = mrb_define_module(mrb, "Kernel");
+  mrb_define_method(mrb, Kernel_module, "sleep", mruby_Kernel_sleep, MRB_ARGS_ARG(1, 0));
 }
 
 #ifdef __cplusplus
