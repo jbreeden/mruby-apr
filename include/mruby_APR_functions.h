@@ -206,7 +206,7 @@
 #define BIND_apr_socket_opt_set_FUNCTION TRUE
 #define BIND_apr_socket_protocol_get_FUNCTION TRUE
 #define BIND_apr_socket_recv_FUNCTION TRUE
-#define BIND_apr_socket_recvfrom_FUNCTION FALSE
+#define BIND_apr_socket_recvfrom_FUNCTION TRUE
 #define BIND_apr_socket_send_FUNCTION TRUE
 #define BIND_apr_socket_sendfile_FUNCTION FALSE
 #define BIND_apr_socket_sendto_FUNCTION TRUE

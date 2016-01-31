@@ -6539,7 +6539,7 @@ mrb_APR_apr_procattr_child_err_set(mrb_state* mrb, mrb_value self) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, parent_err, AprFileT_class(mrb))) {
+  if (!mrb_obj_is_kind_of(mrb, parent_err, AprFileT_class(mrb)) && !mrb_nil_p(parent_err)) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
     return mrb_nil_value();
   }
@@ -6626,7 +6626,7 @@ mrb_APR_apr_procattr_child_in_set(mrb_state* mrb, mrb_value self) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, parent_in, AprFileT_class(mrb))) {
+  if (!mrb_obj_is_kind_of(mrb, parent_in, AprFileT_class(mrb)) && !mrb_nil_p(parent_in)) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
     return mrb_nil_value();
   }
@@ -8433,7 +8433,6 @@ mrb_APR_apr_socket_recvfrom(mrb_state* mrb, mrb_value self) {
   free(native_buf);
   native_buf = NULL;
 
-  /* TODO TODO TODO TODO XXX What was I thinking? Please don't store new pools on every call */
   /* The APR functions that operate on a sockaddr tend to require
    * a functioning `pool` member, but they don't come out with one.
    * So, create one, and reference it from the Ruby object so the GC
