@@ -19,14 +19,6 @@ module APR
   # Creating pools is slow. If you don't need to keep any native handles
   # from the pool around, use this method instead. It re-uses a pool,
   # clearing the contents after each use.
-  # DANGEROUS: Memory will stack up until the topmost frame returns (get it? stack pool?)
-  #            DO NOT CALL IF YIELDING TO CLIENT CODE OR THIS COULD BLOW UP
-  # TODO: Make a better temp pool management system. This is just a twinkle of an idea.
-  # TODO: Set max free size, or APR will never return memory to the system.
-  # TODO: Create more temp pools on demand during high load and destroy them later?
-
-  # Make sure the stack pool exists, even before requested from ruby,
-  # since the C code may use this as well.
   def self.with_stack_pool(&block)
     @stack_pool_handle ||= stack_pool
     stack_pool_enter
