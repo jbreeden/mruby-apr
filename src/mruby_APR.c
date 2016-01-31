@@ -7,6 +7,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+/* MRUBY_BINDING_END */
 
 #define RETURN_ERRNO_AND_OUTPUT(err, output) \
    do { \
@@ -19,6 +20,7 @@ extern "C" {
       return results; \
       } while (0);
 
+/* MRUBY_BINDING: apr_allocator_alloc */
 #if BIND_apr_allocator_alloc_FUNCTION
 #define apr_allocator_alloc_REQUIRED_ARGC 2
 #define apr_allocator_alloc_OPTIONAL_ARGC 0
@@ -55,7 +57,9 @@ mrb_APR_apr_allocator_alloc(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_allocator_create */
 #if BIND_apr_allocator_create_FUNCTION
 #define apr_allocator_create_REQUIRED_ARGC 1
 #define apr_allocator_create_OPTIONAL_ARGC 0
@@ -91,7 +95,9 @@ mrb_APR_apr_allocator_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_allocator_destroy */
 #if BIND_apr_allocator_destroy_FUNCTION
 #define apr_allocator_destroy_REQUIRED_ARGC 1
 #define apr_allocator_destroy_OPTIONAL_ARGC 0
@@ -123,7 +129,9 @@ mrb_APR_apr_allocator_destroy(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_allocator_free */
 #if BIND_apr_allocator_free_FUNCTION
 #define apr_allocator_free_REQUIRED_ARGC 2
 #define apr_allocator_free_OPTIONAL_ARGC 0
@@ -163,7 +171,9 @@ mrb_APR_apr_allocator_free(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_allocator_max_free_set */
 #if BIND_apr_allocator_max_free_set_FUNCTION
 #define apr_allocator_max_free_set_REQUIRED_ARGC 2
 #define apr_allocator_max_free_set_OPTIONAL_ARGC 0
@@ -197,7 +207,9 @@ mrb_APR_apr_allocator_max_free_set(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_allocator_mutex_get */
 #if BIND_apr_allocator_mutex_get_FUNCTION
 #define apr_allocator_mutex_get_REQUIRED_ARGC 1
 #define apr_allocator_mutex_get_OPTIONAL_ARGC 0
@@ -232,7 +244,9 @@ mrb_APR_apr_allocator_mutex_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_allocator_mutex_set */
 #if BIND_apr_allocator_mutex_set_FUNCTION
 #define apr_allocator_mutex_set_REQUIRED_ARGC 2
 #define apr_allocator_mutex_set_OPTIONAL_ARGC 0
@@ -272,7 +286,9 @@ mrb_APR_apr_allocator_mutex_set(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_allocator_owner_get */
 #if BIND_apr_allocator_owner_get_FUNCTION
 #define apr_allocator_owner_get_REQUIRED_ARGC 1
 #define apr_allocator_owner_get_OPTIONAL_ARGC 0
@@ -307,7 +323,9 @@ mrb_APR_apr_allocator_owner_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_allocator_owner_set */
 #if BIND_apr_allocator_owner_set_FUNCTION
 #define apr_allocator_owner_set_REQUIRED_ARGC 2
 #define apr_allocator_owner_set_OPTIONAL_ARGC 0
@@ -347,7 +365,9 @@ mrb_APR_apr_allocator_owner_set(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_app_initialize */
 #if BIND_apr_app_initialize_FUNCTION
 #define apr_app_initialize_REQUIRED_ARGC 3
 #define apr_app_initialize_OPTIONAL_ARGC 0
@@ -393,7 +413,9 @@ mrb_APR_apr_app_initialize(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_array_append */
 #if BIND_apr_array_append_FUNCTION
 #define apr_array_append_REQUIRED_ARGC 3
 #define apr_array_append_OPTIONAL_ARGC 0
@@ -444,7 +466,9 @@ mrb_APR_apr_array_append(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_array_cat */
 #if BIND_apr_array_cat_FUNCTION
 #define apr_array_cat_REQUIRED_ARGC 2
 #define apr_array_cat_OPTIONAL_ARGC 0
@@ -484,7 +508,9 @@ mrb_APR_apr_array_cat(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_array_clear */
 #if BIND_apr_array_clear_FUNCTION
 #define apr_array_clear_REQUIRED_ARGC 1
 #define apr_array_clear_OPTIONAL_ARGC 0
@@ -516,7 +542,9 @@ mrb_APR_apr_array_clear(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_array_copy */
 #if BIND_apr_array_copy_FUNCTION
 #define apr_array_copy_REQUIRED_ARGC 2
 #define apr_array_copy_OPTIONAL_ARGC 0
@@ -559,7 +587,9 @@ mrb_APR_apr_array_copy(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_array_copy_hdr */
 #if BIND_apr_array_copy_hdr_FUNCTION
 #define apr_array_copy_hdr_REQUIRED_ARGC 2
 #define apr_array_copy_hdr_OPTIONAL_ARGC 0
@@ -602,7 +632,9 @@ mrb_APR_apr_array_copy_hdr(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_array_make */
 #if BIND_apr_array_make_FUNCTION
 #define apr_array_make_REQUIRED_ARGC 3
 #define apr_array_make_OPTIONAL_ARGC 0
@@ -641,7 +673,9 @@ mrb_APR_apr_array_make(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_array_pop */
 #if BIND_apr_array_pop_FUNCTION
 #define apr_array_pop_REQUIRED_ARGC 1
 #define apr_array_pop_OPTIONAL_ARGC 0
@@ -676,7 +710,9 @@ mrb_APR_apr_array_pop(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_array_pstrcat */
 #if BIND_apr_array_pstrcat_FUNCTION
 #define apr_array_pstrcat_REQUIRED_ARGC 3
 #define apr_array_pstrcat_OPTIONAL_ARGC 0
@@ -724,7 +760,9 @@ mrb_APR_apr_array_pstrcat(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_array_push */
 #if BIND_apr_array_push_FUNCTION
 #define apr_array_push_REQUIRED_ARGC 1
 #define apr_array_push_OPTIONAL_ARGC 0
@@ -759,7 +797,9 @@ mrb_APR_apr_array_push(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_atoi64 */
 #if BIND_apr_atoi64_FUNCTION
 #define apr_atoi64_REQUIRED_ARGC 1
 #define apr_atoi64_OPTIONAL_ARGC 0
@@ -789,7 +829,9 @@ mrb_APR_apr_atoi64(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_atomic_add32 */
 #if BIND_apr_atomic_add32_FUNCTION
 #define apr_atomic_add32_REQUIRED_ARGC 2
 #define apr_atomic_add32_OPTIONAL_ARGC 0
@@ -827,7 +869,9 @@ mrb_APR_apr_atomic_add32(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_atomic_cas32 */
 #if BIND_apr_atomic_cas32_FUNCTION
 #define apr_atomic_cas32_REQUIRED_ARGC 3
 #define apr_atomic_cas32_OPTIONAL_ARGC 0
@@ -867,7 +911,9 @@ mrb_APR_apr_atomic_cas32(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_atomic_casptr */
 #if BIND_apr_atomic_casptr_FUNCTION
 #define apr_atomic_casptr_REQUIRED_ARGC 3
 #define apr_atomic_casptr_OPTIONAL_ARGC 0
@@ -909,7 +955,9 @@ mrb_APR_apr_atomic_casptr(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_atomic_dec32 */
 #if BIND_apr_atomic_dec32_FUNCTION
 #define apr_atomic_dec32_REQUIRED_ARGC 1
 #define apr_atomic_dec32_OPTIONAL_ARGC 0
@@ -945,7 +993,9 @@ mrb_APR_apr_atomic_dec32(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_atomic_inc32 */
 #if BIND_apr_atomic_inc32_FUNCTION
 #define apr_atomic_inc32_REQUIRED_ARGC 1
 #define apr_atomic_inc32_OPTIONAL_ARGC 0
@@ -981,7 +1031,9 @@ mrb_APR_apr_atomic_inc32(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_atomic_init */
 #if BIND_apr_atomic_init_FUNCTION
 #define apr_atomic_init_REQUIRED_ARGC 1
 #define apr_atomic_init_OPTIONAL_ARGC 0
@@ -1020,7 +1072,9 @@ mrb_APR_apr_atomic_init(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_atomic_read32 */
 #if BIND_apr_atomic_read32_FUNCTION
 #define apr_atomic_read32_REQUIRED_ARGC 1
 #define apr_atomic_read32_OPTIONAL_ARGC 0
@@ -1056,7 +1110,9 @@ mrb_APR_apr_atomic_read32(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_atomic_set32 */
 #if BIND_apr_atomic_set32_FUNCTION
 #define apr_atomic_set32_REQUIRED_ARGC 2
 #define apr_atomic_set32_OPTIONAL_ARGC 0
@@ -1087,7 +1143,9 @@ mrb_APR_apr_atomic_set32(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_atomic_sub32 */
 #if BIND_apr_atomic_sub32_FUNCTION
 #define apr_atomic_sub32_REQUIRED_ARGC 2
 #define apr_atomic_sub32_OPTIONAL_ARGC 0
@@ -1118,7 +1176,9 @@ mrb_APR_apr_atomic_sub32(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_atomic_xchg32 */
 #if BIND_apr_atomic_xchg32_FUNCTION
 #define apr_atomic_xchg32_REQUIRED_ARGC 2
 #define apr_atomic_xchg32_OPTIONAL_ARGC 0
@@ -1156,7 +1216,9 @@ mrb_APR_apr_atomic_xchg32(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_atomic_xchgptr */
 #if BIND_apr_atomic_xchgptr_FUNCTION
 #define apr_atomic_xchgptr_REQUIRED_ARGC 2
 #define apr_atomic_xchgptr_OPTIONAL_ARGC 0
@@ -1193,7 +1255,9 @@ mrb_APR_apr_atomic_xchgptr(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_collapse_spaces */
 #if BIND_apr_collapse_spaces_FUNCTION
 #define apr_collapse_spaces_REQUIRED_ARGC 2
 #define apr_collapse_spaces_OPTIONAL_ARGC 0
@@ -1243,7 +1307,9 @@ mrb_APR_apr_collapse_spaces(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_cpystrn */
 #if BIND_apr_cpystrn_FUNCTION
 #define apr_cpystrn_REQUIRED_ARGC 3
 #define apr_cpystrn_OPTIONAL_ARGC 0
@@ -1295,7 +1361,9 @@ mrb_APR_apr_cpystrn(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_crypto_sha256_new */
 #if BIND_apr_crypto_sha256_new_FUNCTION
 #define apr_crypto_sha256_new_REQUIRED_ARGC 1
 #define apr_crypto_sha256_new_OPTIONAL_ARGC 0
@@ -1330,7 +1398,9 @@ mrb_APR_apr_crypto_sha256_new(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_ctime */
 #if BIND_apr_ctime_FUNCTION
 #define apr_ctime_REQUIRED_ARGC 1
 #define apr_ctime_OPTIONAL_ARGC 0
@@ -1382,6 +1452,7 @@ mrb_APR_apr_ctime(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
 #define chdir_REQUIRED_ARGC 1
 #define chdir_OPTIONAL_ARGC 0
@@ -1414,6 +1485,7 @@ mrb_APR_dir_getcwd(mrb_state* mrb, mrb_value self) {
   return results;
 }
 
+/* MRUBY_BINDING: apr_dir_close */
 #if BIND_apr_dir_close_FUNCTION
 #define apr_dir_close_REQUIRED_ARGC 1
 #define apr_dir_close_OPTIONAL_ARGC 0
@@ -1452,7 +1524,9 @@ mrb_APR_apr_dir_close(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_dir_make */
 #if BIND_apr_dir_make_FUNCTION
 #define apr_dir_make_REQUIRED_ARGC 3
 #define apr_dir_make_OPTIONAL_ARGC 0
@@ -1496,7 +1570,9 @@ mrb_APR_apr_dir_make(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_dir_make_recursive */
 #if BIND_apr_dir_make_recursive_FUNCTION
 #define apr_dir_make_recursive_REQUIRED_ARGC 3
 #define apr_dir_make_recursive_OPTIONAL_ARGC 0
@@ -1540,7 +1616,9 @@ mrb_APR_apr_dir_make_recursive(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_dir_open */
 #if BIND_apr_dir_open_FUNCTION
 #define apr_dir_open_REQUIRED_ARGC 2
 #define apr_dir_open_OPTIONAL_ARGC 0
@@ -1592,7 +1670,9 @@ mrb_APR_apr_dir_open(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_dir_read */
 #if BIND_apr_dir_read_FUNCTION
 #define apr_dir_read_REQUIRED_ARGC 2
 #define apr_dir_read_OPTIONAL_ARGC 0
@@ -1643,7 +1723,9 @@ mrb_APR_apr_dir_read(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_dir_remove */
 #if BIND_apr_dir_remove_FUNCTION
 #define apr_dir_remove_REQUIRED_ARGC 2
 #define apr_dir_remove_OPTIONAL_ARGC 0
@@ -1685,7 +1767,9 @@ mrb_APR_apr_dir_remove(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_dir_rewind */
 #if BIND_apr_dir_rewind_FUNCTION
 #define apr_dir_rewind_REQUIRED_ARGC 1
 #define apr_dir_rewind_OPTIONAL_ARGC 0
@@ -1724,7 +1808,9 @@ mrb_APR_apr_dir_rewind(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_dso_error */
 #if BIND_apr_dso_error_FUNCTION
 #define apr_dso_error_REQUIRED_ARGC 3
 #define apr_dso_error_OPTIONAL_ARGC 0
@@ -1782,7 +1868,9 @@ mrb_APR_apr_dso_error(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_dso_load */
 #if BIND_apr_dso_load_FUNCTION
 #define apr_dso_load_REQUIRED_ARGC 3
 #define apr_dso_load_OPTIONAL_ARGC 0
@@ -1828,7 +1916,9 @@ mrb_APR_apr_dso_load(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_dso_sym */
 #if BIND_apr_dso_sym_FUNCTION
 #define apr_dso_sym_REQUIRED_ARGC 3
 #define apr_dso_sym_OPTIONAL_ARGC 0
@@ -1874,7 +1964,9 @@ mrb_APR_apr_dso_sym(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_dso_unload */
 #if BIND_apr_dso_unload_FUNCTION
 #define apr_dso_unload_REQUIRED_ARGC 1
 #define apr_dso_unload_OPTIONAL_ARGC 0
@@ -1913,7 +2005,9 @@ mrb_APR_apr_dso_unload(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_env_delete */
 #if BIND_apr_env_delete_FUNCTION
 #define apr_env_delete_REQUIRED_ARGC 2
 #define apr_env_delete_OPTIONAL_ARGC 0
@@ -1955,7 +2049,9 @@ mrb_APR_apr_env_delete(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_env_get */
 #if BIND_apr_env_get_FUNCTION
 #define apr_env_get_REQUIRED_ARGC 2
 #define apr_env_get_OPTIONAL_ARGC 0
@@ -2007,7 +2103,9 @@ mrb_APR_apr_env_get(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_env_set */
 #if BIND_apr_env_set_FUNCTION
 #define apr_env_set_REQUIRED_ARGC 3
 #define apr_env_set_OPTIONAL_ARGC 0
@@ -2051,7 +2149,9 @@ mrb_APR_apr_env_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_escape_echo */
 #if BIND_apr_escape_echo_FUNCTION
 #define apr_escape_echo_REQUIRED_ARGC 5
 #define apr_escape_echo_OPTIONAL_ARGC 0
@@ -2114,7 +2214,9 @@ mrb_APR_apr_escape_echo(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_escape_entity */
 #if BIND_apr_escape_entity_FUNCTION
 #define apr_escape_entity_REQUIRED_ARGC 5
 #define apr_escape_entity_OPTIONAL_ARGC 0
@@ -2177,7 +2279,9 @@ mrb_APR_apr_escape_entity(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_escape_hex */
 #if BIND_apr_escape_hex_FUNCTION
 #define apr_escape_hex_REQUIRED_ARGC 5
 #define apr_escape_hex_OPTIONAL_ARGC 0
@@ -2243,7 +2347,9 @@ mrb_APR_apr_escape_hex(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_escape_path */
 #if BIND_apr_escape_path_FUNCTION
 #define apr_escape_path_REQUIRED_ARGC 5
 #define apr_escape_path_OPTIONAL_ARGC 0
@@ -2306,7 +2412,9 @@ mrb_APR_apr_escape_path(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_escape_path_segment */
 #if BIND_apr_escape_path_segment_FUNCTION
 #define apr_escape_path_segment_REQUIRED_ARGC 4
 #define apr_escape_path_segment_OPTIONAL_ARGC 0
@@ -2367,7 +2475,9 @@ mrb_APR_apr_escape_path_segment(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_escape_shell */
 #if BIND_apr_escape_shell_FUNCTION
 #define apr_escape_shell_REQUIRED_ARGC 4
 #define apr_escape_shell_OPTIONAL_ARGC 0
@@ -2428,7 +2538,9 @@ mrb_APR_apr_escape_shell(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_escape_urlencoded */
 #if BIND_apr_escape_urlencoded_FUNCTION
 #define apr_escape_urlencoded_REQUIRED_ARGC 4
 #define apr_escape_urlencoded_OPTIONAL_ARGC 0
@@ -2489,7 +2601,9 @@ mrb_APR_apr_escape_urlencoded(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_append */
 #if BIND_apr_file_append_FUNCTION
 #define apr_file_append_REQUIRED_ARGC 4
 #define apr_file_append_OPTIONAL_ARGC 0
@@ -2535,7 +2649,9 @@ mrb_APR_apr_file_append(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_attrs_set */
 #if BIND_apr_file_attrs_set_FUNCTION
 #define apr_file_attrs_set_REQUIRED_ARGC 4
 #define apr_file_attrs_set_OPTIONAL_ARGC 0
@@ -2581,7 +2697,9 @@ mrb_APR_apr_file_attrs_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_buffer_set */
 #if BIND_apr_file_buffer_set_FUNCTION
 #define apr_file_buffer_set_REQUIRED_ARGC 3
 #define apr_file_buffer_set_OPTIONAL_ARGC 0
@@ -2643,7 +2761,9 @@ mrb_APR_apr_file_buffer_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_buffer_size_get */
 #if BIND_apr_file_buffer_size_get_FUNCTION
 #define apr_file_buffer_size_get_REQUIRED_ARGC 1
 #define apr_file_buffer_size_get_OPTIONAL_ARGC 0
@@ -2682,7 +2802,9 @@ mrb_APR_apr_file_buffer_size_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_close */
 #if BIND_apr_file_close_FUNCTION
 #define apr_file_close_REQUIRED_ARGC 1
 #define apr_file_close_OPTIONAL_ARGC 0
@@ -2721,7 +2843,9 @@ mrb_APR_apr_file_close(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_copy */
 #if BIND_apr_file_copy_FUNCTION
 #define apr_file_copy_REQUIRED_ARGC 4
 #define apr_file_copy_OPTIONAL_ARGC 0
@@ -2767,7 +2891,9 @@ mrb_APR_apr_file_copy(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_data_get */
 #if BIND_apr_file_data_get_FUNCTION
 #define apr_file_data_get_REQUIRED_ARGC 3
 #define apr_file_data_get_OPTIONAL_ARGC 0
@@ -2813,7 +2939,9 @@ mrb_APR_apr_file_data_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_data_set */
 #if BIND_apr_file_data_set_FUNCTION
 #define apr_file_data_set_REQUIRED_ARGC 5
 #define apr_file_data_set_OPTIONAL_ARGC 0
@@ -2869,7 +2997,9 @@ mrb_APR_apr_file_data_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_datasync */
 #if BIND_apr_file_datasync_FUNCTION
 #define apr_file_datasync_REQUIRED_ARGC 1
 #define apr_file_datasync_OPTIONAL_ARGC 0
@@ -2908,7 +3038,9 @@ mrb_APR_apr_file_datasync(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_dup */
 #if BIND_apr_file_dup_FUNCTION
 #define apr_file_dup_REQUIRED_ARGC 3
 #define apr_file_dup_OPTIONAL_ARGC 0
@@ -2960,7 +3092,9 @@ mrb_APR_apr_file_dup(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_dup2 */
 #if BIND_apr_file_dup2_FUNCTION
 #define apr_file_dup2_REQUIRED_ARGC 3
 #define apr_file_dup2_OPTIONAL_ARGC 0
@@ -3015,7 +3149,9 @@ mrb_APR_apr_file_dup2(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_eof */
 #if BIND_apr_file_eof_FUNCTION
 #define apr_file_eof_REQUIRED_ARGC 1
 #define apr_file_eof_OPTIONAL_ARGC 0
@@ -3054,7 +3190,9 @@ mrb_APR_apr_file_eof(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_flags_get */
 #if BIND_apr_file_flags_get_FUNCTION
 #define apr_file_flags_get_REQUIRED_ARGC 1
 #define apr_file_flags_get_OPTIONAL_ARGC 0
@@ -3093,7 +3231,9 @@ mrb_APR_apr_file_flags_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_flush */
 #if BIND_apr_file_flush_FUNCTION
 #define apr_file_flush_REQUIRED_ARGC 1
 #define apr_file_flush_OPTIONAL_ARGC 0
@@ -3132,7 +3272,9 @@ mrb_APR_apr_file_flush(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_getc */
 #if BIND_apr_file_getc_FUNCTION
 #define apr_file_getc_REQUIRED_ARGC 1
 #define apr_file_getc_OPTIONAL_ARGC 0
@@ -3164,7 +3306,9 @@ mrb_APR_apr_file_getc(mrb_state* mrb, mrb_value self) {
   }
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_gets */
 #if BIND_apr_file_gets_FUNCTION
 #define apr_file_gets_REQUIRED_ARGC 2
 #define apr_file_gets_OPTIONAL_ARGC 0
@@ -3219,7 +3363,9 @@ mrb_APR_apr_file_gets(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_info_get */
 #if BIND_apr_file_info_get_FUNCTION
 #define apr_file_info_get_REQUIRED_ARGC 2
 #define apr_file_info_get_OPTIONAL_ARGC 0
@@ -3262,7 +3408,9 @@ mrb_APR_apr_file_info_get(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_inherit_unset */
 #if BIND_apr_file_inherit_unset_FUNCTION
 #define apr_file_inherit_unset_REQUIRED_ARGC 1
 #define apr_file_inherit_unset_OPTIONAL_ARGC 0
@@ -3284,7 +3432,9 @@ mrb_APR_apr_file_inherit_unset(mrb_state* mrb, mrb_value self) {
   return mrb_fixnum_value(result);
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_link */
 #if BIND_apr_file_link_FUNCTION
 #define apr_file_link_REQUIRED_ARGC 2
 #define apr_file_link_OPTIONAL_ARGC 0
@@ -3320,7 +3470,9 @@ mrb_APR_apr_file_link(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_lock */
 #if BIND_apr_file_lock_FUNCTION
 #define apr_file_lock_REQUIRED_ARGC 2
 #define apr_file_lock_OPTIONAL_ARGC 0
@@ -3361,7 +3513,9 @@ mrb_APR_apr_file_lock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_mktemp */
 #if BIND_apr_file_mktemp_FUNCTION
 #define apr_file_mktemp_REQUIRED_ARGC 4
 #define apr_file_mktemp_OPTIONAL_ARGC 0
@@ -3428,7 +3582,9 @@ mrb_APR_apr_file_mktemp(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_mtime_set */
 #if BIND_apr_file_mtime_set_FUNCTION
 #define apr_file_mtime_set_REQUIRED_ARGC 3
 #define apr_file_mtime_set_OPTIONAL_ARGC 0
@@ -3475,7 +3631,9 @@ mrb_APR_apr_file_mtime_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_name_get */
 #if BIND_apr_file_name_get_FUNCTION
 #define apr_file_name_get_REQUIRED_ARGC 2
 #define apr_file_name_get_OPTIONAL_ARGC 0
@@ -3519,7 +3677,9 @@ mrb_APR_apr_file_name_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_namedpipe_create */
 #if BIND_apr_file_namedpipe_create_FUNCTION
 #define apr_file_namedpipe_create_REQUIRED_ARGC 3
 #define apr_file_namedpipe_create_OPTIONAL_ARGC 0
@@ -3563,7 +3723,9 @@ mrb_APR_apr_file_namedpipe_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_open */
 #if BIND_apr_file_open_FUNCTION
 #define apr_file_open_REQUIRED_ARGC 4
 #define apr_file_open_OPTIONAL_ARGC 0
@@ -3619,7 +3781,9 @@ mrb_APR_apr_file_open(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_open_flags_stderr */
 #if BIND_apr_file_open_flags_stderr_FUNCTION
 #define apr_file_open_flags_stderr_REQUIRED_ARGC 2
 #define apr_file_open_flags_stderr_OPTIONAL_ARGC 0
@@ -3656,7 +3820,9 @@ mrb_APR_apr_file_open_flags_stderr(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mruby_box_apr_file_t(mrb, native_thefile));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_open_flags_stdin */
 #if BIND_apr_file_open_flags_stdin_FUNCTION
 #define apr_file_open_flags_stdin_REQUIRED_ARGC 2
 #define apr_file_open_flags_stdin_OPTIONAL_ARGC 0
@@ -3693,7 +3859,9 @@ mrb_APR_apr_file_open_flags_stdin(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mruby_box_apr_file_t(mrb, native_thefile));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_open_flags_stdout */
 #if BIND_apr_file_open_flags_stdout_FUNCTION
 #define apr_file_open_flags_stdout_REQUIRED_ARGC 2
 #define apr_file_open_flags_stdout_OPTIONAL_ARGC 0
@@ -3730,7 +3898,9 @@ mrb_APR_apr_file_open_flags_stdout(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mruby_box_apr_file_t(mrb, native_thefile));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_open_stderr */
 #if BIND_apr_file_open_stderr_FUNCTION
 #define apr_file_open_stderr_REQUIRED_ARGC 1
 #define apr_file_open_stderr_OPTIONAL_ARGC 0
@@ -3779,7 +3949,9 @@ mrb_APR_apr_file_open_stderr(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_open_stdin */
 #if BIND_apr_file_open_stdin_FUNCTION
 #define apr_file_open_stdin_REQUIRED_ARGC 1
 #define apr_file_open_stdin_OPTIONAL_ARGC 0
@@ -3829,7 +4001,9 @@ mrb_APR_apr_file_open_stdin(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_open_stdout */
 #if BIND_apr_file_open_stdout_FUNCTION
 #define apr_file_open_stdout_REQUIRED_ARGC 1
 #define apr_file_open_stdout_OPTIONAL_ARGC 0
@@ -3879,7 +4053,9 @@ mrb_APR_apr_file_open_stdout(mrb_state* mrb, mrb_value self) {
    return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_perms_set */
 #if BIND_apr_file_perms_set_FUNCTION
 #define apr_file_perms_set_REQUIRED_ARGC 2
 #define apr_file_perms_set_OPTIONAL_ARGC 0
@@ -3915,7 +4091,9 @@ mrb_APR_apr_file_perms_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_pipe_create */
 #if BIND_apr_file_pipe_create_FUNCTION
 #define apr_file_pipe_create_REQUIRED_ARGC 1
 #define apr_file_pipe_create_OPTIONAL_ARGC 0
@@ -3967,7 +4145,9 @@ mrb_APR_apr_file_pipe_create(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_pipe_create_ex */
 #if BIND_apr_file_pipe_create_ex_FUNCTION
 #define apr_file_pipe_create_ex_REQUIRED_ARGC 4
 #define apr_file_pipe_create_ex_OPTIONAL_ARGC 0
@@ -4018,7 +4198,9 @@ mrb_APR_apr_file_pipe_create_ex(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_pipe_timeout_get */
 #if BIND_apr_file_pipe_timeout_get_FUNCTION
 #define apr_file_pipe_timeout_get_REQUIRED_ARGC 2
 #define apr_file_pipe_timeout_get_OPTIONAL_ARGC 0
@@ -4062,7 +4244,9 @@ mrb_APR_apr_file_pipe_timeout_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_pipe_timeout_set */
 #if BIND_apr_file_pipe_timeout_set_FUNCTION
 #define apr_file_pipe_timeout_set_REQUIRED_ARGC 2
 #define apr_file_pipe_timeout_set_OPTIONAL_ARGC 0
@@ -4106,7 +4290,9 @@ mrb_APR_apr_file_pipe_timeout_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_printf */
 #if BIND_apr_file_printf_FUNCTION
 #define apr_file_printf_REQUIRED_ARGC 2
 #define apr_file_printf_OPTIONAL_ARGC 0
@@ -4147,7 +4333,9 @@ mrb_APR_apr_file_printf(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_putc */
 #if BIND_apr_file_putc_FUNCTION
 #define apr_file_putc_REQUIRED_ARGC 2
 #define apr_file_putc_OPTIONAL_ARGC 0
@@ -4191,7 +4379,9 @@ mrb_APR_apr_file_putc(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_puts */
 #if BIND_apr_file_puts_FUNCTION
 #define apr_file_puts_REQUIRED_ARGC 2
 #define apr_file_puts_OPTIONAL_ARGC 0
@@ -4233,7 +4423,9 @@ mrb_APR_apr_file_puts(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_read */
 #if BIND_apr_file_read_FUNCTION
 #define apr_file_read_REQUIRED_ARGC 2
 #define apr_file_read_OPTIONAL_ARGC 0
@@ -4284,7 +4476,9 @@ mrb_APR_apr_file_read(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_read_full */
 #if BIND_apr_file_read_full_FUNCTION
 #define apr_file_read_full_REQUIRED_ARGC 4
 #define apr_file_read_full_OPTIONAL_ARGC 0
@@ -4335,7 +4529,9 @@ mrb_APR_apr_file_read_full(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_remove */
 #if BIND_apr_file_remove_FUNCTION
 #define apr_file_remove_REQUIRED_ARGC 2
 #define apr_file_remove_OPTIONAL_ARGC 0
@@ -4377,7 +4573,9 @@ mrb_APR_apr_file_remove(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_rename */
 #if BIND_apr_file_rename_FUNCTION
 #define apr_file_rename_REQUIRED_ARGC 3
 #define apr_file_rename_OPTIONAL_ARGC 0
@@ -4421,7 +4619,9 @@ mrb_APR_apr_file_rename(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_seek */
 #if BIND_apr_file_seek_FUNCTION
 #define apr_file_seek_REQUIRED_ARGC 3
 #define apr_file_seek_OPTIONAL_ARGC 0
@@ -4469,7 +4669,9 @@ mrb_APR_apr_file_seek(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_setaside */
 #if BIND_apr_file_setaside_FUNCTION
 #define apr_file_setaside_REQUIRED_ARGC 3
 #define apr_file_setaside_OPTIONAL_ARGC 0
@@ -4521,7 +4723,9 @@ mrb_APR_apr_file_setaside(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_sync */
 #if BIND_apr_file_sync_FUNCTION
 #define apr_file_sync_REQUIRED_ARGC 1
 #define apr_file_sync_OPTIONAL_ARGC 0
@@ -4560,7 +4764,9 @@ mrb_APR_apr_file_sync(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_trunc */
 #if BIND_apr_file_trunc_FUNCTION
 #define apr_file_trunc_REQUIRED_ARGC 2
 #define apr_file_trunc_OPTIONAL_ARGC 0
@@ -4601,7 +4807,9 @@ mrb_APR_apr_file_trunc(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_ungetc */
 #if BIND_apr_file_ungetc_FUNCTION
 #define apr_file_ungetc_REQUIRED_ARGC 2
 #define apr_file_ungetc_OPTIONAL_ARGC 0
@@ -4643,7 +4851,9 @@ mrb_APR_apr_file_ungetc(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_unlock */
 #if BIND_apr_file_unlock_FUNCTION
 #define apr_file_unlock_REQUIRED_ARGC 1
 #define apr_file_unlock_OPTIONAL_ARGC 0
@@ -4682,7 +4892,9 @@ mrb_APR_apr_file_unlock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_write */
 #if BIND_apr_file_write_FUNCTION
 #define apr_file_write_REQUIRED_ARGC 3
 #define apr_file_write_OPTIONAL_ARGC 0
@@ -4737,7 +4949,9 @@ mrb_APR_apr_file_write(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_write_full */
 #if BIND_apr_file_write_full_FUNCTION
 #define apr_file_write_full_REQUIRED_ARGC 4
 #define apr_file_write_full_OPTIONAL_ARGC 0
@@ -4788,7 +5002,9 @@ mrb_APR_apr_file_write_full(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_writev */
 #if BIND_apr_file_writev_FUNCTION
 #define apr_file_writev_REQUIRED_ARGC 4
 #define apr_file_writev_OPTIONAL_ARGC 0
@@ -4839,7 +5055,9 @@ mrb_APR_apr_file_writev(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_file_writev_full */
 #if BIND_apr_file_writev_full_FUNCTION
 #define apr_file_writev_full_REQUIRED_ARGC 4
 #define apr_file_writev_full_OPTIONAL_ARGC 0
@@ -4890,7 +5108,9 @@ mrb_APR_apr_file_writev_full(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_filepath_encoding */
 #if BIND_apr_filepath_encoding_FUNCTION
 #define apr_filepath_encoding_REQUIRED_ARGC 2
 #define apr_filepath_encoding_OPTIONAL_ARGC 0
@@ -4934,7 +5154,9 @@ mrb_APR_apr_filepath_encoding(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_filepath_get */
 #if BIND_apr_filepath_get_FUNCTION
 #define apr_filepath_get_REQUIRED_ARGC 3
 #define apr_filepath_get_OPTIONAL_ARGC 0
@@ -4971,7 +5193,9 @@ mrb_APR_apr_filepath_get(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mrb_str_new_cstr(mrb, path));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_filepath_list_merge */
 #if BIND_apr_filepath_list_merge_FUNCTION
 #define apr_filepath_list_merge_REQUIRED_ARGC 3
 #define apr_filepath_list_merge_OPTIONAL_ARGC 0
@@ -5023,7 +5247,9 @@ mrb_APR_apr_filepath_list_merge(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_filepath_list_split */
 #if BIND_apr_filepath_list_split_FUNCTION
 #define apr_filepath_list_split_REQUIRED_ARGC 3
 #define apr_filepath_list_split_OPTIONAL_ARGC 0
@@ -5069,7 +5295,9 @@ mrb_APR_apr_filepath_list_split(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_filepath_merge */
 #if BIND_apr_filepath_merge_FUNCTION
 #define apr_filepath_merge_REQUIRED_ARGC 5
 #define apr_filepath_merge_OPTIONAL_ARGC 0
@@ -5119,7 +5347,9 @@ mrb_APR_apr_filepath_merge(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_filepath_name_get */
 #if BIND_apr_filepath_name_get_FUNCTION
 #define apr_filepath_name_get_REQUIRED_ARGC 1
 #define apr_filepath_name_get_OPTIONAL_ARGC 0
@@ -5149,7 +5379,9 @@ mrb_APR_apr_filepath_name_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_filepath_root */
 #if BIND_apr_filepath_root_FUNCTION
 #define apr_filepath_root_REQUIRED_ARGC 4
 #define apr_filepath_root_OPTIONAL_ARGC 0
@@ -5200,7 +5432,9 @@ mrb_APR_apr_filepath_root(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_filepath_set */
 #if BIND_apr_filepath_set_FUNCTION
 #define apr_filepath_set_REQUIRED_ARGC 2
 #define apr_filepath_set_OPTIONAL_ARGC 0
@@ -5242,7 +5476,9 @@ mrb_APR_apr_filepath_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_fnmatch */
 #if BIND_apr_fnmatch_FUNCTION
 #define apr_fnmatch_REQUIRED_ARGC 3
 #define apr_fnmatch_OPTIONAL_ARGC 0
@@ -5276,7 +5512,9 @@ mrb_APR_apr_fnmatch(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_fnmatch_test */
 #if BIND_apr_fnmatch_test_FUNCTION
 #define apr_fnmatch_test_REQUIRED_ARGC 1
 #define apr_fnmatch_test_OPTIONAL_ARGC 0
@@ -5310,7 +5548,9 @@ mrb_APR_apr_fnmatch_test(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_generate_random_bytes */
 #if BIND_apr_generate_random_bytes_FUNCTION
 #define apr_generate_random_bytes_REQUIRED_ARGC 4
 #define apr_generate_random_bytes_OPTIONAL_ARGC 0
@@ -5355,7 +5595,9 @@ mrb_APR_apr_generate_random_bytes(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_gethostname */
 #if BIND_apr_gethostname_FUNCTION
 #define apr_gethostname_REQUIRED_ARGC 1
 #define apr_gethostname_OPTIONAL_ARGC 0
@@ -5390,7 +5632,9 @@ mrb_APR_apr_gethostname(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, hostname);
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_getnameinfo */
 #if BIND_apr_getnameinfo_FUNCTION
 #define apr_getnameinfo_REQUIRED_ARGC 1
 #define apr_getnameinfo_OPTIONAL_ARGC 0
@@ -5427,7 +5671,9 @@ mrb_APR_apr_getnameinfo(mrb_state* mrb, mrb_value self) {
   }
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_getopt */
 #if BIND_apr_getopt_FUNCTION
 #define apr_getopt_REQUIRED_ARGC 4
 #define apr_getopt_OPTIONAL_ARGC 0
@@ -5494,7 +5740,9 @@ mrb_APR_apr_getopt(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_getopt_init */
 #if BIND_apr_getopt_init_FUNCTION
 #define apr_getopt_init_REQUIRED_ARGC 4
 #define apr_getopt_init_OPTIONAL_ARGC 0
@@ -5545,7 +5793,9 @@ mrb_APR_apr_getopt_init(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_getopt_long */
 #if BIND_apr_getopt_long_FUNCTION
 #define apr_getopt_long_REQUIRED_ARGC 6
 #define apr_getopt_long_OPTIONAL_ARGC 0
@@ -5609,7 +5859,9 @@ mrb_APR_apr_getopt_long(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_getservbyname */
 #if BIND_apr_getservbyname_FUNCTION
 #define apr_getservbyname_REQUIRED_ARGC 2
 #define apr_getservbyname_OPTIONAL_ARGC 0
@@ -5650,7 +5902,9 @@ mrb_APR_apr_getservbyname(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_gid_compare */
 #if BIND_apr_gid_compare_FUNCTION
 #define apr_gid_compare_REQUIRED_ARGC 2
 #define apr_gid_compare_OPTIONAL_ARGC 0
@@ -5691,7 +5945,9 @@ mrb_APR_apr_gid_compare(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_gid_get */
 #if BIND_apr_gid_get_FUNCTION
 #define apr_gid_get_REQUIRED_ARGC 3
 #define apr_gid_get_OPTIONAL_ARGC 0
@@ -5737,7 +5993,9 @@ mrb_APR_apr_gid_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_gid_name_get */
 #if BIND_apr_gid_name_get_FUNCTION
 #define apr_gid_name_get_REQUIRED_ARGC 3
 #define apr_gid_name_get_OPTIONAL_ARGC 0
@@ -5786,7 +6044,9 @@ mrb_APR_apr_gid_name_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_clear */
 #if BIND_apr_hash_clear_FUNCTION
 #define apr_hash_clear_REQUIRED_ARGC 1
 #define apr_hash_clear_OPTIONAL_ARGC 0
@@ -5818,7 +6078,9 @@ mrb_APR_apr_hash_clear(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_copy */
 #if BIND_apr_hash_copy_FUNCTION
 #define apr_hash_copy_REQUIRED_ARGC 2
 #define apr_hash_copy_OPTIONAL_ARGC 0
@@ -5861,7 +6123,9 @@ mrb_APR_apr_hash_copy(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_count */
 #if BIND_apr_hash_count_FUNCTION
 #define apr_hash_count_REQUIRED_ARGC 1
 #define apr_hash_count_OPTIONAL_ARGC 0
@@ -5900,7 +6164,9 @@ mrb_APR_apr_hash_count(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_do */
 #if BIND_apr_hash_do_FUNCTION
 #define apr_hash_do_REQUIRED_ARGC 3
 #define apr_hash_do_OPTIONAL_ARGC 0
@@ -5949,7 +6215,9 @@ mrb_APR_apr_hash_do(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_first */
 #if BIND_apr_hash_first_FUNCTION
 #define apr_hash_first_REQUIRED_ARGC 2
 #define apr_hash_first_OPTIONAL_ARGC 0
@@ -5992,7 +6260,9 @@ mrb_APR_apr_hash_first(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_get */
 #if BIND_apr_hash_get_FUNCTION
 #define apr_hash_get_REQUIRED_ARGC 3
 #define apr_hash_get_OPTIONAL_ARGC 0
@@ -6034,7 +6304,9 @@ mrb_APR_apr_hash_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_make */
 #if BIND_apr_hash_make_FUNCTION
 #define apr_hash_make_REQUIRED_ARGC 1
 #define apr_hash_make_OPTIONAL_ARGC 0
@@ -6069,7 +6341,9 @@ mrb_APR_apr_hash_make(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_make_custom */
 #if BIND_apr_hash_make_custom_FUNCTION
 #define apr_hash_make_custom_REQUIRED_ARGC 2
 #define apr_hash_make_custom_OPTIONAL_ARGC 0
@@ -6109,7 +6383,9 @@ mrb_APR_apr_hash_make_custom(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_merge */
 #if BIND_apr_hash_merge_FUNCTION
 #define apr_hash_merge_REQUIRED_ARGC 15
 #define apr_hash_merge_OPTIONAL_ARGC 0
@@ -6217,7 +6493,9 @@ mrb_APR_apr_hash_merge(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_next */
 #if BIND_apr_hash_next_FUNCTION
 #define apr_hash_next_REQUIRED_ARGC 1
 #define apr_hash_next_OPTIONAL_ARGC 0
@@ -6252,7 +6530,9 @@ mrb_APR_apr_hash_next(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_overlay */
 #if BIND_apr_hash_overlay_FUNCTION
 #define apr_hash_overlay_REQUIRED_ARGC 3
 #define apr_hash_overlay_OPTIONAL_ARGC 0
@@ -6303,7 +6583,9 @@ mrb_APR_apr_hash_overlay(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_set */
 #if BIND_apr_hash_set_FUNCTION
 #define apr_hash_set_REQUIRED_ARGC 4
 #define apr_hash_set_OPTIONAL_ARGC 0
@@ -6347,7 +6629,9 @@ mrb_APR_apr_hash_set(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_this */
 #if BIND_apr_hash_this_FUNCTION
 #define apr_hash_this_REQUIRED_ARGC 4
 #define apr_hash_this_OPTIONAL_ARGC 0
@@ -6394,7 +6678,9 @@ mrb_APR_apr_hash_this(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_this_key */
 #if BIND_apr_hash_this_key_FUNCTION
 #define appr_hash_this_key_REQUIRED_ARGC 1
 #define apr_hash_this_key_OPTIONAL_ARGC 0
@@ -6429,7 +6715,9 @@ mrb_APR_apr_hash_this_key(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_this_key_len */
 #if BIND_apr_hash_this_key_len_FUNCTION
 #define apr_hash_this_key_len_REQUIRED_ARGC 1
 #define apr_hash_this_key_len_OPTIONAL_ARGC 0
@@ -6468,7 +6756,9 @@ mrb_APR_apr_hash_this_key_len(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hash_this_val */
 #if BIND_apr_hash_this_val_FUNCTION
 #define apr_hash_this_val_REQUIRED_ARGC 1
 #define apr_hash_this_val_OPTIONAL_ARGC 0
@@ -6503,7 +6793,9 @@ mrb_APR_apr_hash_this_val(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_hashfunc_default */
 #if BIND_apr_hashfunc_default_FUNCTION
 #define apr_hashfunc_default_REQUIRED_ARGC 2
 #define apr_hashfunc_default_OPTIONAL_ARGC 0
@@ -6542,7 +6834,9 @@ mrb_APR_apr_hashfunc_default(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_initialize */
 #if BIND_apr_initialize_FUNCTION
 #define apr_initialize_REQUIRED_ARGC 0
 #define apr_initialize_OPTIONAL_ARGC 0
@@ -6566,7 +6860,9 @@ mrb_APR_apr_initialize(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_ipsubnet_create */
 #if BIND_apr_ipsubnet_create_FUNCTION
 #define apr_ipsubnet_create_REQUIRED_ARGC 4
 #define apr_ipsubnet_create_OPTIONAL_ARGC 0
@@ -6614,7 +6910,9 @@ mrb_APR_apr_ipsubnet_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_ipsubnet_test */
 #if BIND_apr_ipsubnet_test_FUNCTION
 #define apr_ipsubnet_test_REQUIRED_ARGC 2
 #define apr_ipsubnet_test_OPTIONAL_ARGC 0
@@ -6661,7 +6959,9 @@ mrb_APR_apr_ipsubnet_test(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_is_empty_array */
 #if BIND_apr_is_empty_array_FUNCTION
 #define apr_is_empty_array_REQUIRED_ARGC 1
 #define apr_is_empty_array_OPTIONAL_ARGC 0
@@ -6700,7 +7000,9 @@ mrb_APR_apr_is_empty_array(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_is_empty_table */
 #if BIND_apr_is_empty_table_FUNCTION
 #define apr_is_empty_table_REQUIRED_ARGC 1
 #define apr_is_empty_table_OPTIONAL_ARGC 0
@@ -6739,7 +7041,9 @@ mrb_APR_apr_is_empty_table(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_itoa */
 #if BIND_apr_itoa_FUNCTION
 #define apr_itoa_REQUIRED_ARGC 2
 #define apr_itoa_OPTIONAL_ARGC 0
@@ -6776,7 +7080,9 @@ mrb_APR_apr_itoa(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_ltoa */
 #if BIND_apr_ltoa_FUNCTION
 #define apr_ltoa_REQUIRED_ARGC 2
 #define apr_ltoa_OPTIONAL_ARGC 0
@@ -6816,7 +7122,9 @@ mrb_APR_apr_ltoa(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_match_glob */
 #if BIND_apr_match_glob_FUNCTION
 #define apr_match_glob_REQUIRED_ARGC 3
 #define apr_match_glob_OPTIONAL_ARGC 0
@@ -6863,7 +7171,9 @@ mrb_APR_apr_match_glob(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_mcast_hops */
 #if BIND_apr_mcast_hops_FUNCTION
 #define apr_mcast_hops_REQUIRED_ARGC 2
 #define apr_mcast_hops_OPTIONAL_ARGC 0
@@ -6907,7 +7217,9 @@ mrb_APR_apr_mcast_hops(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_mcast_interface */
 #if BIND_apr_mcast_interface_FUNCTION
 #define apr_mcast_interface_REQUIRED_ARGC 2
 #define apr_mcast_interface_OPTIONAL_ARGC 0
@@ -6954,7 +7266,9 @@ mrb_APR_apr_mcast_interface(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_mcast_join */
 #if BIND_apr_mcast_join_FUNCTION
 #define apr_mcast_join_REQUIRED_ARGC 4
 #define apr_mcast_join_OPTIONAL_ARGC 0
@@ -7017,7 +7331,9 @@ mrb_APR_apr_mcast_join(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_mcast_leave */
 #if BIND_apr_mcast_leave_FUNCTION
 #define apr_mcast_leave_REQUIRED_ARGC 4
 #define apr_mcast_leave_OPTIONAL_ARGC 0
@@ -7080,7 +7396,9 @@ mrb_APR_apr_mcast_leave(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_mcast_loopback */
 #if BIND_apr_mcast_loopback_FUNCTION
 #define apr_mcast_loopback_REQUIRED_ARGC 2
 #define apr_mcast_loopback_OPTIONAL_ARGC 0
@@ -7124,7 +7442,9 @@ mrb_APR_apr_mcast_loopback(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_mmap_create */
 #if BIND_apr_mmap_create_FUNCTION
 #define apr_mmap_create_REQUIRED_ARGC 6
 #define apr_mmap_create_OPTIONAL_ARGC 0
@@ -7185,7 +7505,9 @@ mrb_APR_apr_mmap_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_mmap_delete */
 #if BIND_apr_mmap_delete_FUNCTION
 #define apr_mmap_delete_REQUIRED_ARGC 1
 #define apr_mmap_delete_OPTIONAL_ARGC 0
@@ -7224,7 +7546,9 @@ mrb_APR_apr_mmap_delete(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_mmap_dup */
 #if BIND_apr_mmap_dup_FUNCTION
 #define apr_mmap_dup_REQUIRED_ARGC 3
 #define apr_mmap_dup_OPTIONAL_ARGC 0
@@ -7276,7 +7600,9 @@ mrb_APR_apr_mmap_dup(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_mmap_offset */
 #if BIND_apr_mmap_offset_FUNCTION
 #define apr_mmap_offset_REQUIRED_ARGC 3
 #define apr_mmap_offset_OPTIONAL_ARGC 0
@@ -7325,7 +7651,9 @@ mrb_APR_apr_mmap_offset(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_off_t_toa */
 #if BIND_apr_off_t_toa_FUNCTION
 #define apr_off_t_toa_REQUIRED_ARGC 2
 #define apr_off_t_toa_OPTIONAL_ARGC 0
@@ -7365,7 +7693,9 @@ mrb_APR_apr_off_t_toa(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_default_encoding */
 #if BIND_apr_os_default_encoding_FUNCTION
 #define apr_os_default_encoding_REQUIRED_ARGC 1
 #define apr_os_default_encoding_OPTIONAL_ARGC 0
@@ -7400,7 +7730,9 @@ mrb_APR_apr_os_default_encoding(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_dir_get */
 #if BIND_apr_os_dir_get_FUNCTION
 #define apr_os_dir_get_REQUIRED_ARGC 2
 #define apr_os_dir_get_OPTIONAL_ARGC 0
@@ -7444,7 +7776,9 @@ mrb_APR_apr_os_dir_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_dir_put */
 #if BIND_apr_os_dir_put_FUNCTION
 #define apr_os_dir_put_REQUIRED_ARGC 3
 #define apr_os_dir_put_OPTIONAL_ARGC 0
@@ -7493,7 +7827,9 @@ mrb_APR_apr_os_dir_put(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_dso_handle_get */
 #if BIND_apr_os_dso_handle_get_FUNCTION
 #define apr_os_dso_handle_get_REQUIRED_ARGC 2
 #define apr_os_dso_handle_get_OPTIONAL_ARGC 0
@@ -7537,7 +7873,9 @@ mrb_APR_apr_os_dso_handle_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_dso_handle_put */
 #if BIND_apr_os_dso_handle_put_FUNCTION
 #define apr_os_dso_handle_put_REQUIRED_ARGC 3
 #define apr_os_dso_handle_put_OPTIONAL_ARGC 0
@@ -7586,7 +7924,9 @@ mrb_APR_apr_os_dso_handle_put(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_exp_time_get */
 #if BIND_apr_os_exp_time_get_FUNCTION
 #define apr_os_exp_time_get_REQUIRED_ARGC 2
 #define apr_os_exp_time_get_OPTIONAL_ARGC 0
@@ -7630,7 +7970,9 @@ mrb_APR_apr_os_exp_time_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_exp_time_put */
 #if BIND_apr_os_exp_time_put_FUNCTION
 #define apr_os_exp_time_put_REQUIRED_ARGC 3
 #define apr_os_exp_time_put_OPTIONAL_ARGC 0
@@ -7682,7 +8024,9 @@ mrb_APR_apr_os_exp_time_put(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_file_get */
 #if BIND_apr_os_file_get_FUNCTION
 #define apr_os_file_get_REQUIRED_ARGC 2
 #define apr_os_file_get_OPTIONAL_ARGC 0
@@ -7726,7 +8070,9 @@ mrb_APR_apr_os_file_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_file_put */
 #if BIND_apr_os_file_put_FUNCTION
 #define apr_os_file_put_REQUIRED_ARGC 4
 #define apr_os_file_put_OPTIONAL_ARGC 0
@@ -7777,7 +8123,9 @@ mrb_APR_apr_os_file_put(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_imp_time_get */
 #if BIND_apr_os_imp_time_get_FUNCTION
 #define apr_os_imp_time_get_REQUIRED_ARGC 2
 #define apr_os_imp_time_get_OPTIONAL_ARGC 0
@@ -7818,7 +8166,9 @@ mrb_APR_apr_os_imp_time_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_imp_time_put */
 #if BIND_apr_os_imp_time_put_FUNCTION
 #define apr_os_imp_time_put_REQUIRED_ARGC 3
 #define apr_os_imp_time_put_OPTIONAL_ARGC 0
@@ -7867,7 +8217,9 @@ mrb_APR_apr_os_imp_time_put(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_locale_encoding */
 #if BIND_apr_os_locale_encoding_FUNCTION
 #define apr_os_locale_encoding_REQUIRED_ARGC 1
 #define apr_os_locale_encoding_OPTIONAL_ARGC 0
@@ -7902,7 +8254,9 @@ mrb_APR_apr_os_locale_encoding(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_pipe_put */
 #if BIND_apr_os_pipe_put_FUNCTION
 #define apr_os_pipe_put_REQUIRED_ARGC 3
 #define apr_os_pipe_put_OPTIONAL_ARGC 0
@@ -7951,7 +8305,9 @@ mrb_APR_apr_os_pipe_put(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_pipe_put_ex */
 #if BIND_apr_os_pipe_put_ex_FUNCTION
 #define apr_os_pipe_put_ex_REQUIRED_ARGC 4
 #define apr_os_pipe_put_ex_OPTIONAL_ARGC 0
@@ -8002,7 +8358,9 @@ mrb_APR_apr_os_pipe_put_ex(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_proc_mutex_get */
 #if BIND_apr_os_proc_mutex_get_FUNCTION
 #define apr_os_proc_mutex_get_REQUIRED_ARGC 2
 #define apr_os_proc_mutex_get_OPTIONAL_ARGC 0
@@ -8046,7 +8404,9 @@ mrb_APR_apr_os_proc_mutex_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_proc_mutex_put */
 #if BIND_apr_os_proc_mutex_put_FUNCTION
 #define apr_os_proc_mutex_put_REQUIRED_ARGC 3
 #define apr_os_proc_mutex_put_OPTIONAL_ARGC 0
@@ -8095,7 +8455,9 @@ mrb_APR_apr_os_proc_mutex_put(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_shm_get */
 #if BIND_apr_os_shm_get_FUNCTION
 #define apr_os_shm_get_REQUIRED_ARGC 2
 #define apr_os_shm_get_OPTIONAL_ARGC 0
@@ -8139,7 +8501,9 @@ mrb_APR_apr_os_shm_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_shm_put */
 #if BIND_apr_os_shm_put_FUNCTION
 #define apr_os_shm_put_REQUIRED_ARGC 3
 #define apr_os_shm_put_OPTIONAL_ARGC 0
@@ -8188,7 +8552,9 @@ mrb_APR_apr_os_shm_put(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_sock_get */
 #if BIND_apr_os_sock_get_FUNCTION
 #define apr_os_sock_get_REQUIRED_ARGC 2
 #define apr_os_sock_get_OPTIONAL_ARGC 0
@@ -8232,7 +8598,9 @@ mrb_APR_apr_os_sock_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_sock_make */
 #if BIND_apr_os_sock_make_FUNCTION
 #define apr_os_sock_make_REQUIRED_ARGC 3
 #define apr_os_sock_make_OPTIONAL_ARGC 0
@@ -8284,7 +8652,9 @@ mrb_APR_apr_os_sock_make(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_sock_put */
 #if BIND_apr_os_sock_put_FUNCTION
 #define apr_os_sock_put_REQUIRED_ARGC 3
 #define apr_os_sock_put_OPTIONAL_ARGC 0
@@ -8333,7 +8703,9 @@ mrb_APR_apr_os_sock_put(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_thread_current */
 #if BIND_apr_os_thread_current_FUNCTION
 #define apr_os_thread_current_REQUIRED_ARGC 0
 #define apr_os_thread_current_OPTIONAL_ARGC 0
@@ -8353,7 +8725,9 @@ mrb_APR_apr_os_thread_current(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_thread_equal */
 #if BIND_apr_os_thread_equal_FUNCTION
 #define apr_os_thread_equal_REQUIRED_ARGC 2
 #define apr_os_thread_equal_OPTIONAL_ARGC 0
@@ -8394,7 +8768,9 @@ mrb_APR_apr_os_thread_equal(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_thread_get */
 #if BIND_apr_os_thread_get_FUNCTION
 #define apr_os_thread_get_REQUIRED_ARGC 2
 #define apr_os_thread_get_OPTIONAL_ARGC 0
@@ -8438,7 +8814,9 @@ mrb_APR_apr_os_thread_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_thread_put */
 #if BIND_apr_os_thread_put_FUNCTION
 #define apr_os_thread_put_REQUIRED_ARGC 3
 #define apr_os_thread_put_OPTIONAL_ARGC 0
@@ -8487,7 +8865,9 @@ mrb_APR_apr_os_thread_put(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_threadkey_get */
 #if BIND_apr_os_threadkey_get_FUNCTION
 #define apr_os_threadkey_get_REQUIRED_ARGC 2
 #define apr_os_threadkey_get_OPTIONAL_ARGC 0
@@ -8531,7 +8911,9 @@ mrb_APR_apr_os_threadkey_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_threadkey_put */
 #if BIND_apr_os_threadkey_put_FUNCTION
 #define apr_os_threadkey_put_REQUIRED_ARGC 3
 #define apr_os_threadkey_put_OPTIONAL_ARGC 0
@@ -8580,7 +8962,9 @@ mrb_APR_apr_os_threadkey_put(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_os_uuid_get */
 #if BIND_apr_os_uuid_get_FUNCTION
 #define apr_os_uuid_get_REQUIRED_ARGC 1
 #define apr_os_uuid_get_OPTIONAL_ARGC 0
@@ -8616,7 +9000,9 @@ mrb_APR_apr_os_uuid_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_palloc */
 #if BIND_apr_palloc_FUNCTION
 #define apr_palloc_REQUIRED_ARGC 2
 #define apr_palloc_OPTIONAL_ARGC 0
@@ -8653,7 +9039,9 @@ mrb_APR_apr_palloc(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_palloc_debug */
 #if BIND_apr_palloc_debug_FUNCTION
 #define apr_palloc_debug_REQUIRED_ARGC 3
 #define apr_palloc_debug_OPTIONAL_ARGC 0
@@ -8692,7 +9080,9 @@ mrb_APR_apr_palloc_debug(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_parse_addr_port */
 #if BIND_apr_parse_addr_port_FUNCTION
 #define apr_parse_addr_port_REQUIRED_ARGC 5
 #define apr_parse_addr_port_OPTIONAL_ARGC 0
@@ -8748,7 +9138,9 @@ mrb_APR_apr_parse_addr_port(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_password_get */
 #if BIND_apr_password_get_FUNCTION
 #define apr_password_get_REQUIRED_ARGC 3
 #define apr_password_get_OPTIONAL_ARGC 0
@@ -8808,7 +9200,9 @@ mrb_APR_apr_password_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pcalloc_debug */
 #if BIND_apr_pcalloc_debug_FUNCTION
 #define apr_pcalloc_debug_REQUIRED_ARGC 3
 #define apr_pcalloc_debug_OPTIONAL_ARGC 0
@@ -8847,7 +9241,9 @@ mrb_APR_apr_pcalloc_debug(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pescape_echo */
 #if BIND_apr_pescape_echo_FUNCTION
 #define apr_pescape_echo_REQUIRED_ARGC 3
 #define apr_pescape_echo_OPTIONAL_ARGC 0
@@ -8886,7 +9282,9 @@ mrb_APR_apr_pescape_echo(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pescape_entity */
 #if BIND_apr_pescape_entity_FUNCTION
 #define apr_pescape_entity_REQUIRED_ARGC 3
 #define apr_pescape_entity_OPTIONAL_ARGC 0
@@ -8925,7 +9323,9 @@ mrb_APR_apr_pescape_entity(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pescape_hex */
 #if BIND_apr_pescape_hex_FUNCTION
 #define apr_pescape_hex_REQUIRED_ARGC 4
 #define apr_pescape_hex_OPTIONAL_ARGC 0
@@ -8969,7 +9369,9 @@ mrb_APR_apr_pescape_hex(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pescape_path */
 #if BIND_apr_pescape_path_FUNCTION
 #define apr_pescape_path_REQUIRED_ARGC 3
 #define apr_pescape_path_OPTIONAL_ARGC 0
@@ -9008,7 +9410,9 @@ mrb_APR_apr_pescape_path(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pescape_path_segment */
 #if BIND_apr_pescape_path_segment_FUNCTION
 #define apr_pescape_path_segment_REQUIRED_ARGC 2
 #define apr_pescape_path_segment_OPTIONAL_ARGC 0
@@ -9045,7 +9449,9 @@ mrb_APR_apr_pescape_path_segment(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pescape_shell */
 #if BIND_apr_pescape_shell_FUNCTION
 #define apr_pescape_shell_REQUIRED_ARGC 2
 #define apr_pescape_shell_OPTIONAL_ARGC 0
@@ -9082,7 +9488,9 @@ mrb_APR_apr_pescape_shell(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pescape_urlencoded */
 #if BIND_apr_pescape_urlencoded_FUNCTION
 #define apr_pescape_urlencoded_REQUIRED_ARGC 2
 #define apr_pescape_urlencoded_OPTIONAL_ARGC 0
@@ -9119,7 +9527,9 @@ mrb_APR_apr_pescape_urlencoded(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pmemdup */
 #if BIND_apr_pmemdup_FUNCTION
 #define apr_pmemdup_REQUIRED_ARGC 3
 #define apr_pmemdup_OPTIONAL_ARGC 0
@@ -9161,7 +9571,9 @@ mrb_APR_apr_pmemdup(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_poll */
 #if BIND_apr_poll_FUNCTION
 #define apr_poll_REQUIRED_ARGC 4
 #define apr_poll_OPTIONAL_ARGC 0
@@ -9212,7 +9624,9 @@ mrb_APR_apr_poll(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_poll_method_defname */
 #if BIND_apr_poll_method_defname_FUNCTION
 #define apr_poll_method_defname_REQUIRED_ARGC 0
 #define apr_poll_method_defname_OPTIONAL_ARGC 0
@@ -9232,7 +9646,9 @@ mrb_APR_apr_poll_method_defname(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pollcb_add */
 #if BIND_apr_pollcb_add_FUNCTION
 #define apr_pollcb_add_REQUIRED_ARGC 2
 #define apr_pollcb_add_OPTIONAL_ARGC 0
@@ -9279,7 +9695,9 @@ mrb_APR_apr_pollcb_add(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pollcb_create */
 #if BIND_apr_pollcb_create_FUNCTION
 #define apr_pollcb_create_REQUIRED_ARGC 4
 #define apr_pollcb_create_OPTIONAL_ARGC 0
@@ -9327,7 +9745,9 @@ mrb_APR_apr_pollcb_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pollcb_create_ex */
 #if BIND_apr_pollcb_create_ex_FUNCTION
 #define apr_pollcb_create_ex_REQUIRED_ARGC 5
 #define apr_pollcb_create_ex_OPTIONAL_ARGC 0
@@ -9380,7 +9800,9 @@ mrb_APR_apr_pollcb_create_ex(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pollcb_poll */
 #if BIND_apr_pollcb_poll_FUNCTION
 #define apr_pollcb_poll_REQUIRED_ARGC 5
 #define apr_pollcb_poll_OPTIONAL_ARGC 0
@@ -9436,7 +9858,9 @@ mrb_APR_apr_pollcb_poll(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pollcb_remove */
 #if BIND_apr_pollcb_remove_FUNCTION
 #define apr_pollcb_remove_REQUIRED_ARGC 4
 #define apr_pollcb_remove_OPTIONAL_ARGC 0
@@ -9496,7 +9920,9 @@ mrb_APR_apr_pollcb_remove(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pollset_add */
 #if BIND_apr_pollset_add_FUNCTION
 #define apr_pollset_add_REQUIRED_ARGC 2
 #define apr_pollset_add_OPTIONAL_ARGC 0
@@ -9543,7 +9969,9 @@ mrb_APR_apr_pollset_add(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pollset_create */
 #if BIND_apr_pollset_create_FUNCTION
 #define apr_pollset_create_REQUIRED_ARGC 4
 #define apr_pollset_create_OPTIONAL_ARGC 0
@@ -9591,7 +10019,9 @@ mrb_APR_apr_pollset_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pollset_create_ex */
 #if BIND_apr_pollset_create_ex_FUNCTION
 #define apr_pollset_create_ex_REQUIRED_ARGC 5
 #define apr_pollset_create_ex_OPTIONAL_ARGC 0
@@ -9644,7 +10074,9 @@ mrb_APR_apr_pollset_create_ex(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pollset_destroy */
 #if BIND_apr_pollset_destroy_FUNCTION
 #define apr_pollset_destroy_REQUIRED_ARGC 1
 #define apr_pollset_destroy_OPTIONAL_ARGC 0
@@ -9683,7 +10115,9 @@ mrb_APR_apr_pollset_destroy(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pollset_method_name */
 #if BIND_apr_pollset_method_name_FUNCTION
 #define apr_pollset_method_name_REQUIRED_ARGC 1
 #define apr_pollset_method_name_OPTIONAL_ARGC 0
@@ -9718,7 +10152,9 @@ mrb_APR_apr_pollset_method_name(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pollset_poll */
 #if BIND_apr_pollset_poll_FUNCTION
 #define apr_pollset_poll_REQUIRED_ARGC 4
 #define apr_pollset_poll_OPTIONAL_ARGC 0
@@ -9772,7 +10208,9 @@ mrb_APR_apr_pollset_poll(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pollset_remove */
 #if BIND_apr_pollset_remove_FUNCTION
 #define apr_pollset_remove_REQUIRED_ARGC 2
 #define apr_pollset_remove_OPTIONAL_ARGC 0
@@ -9819,7 +10257,9 @@ mrb_APR_apr_pollset_remove(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pollset_wakeup */
 #if BIND_apr_pollset_wakeup_FUNCTION
 #define apr_pollset_wakeup_REQUIRED_ARGC 1
 #define apr_pollset_wakeup_OPTIONAL_ARGC 0
@@ -9858,7 +10298,9 @@ mrb_APR_apr_pollset_wakeup(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_abort_get */
 #if BIND_apr_pool_abort_get_FUNCTION
 #define apr_pool_abort_get_REQUIRED_ARGC 1
 #define apr_pool_abort_get_OPTIONAL_ARGC 0
@@ -9893,7 +10335,9 @@ mrb_APR_apr_pool_abort_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_abort_set */
 #if BIND_apr_pool_abort_set_FUNCTION
 #define apr_pool_abort_set_REQUIRED_ARGC 2
 #define apr_pool_abort_set_OPTIONAL_ARGC 0
@@ -9930,7 +10374,9 @@ mrb_APR_apr_pool_abort_set(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_allocator_get */
 #if BIND_apr_pool_allocator_get_FUNCTION
 #define apr_pool_allocator_get_REQUIRED_ARGC 1
 #define apr_pool_allocator_get_OPTIONAL_ARGC 0
@@ -9965,7 +10411,9 @@ mrb_APR_apr_pool_allocator_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_child_cleanup_set */
 #if BIND_apr_pool_child_cleanup_set_FUNCTION
 #define apr_pool_child_cleanup_set_REQUIRED_ARGC 6
 #define apr_pool_child_cleanup_set_OPTIONAL_ARGC 0
@@ -10022,7 +10470,9 @@ mrb_APR_apr_pool_child_cleanup_set(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_cleanup_for_exec */
 #if BIND_apr_pool_cleanup_for_exec_FUNCTION
 #define apr_pool_cleanup_for_exec_REQUIRED_ARGC 0
 #define apr_pool_cleanup_for_exec_OPTIONAL_ARGC 0
@@ -10039,7 +10489,9 @@ mrb_APR_apr_pool_cleanup_for_exec(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_cleanup_kill */
 #if BIND_apr_pool_cleanup_kill_FUNCTION
 #define apr_pool_cleanup_kill_REQUIRED_ARGC 4
 #define apr_pool_cleanup_kill_OPTIONAL_ARGC 0
@@ -10086,7 +10538,9 @@ mrb_APR_apr_pool_cleanup_kill(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_cleanup_null */
 #if BIND_apr_pool_cleanup_null_FUNCTION
 #define apr_pool_cleanup_null_REQUIRED_ARGC 1
 #define apr_pool_cleanup_null_OPTIONAL_ARGC 0
@@ -10122,7 +10576,9 @@ mrb_APR_apr_pool_cleanup_null(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_cleanup_register */
 #if BIND_apr_pool_cleanup_register_FUNCTION
 #define apr_pool_cleanup_register_REQUIRED_ARGC 6
 #define apr_pool_cleanup_register_OPTIONAL_ARGC 0
@@ -10179,7 +10635,9 @@ mrb_APR_apr_pool_cleanup_register(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_cleanup_run */
 #if BIND_apr_pool_cleanup_run_FUNCTION
 #define apr_pool_cleanup_run_REQUIRED_ARGC 4
 #define apr_pool_cleanup_run_OPTIONAL_ARGC 0
@@ -10233,7 +10691,9 @@ mrb_APR_apr_pool_cleanup_run(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_clear */
 #if BIND_apr_pool_clear_FUNCTION
 #define apr_pool_clear_REQUIRED_ARGC 1
 #define apr_pool_clear_OPTIONAL_ARGC 0
@@ -10265,7 +10725,9 @@ mrb_APR_apr_pool_clear(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_clear_debug */
 #if BIND_apr_pool_clear_debug_FUNCTION
 #define apr_pool_clear_debug_REQUIRED_ARGC 2
 #define apr_pool_clear_debug_OPTIONAL_ARGC 0
@@ -10299,7 +10761,9 @@ mrb_APR_apr_pool_clear_debug(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_create */
 #if BIND_apr_pool_create_FUNCTION
 #define apr_pool_create_REQUIRED_ARGC 1
 #define apr_pool_create_OPTIONAL_ARGC 0
@@ -10356,7 +10820,9 @@ mrb_APR_apr_pool_create(mrb_state* mrb, mrb_value self) {
    return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_create_core_ex */
 #if BIND_apr_pool_create_core_ex_FUNCTION
 #define apr_pool_create_core_ex_REQUIRED_ARGC 3
 #define apr_pool_create_core_ex_OPTIONAL_ARGC 0
@@ -10405,7 +10871,9 @@ mrb_APR_apr_pool_create_core_ex(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_create_core_ex_debug */
 #if BIND_apr_pool_create_core_ex_debug_FUNCTION
 #define apr_pool_create_core_ex_debug_REQUIRED_ARGC 4
 #define apr_pool_create_core_ex_debug_OPTIONAL_ARGC 0
@@ -10456,7 +10924,9 @@ mrb_APR_apr_pool_create_core_ex_debug(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_create_ex */
 #if BIND_apr_pool_create_ex_FUNCTION
 #define apr_pool_create_ex_REQUIRED_ARGC 4
 #define apr_pool_create_ex_OPTIONAL_ARGC 0
@@ -10513,7 +10983,9 @@ mrb_APR_apr_pool_create_ex(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_create_ex_debug */
 #if BIND_apr_pool_create_ex_debug_FUNCTION
 #define apr_pool_create_ex_debug_REQUIRED_ARGC 5
 #define apr_pool_create_ex_debug_OPTIONAL_ARGC 0
@@ -10572,7 +11044,9 @@ mrb_APR_apr_pool_create_ex_debug(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_create_unmanaged_ex */
 #if BIND_apr_pool_create_unmanaged_ex_FUNCTION
 #define apr_pool_create_unmanaged_ex_REQUIRED_ARGC 3
 #define apr_pool_create_unmanaged_ex_OPTIONAL_ARGC 0
@@ -10621,7 +11095,9 @@ mrb_APR_apr_pool_create_unmanaged_ex(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_create_unmanaged_ex_debug */
 #if BIND_apr_pool_create_unmanaged_ex_debug_FUNCTION
 #define apr_pool_create_unmanaged_ex_debug_REQUIRED_ARGC 4
 #define apr_pool_create_unmanaged_ex_debug_OPTIONAL_ARGC 0
@@ -10672,7 +11148,9 @@ mrb_APR_apr_pool_create_unmanaged_ex_debug(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_destroy */
 #if BIND_apr_pool_destroy_FUNCTION
 #define apr_pool_destroy_REQUIRED_ARGC 1
 #define apr_pool_destroy_OPTIONAL_ARGC 0
@@ -10704,7 +11182,9 @@ mrb_APR_apr_pool_destroy(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_destroy_debug */
 #if BIND_apr_pool_destroy_debug_FUNCTION
 #define apr_pool_destroy_debug_REQUIRED_ARGC 2
 #define apr_pool_destroy_debug_OPTIONAL_ARGC 0
@@ -10738,7 +11218,9 @@ mrb_APR_apr_pool_destroy_debug(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_initialize */
 #if BIND_apr_pool_initialize_FUNCTION
 #define apr_pool_initialize_REQUIRED_ARGC 0
 #define apr_pool_initialize_OPTIONAL_ARGC 0
@@ -10762,7 +11244,9 @@ mrb_APR_apr_pool_initialize(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_is_ancestor */
 #if BIND_apr_pool_is_ancestor_FUNCTION
 #define apr_pool_is_ancestor_REQUIRED_ARGC 2
 #define apr_pool_is_ancestor_OPTIONAL_ARGC 0
@@ -10809,7 +11293,9 @@ mrb_APR_apr_pool_is_ancestor(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_note_subprocess */
 #if BIND_apr_pool_note_subprocess_FUNCTION
 #define apr_pool_note_subprocess_REQUIRED_ARGC 3
 #define apr_pool_note_subprocess_OPTIONAL_ARGC 0
@@ -10854,7 +11340,9 @@ mrb_APR_apr_pool_note_subprocess(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_parent_get */
 #if BIND_apr_pool_parent_get_FUNCTION
 #define apr_pool_parent_get_REQUIRED_ARGC 1
 #define apr_pool_parent_get_OPTIONAL_ARGC 0
@@ -10889,7 +11377,9 @@ mrb_APR_apr_pool_parent_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_pre_cleanup_register */
 #if BIND_apr_pool_pre_cleanup_register_FUNCTION
 #define apr_pool_pre_cleanup_register_REQUIRED_ARGC 4
 #define apr_pool_pre_cleanup_register_OPTIONAL_ARGC 0
@@ -10936,7 +11426,9 @@ mrb_APR_apr_pool_pre_cleanup_register(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_tag */
 #if BIND_apr_pool_tag_FUNCTION
 #define apr_pool_tag_REQUIRED_ARGC 2
 #define apr_pool_tag_OPTIONAL_ARGC 0
@@ -10970,7 +11462,9 @@ mrb_APR_apr_pool_tag(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_terminate */
 #if BIND_apr_pool_terminate_FUNCTION
 #define apr_pool_terminate_REQUIRED_ARGC 0
 #define apr_pool_terminate_OPTIONAL_ARGC 0
@@ -10987,7 +11481,9 @@ mrb_APR_apr_pool_terminate(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_userdata_get */
 #if BIND_apr_pool_userdata_get_FUNCTION
 #define apr_pool_userdata_get_REQUIRED_ARGC 3
 #define apr_pool_userdata_get_OPTIONAL_ARGC 0
@@ -11033,7 +11529,9 @@ mrb_APR_apr_pool_userdata_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_userdata_set */
 #if BIND_apr_pool_userdata_set_FUNCTION
 #define apr_pool_userdata_set_REQUIRED_ARGC 5
 #define apr_pool_userdata_set_OPTIONAL_ARGC 0
@@ -11089,7 +11587,9 @@ mrb_APR_apr_pool_userdata_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pool_userdata_setn */
 #if BIND_apr_pool_userdata_setn_FUNCTION
 #define apr_pool_userdata_setn_REQUIRED_ARGC 5
 #define apr_pool_userdata_setn_OPTIONAL_ARGC 0
@@ -11145,7 +11645,9 @@ mrb_APR_apr_pool_userdata_setn(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_create */
 #if BIND_apr_proc_create_FUNCTION
 #define apr_proc_create_REQUIRED_ARGC 6
 #define apr_proc_create_OPTIONAL_ARGC 0
@@ -11247,7 +11749,9 @@ mrb_APR_apr_proc_create(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_detach */
 #if BIND_apr_proc_detach_FUNCTION
 #define apr_proc_detach_REQUIRED_ARGC 1
 #define apr_proc_detach_OPTIONAL_ARGC 0
@@ -11281,7 +11785,9 @@ mrb_APR_apr_proc_detach(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_kill */
 #if BIND_apr_proc_kill_FUNCTION
 #define apr_proc_kill_REQUIRED_ARGC 2
 #define apr_proc_kill_OPTIONAL_ARGC 0
@@ -11322,7 +11828,9 @@ mrb_APR_apr_proc_kill(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_mutex_child_init */
 #if BIND_apr_proc_mutex_child_init_FUNCTION
 #define apr_proc_mutex_child_init_REQUIRED_ARGC 3
 #define apr_proc_mutex_child_init_OPTIONAL_ARGC 0
@@ -11368,7 +11876,9 @@ mrb_APR_apr_proc_mutex_child_init(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_mutex_cleanup */
 #if BIND_apr_proc_mutex_cleanup_FUNCTION
 #define apr_proc_mutex_cleanup_REQUIRED_ARGC 1
 #define apr_proc_mutex_cleanup_OPTIONAL_ARGC 0
@@ -11404,7 +11914,9 @@ mrb_APR_apr_proc_mutex_cleanup(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_mutex_create */
 #if BIND_apr_proc_mutex_create_FUNCTION
 #define apr_proc_mutex_create_REQUIRED_ARGC 4
 #define apr_proc_mutex_create_OPTIONAL_ARGC 0
@@ -11455,7 +11967,9 @@ mrb_APR_apr_proc_mutex_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_mutex_defname */
 #if BIND_apr_proc_mutex_defname_FUNCTION
 #define apr_proc_mutex_defname_REQUIRED_ARGC 6
 #define apr_proc_mutex_defname_OPTIONAL_ARGC 0
@@ -11518,7 +12032,9 @@ mrb_APR_apr_proc_mutex_defname(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_mutex_destroy */
 #if BIND_apr_proc_mutex_destroy_FUNCTION
 #define apr_proc_mutex_destroy_REQUIRED_ARGC 1
 #define apr_proc_mutex_destroy_OPTIONAL_ARGC 0
@@ -11557,7 +12073,9 @@ mrb_APR_apr_proc_mutex_destroy(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_mutex_lock */
 #if BIND_apr_proc_mutex_lock_FUNCTION
 #define apr_proc_mutex_lock_REQUIRED_ARGC 1
 #define apr_proc_mutex_lock_OPTIONAL_ARGC 0
@@ -11596,7 +12114,9 @@ mrb_APR_apr_proc_mutex_lock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_mutex_lockfile */
 #if BIND_apr_proc_mutex_lockfile_FUNCTION
 #define apr_proc_mutex_lockfile_REQUIRED_ARGC 1
 #define apr_proc_mutex_lockfile_OPTIONAL_ARGC 0
@@ -11631,7 +12151,9 @@ mrb_APR_apr_proc_mutex_lockfile(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_mutex_name */
 #if BIND_apr_proc_mutex_name_FUNCTION
 #define apr_proc_mutex_name_REQUIRED_ARGC 1
 #define apr_proc_mutex_name_OPTIONAL_ARGC 0
@@ -11666,7 +12188,9 @@ mrb_APR_apr_proc_mutex_name(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_mutex_trylock */
 #if BIND_apr_proc_mutex_trylock_FUNCTION
 #define apr_proc_mutex_trylock_REQUIRED_ARGC 1
 #define apr_proc_mutex_trylock_OPTIONAL_ARGC 0
@@ -11705,7 +12229,9 @@ mrb_APR_apr_proc_mutex_trylock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_mutex_unlock */
 #if BIND_apr_proc_mutex_unlock_FUNCTION
 #define apr_proc_mutex_unlock_REQUIRED_ARGC 1
 #define apr_proc_mutex_unlock_OPTIONAL_ARGC 0
@@ -11744,7 +12270,9 @@ mrb_APR_apr_proc_mutex_unlock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_other_child_alert */
 #if BIND_apr_proc_other_child_alert_FUNCTION
 #define apr_proc_other_child_alert_REQUIRED_ARGC 3
 #define apr_proc_other_child_alert_OPTIONAL_ARGC 0
@@ -11787,7 +12315,9 @@ mrb_APR_apr_proc_other_child_alert(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_other_child_refresh */
 #if BIND_apr_proc_other_child_refresh_FUNCTION
 #define apr_proc_other_child_refresh_REQUIRED_ARGC 2
 #define apr_proc_other_child_refresh_OPTIONAL_ARGC 0
@@ -11821,7 +12351,9 @@ mrb_APR_apr_proc_other_child_refresh(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_other_child_refresh_all */
 #if BIND_apr_proc_other_child_refresh_all_FUNCTION
 #define apr_proc_other_child_refresh_all_REQUIRED_ARGC 1
 #define apr_proc_other_child_refresh_all_OPTIONAL_ARGC 0
@@ -11848,7 +12380,9 @@ mrb_APR_apr_proc_other_child_refresh_all(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_other_child_register */
 #if BIND_apr_proc_other_child_register_FUNCTION
 #define apr_proc_other_child_register_REQUIRED_ARGC 8
 #define apr_proc_other_child_register_OPTIONAL_ARGC 0
@@ -11915,7 +12449,9 @@ mrb_APR_apr_proc_other_child_register(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_other_child_unregister */
 #if BIND_apr_proc_other_child_unregister_FUNCTION
 #define apr_proc_other_child_unregister_REQUIRED_ARGC 1
 #define apr_proc_other_child_unregister_OPTIONAL_ARGC 0
@@ -11944,7 +12480,9 @@ mrb_APR_apr_proc_other_child_unregister(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_wait */
 #if BIND_apr_proc_wait_FUNCTION
 #define apr_proc_wait_REQUIRED_ARGC 4
 #define apr_proc_wait_OPTIONAL_ARGC 0
@@ -11997,7 +12535,9 @@ mrb_APR_apr_proc_wait(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_proc_wait_all_procs */
 #if BIND_apr_proc_wait_all_procs_FUNCTION
 #define apr_proc_wait_all_procs_REQUIRED_ARGC 5
 #define apr_proc_wait_all_procs_OPTIONAL_ARGC 0
@@ -12059,6 +12599,7 @@ mrb_APR_apr_proc_wait_all_procs(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
 /*
  * EXTENSION
@@ -12076,11 +12617,13 @@ mrb_APR_apr_proc_from_pid(mrb_state* mrb, mrb_value self) {
 #if defined(_WIN32) || defined(_WIN64)
    proc->hproc = OpenProcess(MAXIMUM_ALLOWED, false, pid);
 #endif
+/* MRUBY_BINDING_END */
 
   /* Wasn't made from an apr pool, so "giftwrap" so the ruby gc free's it */
   return mruby_giftwrap_apr_proc_t(mrb, proc);
 }
 
+/* MRUBY_BINDING: apr_procattr_addrspace_set */
 #if BIND_apr_procattr_addrspace_set_FUNCTION
 #define apr_procattr_addrspace_set_REQUIRED_ARGC 2
 #define apr_procattr_addrspace_set_OPTIONAL_ARGC 0
@@ -12121,7 +12664,9 @@ mrb_APR_apr_procattr_addrspace_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_procattr_child_err_set */
 #if BIND_apr_procattr_child_err_set_FUNCTION
 #define apr_procattr_child_err_set_REQUIRED_ARGC 3
 #define apr_procattr_child_err_set_OPTIONAL_ARGC 0
@@ -12174,7 +12719,9 @@ mrb_APR_apr_procattr_child_err_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_procattr_child_errfn_set */
 #if BIND_apr_procattr_child_errfn_set_FUNCTION
 #define apr_procattr_child_errfn_set_REQUIRED_ARGC 2
 #define apr_procattr_child_errfn_set_OPTIONAL_ARGC 0
@@ -12218,7 +12765,9 @@ mrb_APR_apr_procattr_child_errfn_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_procattr_child_in_set */
 #if BIND_apr_procattr_child_in_set_FUNCTION
 #define apr_procattr_child_in_set_REQUIRED_ARGC 3
 #define apr_procattr_child_in_set_OPTIONAL_ARGC 0
@@ -12271,7 +12820,9 @@ mrb_APR_apr_procattr_child_in_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_procattr_child_out_set */
 #if BIND_apr_procattr_child_out_set_FUNCTION
 #define apr_procattr_child_out_set_REQUIRED_ARGC 3
 #define apr_procattr_child_out_set_OPTIONAL_ARGC 0
@@ -12324,7 +12875,9 @@ mrb_APR_apr_procattr_child_out_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_procattr_cmdtype_set */
 #if BIND_apr_procattr_cmdtype_set_FUNCTION
 #define apr_procattr_cmdtype_set_REQUIRED_ARGC 2
 #define apr_procattr_cmdtype_set_OPTIONAL_ARGC 0
@@ -12365,7 +12918,9 @@ mrb_APR_apr_procattr_cmdtype_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_procattr_create */
 #if BIND_apr_procattr_create_FUNCTION
 #define apr_procattr_create_REQUIRED_ARGC 1
 #define apr_procattr_create_OPTIONAL_ARGC 0
@@ -12414,7 +12969,9 @@ mrb_APR_apr_procattr_create(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_procattr_detach_set */
 #if BIND_apr_procattr_detach_set_FUNCTION
 #define apr_procattr_detach_set_REQUIRED_ARGC 2
 #define apr_procattr_detach_set_OPTIONAL_ARGC 0
@@ -12455,7 +13012,9 @@ mrb_APR_apr_procattr_detach_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_procattr_dir_set */
 #if BIND_apr_procattr_dir_set_FUNCTION
 #define apr_procattr_dir_set_REQUIRED_ARGC 2
 #define apr_procattr_dir_set_OPTIONAL_ARGC 0
@@ -12496,7 +13055,9 @@ mrb_APR_apr_procattr_dir_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_procattr_error_check_set */
 #if BIND_apr_procattr_error_check_set_FUNCTION
 #define apr_procattr_error_check_set_REQUIRED_ARGC 2
 #define apr_procattr_error_check_set_OPTIONAL_ARGC 0
@@ -12537,7 +13098,9 @@ mrb_APR_apr_procattr_error_check_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_procattr_group_set */
 #if BIND_apr_procattr_group_set_FUNCTION
 #define apr_procattr_group_set_REQUIRED_ARGC 2
 #define apr_procattr_group_set_OPTIONAL_ARGC 0
@@ -12578,7 +13141,9 @@ mrb_APR_apr_procattr_group_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_procattr_io_set */
 #if BIND_apr_procattr_io_set_FUNCTION
 #define apr_procattr_io_set_REQUIRED_ARGC 4
 #define apr_procattr_io_set_OPTIONAL_ARGC 0
@@ -12623,7 +13188,9 @@ mrb_APR_apr_procattr_io_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_procattr_user_set */
 #if BIND_apr_procattr_user_set_FUNCTION
 #define apr_procattr_user_set_REQUIRED_ARGC 3
 #define apr_procattr_user_set_OPTIONAL_ARGC 0
@@ -12666,7 +13233,9 @@ mrb_APR_apr_procattr_user_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_psprintf */
 #if BIND_apr_psprintf_FUNCTION
 #define apr_psprintf_REQUIRED_ARGC 2
 #define apr_psprintf_OPTIONAL_ARGC 0
@@ -12703,7 +13272,9 @@ mrb_APR_apr_psprintf(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pstrcat */
 #if BIND_apr_pstrcat_FUNCTION
 #define apr_pstrcat_REQUIRED_ARGC 1
 #define apr_pstrcat_OPTIONAL_ARGC 0
@@ -12738,7 +13309,9 @@ mrb_APR_apr_pstrcat(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pstrcatv */
 #if BIND_apr_pstrcatv_FUNCTION
 #define apr_pstrcatv_REQUIRED_ARGC 4
 #define apr_pstrcatv_OPTIONAL_ARGC 0
@@ -12785,7 +13358,9 @@ mrb_APR_apr_pstrcatv(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pstrdup */
 #if BIND_apr_pstrdup_FUNCTION
 #define apr_pstrdup_REQUIRED_ARGC 2
 #define apr_pstrdup_OPTIONAL_ARGC 0
@@ -12822,7 +13397,9 @@ mrb_APR_apr_pstrdup(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pstrmemdup */
 #if BIND_apr_pstrmemdup_FUNCTION
 #define apr_pstrmemdup_REQUIRED_ARGC 3
 #define apr_pstrmemdup_OPTIONAL_ARGC 0
@@ -12861,7 +13438,9 @@ mrb_APR_apr_pstrmemdup(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pstrndup */
 #if BIND_apr_pstrndup_FUNCTION
 #define apr_pstrndup_REQUIRED_ARGC 3
 #define apr_pstrndup_OPTIONAL_ARGC 0
@@ -12900,7 +13479,9 @@ mrb_APR_apr_pstrndup(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_punescape_entity */
 #if BIND_apr_punescape_entity_FUNCTION
 #define apr_punescape_entity_REQUIRED_ARGC 2
 #define apr_punescape_entity_OPTIONAL_ARGC 0
@@ -12937,7 +13518,9 @@ mrb_APR_apr_punescape_entity(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_punescape_hex */
 #if BIND_apr_punescape_hex_FUNCTION
 #define apr_punescape_hex_REQUIRED_ARGC 4
 #define apr_punescape_hex_OPTIONAL_ARGC 0
@@ -12981,7 +13564,9 @@ mrb_APR_apr_punescape_hex(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_punescape_url */
 #if BIND_apr_punescape_url_FUNCTION
 #define apr_punescape_url_REQUIRED_ARGC 5
 #define apr_punescape_url_OPTIONAL_ARGC 0
@@ -13024,7 +13609,9 @@ mrb_APR_apr_punescape_url(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_pvsprintf */
 #if BIND_apr_pvsprintf_FUNCTION
 #define apr_pvsprintf_REQUIRED_ARGC 3
 #define apr_pvsprintf_OPTIONAL_ARGC 0
@@ -13063,7 +13650,9 @@ mrb_APR_apr_pvsprintf(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_random_add_entropy */
 #if BIND_apr_random_add_entropy_FUNCTION
 #define apr_random_add_entropy_REQUIRED_ARGC 3
 #define apr_random_add_entropy_OPTIONAL_ARGC 0
@@ -13102,7 +13691,9 @@ mrb_APR_apr_random_add_entropy(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_random_after_fork */
 #if BIND_apr_random_after_fork_FUNCTION
 #define apr_random_after_fork_REQUIRED_ARGC 1
 #define apr_random_after_fork_OPTIONAL_ARGC 0
@@ -13134,7 +13725,9 @@ mrb_APR_apr_random_after_fork(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_random_barrier */
 #if BIND_apr_random_barrier_FUNCTION
 #define apr_random_barrier_REQUIRED_ARGC 1
 #define apr_random_barrier_OPTIONAL_ARGC 0
@@ -13166,7 +13759,9 @@ mrb_APR_apr_random_barrier(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_random_init */
 #if BIND_apr_random_init_FUNCTION
 #define apr_random_init_REQUIRED_ARGC 5
 #define apr_random_init_OPTIONAL_ARGC 0
@@ -13230,7 +13825,9 @@ mrb_APR_apr_random_init(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_random_insecure_bytes */
 #if BIND_apr_random_insecure_bytes_FUNCTION
 #define apr_random_insecure_bytes_REQUIRED_ARGC 3
 #define apr_random_insecure_bytes_OPTIONAL_ARGC 0
@@ -13276,7 +13873,9 @@ mrb_APR_apr_random_insecure_bytes(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_random_insecure_ready */
 #if BIND_apr_random_insecure_ready_FUNCTION
 #define apr_random_insecure_ready_REQUIRED_ARGC 1
 #define apr_random_insecure_ready_OPTIONAL_ARGC 0
@@ -13315,7 +13914,9 @@ mrb_APR_apr_random_insecure_ready(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_random_secure_bytes */
 #if BIND_apr_random_secure_bytes_FUNCTION
 #define apr_random_secure_bytes_REQUIRED_ARGC 3
 #define apr_random_secure_bytes_OPTIONAL_ARGC 0
@@ -13361,7 +13962,9 @@ mrb_APR_apr_random_secure_bytes(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_random_secure_ready */
 #if BIND_apr_random_secure_ready_FUNCTION
 #define apr_random_secure_ready_REQUIRED_ARGC 1
 #define apr_random_secure_ready_OPTIONAL_ARGC 0
@@ -13400,7 +14003,9 @@ mrb_APR_apr_random_secure_ready(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_random_standard_new */
 #if BIND_apr_random_standard_new_FUNCTION
 #define apr_random_standard_new_REQUIRED_ARGC 1
 #define apr_random_standard_new_OPTIONAL_ARGC 0
@@ -13435,7 +14040,9 @@ mrb_APR_apr_random_standard_new(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_rfc822_date */
 #if BIND_apr_rfc822_date_FUNCTION
 #define apr_rfc822_date_REQUIRED_ARGC 2
 #define apr_rfc822_date_OPTIONAL_ARGC 0
@@ -13492,7 +14099,9 @@ mrb_APR_apr_rfc822_date(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_shm_attach */
 #if BIND_apr_shm_attach_FUNCTION
 #define apr_shm_attach_REQUIRED_ARGC 3
 #define apr_shm_attach_OPTIONAL_ARGC 0
@@ -13538,7 +14147,9 @@ mrb_APR_apr_shm_attach(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_shm_attach_ex */
 #if BIND_apr_shm_attach_ex_FUNCTION
 #define apr_shm_attach_ex_REQUIRED_ARGC 4
 #define apr_shm_attach_ex_OPTIONAL_ARGC 0
@@ -13586,7 +14197,9 @@ mrb_APR_apr_shm_attach_ex(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_shm_baseaddr_get */
 #if BIND_apr_shm_baseaddr_get_FUNCTION
 #define apr_shm_baseaddr_get_REQUIRED_ARGC 1
 #define apr_shm_baseaddr_get_OPTIONAL_ARGC 0
@@ -13621,7 +14234,9 @@ mrb_APR_apr_shm_baseaddr_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_shm_create */
 #if BIND_apr_shm_create_FUNCTION
 #define apr_shm_create_REQUIRED_ARGC 4
 #define apr_shm_create_OPTIONAL_ARGC 0
@@ -13669,7 +14284,9 @@ mrb_APR_apr_shm_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_shm_create_ex */
 #if BIND_apr_shm_create_ex_FUNCTION
 #define apr_shm_create_ex_REQUIRED_ARGC 5
 #define apr_shm_create_ex_OPTIONAL_ARGC 0
@@ -13719,7 +14336,9 @@ mrb_APR_apr_shm_create_ex(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_shm_destroy */
 #if BIND_apr_shm_destroy_FUNCTION
 #define apr_shm_destroy_REQUIRED_ARGC 1
 #define apr_shm_destroy_OPTIONAL_ARGC 0
@@ -13758,7 +14377,9 @@ mrb_APR_apr_shm_destroy(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_shm_detach */
 #if BIND_apr_shm_detach_FUNCTION
 #define apr_shm_detach_REQUIRED_ARGC 1
 #define apr_shm_detach_OPTIONAL_ARGC 0
@@ -13797,7 +14418,9 @@ mrb_APR_apr_shm_detach(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_shm_remove */
 #if BIND_apr_shm_remove_FUNCTION
 #define apr_shm_remove_REQUIRED_ARGC 2
 #define apr_shm_remove_OPTIONAL_ARGC 0
@@ -13839,7 +14462,9 @@ mrb_APR_apr_shm_remove(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_shm_size_get */
 #if BIND_apr_shm_size_get_FUNCTION
 #define apr_shm_size_get_REQUIRED_ARGC 1
 #define apr_shm_size_get_OPTIONAL_ARGC 0
@@ -13878,7 +14503,9 @@ mrb_APR_apr_shm_size_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_signal_block */
 #if BIND_apr_signal_block_FUNCTION
 #define apr_signal_block_REQUIRED_ARGC 1
 #define apr_signal_block_OPTIONAL_ARGC 0
@@ -13912,7 +14539,9 @@ mrb_APR_apr_signal_block(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_signal_description_get */
 #if BIND_apr_signal_description_get_FUNCTION
 #define apr_signal_description_get_REQUIRED_ARGC 1
 #define apr_signal_description_get_OPTIONAL_ARGC 0
@@ -13942,7 +14571,9 @@ mrb_APR_apr_signal_description_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_signal_init */
 #if BIND_apr_signal_init_FUNCTION
 #define apr_signal_init_REQUIRED_ARGC 1
 #define apr_signal_init_OPTIONAL_ARGC 0
@@ -13974,7 +14605,9 @@ mrb_APR_apr_signal_init(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_signal_unblock */
 #if BIND_apr_signal_unblock_FUNCTION
 #define apr_signal_unblock_REQUIRED_ARGC 4
 #define apr_signal_unblock_OPTIONAL_ARGC 0
@@ -14023,7 +14656,9 @@ mrb_APR_apr_signal_unblock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_add_index */
 #if BIND_apr_skiplist_add_index_FUNCTION
 #define apr_skiplist_add_index_REQUIRED_ARGC 3
 #define apr_skiplist_add_index_OPTIONAL_ARGC 0
@@ -14065,7 +14700,9 @@ mrb_APR_apr_skiplist_add_index(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_alloc */
 #if BIND_apr_skiplist_alloc_FUNCTION
 #define apr_skiplist_alloc_REQUIRED_ARGC 2
 #define apr_skiplist_alloc_OPTIONAL_ARGC 0
@@ -14102,7 +14739,9 @@ mrb_APR_apr_skiplist_alloc(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_destroy */
 #if BIND_apr_skiplist_destroy_FUNCTION
 #define apr_skiplist_destroy_REQUIRED_ARGC 2
 #define apr_skiplist_destroy_OPTIONAL_ARGC 0
@@ -14139,7 +14778,9 @@ mrb_APR_apr_skiplist_destroy(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_find */
 #if BIND_apr_skiplist_find_FUNCTION
 #define apr_skiplist_find_REQUIRED_ARGC 3
 #define apr_skiplist_find_OPTIONAL_ARGC 0
@@ -14184,7 +14825,9 @@ mrb_APR_apr_skiplist_find(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_find_compare */
 #if BIND_apr_skiplist_find_compare_FUNCTION
 #define apr_skiplist_find_compare_REQUIRED_ARGC 4
 #define apr_skiplist_find_compare_OPTIONAL_ARGC 0
@@ -14234,7 +14877,9 @@ mrb_APR_apr_skiplist_find_compare(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_free */
 #if BIND_apr_skiplist_free_FUNCTION
 #define apr_skiplist_free_REQUIRED_ARGC 2
 #define apr_skiplist_free_OPTIONAL_ARGC 0
@@ -14271,7 +14916,9 @@ mrb_APR_apr_skiplist_free(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_getlist */
 #if BIND_apr_skiplist_getlist_FUNCTION
 #define apr_skiplist_getlist_REQUIRED_ARGC 1
 #define apr_skiplist_getlist_OPTIONAL_ARGC 0
@@ -14306,7 +14953,9 @@ mrb_APR_apr_skiplist_getlist(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_init */
 #if BIND_apr_skiplist_init_FUNCTION
 #define apr_skiplist_init_REQUIRED_ARGC 2
 #define apr_skiplist_init_OPTIONAL_ARGC 0
@@ -14350,7 +14999,9 @@ mrb_APR_apr_skiplist_init(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_insert */
 #if BIND_apr_skiplist_insert_FUNCTION
 #define apr_skiplist_insert_REQUIRED_ARGC 2
 #define apr_skiplist_insert_OPTIONAL_ARGC 0
@@ -14390,7 +15041,9 @@ mrb_APR_apr_skiplist_insert(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_insert_compare */
 #if BIND_apr_skiplist_insert_compare_FUNCTION
 #define apr_skiplist_insert_compare_REQUIRED_ARGC 3
 #define apr_skiplist_insert_compare_OPTIONAL_ARGC 0
@@ -14435,7 +15088,9 @@ mrb_APR_apr_skiplist_insert_compare(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_merge */
 #if BIND_apr_skiplist_merge_FUNCTION
 #define apr_skiplist_merge_REQUIRED_ARGC 2
 #define apr_skiplist_merge_OPTIONAL_ARGC 0
@@ -14478,7 +15133,9 @@ mrb_APR_apr_skiplist_merge(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_next */
 #if BIND_apr_skiplist_next_FUNCTION
 #define apr_skiplist_next_REQUIRED_ARGC 2
 #define apr_skiplist_next_OPTIONAL_ARGC 0
@@ -14518,7 +15175,9 @@ mrb_APR_apr_skiplist_next(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_peek */
 #if BIND_apr_skiplist_peek_FUNCTION
 #define apr_skiplist_peek_REQUIRED_ARGC 1
 #define apr_skiplist_peek_OPTIONAL_ARGC 0
@@ -14553,7 +15212,9 @@ mrb_APR_apr_skiplist_peek(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_pop */
 #if BIND_apr_skiplist_pop_FUNCTION
 #define apr_skiplist_pop_REQUIRED_ARGC 2
 #define apr_skiplist_pop_OPTIONAL_ARGC 0
@@ -14593,7 +15254,9 @@ mrb_APR_apr_skiplist_pop(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_previous */
 #if BIND_apr_skiplist_previous_FUNCTION
 #define apr_skiplist_previous_REQUIRED_ARGC 2
 #define apr_skiplist_previous_OPTIONAL_ARGC 0
@@ -14633,7 +15296,9 @@ mrb_APR_apr_skiplist_previous(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_remove */
 #if BIND_apr_skiplist_remove_FUNCTION
 #define apr_skiplist_remove_REQUIRED_ARGC 3
 #define apr_skiplist_remove_OPTIONAL_ARGC 0
@@ -14682,7 +15347,9 @@ mrb_APR_apr_skiplist_remove(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_remove_all */
 #if BIND_apr_skiplist_remove_all_FUNCTION
 #define apr_skiplist_remove_all_REQUIRED_ARGC 2
 #define apr_skiplist_remove_all_OPTIONAL_ARGC 0
@@ -14719,7 +15386,9 @@ mrb_APR_apr_skiplist_remove_all(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_remove_compare */
 #if BIND_apr_skiplist_remove_compare_FUNCTION
 #define apr_skiplist_remove_compare_REQUIRED_ARGC 4
 #define apr_skiplist_remove_compare_OPTIONAL_ARGC 0
@@ -14773,7 +15442,9 @@ mrb_APR_apr_skiplist_remove_compare(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_skiplist_set_compare */
 #if BIND_apr_skiplist_set_compare_FUNCTION
 #define apr_skiplist_set_compare_REQUIRED_ARGC 3
 #define apr_skiplist_set_compare_OPTIONAL_ARGC 0
@@ -14815,7 +15486,9 @@ mrb_APR_apr_skiplist_set_compare(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_sleep */
 #if BIND_apr_sleep_FUNCTION
 #define apr_sleep_REQUIRED_ARGC 1
 #define apr_sleep_OPTIONAL_ARGC 0
@@ -14833,7 +15506,9 @@ mrb_APR_apr_sleep(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_snprintf */
 #if BIND_apr_snprintf_FUNCTION
 #define apr_snprintf_REQUIRED_ARGC 3
 #define apr_snprintf_OPTIONAL_ARGC 0
@@ -14889,7 +15564,9 @@ mrb_APR_apr_snprintf(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_sockaddr_equal */
 #if BIND_apr_sockaddr_equal_FUNCTION
 #define apr_sockaddr_equal_REQUIRED_ARGC 2
 #define apr_sockaddr_equal_OPTIONAL_ARGC 0
@@ -14935,7 +15612,9 @@ mrb_APR_apr_sockaddr_equal(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_sockaddr_info_get */
 #if BIND_apr_sockaddr_info_get_FUNCTION
 #define apr_sockaddr_info_get_REQUIRED_ARGC 5
 #define apr_sockaddr_info_get_OPTIONAL_ARGC 0
@@ -14981,7 +15660,9 @@ mrb_APR_apr_sockaddr_info_get(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mruby_box_apr_sockaddr_t(mrb, native_sa));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_sockaddr_ip_get */
 #if BIND_apr_sockaddr_ip_get_FUNCTION
 #define apr_sockaddr_ip_get_REQUIRED_ARGC 1
 #define apr_sockaddr_ip_get_OPTIONAL_ARGC 0
@@ -15019,7 +15700,9 @@ mrb_APR_apr_sockaddr_ip_get(mrb_state* mrb, mrb_value self) {
   }
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_sockaddr_ip_getbuf */
 #if BIND_apr_sockaddr_ip_getbuf_FUNCTION
 #define apr_sockaddr_ip_getbuf_REQUIRED_ARGC 3
 #define apr_sockaddr_ip_getbuf_OPTIONAL_ARGC 0
@@ -15081,7 +15764,9 @@ mrb_APR_apr_sockaddr_ip_getbuf(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_sockaddr_is_wildcard */
 #if BIND_apr_sockaddr_is_wildcard_FUNCTION
 #define apr_sockaddr_is_wildcard_REQUIRED_ARGC 1
 #define apr_sockaddr_is_wildcard_OPTIONAL_ARGC 0
@@ -15120,7 +15805,9 @@ mrb_APR_apr_sockaddr_is_wildcard(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_accept */
 #if BIND_apr_socket_accept_FUNCTION
 #define apr_socket_accept_REQUIRED_ARGC 2
 #define apr_socket_accept_OPTIONAL_ARGC 0
@@ -15165,7 +15852,9 @@ mrb_APR_apr_socket_accept(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mruby_box_apr_socket_t(mrb, native_new_sock));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_addr_get */
 #if BIND_apr_socket_addr_get_FUNCTION
 #define apr_socket_addr_get_REQUIRED_ARGC 2
 #define apr_socket_addr_get_OPTIONAL_ARGC 0
@@ -15200,7 +15889,9 @@ mrb_APR_apr_socket_addr_get(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mruby_box_apr_sockaddr_t(mrb, native_sa));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_atmark */
 #if BIND_apr_socket_atmark_FUNCTION
 #define apr_socket_atmark_REQUIRED_ARGC 2
 #define apr_socket_atmark_OPTIONAL_ARGC 0
@@ -15244,7 +15935,9 @@ mrb_APR_apr_socket_atmark(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_atreadeof */
 #if BIND_apr_socket_atreadeof_FUNCTION
 #define apr_socket_atreadeof_REQUIRED_ARGC 1
 #define apr_socket_atreadeof_OPTIONAL_ARGC 0
@@ -15277,7 +15970,9 @@ mrb_APR_apr_socket_atreadeof(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mrb_bool_value(native_atreadeof));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_bind */
 #if BIND_apr_socket_bind_FUNCTION
 #define apr_socket_bind_REQUIRED_ARGC 2
 #define apr_socket_bind_OPTIONAL_ARGC 0
@@ -15323,7 +16018,9 @@ mrb_APR_apr_socket_bind(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_close */
 #if BIND_apr_socket_close_FUNCTION
 #define apr_socket_close_REQUIRED_ARGC 1
 #define apr_socket_close_OPTIONAL_ARGC 0
@@ -15362,7 +16059,9 @@ mrb_APR_apr_socket_close(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_connect */
 #if BIND_apr_socket_connect_FUNCTION
 #define apr_socket_connect_REQUIRED_ARGC 2
 #define apr_socket_connect_OPTIONAL_ARGC 0
@@ -15408,7 +16107,9 @@ mrb_APR_apr_socket_connect(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_create */
 #if BIND_apr_socket_create_FUNCTION
 #define apr_socket_create_REQUIRED_ARGC 5
 #define apr_socket_create_OPTIONAL_ARGC 0
@@ -15453,7 +16154,9 @@ mrb_APR_apr_socket_create(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mruby_box_apr_socket_t(mrb, native_new_sock));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_data_get */
 #if BIND_apr_socket_data_get_FUNCTION
 #define apr_socket_data_get_REQUIRED_ARGC 3
 #define apr_socket_data_get_OPTIONAL_ARGC 0
@@ -15499,7 +16202,9 @@ mrb_APR_apr_socket_data_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_data_set */
 #if BIND_apr_socket_data_set_FUNCTION
 #define apr_socket_data_set_REQUIRED_ARGC 5
 #define apr_socket_data_set_OPTIONAL_ARGC 0
@@ -15555,7 +16260,9 @@ mrb_APR_apr_socket_data_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_listen */
 #if BIND_apr_socket_listen_FUNCTION
 #define apr_socket_listen_REQUIRED_ARGC 2
 #define apr_socket_listen_OPTIONAL_ARGC 0
@@ -15596,7 +16303,9 @@ mrb_APR_apr_socket_listen(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_opt_get */
 #if BIND_apr_socket_opt_get_FUNCTION
 #define apr_socket_opt_get_REQUIRED_ARGC 2
 #define apr_socket_opt_get_OPTIONAL_ARGC 0
@@ -15636,7 +16345,9 @@ mrb_APR_apr_socket_opt_get(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mrb_fixnum_value(native_on));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_opt_set */
 #if BIND_apr_socket_opt_set_FUNCTION
 #define apr_socket_opt_set_REQUIRED_ARGC 3
 #define apr_socket_opt_set_OPTIONAL_ARGC 0
@@ -15679,7 +16390,9 @@ mrb_APR_apr_socket_opt_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_protocol_get */
 #if BIND_apr_socket_protocol_get_FUNCTION
 #define apr_socket_protocol_get_REQUIRED_ARGC 1
 #define apr_socket_protocol_get_OPTIONAL_ARGC 0
@@ -15717,7 +16430,9 @@ mrb_APR_apr_socket_protocol_get(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mrb_fixnum_value(native_protocol));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_recv */
 #if BIND_apr_socket_recv_FUNCTION
 #define apr_socket_recv_REQUIRED_ARGC 2
 #define apr_socket_recv_OPTIONAL_ARGC 0
@@ -15768,7 +16483,9 @@ mrb_APR_apr_socket_recv(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_recvfrom */
 #if BIND_apr_socket_recvfrom_FUNCTION
 #define apr_socket_recvfrom_REQUIRED_ARGC 3
 #define apr_socket_recvfrom_OPTIONAL_ARGC 0
@@ -15832,7 +16549,9 @@ mrb_APR_apr_socket_recvfrom(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_send */
 #if BIND_apr_socket_send_FUNCTION
 #define apr_socket_send_REQUIRED_ARGC 3
 #define apr_socket_send_OPTIONAL_ARGC 0
@@ -15879,7 +16598,9 @@ mrb_APR_apr_socket_send(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mrb_fixnum_value(size));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_sendfile */
 #if BIND_apr_socket_sendfile_FUNCTION
 #define apr_socket_sendfile_REQUIRED_ARGC 6
 #define apr_socket_sendfile_OPTIONAL_ARGC 0
@@ -15946,7 +16667,9 @@ mrb_APR_apr_socket_sendfile(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_sendto */
 #if BIND_apr_socket_sendto_FUNCTION
 #define apr_socket_sendto_REQUIRED_ARGC 5
 #define apr_socket_sendto_OPTIONAL_ARGC 0
@@ -15998,7 +16721,9 @@ mrb_APR_apr_socket_sendto(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mrb_fixnum_value(size));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_sendv */
 #if BIND_apr_socket_sendv_FUNCTION
 #define apr_socket_sendv_REQUIRED_ARGC 4
 #define apr_socket_sendv_OPTIONAL_ARGC 0
@@ -16049,7 +16774,9 @@ mrb_APR_apr_socket_sendv(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_shutdown */
 #if BIND_apr_socket_shutdown_FUNCTION
 #define apr_socket_shutdown_REQUIRED_ARGC 2
 #define apr_socket_shutdown_OPTIONAL_ARGC 0
@@ -16090,7 +16817,9 @@ mrb_APR_apr_socket_shutdown(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_timeout_get */
 #if BIND_apr_socket_timeout_get_FUNCTION
 #define apr_socket_timeout_get_REQUIRED_ARGC 2
 #define apr_socket_timeout_get_OPTIONAL_ARGC 0
@@ -16132,7 +16861,9 @@ mrb_APR_apr_socket_timeout_get(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mrb_fixnum_value(native_t));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_timeout_set */
 #if BIND_apr_socket_timeout_set_FUNCTION
 #define apr_socket_timeout_set_REQUIRED_ARGC 2
 #define apr_socket_timeout_set_OPTIONAL_ARGC 0
@@ -16173,7 +16904,9 @@ mrb_APR_apr_socket_timeout_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_socket_type_get */
 #if BIND_apr_socket_type_get_FUNCTION
 #define apr_socket_type_get_REQUIRED_ARGC 2
 #define apr_socket_type_get_OPTIONAL_ARGC 0
@@ -16212,7 +16945,9 @@ mrb_APR_apr_socket_type_get(mrb_state* mrb, mrb_value self) {
   RETURN_ERRNO_AND_OUTPUT(result, mrb_fixnum_value(native_type));
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_stat */
 #if BIND_apr_stat_FUNCTION
 #define apr_stat_REQUIRED_ARGC 3
 #define apr_stat_OPTIONAL_ARGC 0
@@ -16257,7 +16992,9 @@ mrb_APR_apr_stat(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_strerror */
 #if BIND_apr_strerror_FUNCTION
 #define apr_strerror_REQUIRED_ARGC 1
 #define apr_strerror_OPTIONAL_ARGC 0
@@ -16291,7 +17028,9 @@ mrb_APR_apr_strerror(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_to_os_error */
 #if BIND_apr_to_os_error_FUNCTION
 #define apr_to_os_error_REQUIRED_ARGC 1
 #define apr_to_os_error_OPTIONAL_ARGC 0
@@ -16303,7 +17042,9 @@ mrb_APR_apr_to_os_error(mrb_state *mrb, mrb_value self) {
   return mrb_fixnum_value(os_errno);
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_strfsize */
 #if BIND_apr_strfsize_FUNCTION
 #define apr_strfsize_REQUIRED_ARGC 2
 #define apr_strfsize_OPTIONAL_ARGC 0
@@ -16356,7 +17097,9 @@ mrb_APR_apr_strfsize(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_strftime */
 #if BIND_apr_strftime_FUNCTION
 #define apr_strftime_REQUIRED_ARGC 5
 #define apr_strftime_OPTIONAL_ARGC 0
@@ -16425,7 +17168,9 @@ mrb_APR_apr_strftime(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_strnatcasecmp */
 #if BIND_apr_strnatcasecmp_FUNCTION
 #define apr_strnatcasecmp_REQUIRED_ARGC 2
 #define apr_strnatcasecmp_OPTIONAL_ARGC 0
@@ -16461,7 +17206,9 @@ mrb_APR_apr_strnatcasecmp(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_strnatcmp */
 #if BIND_apr_strnatcmp_FUNCTION
 #define apr_strnatcmp_REQUIRED_ARGC 2
 #define apr_strnatcmp_OPTIONAL_ARGC 0
@@ -16497,7 +17244,9 @@ mrb_APR_apr_strnatcmp(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_strtoff */
 #if BIND_apr_strtoff_FUNCTION
 #define apr_strtoff_REQUIRED_ARGC 4
 #define apr_strtoff_OPTIONAL_ARGC 0
@@ -16542,7 +17291,9 @@ mrb_APR_apr_strtoff(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_strtoi64 */
 #if BIND_apr_strtoi64_FUNCTION
 #define apr_strtoi64_REQUIRED_ARGC 3
 #define apr_strtoi64_OPTIONAL_ARGC 0
@@ -16579,7 +17330,9 @@ mrb_APR_apr_strtoi64(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_strtok */
 #if BIND_apr_strtok_FUNCTION
 #define apr_strtok_REQUIRED_ARGC 3
 #define apr_strtok_OPTIONAL_ARGC 0
@@ -16634,7 +17387,9 @@ mrb_APR_apr_strtok(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_add */
 #if BIND_apr_table_add_FUNCTION
 #define apr_table_add_REQUIRED_ARGC 3
 #define apr_table_add_OPTIONAL_ARGC 0
@@ -16670,7 +17425,9 @@ mrb_APR_apr_table_add(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_addn */
 #if BIND_apr_table_addn_FUNCTION
 #define apr_table_addn_REQUIRED_ARGC 3
 #define apr_table_addn_OPTIONAL_ARGC 0
@@ -16706,7 +17463,9 @@ mrb_APR_apr_table_addn(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_clear */
 #if BIND_apr_table_clear_FUNCTION
 #define apr_table_clear_REQUIRED_ARGC 1
 #define apr_table_clear_OPTIONAL_ARGC 0
@@ -16738,7 +17497,9 @@ mrb_APR_apr_table_clear(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_clone */
 #if BIND_apr_table_clone_FUNCTION
 #define apr_table_clone_REQUIRED_ARGC 2
 #define apr_table_clone_OPTIONAL_ARGC 0
@@ -16781,7 +17542,9 @@ mrb_APR_apr_table_clone(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_compress */
 #if BIND_apr_table_compress_FUNCTION
 #define apr_table_compress_REQUIRED_ARGC 2
 #define apr_table_compress_OPTIONAL_ARGC 0
@@ -16815,7 +17578,9 @@ mrb_APR_apr_table_compress(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_copy */
 #if BIND_apr_table_copy_FUNCTION
 #define apr_table_copy_REQUIRED_ARGC 2
 #define apr_table_copy_OPTIONAL_ARGC 0
@@ -16858,7 +17623,9 @@ mrb_APR_apr_table_copy(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_do */
 #if BIND_apr_table_do_FUNCTION
 #define apr_table_do_REQUIRED_ARGC 3
 #define apr_table_do_OPTIONAL_ARGC 0
@@ -16907,7 +17674,9 @@ mrb_APR_apr_table_do(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_elts */
 #if BIND_apr_table_elts_FUNCTION
 #define apr_table_elts_REQUIRED_ARGC 1
 #define apr_table_elts_OPTIONAL_ARGC 0
@@ -16942,7 +17711,9 @@ mrb_APR_apr_table_elts(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_get */
 #if BIND_apr_table_get_FUNCTION
 #define apr_table_get_REQUIRED_ARGC 2
 #define apr_table_get_OPTIONAL_ARGC 0
@@ -16979,7 +17750,9 @@ mrb_APR_apr_table_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_getm */
 #if BIND_apr_table_getm_FUNCTION
 #define apr_table_getm_REQUIRED_ARGC 3
 #define apr_table_getm_OPTIONAL_ARGC 0
@@ -17024,7 +17797,9 @@ mrb_APR_apr_table_getm(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_make */
 #if BIND_apr_table_make_FUNCTION
 #define apr_table_make_REQUIRED_ARGC 2
 #define apr_table_make_OPTIONAL_ARGC 0
@@ -17061,7 +17836,9 @@ mrb_APR_apr_table_make(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_merge */
 #if BIND_apr_table_merge_FUNCTION
 #define apr_table_merge_REQUIRED_ARGC 3
 #define apr_table_merge_OPTIONAL_ARGC 0
@@ -17097,7 +17874,9 @@ mrb_APR_apr_table_merge(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_mergen */
 #if BIND_apr_table_mergen_FUNCTION
 #define apr_table_mergen_REQUIRED_ARGC 3
 #define apr_table_mergen_OPTIONAL_ARGC 0
@@ -17133,7 +17912,9 @@ mrb_APR_apr_table_mergen(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_overlap */
 #if BIND_apr_table_overlap_FUNCTION
 #define apr_table_overlap_REQUIRED_ARGC 3
 #define apr_table_overlap_OPTIONAL_ARGC 0
@@ -17175,7 +17956,9 @@ mrb_APR_apr_table_overlap(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_overlay */
 #if BIND_apr_table_overlay_FUNCTION
 #define apr_table_overlay_REQUIRED_ARGC 6
 #define apr_table_overlay_OPTIONAL_ARGC 0
@@ -17235,7 +18018,9 @@ mrb_APR_apr_table_overlay(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_set */
 #if BIND_apr_table_set_FUNCTION
 #define apr_table_set_REQUIRED_ARGC 3
 #define apr_table_set_OPTIONAL_ARGC 0
@@ -17271,7 +18056,9 @@ mrb_APR_apr_table_set(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_setn */
 #if BIND_apr_table_setn_FUNCTION
 #define apr_table_setn_REQUIRED_ARGC 3
 #define apr_table_setn_OPTIONAL_ARGC 0
@@ -17307,7 +18094,9 @@ mrb_APR_apr_table_setn(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_unset */
 #if BIND_apr_table_unset_FUNCTION
 #define apr_table_unset_REQUIRED_ARGC 2
 #define apr_table_unset_OPTIONAL_ARGC 0
@@ -17341,7 +18130,9 @@ mrb_APR_apr_table_unset(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_table_vdo */
 #if BIND_apr_table_vdo_FUNCTION
 #define apr_table_vdo_REQUIRED_ARGC 4
 #define apr_table_vdo_OPTIONAL_ARGC 0
@@ -17392,7 +18183,9 @@ mrb_APR_apr_table_vdo(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_temp_dir_get */
 #if BIND_apr_temp_dir_get_FUNCTION
 #define apr_temp_dir_get_REQUIRED_ARGC 1
 #define apr_temp_dir_get_OPTIONAL_ARGC 0
@@ -17441,7 +18234,9 @@ mrb_APR_apr_temp_dir_get(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_terminate */
 #if BIND_apr_terminate_FUNCTION
 #define apr_terminate_REQUIRED_ARGC 0
 #define apr_terminate_OPTIONAL_ARGC 0
@@ -17458,7 +18253,9 @@ mrb_APR_apr_terminate(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_terminate2 */
 #if BIND_apr_terminate2_FUNCTION
 #define apr_terminate2_REQUIRED_ARGC 0
 #define apr_terminate2_OPTIONAL_ARGC 0
@@ -17475,7 +18272,9 @@ mrb_APR_apr_terminate2(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_cond_broadcast */
 #if BIND_apr_thread_cond_broadcast_FUNCTION
 #define apr_thread_cond_broadcast_REQUIRED_ARGC 1
 #define apr_thread_cond_broadcast_OPTIONAL_ARGC 0
@@ -17514,7 +18313,9 @@ mrb_APR_apr_thread_cond_broadcast(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_cond_create */
 #if BIND_apr_thread_cond_create_FUNCTION
 #define apr_thread_cond_create_REQUIRED_ARGC 2
 #define apr_thread_cond_create_OPTIONAL_ARGC 0
@@ -17558,7 +18359,9 @@ mrb_APR_apr_thread_cond_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_cond_destroy */
 #if BIND_apr_thread_cond_destroy_FUNCTION
 #define apr_thread_cond_destroy_REQUIRED_ARGC 1
 #define apr_thread_cond_destroy_OPTIONAL_ARGC 0
@@ -17597,7 +18400,9 @@ mrb_APR_apr_thread_cond_destroy(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_cond_signal */
 #if BIND_apr_thread_cond_signal_FUNCTION
 #define apr_thread_cond_signal_REQUIRED_ARGC 1
 #define apr_thread_cond_signal_OPTIONAL_ARGC 0
@@ -17636,7 +18441,9 @@ mrb_APR_apr_thread_cond_signal(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_cond_timedwait */
 #if BIND_apr_thread_cond_timedwait_FUNCTION
 #define apr_thread_cond_timedwait_REQUIRED_ARGC 3
 #define apr_thread_cond_timedwait_OPTIONAL_ARGC 0
@@ -17688,7 +18495,9 @@ mrb_APR_apr_thread_cond_timedwait(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_cond_wait */
 #if BIND_apr_thread_cond_wait_FUNCTION
 #define apr_thread_cond_wait_REQUIRED_ARGC 2
 #define apr_thread_cond_wait_OPTIONAL_ARGC 0
@@ -17735,7 +18544,9 @@ mrb_APR_apr_thread_cond_wait(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_create */
 #if BIND_apr_thread_create_FUNCTION
 #define apr_thread_create_REQUIRED_ARGC 5
 #define apr_thread_create_OPTIONAL_ARGC 0
@@ -17797,7 +18608,9 @@ mrb_APR_apr_thread_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_data_get */
 #if BIND_apr_thread_data_get_FUNCTION
 #define apr_thread_data_get_REQUIRED_ARGC 3
 #define apr_thread_data_get_OPTIONAL_ARGC 0
@@ -17843,7 +18656,9 @@ mrb_APR_apr_thread_data_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_data_set */
 #if BIND_apr_thread_data_set_FUNCTION
 #define apr_thread_data_set_REQUIRED_ARGC 5
 #define apr_thread_data_set_OPTIONAL_ARGC 0
@@ -17899,7 +18714,9 @@ mrb_APR_apr_thread_data_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_detach */
 #if BIND_apr_thread_detach_FUNCTION
 #define apr_thread_detach_REQUIRED_ARGC 1
 #define apr_thread_detach_OPTIONAL_ARGC 0
@@ -17938,7 +18755,9 @@ mrb_APR_apr_thread_detach(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_exit */
 #if BIND_apr_thread_exit_FUNCTION
 #define apr_thread_exit_REQUIRED_ARGC 2
 #define apr_thread_exit_OPTIONAL_ARGC 0
@@ -17979,7 +18798,9 @@ mrb_APR_apr_thread_exit(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_join */
 #if BIND_apr_thread_join_FUNCTION
 #define apr_thread_join_REQUIRED_ARGC 2
 #define apr_thread_join_OPTIONAL_ARGC 0
@@ -18023,7 +18844,9 @@ mrb_APR_apr_thread_join(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_mutex_create */
 #if BIND_apr_thread_mutex_create_FUNCTION
 #define apr_thread_mutex_create_REQUIRED_ARGC 3
 #define apr_thread_mutex_create_OPTIONAL_ARGC 0
@@ -18069,7 +18892,9 @@ mrb_APR_apr_thread_mutex_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_mutex_destroy */
 #if BIND_apr_thread_mutex_destroy_FUNCTION
 #define apr_thread_mutex_destroy_REQUIRED_ARGC 6
 #define apr_thread_mutex_destroy_OPTIONAL_ARGC 0
@@ -18133,7 +18958,9 @@ mrb_APR_apr_thread_mutex_destroy(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_mutex_lock */
 #if BIND_apr_thread_mutex_lock_FUNCTION
 #define apr_thread_mutex_lock_REQUIRED_ARGC 1
 #define apr_thread_mutex_lock_OPTIONAL_ARGC 0
@@ -18172,7 +18999,9 @@ mrb_APR_apr_thread_mutex_lock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_mutex_trylock */
 #if BIND_apr_thread_mutex_trylock_FUNCTION
 #define apr_thread_mutex_trylock_REQUIRED_ARGC 1
 #define apr_thread_mutex_trylock_OPTIONAL_ARGC 0
@@ -18211,7 +19040,9 @@ mrb_APR_apr_thread_mutex_trylock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_mutex_unlock */
 #if BIND_apr_thread_mutex_unlock_FUNCTION
 #define apr_thread_mutex_unlock_REQUIRED_ARGC 1
 #define apr_thread_mutex_unlock_OPTIONAL_ARGC 0
@@ -18250,7 +19081,9 @@ mrb_APR_apr_thread_mutex_unlock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_once */
 #if BIND_apr_thread_once_FUNCTION
 #define apr_thread_once_REQUIRED_ARGC 2
 #define apr_thread_once_OPTIONAL_ARGC 0
@@ -18294,7 +19127,9 @@ mrb_APR_apr_thread_once(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_once_init */
 #if BIND_apr_thread_once_init_FUNCTION
 #define apr_thread_once_init_REQUIRED_ARGC 2
 #define apr_thread_once_init_OPTIONAL_ARGC 0
@@ -18338,7 +19173,9 @@ mrb_APR_apr_thread_once_init(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_rwlock_create */
 #if BIND_apr_thread_rwlock_create_FUNCTION
 #define apr_thread_rwlock_create_REQUIRED_ARGC 2
 #define apr_thread_rwlock_create_OPTIONAL_ARGC 0
@@ -18382,7 +19219,9 @@ mrb_APR_apr_thread_rwlock_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_rwlock_destroy */
 #if BIND_apr_thread_rwlock_destroy_FUNCTION
 #define apr_thread_rwlock_destroy_REQUIRED_ARGC 1
 #define apr_thread_rwlock_destroy_OPTIONAL_ARGC 0
@@ -18421,7 +19260,9 @@ mrb_APR_apr_thread_rwlock_destroy(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_rwlock_rdlock */
 #if BIND_apr_thread_rwlock_rdlock_FUNCTION
 #define apr_thread_rwlock_rdlock_REQUIRED_ARGC 1
 #define apr_thread_rwlock_rdlock_OPTIONAL_ARGC 0
@@ -18460,7 +19301,9 @@ mrb_APR_apr_thread_rwlock_rdlock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_rwlock_tryrdlock */
 #if BIND_apr_thread_rwlock_tryrdlock_FUNCTION
 #define apr_thread_rwlock_tryrdlock_REQUIRED_ARGC 1
 #define apr_thread_rwlock_tryrdlock_OPTIONAL_ARGC 0
@@ -18499,7 +19342,9 @@ mrb_APR_apr_thread_rwlock_tryrdlock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_rwlock_trywrlock */
 #if BIND_apr_thread_rwlock_trywrlock_FUNCTION
 #define apr_thread_rwlock_trywrlock_REQUIRED_ARGC 1
 #define apr_thread_rwlock_trywrlock_OPTIONAL_ARGC 0
@@ -18538,7 +19383,9 @@ mrb_APR_apr_thread_rwlock_trywrlock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_rwlock_unlock */
 #if BIND_apr_thread_rwlock_unlock_FUNCTION
 #define apr_thread_rwlock_unlock_REQUIRED_ARGC 1
 #define apr_thread_rwlock_unlock_OPTIONAL_ARGC 0
@@ -18577,7 +19424,9 @@ mrb_APR_apr_thread_rwlock_unlock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_rwlock_wrlock */
 #if BIND_apr_thread_rwlock_wrlock_FUNCTION
 #define apr_thread_rwlock_wrlock_REQUIRED_ARGC 1
 #define apr_thread_rwlock_wrlock_OPTIONAL_ARGC 0
@@ -18616,7 +19465,9 @@ mrb_APR_apr_thread_rwlock_wrlock(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_thread_yield */
 #if BIND_apr_thread_yield_FUNCTION
 #define apr_thread_yield_REQUIRED_ARGC 0
 #define apr_thread_yield_OPTIONAL_ARGC 0
@@ -18633,7 +19484,9 @@ mrb_APR_apr_thread_yield(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_threadattr_create */
 #if BIND_apr_threadattr_create_FUNCTION
 #define apr_threadattr_create_REQUIRED_ARGC 2
 #define apr_threadattr_create_OPTIONAL_ARGC 0
@@ -18677,7 +19530,9 @@ mrb_APR_apr_threadattr_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_threadattr_detach_get */
 #if BIND_apr_threadattr_detach_get_FUNCTION
 #define apr_threadattr_detach_get_REQUIRED_ARGC 1
 #define apr_threadattr_detach_get_OPTIONAL_ARGC 0
@@ -18716,7 +19571,9 @@ mrb_APR_apr_threadattr_detach_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_threadattr_detach_set */
 #if BIND_apr_threadattr_detach_set_FUNCTION
 #define apr_threadattr_detach_set_REQUIRED_ARGC 2
 #define apr_threadattr_detach_set_OPTIONAL_ARGC 0
@@ -18757,7 +19614,9 @@ mrb_APR_apr_threadattr_detach_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_threadattr_guardsize_set */
 #if BIND_apr_threadattr_guardsize_set_FUNCTION
 #define apr_threadattr_guardsize_set_REQUIRED_ARGC 2
 #define apr_threadattr_guardsize_set_OPTIONAL_ARGC 0
@@ -18798,7 +19657,9 @@ mrb_APR_apr_threadattr_guardsize_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_threadattr_stacksize_set */
 #if BIND_apr_threadattr_stacksize_set_FUNCTION
 #define apr_threadattr_stacksize_set_REQUIRED_ARGC 2
 #define apr_threadattr_stacksize_set_OPTIONAL_ARGC 0
@@ -18839,7 +19700,9 @@ mrb_APR_apr_threadattr_stacksize_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_threadkey_data_get */
 #if BIND_apr_threadkey_data_get_FUNCTION
 #define apr_threadkey_data_get_REQUIRED_ARGC 3
 #define apr_threadkey_data_get_OPTIONAL_ARGC 0
@@ -18885,7 +19748,9 @@ mrb_APR_apr_threadkey_data_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_threadkey_data_set */
 #if BIND_apr_threadkey_data_set_FUNCTION
 #define apr_threadkey_data_set_REQUIRED_ARGC 5
 #define apr_threadkey_data_set_OPTIONAL_ARGC 0
@@ -18941,7 +19806,9 @@ mrb_APR_apr_threadkey_data_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_threadkey_private_create */
 #if BIND_apr_threadkey_private_create_FUNCTION
 #define apr_threadkey_private_create_REQUIRED_ARGC 4
 #define apr_threadkey_private_create_OPTIONAL_ARGC 0
@@ -18995,7 +19862,9 @@ mrb_APR_apr_threadkey_private_create(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_threadkey_private_delete */
 #if BIND_apr_threadkey_private_delete_FUNCTION
 #define apr_threadkey_private_delete_REQUIRED_ARGC 1
 #define apr_threadkey_private_delete_OPTIONAL_ARGC 0
@@ -19034,7 +19903,9 @@ mrb_APR_apr_threadkey_private_delete(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_threadkey_private_get */
 #if BIND_apr_threadkey_private_get_FUNCTION
 #define apr_threadkey_private_get_REQUIRED_ARGC 2
 #define apr_threadkey_private_get_OPTIONAL_ARGC 0
@@ -19078,7 +19949,9 @@ mrb_APR_apr_threadkey_private_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_threadkey_private_set */
 #if BIND_apr_threadkey_private_set_FUNCTION
 #define apr_threadkey_private_set_REQUIRED_ARGC 2
 #define apr_threadkey_private_set_OPTIONAL_ARGC 0
@@ -19122,7 +19995,9 @@ mrb_APR_apr_threadkey_private_set(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_time_ansi_put */
 #if BIND_apr_time_ansi_put_FUNCTION
 #define apr_time_ansi_put_REQUIRED_ARGC 2
 #define apr_time_ansi_put_OPTIONAL_ARGC 0
@@ -19163,7 +20038,9 @@ mrb_APR_apr_time_ansi_put(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_time_clock_hires */
 #if BIND_apr_time_clock_hires_FUNCTION
 #define apr_time_clock_hires_REQUIRED_ARGC 1
 #define apr_time_clock_hires_OPTIONAL_ARGC 0
@@ -19195,7 +20072,9 @@ mrb_APR_apr_time_clock_hires(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_time_exp_get */
 #if BIND_apr_time_exp_get_FUNCTION
 #define apr_time_exp_get_REQUIRED_ARGC 2
 #define apr_time_exp_get_OPTIONAL_ARGC 0
@@ -19239,7 +20118,9 @@ mrb_APR_apr_time_exp_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_time_exp_gmt */
 #if BIND_apr_time_exp_gmt_FUNCTION
 #define apr_time_exp_gmt_REQUIRED_ARGC 2
 #define apr_time_exp_gmt_OPTIONAL_ARGC 0
@@ -19283,7 +20164,9 @@ mrb_APR_apr_time_exp_gmt(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_time_exp_gmt_get */
 #if BIND_apr_time_exp_gmt_get_FUNCTION
 #define apr_time_exp_gmt_get_REQUIRED_ARGC 2
 #define apr_time_exp_gmt_get_OPTIONAL_ARGC 0
@@ -19327,7 +20210,9 @@ mrb_APR_apr_time_exp_gmt_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_time_exp_lt */
 #if BIND_apr_time_exp_lt_FUNCTION
 #define apr_time_exp_lt_REQUIRED_ARGC 2
 #define apr_time_exp_lt_OPTIONAL_ARGC 0
@@ -19371,7 +20256,9 @@ mrb_APR_apr_time_exp_lt(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_time_exp_tz */
 #if BIND_apr_time_exp_tz_FUNCTION
 #define apr_time_exp_tz_REQUIRED_ARGC 3
 #define apr_time_exp_tz_OPTIONAL_ARGC 0
@@ -19417,7 +20304,9 @@ mrb_APR_apr_time_exp_tz(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_time_now */
 #if BIND_apr_time_now_FUNCTION
 #define apr_time_now_REQUIRED_ARGC 0
 #define apr_time_now_OPTIONAL_ARGC 0
@@ -19439,7 +20328,9 @@ mrb_APR_apr_time_now(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_time_sec */
 #if BIND_apr_time_sec_FUNCTION
 #define apr_time_sec_REQUIRED_ARGC 1
 #define apr_time_sec_OPTIONAL_ARGC 0
@@ -19467,7 +20358,9 @@ mrb_APR_apr_time_sec(mrb_state* mrb, mrb_value self) {
   return mrb_float_value(mrb, result);
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_tokenize_to_argv */
 #if BIND_apr_tokenize_to_argv_FUNCTION
 #define apr_tokenize_to_argv_REQUIRED_ARGC 2
 #define apr_tokenize_to_argv_OPTIONAL_ARGC 0
@@ -19525,7 +20418,9 @@ mrb_APR_apr_tokenize_to_argv(mrb_state* mrb, mrb_value self) {
   return results;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_uid_compare */
 #if BIND_apr_uid_compare_FUNCTION
 #define apr_uid_compare_REQUIRED_ARGC 2
 #define apr_uid_compare_OPTIONAL_ARGC 0
@@ -19566,7 +20461,9 @@ mrb_APR_apr_uid_compare(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_uid_current */
 #if BIND_apr_uid_current_FUNCTION
 #define apr_uid_current_REQUIRED_ARGC 3
 #define apr_uid_current_OPTIONAL_ARGC 0
@@ -19615,7 +20512,9 @@ mrb_APR_apr_uid_current(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_uid_get */
 #if BIND_apr_uid_get_FUNCTION
 #define apr_uid_get_REQUIRED_ARGC 4
 #define apr_uid_get_OPTIONAL_ARGC 0
@@ -19666,7 +20565,9 @@ mrb_APR_apr_uid_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_uid_homepath_get */
 #if BIND_apr_uid_homepath_get_FUNCTION
 #define apr_uid_homepath_get_REQUIRED_ARGC 3
 #define apr_uid_homepath_get_OPTIONAL_ARGC 0
@@ -19712,7 +20613,9 @@ mrb_APR_apr_uid_homepath_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_uid_name_get */
 #if BIND_apr_uid_name_get_FUNCTION
 #define apr_uid_name_get_REQUIRED_ARGC 3
 #define apr_uid_name_get_OPTIONAL_ARGC 0
@@ -19761,7 +20664,9 @@ mrb_APR_apr_uid_name_get(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_unescape_entity */
 #if BIND_apr_unescape_entity_FUNCTION
 #define apr_unescape_entity_REQUIRED_ARGC 4
 #define apr_unescape_entity_OPTIONAL_ARGC 0
@@ -19822,7 +20727,9 @@ mrb_APR_apr_unescape_entity(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_unescape_hex */
 #if BIND_apr_unescape_hex_FUNCTION
 #define apr_unescape_hex_REQUIRED_ARGC 5
 #define apr_unescape_hex_OPTIONAL_ARGC 0
@@ -19869,7 +20776,9 @@ mrb_APR_apr_unescape_hex(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_unescape_url */
 #if BIND_apr_unescape_url_FUNCTION
 #define apr_unescape_url_REQUIRED_ARGC 7
 #define apr_unescape_url_OPTIONAL_ARGC 0
@@ -19936,7 +20845,9 @@ mrb_APR_apr_unescape_url(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_version */
 #if BIND_apr_version_FUNCTION
 #define apr_version_REQUIRED_ARGC 1
 #define apr_version_OPTIONAL_ARGC 0
@@ -19968,7 +20879,9 @@ mrb_APR_apr_version(mrb_state* mrb, mrb_value self) {
   return mrb_nil_value();
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_version_string */
 #if BIND_apr_version_string_FUNCTION
 #define apr_version_string_REQUIRED_ARGC 0
 #define apr_version_string_OPTIONAL_ARGC 0
@@ -19988,7 +20901,9 @@ mrb_APR_apr_version_string(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_vformatter */
 #if BIND_apr_vformatter_FUNCTION
 #define apr_vformatter_REQUIRED_ARGC 5
 #define apr_vformatter_OPTIONAL_ARGC 0
@@ -20044,7 +20959,9 @@ mrb_APR_apr_vformatter(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_vsnprintf */
 #if BIND_apr_vsnprintf_FUNCTION
 #define apr_vsnprintf_REQUIRED_ARGC 4
 #define apr_vsnprintf_OPTIONAL_ARGC 0
@@ -20102,7 +21019,9 @@ mrb_APR_apr_vsnprintf(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_wait_for_io_or_timeout */
 #if BIND_apr_wait_for_io_or_timeout_FUNCTION
 #define apr_wait_for_io_or_timeout_REQUIRED_ARGC 3
 #define apr_wait_for_io_or_timeout_OPTIONAL_ARGC 0
@@ -20151,6 +21070,7 @@ mrb_APR_apr_wait_for_io_or_timeout(mrb_state* mrb, mrb_value self) {
   return return_value;
 }
 #endif
+/* MRUBY_BINDING_END */
 
 /* Error Status Checks */
 
