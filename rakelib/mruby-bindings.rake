@@ -23,6 +23,7 @@ namespace :bindings do
       #{inc}/apr_time.h
       #{inc}/apr_thread_proc.h
       #{inc}/apr_want.h
+      mruby-bindings.in/dummy_decls.h
     ]
     
     if headers.length == 0

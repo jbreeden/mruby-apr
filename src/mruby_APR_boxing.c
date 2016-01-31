@@ -477,7 +477,7 @@ static void free_apr_pool_t(mrb_state* mrb, void* ptr) {
   mruby_to_native_ref* box = (mruby_to_native_ref*)ptr;
   if (box->belongs_to_ruby) {
     if (box->obj != NULL) {
-      free(box->obj);
+      apr_pool_destroy((apr_pool_t*)box->obj);
       box->obj = NULL;
     }
   }

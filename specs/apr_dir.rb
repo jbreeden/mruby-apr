@@ -75,5 +75,4 @@ TestFixture.new('APR API: Directories') do
     end
   end
 
-  APR::apr_pool_destroy(@pool)
 end

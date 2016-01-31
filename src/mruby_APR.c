@@ -2,13 +2,47 @@
 
 /* MRUBY_BINDING: header */
 /* sha: user_defined */
+#define RETURN_ERRNO_AND_OUTPUT(err, output) \
+   do { \
+      mrb_value results = mrb_ary_new(mrb); \
+      mrb_ary_push(mrb, results, mrb_fixnum_value(err)); \
+      if (result == 0) \
+        mrb_ary_push(mrb, results, output); \
+            else \
+         mrb_ary_push(mrb, results, mrb_nil_value()); \
+      return results; \
+      } while (0);
+      
+#define apr_file_inherit_unset_REQUIRED_ARGC 1
+#define apr_file_inherit_unset_OPTIONAL_ARGC 0
+mrb_value
+mrb_APR_apr_file_inherit_unset(mrb_state* mrb, mrb_value self) {
+  mrb_value thefile;
+  mrb_get_args(mrb, "o", &thefile);
 
-/*
- * EXTENSION
- * This function is not in libapr, it's just useful for
- * implementing some of Ruby's stdlib.
- * Ex. `spawn` returns only the PID, which we'd like to `wait` on later
- */
+  /* Type checking */
+  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+    return mrb_nil_value();
+  }
+
+  apr_file_t * native_thefile = (mrb_nil_p(thefile) ? NULL : mruby_unbox_apr_file_t(thefile));
+
+  apr_status_t result = apr_file_inherit_unset(native_thefile);
+
+  return mrb_fixnum_value(result);
+}
+
+#define apr_to_os_error_REQUIRED_ARGC 1
+#define apr_to_os_error_OPTIONAL_ARGC 0
+mrb_value
+mrb_APR_apr_to_os_error(mrb_state *mrb, mrb_value self) {
+  mrb_int apr_errno;
+  mrb_get_args(mrb, "i", &apr_errno);
+  int os_errno = APR_TO_OS_ERROR(apr_errno);
+  return mrb_fixnum_value(os_errno);
+}
+
 mrb_value
 mrb_APR_apr_proc_from_pid(mrb_state* mrb, mrb_value self) {
   mrb_int pid;
@@ -23,17 +57,53 @@ mrb_APR_apr_proc_from_pid(mrb_state* mrb, mrb_value self) {
   /* Wasn't made from an apr pool, so "giftwrap" so the ruby gc free's it */
   return mruby_giftwrap_apr_proc_t(mrb, proc);
 }
+      
+#define apr_pool_create_REQUIRED_ARGC 1
+#define apr_pool_create_OPTIONAL_ARGC 0
+/* apr_pool_create_core_ex
+*
+* Parameters:
+* - parent: apr_pool_t
+* Return Type: [apr_status_t, apr_pool_t]
+*/
+mrb_value
+mrb_APR_apr_pool_create(mrb_state* mrb, mrb_value self) {
+   mrb_value parent;
 
-#define RETURN_ERRNO_AND_OUTPUT(err, output) \
-   do { \
-      mrb_value results = mrb_ary_new(mrb); \
-      mrb_ary_push(mrb, results, mrb_fixnum_value(err)); \
-      if (result == 0) \
-        mrb_ary_push(mrb, results, output); \
-            else \
-         mrb_ary_push(mrb, results, mrb_nil_value()); \
-      return results; \
-      } while (0);
+   /* Fetch the args */
+   mrb_get_args(mrb, "o", &parent);
+
+   /* Type checking */
+   if (!mrb_nil_p(parent) && !mrb_obj_is_kind_of(mrb, parent, AprPoolT_class(mrb))) {
+      mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+      return mrb_nil_value();
+   }
+
+   /* Unbox parameters */
+   apr_pool_t * native_parent = (mrb_nil_p(parent) ? NULL : mruby_unbox_apr_pool_t(parent));
+
+   /* Invocation */
+   apr_pool_t * native_newpool = NULL;
+   apr_status_t result = apr_pool_create_ex(&native_newpool, native_parent, NULL, NULL);
+
+   /* Box the return value */
+   mrb_value return_value = mrb_fixnum_value(result);
+
+   mrb_value results = mrb_ary_new(mrb);
+   mrb_ary_push(mrb, results, return_value);
+   if (result == 0) {
+      /*
+       * Giftwrapping the pool ensures it is destroyed when all references to
+       * the pool from MRuby are GC'ed
+       */
+      mrb_ary_push(mrb, results, mruby_giftwrap_apr_pool_t(mrb, native_newpool));
+   }
+   else {
+      mrb_ary_push(mrb, results, mrb_nil_value());
+   }
+
+   return results;
+}
 
 #define chdir_REQUIRED_ARGC 1
 #define chdir_OPTIONAL_ARGC 0
@@ -287,36 +357,22 @@ mrb_APR_apr_cpystrn(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_ctime */
-/* sha: user_edited */
+/* sha: d3f2162f66614f5cf1da5f71930b9b1d1c93c45d09bdbcca18208fc725084d6f */
 #if BIND_apr_ctime_FUNCTION
 #define apr_ctime_REQUIRED_ARGC 1
 #define apr_ctime_OPTIONAL_ARGC 0
-/* apr_ctime
- *
- * Parameters:
- * - t: AprTimeT
- * Return Type: apr_status_t
- */
+/* apr_status_t apr_ctime(char * date_str, apr_time_t t) */
 mrb_value
 mrb_APR_apr_ctime(mrb_state* mrb, mrb_value self) {
-  mrb_value t;
+  mrb_int native_t;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "o", &t);
-
-  /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, t, AprTimeT_class(mrb))) {
-    mrb_raise(mrb, AprTimeT_class(mrb), "AprTimeT expected");
-    return mrb_nil_value();
-  }
-
-  /* unboxing parameters */
-  apr_time_t native_t = *mruby_unbox_apr_time_t(t);
+  mrb_get_args(mrb, "i", &native_t);
 
   /* Invocation */
   char * native_date_str = (char*)malloc(APR_CTIME_LEN);
   apr_status_t result = apr_ctime(native_date_str, native_t);
-
+  
   /* Box the return value */
   if (result > MRB_INT_MAX) {
     mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
@@ -1699,7 +1755,7 @@ mrb_APR_apr_file_mktemp(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_mtime_set */
-/* sha: 490bff584f7f8f1b27c8d9eba0768e8e08c94cbbe78e8cca9edc6c1949696fe9 */
+/* sha: abeb5962e1bbb6ad1497a261ed70798798d42392cdbe74611c67d5814c01d7d1 */
 #if BIND_apr_file_mtime_set_FUNCTION
 #define apr_file_mtime_set_REQUIRED_ARGC 3
 #define apr_file_mtime_set_OPTIONAL_ARGC 0
@@ -1707,21 +1763,17 @@ mrb_APR_apr_file_mktemp(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_apr_file_mtime_set(mrb_state* mrb, mrb_value self) {
   char * native_fname = NULL;
-  mrb_value mtime;
+  mrb_int native_mtime;
   mrb_value pool;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "zoo", &native_fname, &mtime, &pool);
+  mrb_get_args(mrb, "zio", &native_fname, &native_mtime, &pool);
 
   /* Type checking */
-  TODO_type_check_apr_time_t(mtime);
   if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
     return mrb_nil_value();
   }
-
-  /* Unbox param: mtime */
-  apr_time_t native_mtime = TODO_mruby_unbox_apr_time_t(mtime);
 
   /* Unbox param: pool */
   apr_pool_t * native_pool = (mrb_nil_p(pool) ? NULL : mruby_unbox_apr_pool_t(pool));
@@ -5626,26 +5678,36 @@ mrb_APR_apr_pool_userdata_setn(mrb_state* mrb, mrb_value self) {
 #if BIND_apr_proc_create_FUNCTION
 #define apr_proc_create_REQUIRED_ARGC 6
 #define apr_proc_create_OPTIONAL_ARGC 0
-/* apr_status_t apr_proc_create(apr_proc_t * new_proc, const char * progname, const char *const * args, const char *const * env, apr_procattr_t * attr, apr_pool_t * pool) */
+/* apr_proc_create
+ *
+ * Parameters:
+ * - progname: const char *
+ * - args: const char *const *
+ * - env: const char *const *
+ * - attr: apr_procattr_t *
+ * - pool: apr_pool_t *
+ * Return Type: [Fixnum, AprProcT]
+ */
 mrb_value
 mrb_APR_apr_proc_create(mrb_state* mrb, mrb_value self) {
-  mrb_value new_proc;
-  char * native_progname = NULL;
+  char * native_progname;
   mrb_value args;
   mrb_value env;
   mrb_value attr;
   mrb_value pool;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "ozoooo", &new_proc, &native_progname, &args, &env, &attr, &pool);
+  mrb_get_args(mrb, "zoooo", &native_progname, &args, &env, &attr, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, new_proc, AprProcT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcT expected");
-    return mrb_nil_value();
+  if (!mrb_obj_is_kind_of(mrb, args, mrb->array_class) && !mrb_nil_p(args)) {
+     mrb_raise(mrb, E_TYPE_ERROR, "Array expected");
+     return mrb_nil_value();
   }
-  TODO_type_check_char_PTR_const_PTR(args);
-  TODO_type_check_char_PTR_const_PTR(env);
+  if (!mrb_obj_is_kind_of(mrb, env, mrb->array_class) && !mrb_nil_p(env)) {
+     mrb_raise(mrb, E_TYPE_ERROR, "Array expected");
+     return mrb_nil_value();
+  }
   if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
     return mrb_nil_value();
@@ -5655,28 +5717,63 @@ mrb_APR_apr_proc_create(mrb_state* mrb, mrb_value self) {
     return mrb_nil_value();
   }
 
-  /* Unbox param: new_proc */
-  apr_proc_t * native_new_proc = (mrb_nil_p(new_proc) ? NULL : mruby_unbox_apr_proc_t(new_proc));
+  /* Unbox parameters */
 
-  /* Unbox param: args */
-  const char *const * native_args = TODO_mruby_unbox_char_PTR_const_PTR(args);
+  const char ** native_args;
+  if (mrb_nil_p(args)) {
+    native_args = NULL;
+  }
+  else {
+     int argc = mrb_ary_len(mrb, args);
+     native_args = (const char**)malloc(sizeof(char*) * (argc + 1));
+     for (int i = 0; i < argc; ++i) {
+        mrb_value ruby_string = mrb_ary_entry(args, i);
+        native_args[i] = mrb_string_value_cstr(mrb, &ruby_string);
+     }
+     native_args[argc] = NULL;
+  }
 
-  /* Unbox param: env */
-  const char *const * native_env = TODO_mruby_unbox_char_PTR_const_PTR(env);
+  const char ** native_env;
+  if (mrb_nil_p(env)) {
+     native_env = NULL;
+  }
+  else {
+     int envc = mrb_ary_len(mrb, env);
+     native_env = (const char**)malloc(sizeof(char*) * (envc + 1));
+     for (int i = 0; i < envc; ++i) {
+        mrb_value ruby_string = mrb_ary_entry(env, i);
+        native_env[i] = mrb_string_value_cstr(mrb, &ruby_string);
+     }
+     native_env[envc] = NULL;
+  }
 
-  /* Unbox param: attr */
   apr_procattr_t * native_attr = (mrb_nil_p(attr) ? NULL : mruby_unbox_apr_procattr_t(attr));
-
-  /* Unbox param: pool */
   apr_pool_t * native_pool = (mrb_nil_p(pool) ? NULL : mruby_unbox_apr_pool_t(pool));
 
   /* Invocation */
-  apr_status_t native_return_value = apr_proc_create(native_new_proc, native_progname, native_args, native_env, native_attr, native_pool);
+  apr_proc_t* native_new_proc = (apr_proc_t*)malloc(sizeof(apr_proc_t));
+  apr_status_t result = apr_proc_create(native_new_proc, native_progname, native_args, native_env, native_attr, native_pool);
+  if (native_args != NULL) free(native_args);
+  if (native_env != NULL) free(native_env);
 
   /* Box the return value */
-  mrb_value return_value = mrb_fixnum_value(native_return_value);
-  
-  return return_value;
+  if (result > MRB_INT_MAX) {
+    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
+    return mrb_nil_value();
+  }
+  mrb_value return_value = mrb_fixnum_value(result);
+
+  mrb_value results = mrb_ary_new(mrb);
+  mrb_ary_push(mrb, results, return_value);
+  if (result == 0) {
+     mrb_ary_push(mrb, results, mruby_giftwrap_apr_proc_t(mrb, native_new_proc));
+  }
+  else {
+     free(native_new_proc);
+     mrb_ary_push(mrb, results, mrb_nil_value());
+  }
+
+  return results;
 }
 #endif
 /* MRUBY_BINDING_END */
@@ -6281,41 +6378,53 @@ mrb_APR_apr_proc_other_child_unregister(mrb_state* mrb, mrb_value self) {
 #if BIND_apr_proc_wait_FUNCTION
 #define apr_proc_wait_REQUIRED_ARGC 4
 #define apr_proc_wait_OPTIONAL_ARGC 0
-/* apr_status_t apr_proc_wait(apr_proc_t * proc, int * exitcode, apr_exit_why_e * exitwhy, apr_wait_how_e waithow) */
+/* apr_proc_wait
+ *
+ * Parameters:
+ * - proc: apr_proc_t *
+ * - waithow: apr_wait_how_e
+ * Return Type: [errno: Fixnum, exitcode: Fixnum, exitwhy: Fixnum]
+ */
 mrb_value
 mrb_APR_apr_proc_wait(mrb_state* mrb, mrb_value self) {
   mrb_value proc;
-  mrb_value exitcode;
-  mrb_value exitwhy;
   mrb_int native_waithow;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "oooi", &proc, &exitcode, &exitwhy, &native_waithow);
+  mrb_get_args(mrb, "oi", &proc, &native_waithow);
 
   /* Type checking */
   if (!mrb_obj_is_kind_of(mrb, proc, AprProcT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprProcT expected");
     return mrb_nil_value();
   }
-  TODO_type_check_int_PTR(exitcode);
-  TODO_type_check_apr_exit_why_e_PTR(exitwhy);
 
-  /* Unbox param: proc */
+  /* Unbox parameters */
   apr_proc_t * native_proc = (mrb_nil_p(proc) ? NULL : mruby_unbox_apr_proc_t(proc));
 
-  /* Unbox param: exitcode */
-  int * native_exitcode = TODO_mruby_unbox_int_PTR(exitcode);
-
-  /* Unbox param: exitwhy */
-  apr_exit_why_e * native_exitwhy = TODO_mruby_unbox_apr_exit_why_e_PTR(exitwhy);
-
   /* Invocation */
-  apr_status_t native_return_value = apr_proc_wait(native_proc, native_exitcode, native_exitwhy, native_waithow);
+  int native_exitcode;
+  apr_exit_why_e native_exitwhy;
+  apr_status_t result = apr_proc_wait(native_proc, &native_exitcode, &native_exitwhy, native_waithow);
 
   /* Box the return value */
-  mrb_value return_value = mrb_fixnum_value(native_return_value);
-  
-  return return_value;
+  if (result > MRB_INT_MAX) {
+    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
+    return mrb_nil_value();
+  }
+
+  mrb_value results = mrb_ary_new(mrb);
+  mrb_ary_push(mrb, results, mrb_fixnum_value(result));
+  if (result == APR_CHILD_DONE) {
+     mrb_ary_push(mrb, results, mrb_fixnum_value(native_exitcode));
+     mrb_ary_push(mrb, results, mrb_fixnum_value(native_exitwhy));
+  }
+  else {
+     mrb_ary_push(mrb, results, mrb_nil_value());
+     mrb_ary_push(mrb, results, mrb_nil_value());
+  }
+
+  return results;
 }
 #endif
 /* MRUBY_BINDING_END */
@@ -6545,17 +6654,17 @@ mrb_APR_apr_procattr_child_in_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING: apr_procattr_child_out_set */
 /* sha: e2137e029ca564c4c4324162d7d6bba558df792f375e082c8080d605d972ebcd */
 #if BIND_apr_procattr_child_out_set_FUNCTION
-#define apr_procattr_child_out_set_REQUIRED_ARGC 3
-#define apr_procattr_child_out_set_OPTIONAL_ARGC 0
+#define apr_procattr_child_out_set_REQUIRED_ARGC 2
+#define apr_procattr_child_out_set_OPTIONAL_ARGC 1
 /* apr_status_t apr_procattr_child_out_set(struct apr_procattr_t * attr, apr_file_t * child_out, apr_file_t * parent_out) */
 mrb_value
 mrb_APR_apr_procattr_child_out_set(mrb_state* mrb, mrb_value self) {
   mrb_value attr;
   mrb_value child_out;
-  mrb_value parent_out;
+  mrb_value parent_out = mrb_nil_value();
 
   /* Fetch the args */
-  mrb_get_args(mrb, "ooo", &attr, &child_out, &parent_out);
+  mrb_get_args(mrb, "oo|o", &attr, &child_out, &parent_out);
 
   /* Type checking */
   if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
@@ -6566,7 +6675,7 @@ mrb_APR_apr_procattr_child_out_set(mrb_state* mrb, mrb_value self) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, parent_out, AprFileT_class(mrb))) {
+  if (!mrb_obj_is_kind_of(mrb, parent_out, AprFileT_class(mrb)) && !mrb_nil_p(parent_out)) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
     return mrb_nil_value();
   }
@@ -6628,37 +6737,51 @@ mrb_APR_apr_procattr_cmdtype_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING: apr_procattr_create */
 /* sha: 7511c2c3fd7433080993ef57994eb25d450b4888a73d9adeea5e17d6b2bf52d7 */
 #if BIND_apr_procattr_create_FUNCTION
-#define apr_procattr_create_REQUIRED_ARGC 2
+#define apr_procattr_create_REQUIRED_ARGC 1
 #define apr_procattr_create_OPTIONAL_ARGC 0
-/* apr_status_t apr_procattr_create(apr_procattr_t ** new_attr, apr_pool_t * cont) */
+/* apr_procattr_create
+ *
+ * Parameters:
+ * - cont: AprPoolT
+ * Return Type: [Fixnum, AprProcattrT]
+ */
 mrb_value
 mrb_APR_apr_procattr_create(mrb_state* mrb, mrb_value self) {
-  mrb_value new_attr;
   mrb_value cont;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "oo", &new_attr, &cont);
+  mrb_get_args(mrb, "o", &cont);
 
   /* Type checking */
-  TODO_type_check_apr_procattr_t_PTR_PTR(new_attr);
   if (!mrb_obj_is_kind_of(mrb, cont, AprPoolT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
     return mrb_nil_value();
   }
 
-  /* Unbox param: new_attr */
-  apr_procattr_t ** native_new_attr = TODO_mruby_unbox_apr_procattr_t_PTR_PTR(new_attr);
-
-  /* Unbox param: cont */
+  /* Unbox parameters */
   apr_pool_t * native_cont = (mrb_nil_p(cont) ? NULL : mruby_unbox_apr_pool_t(cont));
 
   /* Invocation */
-  apr_status_t native_return_value = apr_procattr_create(native_new_attr, native_cont);
+  apr_procattr_t * native_new_attr;
+  apr_status_t result = apr_procattr_create(&native_new_attr, native_cont);
 
   /* Box the return value */
-  mrb_value return_value = mrb_fixnum_value(native_return_value);
-  
-  return return_value;
+  if (result > MRB_INT_MAX) {
+    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
+    return mrb_nil_value();
+  }
+  mrb_value return_value = mrb_fixnum_value(result);
+
+  mrb_value results = mrb_ary_new(mrb);
+  mrb_ary_push(mrb, results, return_value);
+  if (result == 0) {
+     mrb_ary_push(mrb, results, mruby_box_apr_procattr_t(mrb, native_new_attr));
+  }
+  else {
+     mrb_ary_push(mrb, results, mrb_nil_value());
+  }
+
+  return results;
 }
 #endif
 /* MRUBY_BINDING_END */
@@ -7160,7 +7283,7 @@ mrb_APR_apr_pvsprintf(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_rfc822_date */
-/* sha: 067848648e44962d449d7425c400a70dc68dc884ebaf2fe7ddcdbc602cf0e9ac */
+/* sha: 9e32ac3d40f86d6cd4bedc474a05943c01f4cf43631135fd9ceed8aa69cca88f */
 #if BIND_apr_rfc822_date_FUNCTION
 #define apr_rfc822_date_REQUIRED_ARGC 2
 #define apr_rfc822_date_OPTIONAL_ARGC 0
@@ -7168,20 +7291,16 @@ mrb_APR_apr_pvsprintf(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_apr_rfc822_date(mrb_state* mrb, mrb_value self) {
   mrb_value date_str;
-  mrb_value t;
+  mrb_int native_t;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "oo", &date_str, &t);
+  mrb_get_args(mrb, "oi", &date_str, &native_t);
 
   /* Type checking */
   TODO_type_check_char_PTR(date_str);
-  TODO_type_check_apr_time_t(t);
 
   /* Unbox param: date_str */
   char * native_date_str = TODO_mruby_unbox_char_PTR(date_str);
-
-  /* Unbox param: t */
-  apr_time_t native_t = TODO_mruby_unbox_apr_time_t(t);
 
   /* Invocation */
   apr_status_t native_return_value = apr_rfc822_date(native_date_str, native_t);
@@ -8314,6 +8433,7 @@ mrb_APR_apr_socket_recvfrom(mrb_state* mrb, mrb_value self) {
   free(native_buf);
   native_buf = NULL;
 
+  /* TODO TODO TODO TODO XXX What was I thinking? Please don't store new pools on every call */
   /* The APR functions that operate on a sockaddr tend to require
    * a functioning `pool` member, but they don't come out with one.
    * So, create one, and reference it from the Ruby object so the GC
@@ -9969,7 +10089,7 @@ mrb_APR_apr_time_exp_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_time_exp_gmt */
-/* sha: f9eafc9d2e85ca69c1a7092387c3a5bb08577eb182b941c16bec3ac8dd5a198a */
+/* sha: 911c1e57ee11422c00508e712de17b65b8e892156e521dd071d43d55b73567ec */
 #if BIND_apr_time_exp_gmt_FUNCTION
 #define apr_time_exp_gmt_REQUIRED_ARGC 2
 #define apr_time_exp_gmt_OPTIONAL_ARGC 0
@@ -9977,23 +10097,19 @@ mrb_APR_apr_time_exp_get(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_apr_time_exp_gmt(mrb_state* mrb, mrb_value self) {
   mrb_value result;
-  mrb_value input;
+  mrb_int native_input;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "oo", &result, &input);
+  mrb_get_args(mrb, "oi", &result, &native_input);
 
   /* Type checking */
   if (!mrb_obj_is_kind_of(mrb, result, AprTimeExpT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprTimeExpT expected");
     return mrb_nil_value();
   }
-  TODO_type_check_apr_time_t(input);
 
   /* Unbox param: result */
   apr_time_exp_t * native_result = (mrb_nil_p(result) ? NULL : mruby_unbox_apr_time_exp_t(result));
-
-  /* Unbox param: input */
-  apr_time_t native_input = TODO_mruby_unbox_apr_time_t(input);
 
   /* Invocation */
   apr_status_t native_return_value = apr_time_exp_gmt(native_result, native_input);
@@ -10045,7 +10161,7 @@ mrb_APR_apr_time_exp_gmt_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_time_exp_lt */
-/* sha: 820fdbf2aff60b576f110958144ee265881af31d52380616401778ed5fd399aa */
+/* sha: fefd31d57439c8fe6317eb908c5eb637019920b8b29e26bc73fed2fb2f6c7dbc */
 #if BIND_apr_time_exp_lt_FUNCTION
 #define apr_time_exp_lt_REQUIRED_ARGC 2
 #define apr_time_exp_lt_OPTIONAL_ARGC 0
@@ -10053,23 +10169,19 @@ mrb_APR_apr_time_exp_gmt_get(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_apr_time_exp_lt(mrb_state* mrb, mrb_value self) {
   mrb_value result;
-  mrb_value input;
+  mrb_int native_input;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "oo", &result, &input);
+  mrb_get_args(mrb, "oi", &result, &native_input);
 
   /* Type checking */
   if (!mrb_obj_is_kind_of(mrb, result, AprTimeExpT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprTimeExpT expected");
     return mrb_nil_value();
   }
-  TODO_type_check_apr_time_t(input);
 
   /* Unbox param: result */
   apr_time_exp_t * native_result = (mrb_nil_p(result) ? NULL : mruby_unbox_apr_time_exp_t(result));
-
-  /* Unbox param: input */
-  apr_time_t native_input = TODO_mruby_unbox_apr_time_t(input);
 
   /* Invocation */
   apr_status_t native_return_value = apr_time_exp_lt(native_result, native_input);
@@ -10083,7 +10195,7 @@ mrb_APR_apr_time_exp_lt(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_time_exp_tz */
-/* sha: ddaed3a03c93fa0f2675701266bd308b4031f0d40d51a899776845ddbcbe93fc */
+/* sha: 08848a2836f1f0af248c456125644829e4e10f051a6e1de46b0925e3098e9ac8 */
 #if BIND_apr_time_exp_tz_FUNCTION
 #define apr_time_exp_tz_REQUIRED_ARGC 3
 #define apr_time_exp_tz_OPTIONAL_ARGC 0
@@ -10091,24 +10203,20 @@ mrb_APR_apr_time_exp_lt(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_apr_time_exp_tz(mrb_state* mrb, mrb_value self) {
   mrb_value result;
-  mrb_value input;
+  mrb_int native_input;
   mrb_int native_offs;
 
   /* Fetch the args */
-  mrb_get_args(mrb, "ooi", &result, &input, &native_offs);
+  mrb_get_args(mrb, "oii", &result, &native_input, &native_offs);
 
   /* Type checking */
   if (!mrb_obj_is_kind_of(mrb, result, AprTimeExpT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprTimeExpT expected");
     return mrb_nil_value();
   }
-  TODO_type_check_apr_time_t(input);
 
   /* Unbox param: result */
   apr_time_exp_t * native_result = (mrb_nil_p(result) ? NULL : mruby_unbox_apr_time_exp_t(result));
-
-  /* Unbox param: input */
-  apr_time_t native_input = TODO_mruby_unbox_apr_time_t(input);
 
   /* Invocation */
   apr_status_t native_return_value = apr_time_exp_tz(native_result, native_input, native_offs);
@@ -10122,25 +10230,43 @@ mrb_APR_apr_time_exp_tz(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_time_now */
-/* sha: user_edited */
+/* sha: 8fcc2565f090474e686700395d33eb0d59689a0b986df231312e5544a2abf4ab */
 #if BIND_apr_time_now_FUNCTION
 #define apr_time_now_REQUIRED_ARGC 0
 #define apr_time_now_OPTIONAL_ARGC 0
-/* apr_time_now
- *
- * Parameters: None
- * Return Type: apr_time_t
- */
+/* apr_time_t apr_time_now() */
 mrb_value
 mrb_APR_apr_time_now(mrb_state* mrb, mrb_value self) {
   /* Invocation */
-  apr_time_t result = apr_time_now();
+  apr_time_t native_return_value = apr_time_now();
 
   /* Box the return value */
-  apr_time_t* new_time = (apr_time_t*)malloc(sizeof(apr_time_t));
-  memcpy(new_time, &result, sizeof(apr_time_t));
-  mrb_value return_value = mruby_giftwrap_apr_time_t(mrb, new_time);
+  mrb_value return_value = mrb_fixnum_value(native_return_value);
+  
+  return return_value;
+}
+#endif
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: apr_time_sec */
+/* sha: e35d1720f84afdc3f643766f863c619f308735a966c1d683bd176641e038fbfb */
+#if BIND_apr_time_sec_FUNCTION
+#define apr_time_sec_REQUIRED_ARGC 1
+#define apr_time_sec_OPTIONAL_ARGC 0
+/* int apr_time_sec(int time) */
+mrb_value
+mrb_APR_apr_time_sec(mrb_state* mrb, mrb_value self) {
+  mrb_int native_time;
+
+  /* Fetch the args */
+  mrb_get_args(mrb, "i", &native_time);
+
+  /* Invocation */
+  int native_return_value = apr_time_sec(native_time);
+
+  /* Box the return value */
+  mrb_value return_value = mrb_fixnum_value(native_return_value);
+  
   return return_value;
 }
 #endif
@@ -10254,8 +10380,6 @@ void mrb_mruby_apr_gem_init(mrb_state* mrb) {
 /* MRUBY_BINDING: pre_class_initializations */
 /* sha: user_defined */
   mruby_APR_init_native_ext(mrb);
-
-  mrb_define_class_under(mrb, APR_module, "AprTimeT", mrb->object_class);
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: class_initializations */
@@ -10321,6 +10445,9 @@ void mrb_mruby_apr_gem_init(mrb_state* mrb) {
   mrb_define_class_method(mrb, APR_module, "apr_dir_chdir", mrb_APR_dir_chdir, MRB_ARGS_ARG(chdir_REQUIRED_ARGC, chdir_OPTIONAL_ARGC));
   mrb_define_class_method(mrb, APR_module, "apr_dir_getcwd", mrb_APR_dir_getcwd, MRB_ARGS_ARG(getcwd_REQUIRED_ARGC, getcwd_OPTIONAL_ARGC));
   mrb_define_class_method(mrb, APR_module, "apr_proc_from_pid", mrb_APR_apr_proc_from_pid, MRB_ARGS_ARG(1, 0));
+  mrb_define_class_method(mrb, APR_module, "apr_pool_create", mrb_APR_apr_pool_create, MRB_ARGS_ARG(apr_pool_create_REQUIRED_ARGC, apr_pool_create_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "apr_to_os_error", mrb_APR_apr_to_os_error, MRB_ARGS_ARG(apr_to_os_error_REQUIRED_ARGC, apr_to_os_error_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "apr_file_inherit_unset", mrb_APR_apr_file_inherit_unset, MRB_ARGS_ARG(apr_file_inherit_unset_REQUIRED_ARGC, apr_file_inherit_unset_OPTIONAL_ARGC));
   
   /* Error Status Checks */
 
@@ -10401,7 +10528,7 @@ void mrb_mruby_apr_gem_init(mrb_state* mrb) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: global_function_definitions */
-/* sha: 68c6f8888abbb2d3f846aace0b385c8869a87c14c08fb2c1e9b734777a25316a */
+/* sha: 90de25300936d01c8de58dddbd7db4dde951bd316f7dbf74e40cd032a4c7d403 */
   /*
    * Global Functions
    */
@@ -11166,6 +11293,9 @@ void mrb_mruby_apr_gem_init(mrb_state* mrb) {
 #endif
 #if BIND_apr_time_now_FUNCTION
   mrb_define_class_method(mrb, APR_module, "apr_time_now", mrb_APR_apr_time_now, MRB_ARGS_ARG(apr_time_now_REQUIRED_ARGC, apr_time_now_OPTIONAL_ARGC));
+#endif
+#if BIND_apr_time_sec_FUNCTION
+  mrb_define_class_method(mrb, APR_module, "apr_time_sec", mrb_APR_apr_time_sec, MRB_ARGS_ARG(apr_time_sec_REQUIRED_ARGC, apr_time_sec_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_tokenize_to_argv_FUNCTION
   mrb_define_class_method(mrb, APR_module, "apr_tokenize_to_argv", mrb_APR_apr_tokenize_to_argv, MRB_ARGS_ARG(apr_tokenize_to_argv_REQUIRED_ARGC, apr_tokenize_to_argv_OPTIONAL_ARGC));

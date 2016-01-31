@@ -32,3 +32,5 @@
 # CTypes.translate_enum_names do |name|
 #   name
 # end
+
+CTypes.typedef('int', 'apr_time_t')

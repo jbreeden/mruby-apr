@@ -19,5 +19,4 @@ TestFixture.new('APR API: Time') do
     end
   end
 
-  APR::apr_pool_destroy(@pool)
 end

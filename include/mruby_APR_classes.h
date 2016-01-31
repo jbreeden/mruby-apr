@@ -8,41 +8,6 @@
 #define BIND_AprFileT_INITIALIZE TRUE
 
 #define BIND_AprFinfoT_TYPE TRUE
-#define BIND_AprFinfoT_INITIALIZE TRUE
-#define BIND_AprFinfoT_pool_FIELD_READER TRUE
-#define BIND_AprFinfoT_pool_FIELD_WRITER TRUE
-#define BIND_AprFinfoT_valid_FIELD_READER TRUE
-#define BIND_AprFinfoT_valid_FIELD_WRITER TRUE
-#define BIND_AprFinfoT_protection_FIELD_READER TRUE
-#define BIND_AprFinfoT_protection_FIELD_WRITER TRUE
-#define BIND_AprFinfoT_filetype_FIELD_READER TRUE
-#define BIND_AprFinfoT_filetype_FIELD_WRITER TRUE
-#define BIND_AprFinfoT_user_FIELD_READER FALSE
-#define BIND_AprFinfoT_user_FIELD_WRITER FALSE
-#define BIND_AprFinfoT_group_FIELD_READER FALSE
-#define BIND_AprFinfoT_group_FIELD_WRITER FALSE
-#define BIND_AprFinfoT_inode_FIELD_READER FALSE
-#define BIND_AprFinfoT_inode_FIELD_WRITER FALSE
-#define BIND_AprFinfoT_device_FIELD_READER FALSE
-#define BIND_AprFinfoT_device_FIELD_WRITER FALSE
-#define BIND_AprFinfoT_nlink_FIELD_READER TRUE
-#define BIND_AprFinfoT_nlink_FIELD_WRITER TRUE
-#define BIND_AprFinfoT_size_FIELD_READER FALSE
-#define BIND_AprFinfoT_size_FIELD_WRITER FALSE
-#define BIND_AprFinfoT_csize_FIELD_READER FALSE
-#define BIND_AprFinfoT_csize_FIELD_WRITER FALSE
-#define BIND_AprFinfoT_atime_FIELD_READER FALSE
-#define BIND_AprFinfoT_atime_FIELD_WRITER FALSE
-#define BIND_AprFinfoT_mtime_FIELD_READER FALSE
-#define BIND_AprFinfoT_mtime_FIELD_WRITER FALSE
-#define BIND_AprFinfoT_ctime_FIELD_READER FALSE
-#define BIND_AprFinfoT_ctime_FIELD_WRITER FALSE
-#define BIND_AprFinfoT_fname_FIELD_READER TRUE
-#define BIND_AprFinfoT_fname_FIELD_WRITER TRUE
-#define BIND_AprFinfoT_name_FIELD_READER TRUE
-#define BIND_AprFinfoT_name_FIELD_WRITER TRUE
-#define BIND_AprFinfoT_filehand_FIELD_READER TRUE
-#define BIND_AprFinfoT_filehand_FIELD_WRITER TRUE
 
 #define BIND_AprGlobalMutexT_TYPE TRUE
 #define BIND_AprGlobalMutexT_INITIALIZE TRUE
@@ -72,7 +37,7 @@
 
 #define BIND_AprProcT_TYPE TRUE
 #define BIND_AprProcT_INITIALIZE TRUE
-#define BIND_AprProcT_pid_FIELD_READER FALSE
+#define BIND_AprProcT_pid_FIELD_READER TRUE
 #define BIND_AprProcT_pid_FIELD_WRITER FALSE
 #define BIND_AprProcT_in_FIELD_READER TRUE
 #define BIND_AprProcT_in_FIELD_WRITER TRUE

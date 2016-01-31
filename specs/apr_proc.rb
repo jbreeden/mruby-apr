@@ -110,5 +110,4 @@ TestFixture.new('APR API: Processes') do
     end
   end
 
-  APR::apr_pool_destroy(@pool)
 end

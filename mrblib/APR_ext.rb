@@ -14,10 +14,6 @@ module APR
   def self.with_pool(&block)
     err, pool = APR.apr_pool_create(nil)
     return block[pool]
-  ensure
-    # Disown so the GC doesn't try to destroy again
-    APR::AprPoolT.disown(pool)
-    APR.apr_pool_destroy(pool)
   end
 
   # Creating pools is slow. If you don't need to keep any native handles

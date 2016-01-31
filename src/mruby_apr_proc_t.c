@@ -37,12 +37,9 @@ mrb_APR_AprProcT_initialize(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_AprProcT_get_pid(mrb_state* mrb, mrb_value self) {
   apr_proc_t * native_self = mruby_unbox_apr_proc_t(self);
-
-  pid_t native_pid = native_self->pid;
-
-  mrb_value pid = TODO_mruby_box_pid_t(mrb, native_pid);
-
-  return pid;
+  pid_t native_field = native_self->pid;
+  mrb_value ruby_field = mrb_fixnum_value(native_field);
+  return ruby_field;
 }
 #endif
 /* MRUBY_BINDING_END */
@@ -77,12 +74,9 @@ mrb_APR_AprProcT_set_pid(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_AprProcT_get_in(mrb_state* mrb, mrb_value self) {
   apr_proc_t * native_self = mruby_unbox_apr_proc_t(self);
-
-  apr_file_t * native_in = native_self->in;
-
-  mrb_value in = (native_in == NULL ? mrb_nil_value() : mruby_box_apr_file_t(mrb, native_in));
-
-  return in;
+  apr_file_t * native_field = native_self->in;
+  mrb_value ruby_field = (native_field == NULL ? mrb_nil_value() : mruby_box_apr_file_t(mrb, native_field));
+  return ruby_field;
 }
 #endif
 /* MRUBY_BINDING_END */
@@ -120,12 +114,9 @@ mrb_APR_AprProcT_set_in(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_AprProcT_get_out(mrb_state* mrb, mrb_value self) {
   apr_proc_t * native_self = mruby_unbox_apr_proc_t(self);
-
-  apr_file_t * native_out = native_self->out;
-
-  mrb_value out = (native_out == NULL ? mrb_nil_value() : mruby_box_apr_file_t(mrb, native_out));
-
-  return out;
+  apr_file_t * native_field = native_self->out;
+  mrb_value ruby_field = (native_field == NULL ? mrb_nil_value() : mruby_box_apr_file_t(mrb, native_field));
+  return ruby_field;
 }
 #endif
 /* MRUBY_BINDING_END */
@@ -163,12 +154,9 @@ mrb_APR_AprProcT_set_out(mrb_state* mrb, mrb_value self) {
 mrb_value
 mrb_APR_AprProcT_get_err(mrb_state* mrb, mrb_value self) {
   apr_proc_t * native_self = mruby_unbox_apr_proc_t(self);
-
-  apr_file_t * native_err = native_self->err;
-
-  mrb_value err = (native_err == NULL ? mrb_nil_value() : mruby_box_apr_file_t(mrb, native_err));
-
-  return err;
+  apr_file_t * native_field = native_self->err;
+  mrb_value ruby_field = (native_field == NULL ? mrb_nil_value() : mruby_box_apr_file_t(mrb, native_field));
+  return ruby_field;
 }
 #endif
 /* MRUBY_BINDING_END */
