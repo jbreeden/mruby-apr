@@ -3,15 +3,15 @@ module Process
     def initialize(pid, exit_status, apr_exit_why)
       @pid = pid
       @exitstatus = exit_status
-      if apr_exit_why == APR::AprExitWhyE::APR_PROC_EXIT
+      if apr_exit_why == APR::ExitWhy::APR_PROC_EXIT
         @exited = true
         @signaled = false
         @coredump = false
-      elsif apr_exit_why == APR::AprExitWhyE::APR_PROC_SIGNAL
+      elsif apr_exit_why == APR::ExitWhy::APR_PROC_SIGNAL
         @exited = false
         @signaled = true
         @coredump = false
-      elsif apr_exit_why == APR::AprExitWhyE::APR_PROC_SIGNAL_CORE
+      elsif apr_exit_why == APR::ExitWhy::APR_PROC_SIGNAL_CORE
         @exited = false
         @signaled = true
         @coredump = true

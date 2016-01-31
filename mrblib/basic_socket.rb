@@ -4,7 +4,7 @@ class BasicSocket < IO
   # -----------------------------
 
   # A subclass of BasicSocket must provide the following instance variables:
-  # - @apr_socket: An APR::AprSocketT instance
+  # - @apr_socket: An APR::Socket instance
 
   def initialize
     # Sockets always open in duplex mode.
@@ -189,13 +189,13 @@ class BasicSocket < IO
 
   def close_read
     @can_read = false
-    err = APR::apr_socket_shutdown(@apr_socket, APR::AprShutdownHowE::APR_SHUTDOWN_READ)
+    err = APR::apr_socket_shutdown(@apr_socket, APR::ShutdownHow::APR_SHUTDOWN_READ)
     APR.raise_apr_errno(err)
   end
 
   def close_write
     @can_write = false
-    err = APR::apr_socket_shutdown(@apr_socket, APR::AprShutdownHowE::APR_SHUTDOWN_WRITE)
+    err = APR::apr_socket_shutdown(@apr_socket, APR::ShutdownHow::APR_SHUTDOWN_WRITE)
     APR.raise_apr_errno(err)
   end
 

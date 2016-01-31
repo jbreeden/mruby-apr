@@ -5,18 +5,18 @@
 
 #include "mruby_APR.h"
 
-#if BIND_AprFileT_TYPE
+#if BIND_File_TYPE
 
 /* MRUBY_BINDING: header */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprFileT::initialize */
-/* sha: ad752012bb3077691103841716a38b406cd006b6078ef49ad8187bc182baf3a9 */
-#if BIND_AprFileT_INITIALIZE
+/* MRUBY_BINDING: File::initialize */
+/* sha: 7fb1148a0e01622586ac548c8cfae4578c8004d50526f93ebac9ed34d3a3af0e */
+#if BIND_File_INITIALIZE
 mrb_value
-mrb_APR_AprFileT_initialize(mrb_state* mrb, mrb_value self) {
+mrb_APR_File_initialize(mrb_state* mrb, mrb_value self) {
   mrb_raise(mrb, E_NOMETHOD_ERROR, "No initializer defined");
 /* 
   apr_file_t* native_object = (apr_file_t*)calloc(1, sizeof(apr_file_t));
@@ -28,7 +28,7 @@ mrb_APR_AprFileT_initialize(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 
-void mrb_APR_AprFileT_init(mrb_state* mrb) {
+void mrb_APR_File_init(mrb_state* mrb) {
   static int initialized = 0;
   if (initialized) return;
   else initialized = 1;
@@ -38,27 +38,27 @@ void mrb_APR_AprFileT_init(mrb_state* mrb) {
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprFileT::class_definition */
-/* sha: 9d421e7e23c120fca14c8204fb0ae70e97e1d102c798e3deab2a3783343651dd */
-  struct RClass* AprFileT_class = mrb_define_class_under(mrb, APR_module(mrb), "AprFileT", mrb->object_class);
-  MRB_SET_INSTANCE_TT(AprFileT_class, MRB_TT_DATA);
+/* MRUBY_BINDING: File::class_definition */
+/* sha: b69fb80aeec311c3f2dd37f1a8fad37541260b56ae6d8b996fda2021d56df681 */
+  struct RClass* File_class = mrb_define_class_under(mrb, APR_module(mrb), "File", mrb->object_class);
+  MRB_SET_INSTANCE_TT(File_class, MRB_TT_DATA);
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprFileT::pre_class_method_definitions */
+/* MRUBY_BINDING: File::pre_class_method_definitions */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprFileT::class_method_definitions */
-/* sha: d56ea486ecd8f29a40db525f3f81e2926833b0a8fadb34cdfc6874f2b6cd66e7 */
-#if BIND_AprFileT_INITIALIZE
-  mrb_define_method(mrb, AprFileT_class, "initialize", mrb_APR_AprFileT_initialize, MRB_ARGS_NONE());
+/* MRUBY_BINDING: File::class_method_definitions */
+/* sha: f45ddcd7e71c27adc3f1cf68b46c63e1c3333580d941e69087c0f33dce7b071c */
+#if BIND_File_INITIALIZE
+  mrb_define_method(mrb, File_class, "initialize", mrb_APR_File_initialize, MRB_ARGS_NONE());
 #endif
 /* MRUBY_BINDING_END */
 
 
 
-/* MRUBY_BINDING: AprFileT::post_class_definition */
+/* MRUBY_BINDING: File::post_class_definition */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */

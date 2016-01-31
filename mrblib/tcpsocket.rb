@@ -3,10 +3,10 @@ class TCPSocket < IPSocket
     super()
 
     # Wrapper semantics, for internal use only
-    if (remote_host.class == APR::AprSocketT)
+    if (remote_host.class == APR::Socket)
       @apr_socket = remote_host
       @pool = remote_port
-      err, @apr_remote_addrinfo = APR::apr_socket_addr_get(APR::AprInterfaceE::APR_REMOTE, @apr_socket)
+      err, @apr_remote_addrinfo = APR::apr_socket_addr_get(APR::Interface::APR_REMOTE, @apr_socket)
       APR::raise_apr_errno(err)
       err, @remote_host = APR::apr_sockaddr_ip_get(@apr_remote_addrinfo)
       APR::raise_apr_errno(err)

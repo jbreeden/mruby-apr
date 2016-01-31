@@ -21,8 +21,8 @@ mrb_APR_apr_file_inherit_unset(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &thefile);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -74,8 +74,8 @@ mrb_APR_apr_pool_create(mrb_state* mrb, mrb_value self) {
    mrb_get_args(mrb, "o", &parent);
 
    /* Type checking */
-   if (!mrb_nil_p(parent) && !mrb_obj_is_kind_of(mrb, parent, AprPoolT_class(mrb))) {
-      mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+   if (!mrb_nil_p(parent) && !mrb_obj_is_kind_of(mrb, parent, Pool_class(mrb))) {
+      mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
       return mrb_nil_value();
    }
 
@@ -416,8 +416,8 @@ mrb_APR_apr_dir_close(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &thedir);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thedir, AprDirT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprDirT expected");
+  if (!mrb_obj_is_kind_of(mrb, thedir, Dir_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Dir expected");
     return mrb_nil_value();
   }
 
@@ -462,8 +462,8 @@ mrb_APR_apr_dir_make(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zio", &native_path, &native_perm, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -509,8 +509,8 @@ mrb_APR_apr_dir_make_recursive(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zio", &native_path, &native_perm, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -554,8 +554,8 @@ mrb_APR_apr_dir_open(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zo", &native_dirname, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -609,8 +609,8 @@ mrb_APR_apr_dir_read(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "io", &native_wanted, &thedir);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thedir, AprDirT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprDirT expected");
+  if (!mrb_obj_is_kind_of(mrb, thedir, Dir_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Dir expected");
     return mrb_nil_value();
   }
 
@@ -663,8 +663,8 @@ mrb_APR_apr_dir_remove(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zo", &native_path, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -706,8 +706,8 @@ mrb_APR_apr_dir_rewind(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &thedir);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thedir, AprDirT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprDirT expected");
+  if (!mrb_obj_is_kind_of(mrb, thedir, Dir_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Dir expected");
     return mrb_nil_value();
   }
 
@@ -750,8 +750,8 @@ mrb_APR_apr_env_delete(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zo", &native_envvar, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -783,7 +783,7 @@ mrb_APR_apr_env_delete(mrb_state* mrb, mrb_value self) {
  *
  * Parameters:
  * - envvar: String
- * - pool: AprPoolT
+ * - pool: Pool
  * Return Type: [errno: Fixnum, value: String]
  */
 mrb_value
@@ -795,8 +795,8 @@ mrb_APR_apr_env_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zo", &native_envvar, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -852,8 +852,8 @@ mrb_APR_apr_env_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zzo", &native_envvar, &native_value, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -901,8 +901,8 @@ mrb_APR_apr_file_append(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zzio", &native_from_path, &native_to_path, &native_perms, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -936,7 +936,7 @@ mrb_APR_apr_file_append(mrb_state* mrb, mrb_value self) {
  * - fname: String
  * - attributes: Fixnum
  * - attr_mask: Fixnum
- * - pool: AprPoolT
+ * - pool: Pool
  * Return Type: Fixnum (errno)
  */
 mrb_value
@@ -950,8 +950,8 @@ mrb_APR_apr_file_attrs_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ziio", &native_fname, &native_attributes, &native_attr_mask, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -975,7 +975,7 @@ mrb_APR_apr_file_attrs_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_buffer_set */
-/* sha: 233e90b3adf396b23a87723ce2a1a24b941d32e57c6cb0251cc6277d23be52c2 */
+/* sha: dc428c9894fc0698d6f8afe8602b6687f6866169b15678d1b3968f14c8a545a2 */
 #if BIND_apr_file_buffer_set_FUNCTION
 #define apr_file_buffer_set_REQUIRED_ARGC 3
 #define apr_file_buffer_set_OPTIONAL_ARGC 0
@@ -990,8 +990,8 @@ mrb_APR_apr_file_buffer_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooi", &thefile, &buffer, &native_bufsize);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
   TODO_type_check_char_PTR(buffer);
@@ -1032,8 +1032,8 @@ mrb_APR_apr_file_buffer_size_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &thefile);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -1074,8 +1074,8 @@ mrb_APR_apr_file_close(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &file);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, file, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, file, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -1108,8 +1108,8 @@ mrb_APR_apr_file_close(mrb_state* mrb, mrb_value self) {
  * - from_path: String
  * - to_path: String
  * - perms: int
- * - pool: AprPoolType
- * Return Type: AprStatusT
+ * - pool: Poolype
+ * Return Type: Status
  */
 mrb_value
 mrb_APR_apr_file_copy(mrb_state* mrb, mrb_value self) {
@@ -1122,8 +1122,8 @@ mrb_APR_apr_file_copy(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zzio", &native_from_path, &native_to_path, &native_perms, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -1147,7 +1147,7 @@ mrb_APR_apr_file_copy(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_data_get */
-/* sha: b44e1b63e2423746f376dfcab0ee39b48304b71547c0e1ac5bae143e750b589a */
+/* sha: 51941794b467a6b62f4bd232df8ae14ef1251862161971a796c9dfe45b7ab213 */
 #if BIND_apr_file_data_get_FUNCTION
 #define apr_file_data_get_REQUIRED_ARGC 3
 #define apr_file_data_get_OPTIONAL_ARGC 0
@@ -1163,8 +1163,8 @@ mrb_APR_apr_file_data_get(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_void_PTR_PTR(data);
-  if (!mrb_obj_is_kind_of(mrb, file, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, file, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -1186,7 +1186,7 @@ mrb_APR_apr_file_data_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_data_set */
-/* sha: 24d5243a23f5ea5bf6c04cedf80fdfcf2e77af7016d76d61795303d3c5620fca */
+/* sha: fd7c1e6c7e6399e4fef4b82ef74802c130dd5189d94a1d66709808488ce3ca71 */
 #if BIND_apr_file_data_set_FUNCTION
 #define apr_file_data_set_REQUIRED_ARGC 4
 #define apr_file_data_set_OPTIONAL_ARGC 0
@@ -1202,8 +1202,8 @@ mrb_APR_apr_file_data_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oozo", &file, &data, &native_key, &cleanup);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, file, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, file, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
   TODO_type_check_void_PTR(data);
@@ -1248,8 +1248,8 @@ mrb_APR_apr_file_datasync(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &thefile);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -1272,7 +1272,7 @@ mrb_APR_apr_file_datasync(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_dup */
-/* sha: 61427bfe5bebe6511628dd54b5a1ea4bb0c30f13eab67313275dd3287fa9fb9a */
+/* sha: 86c793f658917e27f2abbc4dc90a5eddd855e907ef3ca037457910cc0ec993a2 */
 #if BIND_apr_file_dup_FUNCTION
 #define apr_file_dup_REQUIRED_ARGC 3
 #define apr_file_dup_OPTIONAL_ARGC 0
@@ -1288,12 +1288,12 @@ mrb_APR_apr_file_dup(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_file_t_PTR_PTR(new_file);
-  if (!mrb_obj_is_kind_of(mrb, old_file, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, old_file, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -1318,7 +1318,7 @@ mrb_APR_apr_file_dup(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_dup2 */
-/* sha: 16682dd99880b3955c1d31dd1fcc058892928f3c4ea343fa2142076043dda146 */
+/* sha: 3136e5f4b60cf67f45424a605c984ee69ade2812d92ffbc9de681b6b186290bc */
 #if BIND_apr_file_dup2_FUNCTION
 #define apr_file_dup2_REQUIRED_ARGC 3
 #define apr_file_dup2_OPTIONAL_ARGC 0
@@ -1333,16 +1333,16 @@ mrb_APR_apr_file_dup2(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooo", &new_file, &old_file, &p);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, new_file, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, new_file, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, old_file, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, old_file, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -1385,8 +1385,8 @@ mrb_APR_apr_file_eof(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &fptr);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, fptr, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, fptr, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -1427,8 +1427,8 @@ mrb_APR_apr_file_flags_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &f);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, f, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, f, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -1469,8 +1469,8 @@ mrb_APR_apr_file_flush(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &thefile);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -1500,7 +1500,7 @@ mrb_APR_apr_file_flush(mrb_state* mrb, mrb_value self) {
 /* apr_file_getc
  *
  * Parameters:
- * - thefile: AprFileT
+ * - thefile: File
  * Return Type: errno: Fixnum, char: String
  */
 mrb_value
@@ -1509,8 +1509,8 @@ mrb_APR_apr_file_getc(mrb_state* mrb, mrb_value self) {
 
   /* Fetch the args */
   mrb_get_args(mrb, "o", &thefile);
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
   apr_file_t * native_thefile = (mrb_nil_p(thefile) ? NULL : mruby_unbox_apr_file_t(thefile));
@@ -1546,8 +1546,8 @@ mrb_APR_apr_file_gets(mrb_state* mrb, mrb_value self) {
 
   /* Fetch the args */
   mrb_get_args(mrb, "io", &native_len, &thefile);
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -1594,8 +1594,8 @@ mrb_APR_apr_file_gets(mrb_state* mrb, mrb_value self) {
  *
  * Parameters:
  * - wanted: Fixnum
- * - thefile: AprFileT
- * Return Type: [errno: Fixnum, stat: AprStatusT]
+ * - thefile: File
+ * Return Type: [errno: Fixnum, stat: Status]
  */
 mrb_value
 mrb_APR_apr_file_info_get(mrb_state* mrb, mrb_value self) {
@@ -1606,8 +1606,8 @@ mrb_APR_apr_file_info_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "io", &native_wanted, &thefile);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -1674,7 +1674,7 @@ mrb_APR_apr_file_link(mrb_state* mrb, mrb_value self) {
 /* apr_file_lock
  *
  * Parameters:
- * - thefile: AprFileT
+ * - thefile: File
  * - type: Fixnum
  * Return Type: Fixnum (errno)
  */
@@ -1687,8 +1687,8 @@ mrb_APR_apr_file_lock(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &thefile, &native_type);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -1711,7 +1711,7 @@ mrb_APR_apr_file_lock(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_mktemp */
-/* sha: d697340f65a9c9d6d98cb6f466451d59c155f14a98c85392e580268ac5b9e55c */
+/* sha: 75d6565967c769f7d61911ada851ccb25fbdc6738abcffb671460cfdad53ec72 */
 #if BIND_apr_file_mktemp_FUNCTION
 #define apr_file_mktemp_REQUIRED_ARGC 4
 #define apr_file_mktemp_OPTIONAL_ARGC 0
@@ -1729,8 +1729,8 @@ mrb_APR_apr_file_mktemp(mrb_state* mrb, mrb_value self) {
   /* Type checking */
   TODO_type_check_apr_file_t_PTR_PTR(fp);
   TODO_type_check_char_PTR(templ);
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -1755,7 +1755,7 @@ mrb_APR_apr_file_mktemp(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_mtime_set */
-/* sha: abeb5962e1bbb6ad1497a261ed70798798d42392cdbe74611c67d5814c01d7d1 */
+/* sha: ed4a341fb6933b7a49914ac1e2bd8ed319b8e2401e3048f44b11d940905110af */
 #if BIND_apr_file_mtime_set_FUNCTION
 #define apr_file_mtime_set_REQUIRED_ARGC 3
 #define apr_file_mtime_set_OPTIONAL_ARGC 0
@@ -1770,8 +1770,8 @@ mrb_APR_apr_file_mtime_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zio", &native_fname, &native_mtime, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -1790,7 +1790,7 @@ mrb_APR_apr_file_mtime_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_name_get */
-/* sha: 05d0e7d684338451046df3ab09ee81d96027aecdf87e9d91ecf67b4812550cd2 */
+/* sha: ee3c9c2a0ab17b2fcfe84a527471adc2b8a7eea9f503f9d0e129439a61ba8c85 */
 #if BIND_apr_file_name_get_FUNCTION
 #define apr_file_name_get_REQUIRED_ARGC 2
 #define apr_file_name_get_OPTIONAL_ARGC 0
@@ -1805,8 +1805,8 @@ mrb_APR_apr_file_name_get(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_char_PTR_PTR(new_path);
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -1837,7 +1837,7 @@ mrb_APR_apr_file_name_get(mrb_state* mrb, mrb_value self) {
  * Parameters:
  * - filename: String
  * - perm: Fixnum
- * - pool: AprPoolT
+ * - pool: Pool
  * Return Type: Fixnum (errno)
  */
 mrb_value
@@ -1850,8 +1850,8 @@ mrb_APR_apr_file_namedpipe_create(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zio", &native_filename, &native_perm, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -1899,8 +1899,8 @@ mrb_APR_apr_file_open(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ziio", &native_fname, &native_flag, &native_perm, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -1954,8 +1954,8 @@ mrb_APR_apr_file_open_flags_stderr(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "io", &native_flags, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -1994,8 +1994,8 @@ mrb_APR_apr_file_open_flags_stdin(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "io", &native_flags, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -2034,8 +2034,8 @@ mrb_APR_apr_file_open_flags_stdout(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "io", &native_flags, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -2072,8 +2072,8 @@ mrb_APR_apr_file_open_stderr(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -2125,8 +2125,8 @@ mrb_APR_apr_file_open_stdin(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -2178,8 +2178,8 @@ mrb_APR_apr_file_open_stdout(mrb_state* mrb, mrb_value self) {
    mrb_get_args(mrb, "o", &pool);
 
    /* Type checking */
-   if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-      mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+   if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+      mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
       return mrb_nil_value();
    }
 
@@ -2254,8 +2254,8 @@ mrb_APR_apr_file_perms_set(mrb_state* mrb, mrb_value self) {
 /* apr_file_pipe_create
  *
  * Parameters:
- * - pool: AprPoolT
- * Return Type: [errno: Fixnum, readEnd: AprFileT, writeEnd: AprFileT]
+ * - pool: Pool
+ * Return Type: [errno: Fixnum, readEnd: File, writeEnd: File]
  */
 mrb_value
 mrb_APR_apr_file_pipe_create(mrb_state* mrb, mrb_value self) {
@@ -2265,8 +2265,8 @@ mrb_APR_apr_file_pipe_create(mrb_state* mrb, mrb_value self) {
    mrb_get_args(mrb, "o", &pool);
 
    /* Type checking */
-   if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-      mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+   if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+      mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
       return mrb_nil_value();
    }
 
@@ -2302,7 +2302,7 @@ mrb_APR_apr_file_pipe_create(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_pipe_create_ex */
-/* sha: 04af7a631ee45ca3733c1caf77050c7e0486965169c0d9262fcb0df1e324ec00 */
+/* sha: 6792451ac6499848b5151556eb0c17d985b5e060d00968ecac63b8395e96c745 */
 #if BIND_apr_file_pipe_create_ex_FUNCTION
 #define apr_file_pipe_create_ex_REQUIRED_ARGC 4
 #define apr_file_pipe_create_ex_OPTIONAL_ARGC 0
@@ -2320,8 +2320,8 @@ mrb_APR_apr_file_pipe_create_ex(mrb_state* mrb, mrb_value self) {
   /* Type checking */
   TODO_type_check_apr_file_t_PTR_PTR(in);
   TODO_type_check_apr_file_t_PTR_PTR(out);
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -2346,7 +2346,7 @@ mrb_APR_apr_file_pipe_create_ex(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_pipe_timeout_get */
-/* sha: b322ba6ee5917e0de178487b8ab522013786040e041ba4c80208471534e1b0ab */
+/* sha: c7ee9b0d38c166b3b03b084fa891ac5c5cdc69233514280e7ff380c7966fc5a4 */
 #if BIND_apr_file_pipe_timeout_get_FUNCTION
 #define apr_file_pipe_timeout_get_REQUIRED_ARGC 2
 #define apr_file_pipe_timeout_get_OPTIONAL_ARGC 0
@@ -2360,8 +2360,8 @@ mrb_APR_apr_file_pipe_timeout_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &thepipe, &timeout);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thepipe, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thepipe, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
   TODO_type_check_apr_interval_time_t_PTR(timeout);
@@ -2384,7 +2384,7 @@ mrb_APR_apr_file_pipe_timeout_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_pipe_timeout_set */
-/* sha: ecec52e66bd648b8ad50a41db16b068d658b28d107941ab6bc67d4c8b2d6e51d */
+/* sha: 1bee6ff8055fc0a05f641d6753e33a2dab6f41f78d1585d4ba2be5c644750790 */
 #if BIND_apr_file_pipe_timeout_set_FUNCTION
 #define apr_file_pipe_timeout_set_REQUIRED_ARGC 2
 #define apr_file_pipe_timeout_set_OPTIONAL_ARGC 0
@@ -2398,8 +2398,8 @@ mrb_APR_apr_file_pipe_timeout_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &thepipe, &timeout);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thepipe, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thepipe, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
   TODO_type_check_apr_interval_time_t(timeout);
@@ -2422,7 +2422,7 @@ mrb_APR_apr_file_pipe_timeout_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_printf */
-/* sha: 0b9b90b2136e4a6d3621ff334945a5a924d52d903618ee4b19d8b69c3b14b2db */
+/* sha: 0b18de695c18d642016d89948c51000dfc2e26863cc72f6e515bbe62754e45f9 */
 #if BIND_apr_file_printf_FUNCTION
 #define apr_file_printf_REQUIRED_ARGC 2
 #define apr_file_printf_OPTIONAL_ARGC 0
@@ -2436,8 +2436,8 @@ mrb_APR_apr_file_printf(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oz", &fptr, &native_format);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, fptr, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, fptr, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -2456,7 +2456,7 @@ mrb_APR_apr_file_printf(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_putc */
-/* sha: a37a85e0c2314aac2fd8a4e66aa3e6bb26f3b3dbfda754e94299701e0b01f9e6 */
+/* sha: 5aa8ad00d0a9c0693aa0fb55c97abdb5293c4d2d1905abd781c1ccd9de0dc6b5 */
 #if BIND_apr_file_putc_FUNCTION
 #define apr_file_putc_REQUIRED_ARGC 2
 #define apr_file_putc_OPTIONAL_ARGC 0
@@ -2470,8 +2470,8 @@ mrb_APR_apr_file_putc(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "io", &native_ch, &thefile);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -2510,8 +2510,8 @@ mrb_APR_apr_file_puts(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zo", &native_str, &thefile);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -2542,7 +2542,7 @@ mrb_APR_apr_file_puts(mrb_state* mrb, mrb_value self) {
 /* apr_file_read
  *
  * Parameters:
- * - thefile: AprFileT
+ * - thefile: File
  * - nbytes: Fixnum
  * Return Type: [int, String] (error & string of bytes read)
  */
@@ -2555,8 +2555,8 @@ mrb_APR_apr_file_read(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &thefile, &native_nbytes);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -2589,7 +2589,7 @@ mrb_APR_apr_file_read(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_read_full */
-/* sha: 0d4cdbd478015cb54e97f5f7e3c3de51217b0c1b9cca89747927ed749626784d */
+/* sha: 22947b2e713f5bc33c51d78210ea67f6d80154f9b77fe368b3d744b68ddbef75 */
 #if BIND_apr_file_read_full_FUNCTION
 #define apr_file_read_full_REQUIRED_ARGC 4
 #define apr_file_read_full_OPTIONAL_ARGC 0
@@ -2605,8 +2605,8 @@ mrb_APR_apr_file_read_full(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooio", &thefile, &buf, &native_nbytes, &bytes_read);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
   TODO_type_check_void_PTR(buf);
@@ -2641,7 +2641,7 @@ mrb_APR_apr_file_read_full(mrb_state* mrb, mrb_value self) {
  *
  * Parameters:
  * - path: String
- * - pool: AprPoolT
+ * - pool: Pool
  * Return Type: Fixnum (errno)
  */
 mrb_value
@@ -2653,8 +2653,8 @@ mrb_APR_apr_file_remove(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zo", &native_path, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -2687,7 +2687,7 @@ mrb_APR_apr_file_remove(mrb_state* mrb, mrb_value self) {
  * Parameters:
  * - from_path: String
  * - to_path: String
- * - pool: AprPoolT
+ * - pool: Pool
  * Return Type: Fixnum (errno)
  */
 mrb_value
@@ -2700,8 +2700,8 @@ mrb_APR_apr_file_rename(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zzo", &native_from_path, &native_to_path, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -2732,7 +2732,7 @@ mrb_APR_apr_file_rename(mrb_state* mrb, mrb_value self) {
 /* apr_file_seek
  *
  * Parameters:
- * - thefile: AprFileT
+ * - thefile: File
  * - where: Fixnum
  * - offset: Fixnum
  * Return Type: [int, int] (errno & the actuall offset that resulted)
@@ -2747,8 +2747,8 @@ mrb_APR_apr_file_seek(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oii", &thefile, &native_where, &native_offset);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -2776,7 +2776,7 @@ mrb_APR_apr_file_seek(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_setaside */
-/* sha: 8ea061cff4ffe5c5ac3dcba633070c23c54439eb0a92204748f100d03c547544 */
+/* sha: cbf3e6cf8ec9579d306ee7fee3685fd497f1a99b39d5251e548d55db8a814cbb */
 #if BIND_apr_file_setaside_FUNCTION
 #define apr_file_setaside_REQUIRED_ARGC 3
 #define apr_file_setaside_OPTIONAL_ARGC 0
@@ -2792,12 +2792,12 @@ mrb_APR_apr_file_setaside(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_file_t_PTR_PTR(new_file);
-  if (!mrb_obj_is_kind_of(mrb, old_file, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, old_file, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -2840,8 +2840,8 @@ mrb_APR_apr_file_sync(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &thefile);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -2884,8 +2884,8 @@ mrb_APR_apr_file_trunc(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &fp, &native_offset);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, fp, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, fp, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -2932,8 +2932,8 @@ mrb_APR_apr_file_ungetc(mrb_state* mrb, mrb_value self) {
     mrb_raise(mrb, E_TYPE_ERROR, "String expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -2960,7 +2960,7 @@ mrb_APR_apr_file_ungetc(mrb_state* mrb, mrb_value self) {
 /* apr_file_unlock
  *
  * Parameters:
- * - thefile: AprFileT
+ * - thefile: File
  * Return Type: Fixnum (errno)
  */
 mrb_value
@@ -2971,8 +2971,8 @@ mrb_APR_apr_file_unlock(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &thefile);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -3002,7 +3002,7 @@ mrb_APR_apr_file_unlock(mrb_state* mrb, mrb_value self) {
 /* apr_file_write
  *
  * Parameters:
- * - thefile: AprFileT
+ * - thefile: File
  * - buf: String
  * - nbytes: Fixnum
  * Return Type: [err, int] (error code & bytes written)
@@ -3017,8 +3017,8 @@ mrb_APR_apr_file_write(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooi", &thefile, &buf, &native_nbytes);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -3053,7 +3053,7 @@ mrb_APR_apr_file_write(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_write_full */
-/* sha: 2f2efb8c2dbe1ec45614ef1073a1ffc6a55b2400548fb5cc520ad96b5ce018a1 */
+/* sha: fb0e10344dd7a63d6d359616077a4762402833f317584359909813f516e3e2b1 */
 #if BIND_apr_file_write_full_FUNCTION
 #define apr_file_write_full_REQUIRED_ARGC 4
 #define apr_file_write_full_OPTIONAL_ARGC 0
@@ -3069,8 +3069,8 @@ mrb_APR_apr_file_write_full(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooio", &thefile, &buf, &native_nbytes, &bytes_written);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
   TODO_type_check_void_PTR(buf);
@@ -3097,7 +3097,7 @@ mrb_APR_apr_file_write_full(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_writev */
-/* sha: 32b1b8e25a5eb12c76710ae2936a1249076750ccf3c3645c60092f21f547cfa8 */
+/* sha: a8aa0a3afa9a0a49aba50ac4c6d2ef7326523a8b4f47ee870730961cb4af3eef */
 #if BIND_apr_file_writev_FUNCTION
 #define apr_file_writev_REQUIRED_ARGC 4
 #define apr_file_writev_OPTIONAL_ARGC 0
@@ -3113,8 +3113,8 @@ mrb_APR_apr_file_writev(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooio", &thefile, &vec, &native_nvec, &nbytes);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
   TODO_type_check_iovec_PTR(vec);
@@ -3141,7 +3141,7 @@ mrb_APR_apr_file_writev(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_file_writev_full */
-/* sha: adfe3c187edbd87ef53331912c13ee0c1e690d30d444c6be0e2406d27319ad22 */
+/* sha: 5256178d87e769ee056a1d37f44b74327eb5e3e339a62301e343a6f91e71af67 */
 #if BIND_apr_file_writev_full_FUNCTION
 #define apr_file_writev_full_REQUIRED_ARGC 4
 #define apr_file_writev_full_OPTIONAL_ARGC 0
@@ -3157,8 +3157,8 @@ mrb_APR_apr_file_writev_full(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooio", &thefile, &vec, &native_nvec, &nbytes);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thefile, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, thefile, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
   TODO_type_check_iovec_PTR(vec);
@@ -3185,7 +3185,7 @@ mrb_APR_apr_file_writev_full(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_filepath_encoding */
-/* sha: 656acc02862d402be2a375ec2908e2332c1d993247464681736ad2f1b9d4ebda */
+/* sha: ca94d630ade64fbbc71b34df7ee291df4122bd229e61d45b1f12ae15a32b5d31 */
 #if BIND_apr_filepath_encoding_FUNCTION
 #define apr_filepath_encoding_REQUIRED_ARGC 2
 #define apr_filepath_encoding_OPTIONAL_ARGC 0
@@ -3200,8 +3200,8 @@ mrb_APR_apr_filepath_encoding(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_int_PTR(style);
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -3223,7 +3223,7 @@ mrb_APR_apr_filepath_encoding(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_filepath_get */
-/* sha: b3e53af19d0835e12db5ff7e6d8746970e7aece6ded9dfda3138f32818000ea9 */
+/* sha: 5c62a451baabc8fee878ad4de041e40901709c6b36ee439b2ffe921e3190a245 */
 #if BIND_apr_filepath_get_FUNCTION
 #define apr_filepath_get_REQUIRED_ARGC 3
 #define apr_filepath_get_OPTIONAL_ARGC 0
@@ -3239,8 +3239,8 @@ mrb_APR_apr_filepath_get(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_char_PTR_PTR(path);
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -3262,7 +3262,7 @@ mrb_APR_apr_filepath_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_filepath_list_merge */
-/* sha: 96a823959f6bdc7cc0f9407e84e8cdb064c6c2fa0a6a1fbcf6402fc631c0fc7b */
+/* sha: 6c41fc0c85720178dca8b9827db996dcb9f4c17355417d14538fd1dfa0afb313 */
 #if BIND_apr_filepath_list_merge_FUNCTION
 #define apr_filepath_list_merge_REQUIRED_ARGC 3
 #define apr_filepath_list_merge_OPTIONAL_ARGC 0
@@ -3279,8 +3279,8 @@ mrb_APR_apr_filepath_list_merge(mrb_state* mrb, mrb_value self) {
   /* Type checking */
   TODO_type_check_char_PTR_PTR(liststr);
   TODO_type_check_apr_array_header_t_PTR(pathelts);
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -3305,7 +3305,7 @@ mrb_APR_apr_filepath_list_merge(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_filepath_list_split */
-/* sha: bccb6b76188a6b66a0e77e3ff80ce899438a1555c90269c88b16cd78ce669437 */
+/* sha: e2e60bd9a6c956775e0ef30b691143cb18e7b5c4feaaaa233506b22d075e0aac */
 #if BIND_apr_filepath_list_split_FUNCTION
 #define apr_filepath_list_split_REQUIRED_ARGC 3
 #define apr_filepath_list_split_OPTIONAL_ARGC 0
@@ -3321,8 +3321,8 @@ mrb_APR_apr_filepath_list_split(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_array_header_t_PTR_PTR(pathelts);
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -3344,7 +3344,7 @@ mrb_APR_apr_filepath_list_split(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_filepath_merge */
-/* sha: 53a5cd5767bce076e59ba7dd2f2a8c3a8ae1d47ac3a7626ddf2591e135a059a2 */
+/* sha: 78e7d6a6c7ac3d861c4262c698af9e737e7c69137a7e408486307a1965c2bc64 */
 #if BIND_apr_filepath_merge_FUNCTION
 #define apr_filepath_merge_REQUIRED_ARGC 5
 #define apr_filepath_merge_OPTIONAL_ARGC 0
@@ -3362,8 +3362,8 @@ mrb_APR_apr_filepath_merge(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_char_PTR_PTR(newpath);
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -3385,7 +3385,7 @@ mrb_APR_apr_filepath_merge(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_filepath_root */
-/* sha: 3461e2c21e201e89378f43b174a647483b4fa8335d5035a6526cd73a585c8630 */
+/* sha: 673813d23a440e12a84a0cc11a6e88ddb94fdbc3089d5eda95d357c736b7e003 */
 #if BIND_apr_filepath_root_FUNCTION
 #define apr_filepath_root_REQUIRED_ARGC 4
 #define apr_filepath_root_OPTIONAL_ARGC 0
@@ -3403,8 +3403,8 @@ mrb_APR_apr_filepath_root(mrb_state* mrb, mrb_value self) {
   /* Type checking */
   TODO_type_check_char_PTR_PTR(rootpath);
   TODO_type_check_char_PTR_PTR(filepath);
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -3429,7 +3429,7 @@ mrb_APR_apr_filepath_root(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_filepath_set */
-/* sha: 8b2b81ce81f6167555cc1e623cbeedcfb0d663069762aee2eca4542ddf197a62 */
+/* sha: 39c4e741cabb9a3c775d8d491fd88db2788c6003ea19c2cc6c5da140baef29d8 */
 #if BIND_apr_filepath_set_FUNCTION
 #define apr_filepath_set_REQUIRED_ARGC 2
 #define apr_filepath_set_OPTIONAL_ARGC 0
@@ -3443,8 +3443,8 @@ mrb_APR_apr_filepath_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zo", &native_path, &p);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -3578,8 +3578,8 @@ mrb_APR_apr_gethostname(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -3616,8 +3616,8 @@ mrb_APR_apr_getnameinfo(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &sa);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sa, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, sa, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
 
@@ -3638,7 +3638,7 @@ mrb_APR_apr_getnameinfo(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_getservbyname */
-/* sha: 047db930bb94a2ee222135caf59554de2dbcc789c3bc51a219e88c32f63b2053 */
+/* sha: 6628b679b20a5fbfa07dafada816bf746f872cd53ca434b1e561dafd0bbeae7f */
 #if BIND_apr_getservbyname_FUNCTION
 #define apr_getservbyname_REQUIRED_ARGC 2
 #define apr_getservbyname_OPTIONAL_ARGC 0
@@ -3652,8 +3652,8 @@ mrb_APR_apr_getservbyname(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oz", &sockaddr, &native_servname);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sockaddr, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, sockaddr, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
 
@@ -3672,7 +3672,7 @@ mrb_APR_apr_getservbyname(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_global_mutex_child_init */
-/* sha: 240d39205ffcbc3ddf560a4c6f9cdcc28359cc22a0fc3d22920e9e3631a9b61c */
+/* sha: 7e953039acb1a39cabe770b2c312bbb56a7a474609817ce298f56d6ec215917a */
 #if BIND_apr_global_mutex_child_init_FUNCTION
 #define apr_global_mutex_child_init_REQUIRED_ARGC 3
 #define apr_global_mutex_child_init_OPTIONAL_ARGC 0
@@ -3688,8 +3688,8 @@ mrb_APR_apr_global_mutex_child_init(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_global_mutex_t_PTR_PTR(mutex);
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -3711,7 +3711,7 @@ mrb_APR_apr_global_mutex_child_init(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_global_mutex_create */
-/* sha: b320e093452340ca9db8d0ce0aa2f099acde15fcdf4486cbafbbabe073c56e3c */
+/* sha: a49c289a21650b71eea3621c47f4a81af48ef7f83211b8915245ebf7087d2853 */
 #if BIND_apr_global_mutex_create_FUNCTION
 #define apr_global_mutex_create_REQUIRED_ARGC 4
 #define apr_global_mutex_create_OPTIONAL_ARGC 0
@@ -3728,8 +3728,8 @@ mrb_APR_apr_global_mutex_create(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_global_mutex_t_PTR_PTR(mutex);
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -3751,7 +3751,7 @@ mrb_APR_apr_global_mutex_create(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_global_mutex_destroy */
-/* sha: 484b676cac1bcedc23bd5f0315036aba213ce8ffc1c3f38b833635d652787a42 */
+/* sha: b2370082e88bcc135a2182b0f8af2d6a0d1f1986f726f6ad2045faddd448d19e */
 #if BIND_apr_global_mutex_destroy_FUNCTION
 #define apr_global_mutex_destroy_REQUIRED_ARGC 1
 #define apr_global_mutex_destroy_OPTIONAL_ARGC 0
@@ -3764,8 +3764,8 @@ mrb_APR_apr_global_mutex_destroy(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &mutex);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, mutex, AprGlobalMutexT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprGlobalMutexT expected");
+  if (!mrb_obj_is_kind_of(mrb, mutex, GlobalMutex_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "GlobalMutex expected");
     return mrb_nil_value();
   }
 
@@ -3784,7 +3784,7 @@ mrb_APR_apr_global_mutex_destroy(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_global_mutex_lock */
-/* sha: 4d51a06464aff9cac7b724478a31d15717a8b2d70f814731ffbf8b781a2d732c */
+/* sha: 938fd4c4b8aab3dbb742642f17ed0cfa7235e51c7658f5deb59ceaf9877b7007 */
 #if BIND_apr_global_mutex_lock_FUNCTION
 #define apr_global_mutex_lock_REQUIRED_ARGC 1
 #define apr_global_mutex_lock_OPTIONAL_ARGC 0
@@ -3797,8 +3797,8 @@ mrb_APR_apr_global_mutex_lock(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &mutex);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, mutex, AprGlobalMutexT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprGlobalMutexT expected");
+  if (!mrb_obj_is_kind_of(mrb, mutex, GlobalMutex_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "GlobalMutex expected");
     return mrb_nil_value();
   }
 
@@ -3817,7 +3817,7 @@ mrb_APR_apr_global_mutex_lock(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_global_mutex_lockfile */
-/* sha: 06c10bba548d1c143fe3814e679766ef533e47471b79fec2f4bc36060689f517 */
+/* sha: a7021d6dcb85852d0534bbef2e4f8e9af0849e6c148cb7ba7884458770e7d052 */
 #if BIND_apr_global_mutex_lockfile_FUNCTION
 #define apr_global_mutex_lockfile_REQUIRED_ARGC 1
 #define apr_global_mutex_lockfile_OPTIONAL_ARGC 0
@@ -3830,8 +3830,8 @@ mrb_APR_apr_global_mutex_lockfile(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &mutex);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, mutex, AprGlobalMutexT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprGlobalMutexT expected");
+  if (!mrb_obj_is_kind_of(mrb, mutex, GlobalMutex_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "GlobalMutex expected");
     return mrb_nil_value();
   }
 
@@ -3850,7 +3850,7 @@ mrb_APR_apr_global_mutex_lockfile(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_global_mutex_name */
-/* sha: 53037b8d38e4f9b748a412b23babdde4108689c781b9e2fe20da8cc65f45581c */
+/* sha: 60998c651ab926f040a076e0f5b965387d8d72dbea9b55e1a017b7428549fac2 */
 #if BIND_apr_global_mutex_name_FUNCTION
 #define apr_global_mutex_name_REQUIRED_ARGC 1
 #define apr_global_mutex_name_OPTIONAL_ARGC 0
@@ -3863,8 +3863,8 @@ mrb_APR_apr_global_mutex_name(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &mutex);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, mutex, AprGlobalMutexT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprGlobalMutexT expected");
+  if (!mrb_obj_is_kind_of(mrb, mutex, GlobalMutex_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "GlobalMutex expected");
     return mrb_nil_value();
   }
 
@@ -3883,7 +3883,7 @@ mrb_APR_apr_global_mutex_name(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_global_mutex_trylock */
-/* sha: 964d97f1bfc4889a9e4369d79c3457969dabd8005df8d8312be8caf8b4dda85c */
+/* sha: 5702e6148f495c14d392485cc5609f0fb268d1ed9c3378ec6509779c219c6e9d */
 #if BIND_apr_global_mutex_trylock_FUNCTION
 #define apr_global_mutex_trylock_REQUIRED_ARGC 1
 #define apr_global_mutex_trylock_OPTIONAL_ARGC 0
@@ -3896,8 +3896,8 @@ mrb_APR_apr_global_mutex_trylock(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &mutex);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, mutex, AprGlobalMutexT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprGlobalMutexT expected");
+  if (!mrb_obj_is_kind_of(mrb, mutex, GlobalMutex_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "GlobalMutex expected");
     return mrb_nil_value();
   }
 
@@ -3916,7 +3916,7 @@ mrb_APR_apr_global_mutex_trylock(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_global_mutex_unlock */
-/* sha: 25dafa9645e560c5cf8074ff8bf59fed47a6ddad8b694e53b9bec107c7329470 */
+/* sha: d76d5959dd6decd451039a771d3a9c6776749088f00bbb812bfb08bd51378e1d */
 #if BIND_apr_global_mutex_unlock_FUNCTION
 #define apr_global_mutex_unlock_REQUIRED_ARGC 1
 #define apr_global_mutex_unlock_OPTIONAL_ARGC 0
@@ -3929,8 +3929,8 @@ mrb_APR_apr_global_mutex_unlock(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &mutex);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, mutex, AprGlobalMutexT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprGlobalMutexT expected");
+  if (!mrb_obj_is_kind_of(mrb, mutex, GlobalMutex_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "GlobalMutex expected");
     return mrb_nil_value();
   }
 
@@ -3976,7 +3976,7 @@ mrb_APR_apr_initialize(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_ipsubnet_create */
-/* sha: 9626a152b9bc70575f2ee483e9781396eb55db45b5202f1a9177c079b6e56725 */
+/* sha: 834e52a690b1e08695e6d02900b8afa25ef2835488d9e24dce958390e72f614d */
 #if BIND_apr_ipsubnet_create_FUNCTION
 #define apr_ipsubnet_create_REQUIRED_ARGC 4
 #define apr_ipsubnet_create_OPTIONAL_ARGC 0
@@ -3993,8 +3993,8 @@ mrb_APR_apr_ipsubnet_create(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_ipsubnet_t_PTR_PTR(ipsub);
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -4016,7 +4016,7 @@ mrb_APR_apr_ipsubnet_create(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_ipsubnet_test */
-/* sha: 8a0cf2679f2cadc29627bfb7261f7150533d593ac21eb6465837019bba0f75a6 */
+/* sha: 6de32e1cb38f3554845c180cb3a5177cd2cc52b228f1fe7a0a418d38f5abdd5e */
 #if BIND_apr_ipsubnet_test_FUNCTION
 #define apr_ipsubnet_test_REQUIRED_ARGC 2
 #define apr_ipsubnet_test_OPTIONAL_ARGC 0
@@ -4030,12 +4030,12 @@ mrb_APR_apr_ipsubnet_test(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &ipsub, &sa);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, ipsub, AprIpsubnetT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprIpsubnetT expected");
+  if (!mrb_obj_is_kind_of(mrb, ipsub, Ipsubnet_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Ipsubnet expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, sa, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, sa, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
 
@@ -4057,7 +4057,7 @@ mrb_APR_apr_ipsubnet_test(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_itoa */
-/* sha: 1cc4b78a381a12d2da493fed8b32730858153fe8cf090ed45bbf5998b4294a87 */
+/* sha: 639e9c8ba86aef5de942c3e05d43fd72b4bfa996c00384d04a32488b4604b107 */
 #if BIND_apr_itoa_FUNCTION
 #define apr_itoa_REQUIRED_ARGC 2
 #define apr_itoa_OPTIONAL_ARGC 0
@@ -4071,8 +4071,8 @@ mrb_APR_apr_itoa(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &p, &native_n);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -4091,7 +4091,7 @@ mrb_APR_apr_itoa(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_ltoa */
-/* sha: 1a165bb570f035e687e565514468dd6c22e29f584d122f048309fe39a4aa18dd */
+/* sha: 6e91275548f82150e18619b39b4ae2c9ff994930c6a5734bfff1570f056c2fca */
 #if BIND_apr_ltoa_FUNCTION
 #define apr_ltoa_REQUIRED_ARGC 2
 #define apr_ltoa_OPTIONAL_ARGC 0
@@ -4105,8 +4105,8 @@ mrb_APR_apr_ltoa(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &p, &native_n);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -4125,7 +4125,7 @@ mrb_APR_apr_ltoa(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_match_glob */
-/* sha: db00b094f97c02ddfd1fd9ca67b8ff4c13c35bfc57771905b69612e1b2cfea16 */
+/* sha: 40dc01927bcf3d94abd72337758c917d05b5cdb3617ebe92e93a6a7ab0399dd6 */
 #if BIND_apr_match_glob_FUNCTION
 #define apr_match_glob_REQUIRED_ARGC 3
 #define apr_match_glob_OPTIONAL_ARGC 0
@@ -4141,8 +4141,8 @@ mrb_APR_apr_match_glob(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_array_header_t_PTR_PTR(result);
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -4164,7 +4164,7 @@ mrb_APR_apr_match_glob(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_mcast_hops */
-/* sha: 213bc0ceb4dca8956d1bc729294ffb2dedb81740194e7f648ab74fce553e7735 */
+/* sha: 240e891da5554dd2d59b3cad699c73005a80d9b4d5e25cea3d1fabe02d5613b4 */
 #if BIND_apr_mcast_hops_FUNCTION
 #define apr_mcast_hops_REQUIRED_ARGC 2
 #define apr_mcast_hops_OPTIONAL_ARGC 0
@@ -4178,8 +4178,8 @@ mrb_APR_apr_mcast_hops(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &sock, &native_ttl);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -4198,7 +4198,7 @@ mrb_APR_apr_mcast_hops(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_mcast_interface */
-/* sha: 6a7618e3dfb7a3524a75ef710bc99e0d00ae0308a74d7560e19139631f579caa */
+/* sha: 8b7e75974e0c1b4f7b001b345d6b659d74d70bab28604ee2879d8edab051ef5f */
 #if BIND_apr_mcast_interface_FUNCTION
 #define apr_mcast_interface_REQUIRED_ARGC 2
 #define apr_mcast_interface_OPTIONAL_ARGC 0
@@ -4212,12 +4212,12 @@ mrb_APR_apr_mcast_interface(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &sock, &iface);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, iface, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, iface, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
 
@@ -4239,7 +4239,7 @@ mrb_APR_apr_mcast_interface(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_mcast_join */
-/* sha: 55918493ac454d59ccb77f01388aeeae32d1cb3f651238e70cfd9c313da25c61 */
+/* sha: b9f23970955026fbf5e00d5b4edd86a55f90087500a0c1e857944f2359c33c97 */
 #if BIND_apr_mcast_join_FUNCTION
 #define apr_mcast_join_REQUIRED_ARGC 4
 #define apr_mcast_join_OPTIONAL_ARGC 0
@@ -4255,20 +4255,20 @@ mrb_APR_apr_mcast_join(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oooo", &sock, &join, &iface, &source);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, join, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, join, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, iface, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, iface, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, source, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, source, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
 
@@ -4296,7 +4296,7 @@ mrb_APR_apr_mcast_join(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_mcast_leave */
-/* sha: d0f1b2df945c4bb7760983da2c21ba2c9056f13d2df8fa1f423f1ede68d88add */
+/* sha: c63c1e1416c0b411fd2a44ebb02bb62eb9ed7c6d641ca26488faaa38087c8511 */
 #if BIND_apr_mcast_leave_FUNCTION
 #define apr_mcast_leave_REQUIRED_ARGC 4
 #define apr_mcast_leave_OPTIONAL_ARGC 0
@@ -4312,20 +4312,20 @@ mrb_APR_apr_mcast_leave(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oooo", &sock, &addr, &iface, &source);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, addr, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, addr, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, iface, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, iface, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, source, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, source, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
 
@@ -4353,7 +4353,7 @@ mrb_APR_apr_mcast_leave(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_mcast_loopback */
-/* sha: 53c60eccf79a5f6399cc1acaa11673650046c2971e89359dbcf65caeb3806fad */
+/* sha: 1ccd7d2ee87baa2936e2c9db7434b0af3a606536bf14d3b33e412457ec6281c0 */
 #if BIND_apr_mcast_loopback_FUNCTION
 #define apr_mcast_loopback_REQUIRED_ARGC 2
 #define apr_mcast_loopback_OPTIONAL_ARGC 0
@@ -4367,8 +4367,8 @@ mrb_APR_apr_mcast_loopback(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &sock, &native_opt);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -4387,7 +4387,7 @@ mrb_APR_apr_mcast_loopback(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_off_t_toa */
-/* sha: 7643b113b0e9c64cf054f569be2ae82eacb6704cef8e6512a8bbdb4ac5fd7a24 */
+/* sha: 6a35e13a5522276c0309682dba4e781a6f375441f3e694c026231c6680dfc44d */
 #if BIND_apr_off_t_toa_FUNCTION
 #define apr_off_t_toa_REQUIRED_ARGC 2
 #define apr_off_t_toa_OPTIONAL_ARGC 0
@@ -4401,8 +4401,8 @@ mrb_APR_apr_off_t_toa(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &p, &n);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
   TODO_type_check_apr_off_t(n);
@@ -4425,7 +4425,7 @@ mrb_APR_apr_off_t_toa(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_palloc */
-/* sha: fc5e2f2fb8e7170da2fa9680c7440512225229f856f3c3d93ef72f8289f051b1 */
+/* sha: c88eb03b46d96b3721f5a0f973498df243b8189448cf9d8a627a9f3849a71edd */
 #if BIND_apr_palloc_FUNCTION
 #define apr_palloc_REQUIRED_ARGC 2
 #define apr_palloc_OPTIONAL_ARGC 0
@@ -4439,8 +4439,8 @@ mrb_APR_apr_palloc(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &p, &native_size);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -4459,7 +4459,7 @@ mrb_APR_apr_palloc(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_palloc_debug */
-/* sha: 26c0e3be3dda4bebec473f7ff9e8247160e3a3535ce5a87d391c0d94751c877c */
+/* sha: 17170bf76ec98baa4ce18675afa4ef2927a2497501f8350670d3b7bf4bbfe8e4 */
 #if BIND_apr_palloc_debug_FUNCTION
 #define apr_palloc_debug_REQUIRED_ARGC 3
 #define apr_palloc_debug_OPTIONAL_ARGC 0
@@ -4474,8 +4474,8 @@ mrb_APR_apr_palloc_debug(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oiz", &p, &native_size, &native_file_line);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -4494,7 +4494,7 @@ mrb_APR_apr_palloc_debug(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_parse_addr_port */
-/* sha: 28dc6d39294d8430d2fcfc8a57cfac135f3586209fd218ae7cbec09e34f1fcc6 */
+/* sha: 7fa3ccb33d0837ec75563df042057bc2c175c493ba3fe25436c75a8b357bea96 */
 #if BIND_apr_parse_addr_port_FUNCTION
 #define apr_parse_addr_port_REQUIRED_ARGC 5
 #define apr_parse_addr_port_OPTIONAL_ARGC 0
@@ -4514,8 +4514,8 @@ mrb_APR_apr_parse_addr_port(mrb_state* mrb, mrb_value self) {
   TODO_type_check_char_PTR_PTR(addr);
   TODO_type_check_char_PTR_PTR(scope_id);
   TODO_type_check_apr_port_t_PTR(port);
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -4543,7 +4543,7 @@ mrb_APR_apr_parse_addr_port(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pcalloc_debug */
-/* sha: 1caf1ed057d8fb5ff30c379f40ffb1bc03e25d43af72585ca3bdb421aabf673f */
+/* sha: 757b81ef880e37fe03e030858c705e6da48effa600a867fd16a501b1540f4f90 */
 #if BIND_apr_pcalloc_debug_FUNCTION
 #define apr_pcalloc_debug_REQUIRED_ARGC 3
 #define apr_pcalloc_debug_OPTIONAL_ARGC 0
@@ -4558,8 +4558,8 @@ mrb_APR_apr_pcalloc_debug(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oiz", &p, &native_size, &native_file_line);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -4578,7 +4578,7 @@ mrb_APR_apr_pcalloc_debug(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pmemdup */
-/* sha: 29d2a1b74e4ce5fe0c241dc449cb28f8981b14a6564277b2609f6e7c6bf88045 */
+/* sha: d19e37ac151543ec90c9cb8ad104a57a01f4d11141eff1ceeebdeed7ced7a584 */
 #if BIND_apr_pmemdup_FUNCTION
 #define apr_pmemdup_REQUIRED_ARGC 3
 #define apr_pmemdup_OPTIONAL_ARGC 0
@@ -4593,8 +4593,8 @@ mrb_APR_apr_pmemdup(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooi", &p, &m, &native_n);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
   TODO_type_check_void_PTR(m);
@@ -4617,7 +4617,7 @@ mrb_APR_apr_pmemdup(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_abort_get */
-/* sha: e8616fc332beac50d25c37b8dfeb6be3d44e4aa673ca27894d20f4fa56155974 */
+/* sha: abfcb74edfac31a37f8378abbfa5b7d3c433ef275cb6593a2e9fdc04a79a44f7 */
 #if BIND_apr_pool_abort_get_FUNCTION
 #define apr_pool_abort_get_REQUIRED_ARGC 1
 #define apr_pool_abort_get_OPTIONAL_ARGC 0
@@ -4630,8 +4630,8 @@ mrb_APR_apr_pool_abort_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -4650,7 +4650,7 @@ mrb_APR_apr_pool_abort_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_abort_set */
-/* sha: 40a87b2546cd93c612ca346d57e69380416d6c0b23b50cb4fa0496ebecce03e7 */
+/* sha: cbf074d567b82223b45ab7352e5222e5f34515df8cb2f0324db4292de205293c */
 #if BIND_apr_pool_abort_set_FUNCTION
 #define apr_pool_abort_set_REQUIRED_ARGC 2
 #define apr_pool_abort_set_OPTIONAL_ARGC 0
@@ -4665,8 +4665,8 @@ mrb_APR_apr_pool_abort_set(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_abortfunc_t(abortfunc);
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -4685,7 +4685,7 @@ mrb_APR_apr_pool_abort_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_allocator_get */
-/* sha: 608912e99c7b08729154364b655fffd40088c48968bc7d2dc5608af1ae035292 */
+/* sha: 0f35959b9288103a9d05a86acd7539cafe574c7a838e3700fbf8ecc2fb316f60 */
 #if BIND_apr_pool_allocator_get_FUNCTION
 #define apr_pool_allocator_get_REQUIRED_ARGC 1
 #define apr_pool_allocator_get_OPTIONAL_ARGC 0
@@ -4698,8 +4698,8 @@ mrb_APR_apr_pool_allocator_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -4718,7 +4718,7 @@ mrb_APR_apr_pool_allocator_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_child_cleanup_set */
-/* sha: 012afa4ab11bd403f9cb62ca2abe7d43818cc14147584e40c05b70ad4615f3f4 */
+/* sha: aa7a82754301d3c4524e73aa6b09f13dcee6778f4a65fff1cef6027a8cc8433c */
 #if BIND_apr_pool_child_cleanup_set_FUNCTION
 #define apr_pool_child_cleanup_set_REQUIRED_ARGC 4
 #define apr_pool_child_cleanup_set_OPTIONAL_ARGC 0
@@ -4734,8 +4734,8 @@ mrb_APR_apr_pool_child_cleanup_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oooo", &p, &data, &plain_cleanup, &child_cleanup);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
   TODO_type_check_void_PTR(data);
@@ -4779,7 +4779,7 @@ mrb_APR_apr_pool_cleanup_for_exec(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_cleanup_kill */
-/* sha: 6fbb531f6e51a11cce6e429dcd36ae8273fb8e4f4e251b748e7b8c86b97d53c2 */
+/* sha: 2f19ea59fc034de36f96003b790e03f45f2a9cb6c7e0588028fe8665ecf06eb9 */
 #if BIND_apr_pool_cleanup_kill_FUNCTION
 #define apr_pool_cleanup_kill_REQUIRED_ARGC 3
 #define apr_pool_cleanup_kill_OPTIONAL_ARGC 0
@@ -4794,8 +4794,8 @@ mrb_APR_apr_pool_cleanup_kill(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooo", &p, &data, &cleanup);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
   TODO_type_check_void_PTR(data);
@@ -4849,7 +4849,7 @@ mrb_APR_apr_pool_cleanup_null(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_cleanup_register */
-/* sha: 5b5c625cc6e4c2c105b638a5d72f5df4344e5dcb567082b233e02ef137b3f444 */
+/* sha: 548f6724464162efd6a9ced53cb8c08e26d57b3d2c2222498838723a02ad95ce */
 #if BIND_apr_pool_cleanup_register_FUNCTION
 #define apr_pool_cleanup_register_REQUIRED_ARGC 4
 #define apr_pool_cleanup_register_OPTIONAL_ARGC 0
@@ -4865,8 +4865,8 @@ mrb_APR_apr_pool_cleanup_register(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oooo", &p, &data, &plain_cleanup, &child_cleanup);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
   TODO_type_check_void_PTR(data);
@@ -4894,7 +4894,7 @@ mrb_APR_apr_pool_cleanup_register(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_cleanup_run */
-/* sha: c67faa7f07fadccea9ca36ea7bf0fc1146c00c8b9263cab1a4549a4d0795a78d */
+/* sha: a39bc94cd6d38c59d22da1bab9adb2ecbf3aec2364c1c43939e9c03733c9dc58 */
 #if BIND_apr_pool_cleanup_run_FUNCTION
 #define apr_pool_cleanup_run_REQUIRED_ARGC 3
 #define apr_pool_cleanup_run_OPTIONAL_ARGC 0
@@ -4909,8 +4909,8 @@ mrb_APR_apr_pool_cleanup_run(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooo", &p, &data, &cleanup);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
   TODO_type_check_void_PTR(data);
@@ -4955,8 +4955,8 @@ mrb_APR_apr_pool_clear(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &p);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -4972,7 +4972,7 @@ mrb_APR_apr_pool_clear(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_clear_debug */
-/* sha: fcfacf2d92ccd061ad91bdea420cea3c2e35b5422707504f10c7b527f34e4ca6 */
+/* sha: 670835e76b1d84fd90dcef818e2bddcf47362b06442f72f492207c88acd7c811 */
 #if BIND_apr_pool_clear_debug_FUNCTION
 #define apr_pool_clear_debug_REQUIRED_ARGC 2
 #define apr_pool_clear_debug_OPTIONAL_ARGC 0
@@ -4986,8 +4986,8 @@ mrb_APR_apr_pool_clear_debug(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oz", &p, &native_file_line);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -5084,7 +5084,7 @@ mrb_APR_apr_pool_create_core_ex_debug(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_create_ex */
-/* sha: bd1fc5dcd9d08c8c5b1f0fba501ce3a772d1040d4a11236540d940942f07f989 */
+/* sha: 5f248c77daebff3636eb9e370520425d3a86a79ff1210c794a97818b53376b82 */
 #if BIND_apr_pool_create_ex_FUNCTION
 #define apr_pool_create_ex_REQUIRED_ARGC 4
 #define apr_pool_create_ex_OPTIONAL_ARGC 0
@@ -5101,8 +5101,8 @@ mrb_APR_apr_pool_create_ex(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_pool_t_PTR_PTR(newpool);
-  if (!mrb_obj_is_kind_of(mrb, parent, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, parent, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
   TODO_type_check_apr_abortfunc_t(abort_fn);
@@ -5132,7 +5132,7 @@ mrb_APR_apr_pool_create_ex(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_create_ex_debug */
-/* sha: 4a46ba52a800772e611244198af58375e254e9ed8439905ca2f726755a0623ce */
+/* sha: ec2c24b39d83bc1576468afb24decc24aeb6a6ee2c84a6780e5250dd87c1e740 */
 #if BIND_apr_pool_create_ex_debug_FUNCTION
 #define apr_pool_create_ex_debug_REQUIRED_ARGC 5
 #define apr_pool_create_ex_debug_OPTIONAL_ARGC 0
@@ -5150,8 +5150,8 @@ mrb_APR_apr_pool_create_ex_debug(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_pool_t_PTR_PTR(newpool);
-  if (!mrb_obj_is_kind_of(mrb, parent, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, parent, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
   TODO_type_check_apr_abortfunc_t(abort_fn);
@@ -5280,8 +5280,8 @@ mrb_APR_apr_pool_destroy(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &p);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -5297,7 +5297,7 @@ mrb_APR_apr_pool_destroy(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_destroy_debug */
-/* sha: 5ec2256a61877bd1be498e78bc1b2fd7104f07ae82845da17392d41ef389ecf6 */
+/* sha: e35e08e01485248bd59bf382657b73a227e9e225efd4594283d2b5de83324017 */
 #if BIND_apr_pool_destroy_debug_FUNCTION
 #define apr_pool_destroy_debug_REQUIRED_ARGC 2
 #define apr_pool_destroy_debug_OPTIONAL_ARGC 0
@@ -5311,8 +5311,8 @@ mrb_APR_apr_pool_destroy_debug(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oz", &p, &native_file_line);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -5347,7 +5347,7 @@ mrb_APR_apr_pool_initialize(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_is_ancestor */
-/* sha: cc0127013f9f58d8acc09fa2ada8527386f9e1931f08976786b2abe971a88a15 */
+/* sha: d696e8c63416f7a7964899b44b2d3361ce1202ad2b472f2d7afaa8359df86cd1 */
 #if BIND_apr_pool_is_ancestor_FUNCTION
 #define apr_pool_is_ancestor_REQUIRED_ARGC 2
 #define apr_pool_is_ancestor_OPTIONAL_ARGC 0
@@ -5361,12 +5361,12 @@ mrb_APR_apr_pool_is_ancestor(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &a, &b);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, a, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, a, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, b, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, b, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -5388,7 +5388,7 @@ mrb_APR_apr_pool_is_ancestor(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_note_subprocess */
-/* sha: 568a4b46bd7d8b51276b30fd98daa798257acc08e3bf6d7be2503bb9dec02507 */
+/* sha: ecfe5738b265f67b4d6b58dc6c4fd59ef33d112ced385f464784d628a3e8c73c */
 #if BIND_apr_pool_note_subprocess_FUNCTION
 #define apr_pool_note_subprocess_REQUIRED_ARGC 3
 #define apr_pool_note_subprocess_OPTIONAL_ARGC 0
@@ -5403,12 +5403,12 @@ mrb_APR_apr_pool_note_subprocess(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooi", &a, &proc, &native_how);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, a, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, a, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, proc, AprProcT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcT expected");
+  if (!mrb_obj_is_kind_of(mrb, proc, Proc_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Proc expected");
     return mrb_nil_value();
   }
 
@@ -5427,7 +5427,7 @@ mrb_APR_apr_pool_note_subprocess(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_parent_get */
-/* sha: 9ab0fc3856b2e1df67e69e11141a9f074bb4bf21fcccfd285589734662fe461f */
+/* sha: bf734ab7b1a983da1edf9458d1eedafb525a44b8ef9fa0517a988a63af38e9a5 */
 #if BIND_apr_pool_parent_get_FUNCTION
 #define apr_pool_parent_get_REQUIRED_ARGC 1
 #define apr_pool_parent_get_OPTIONAL_ARGC 0
@@ -5440,8 +5440,8 @@ mrb_APR_apr_pool_parent_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -5460,7 +5460,7 @@ mrb_APR_apr_pool_parent_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_pre_cleanup_register */
-/* sha: d157bdb3803083152c4e9933ba7d5fc665a69140742ee155c358d39c5a45dcd8 */
+/* sha: f7fb79d84a90922bbf027cff37ba280814e02ceb6f4d7c0824d72bdab039fd73 */
 #if BIND_apr_pool_pre_cleanup_register_FUNCTION
 #define apr_pool_pre_cleanup_register_REQUIRED_ARGC 3
 #define apr_pool_pre_cleanup_register_OPTIONAL_ARGC 0
@@ -5475,8 +5475,8 @@ mrb_APR_apr_pool_pre_cleanup_register(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooo", &p, &data, &plain_cleanup);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
   TODO_type_check_void_PTR(data);
@@ -5500,7 +5500,7 @@ mrb_APR_apr_pool_pre_cleanup_register(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_tag */
-/* sha: cca71f2f6e7b0672b7c07806c0a0169d5c475f37837c66241613438a116ef415 */
+/* sha: c49c680ea66a7f928a455f631577a75244442c2d024e1823f0fb4e6854970c96 */
 #if BIND_apr_pool_tag_FUNCTION
 #define apr_pool_tag_REQUIRED_ARGC 2
 #define apr_pool_tag_OPTIONAL_ARGC 0
@@ -5514,8 +5514,8 @@ mrb_APR_apr_pool_tag(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oz", &pool, &native_tag);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -5547,7 +5547,7 @@ mrb_APR_apr_pool_terminate(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_userdata_get */
-/* sha: 67ba5122094210c6249cd5af86d9fa1d8c6956e4c051aa653e75aa433f48a0c2 */
+/* sha: c577a04a3add332cb75c7ff3ac09b17b19d6599a83882c71c2738731e039cb6d */
 #if BIND_apr_pool_userdata_get_FUNCTION
 #define apr_pool_userdata_get_REQUIRED_ARGC 3
 #define apr_pool_userdata_get_OPTIONAL_ARGC 0
@@ -5563,8 +5563,8 @@ mrb_APR_apr_pool_userdata_get(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_void_PTR_PTR(data);
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -5586,7 +5586,7 @@ mrb_APR_apr_pool_userdata_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_userdata_set */
-/* sha: 5be91ba5f6f365bd75c453e5d3f6efe63c3d5025ceb20f02283f0b96af751344 */
+/* sha: 2bba0a63c114caf8b56b1cc094d4901612207e542c0bdf29dd990436692c1efe */
 #if BIND_apr_pool_userdata_set_FUNCTION
 #define apr_pool_userdata_set_REQUIRED_ARGC 4
 #define apr_pool_userdata_set_OPTIONAL_ARGC 0
@@ -5604,8 +5604,8 @@ mrb_APR_apr_pool_userdata_set(mrb_state* mrb, mrb_value self) {
   /* Type checking */
   TODO_type_check_void_PTR(data);
   TODO_type_check_apr_status_t_LPAREN_PTR_RPAREN_LPAREN_void_PTR_RPAREN(cleanup);
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -5630,7 +5630,7 @@ mrb_APR_apr_pool_userdata_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pool_userdata_setn */
-/* sha: e97fe1dcffff65c76aa293e0c65df64c78e0a0b27e7de0a9901734aef8ec82ea */
+/* sha: 3b968ad3035554c0f380bc8f94f66ef3f9ba03dffeaa80a6d6c72f8c1bb50247 */
 #if BIND_apr_pool_userdata_setn_FUNCTION
 #define apr_pool_userdata_setn_REQUIRED_ARGC 4
 #define apr_pool_userdata_setn_OPTIONAL_ARGC 0
@@ -5648,8 +5648,8 @@ mrb_APR_apr_pool_userdata_setn(mrb_state* mrb, mrb_value self) {
   /* Type checking */
   TODO_type_check_void_PTR(data);
   TODO_type_check_apr_status_t_LPAREN_PTR_RPAREN_LPAREN_void_PTR_RPAREN(cleanup);
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -5686,7 +5686,7 @@ mrb_APR_apr_pool_userdata_setn(mrb_state* mrb, mrb_value self) {
  * - env: const char *const *
  * - attr: apr_procattr_t *
  * - pool: apr_pool_t *
- * Return Type: [Fixnum, AprProcT]
+ * Return Type: [Fixnum, Proc]
  */
 mrb_value
 mrb_APR_apr_proc_create(mrb_state* mrb, mrb_value self) {
@@ -5708,12 +5708,12 @@ mrb_APR_apr_proc_create(mrb_state* mrb, mrb_value self) {
      mrb_raise(mrb, E_TYPE_ERROR, "Array expected");
      return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -5803,7 +5803,7 @@ mrb_APR_apr_proc_detach(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_fork */
-/* sha: 73b213b492a0e4e4d2d4de5c68f2c05ddfa0a021057a4260ea64ea1d1d06f2ec */
+/* sha: a63c56d3fc6260cc4e5128b97695ccf92d769ad4591301274fe79abc382c7b06 */
 #if BIND_apr_proc_fork_FUNCTION
 #define apr_proc_fork_REQUIRED_ARGC 2
 #define apr_proc_fork_OPTIONAL_ARGC 0
@@ -5817,12 +5817,12 @@ mrb_APR_apr_proc_fork(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &proc, &cont);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, proc, AprProcT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcT expected");
+  if (!mrb_obj_is_kind_of(mrb, proc, Proc_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Proc expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, cont, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, cont, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -5844,7 +5844,7 @@ mrb_APR_apr_proc_fork(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_kill */
-/* sha: f3b2e5e4e2c92f9700a5d25d7c3b988a8b4d3857969d0d993c59e17fd59fa813 */
+/* sha: 1794e173ec110b13ffafd57de833a0cfc234467ced93bcbc74408ea489b4c20d */
 #if BIND_apr_proc_kill_FUNCTION
 #define apr_proc_kill_REQUIRED_ARGC 2
 #define apr_proc_kill_OPTIONAL_ARGC 0
@@ -5858,8 +5858,8 @@ mrb_APR_apr_proc_kill(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &proc, &native_sig);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, proc, AprProcT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcT expected");
+  if (!mrb_obj_is_kind_of(mrb, proc, Proc_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Proc expected");
     return mrb_nil_value();
   }
 
@@ -5878,7 +5878,7 @@ mrb_APR_apr_proc_kill(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_mutex_child_init */
-/* sha: 5efcd091fe483ee5845a06a154e79cef4088d84d3325c4646536eb7a8611d4aa */
+/* sha: 807b2ae5dd27088cf1147f3196336488586a21f0f2bdd6ee0bd33e8afc558856 */
 #if BIND_apr_proc_mutex_child_init_FUNCTION
 #define apr_proc_mutex_child_init_REQUIRED_ARGC 3
 #define apr_proc_mutex_child_init_OPTIONAL_ARGC 0
@@ -5894,8 +5894,8 @@ mrb_APR_apr_proc_mutex_child_init(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_proc_mutex_t_PTR_PTR(mutex);
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -5947,7 +5947,7 @@ mrb_APR_apr_proc_mutex_cleanup(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_mutex_create */
-/* sha: 087d0227f10b78507fa890b581a1414112675c904b9a5a3d82dca2143589ae4a */
+/* sha: 9f21c517eac5658f2cfd4764ee6bcc1eb636f44915573eafd7f74cce4494369b */
 #if BIND_apr_proc_mutex_create_FUNCTION
 #define apr_proc_mutex_create_REQUIRED_ARGC 4
 #define apr_proc_mutex_create_OPTIONAL_ARGC 0
@@ -5964,8 +5964,8 @@ mrb_APR_apr_proc_mutex_create(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_proc_mutex_t_PTR_PTR(mutex);
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -6006,7 +6006,7 @@ mrb_APR_apr_proc_mutex_defname(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_mutex_destroy */
-/* sha: 38f002ff480a2cb5c5d0e1876c0c847683ffe201cd6aa0b5bd5d1f1dbdf65334 */
+/* sha: 5e356ca6e450bb03bdf16fbedf56fb28c64e1673f98b3e53ccb0bce4d31c1061 */
 #if BIND_apr_proc_mutex_destroy_FUNCTION
 #define apr_proc_mutex_destroy_REQUIRED_ARGC 1
 #define apr_proc_mutex_destroy_OPTIONAL_ARGC 0
@@ -6019,8 +6019,8 @@ mrb_APR_apr_proc_mutex_destroy(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &mutex);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, mutex, AprProcMutexT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcMutexT expected");
+  if (!mrb_obj_is_kind_of(mrb, mutex, ProcMutex_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "ProcMutex expected");
     return mrb_nil_value();
   }
 
@@ -6039,7 +6039,7 @@ mrb_APR_apr_proc_mutex_destroy(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_mutex_lock */
-/* sha: 06945b3338ba3c5088f7568fb3536781a77811f6148cc48490f6e4f18ac8d488 */
+/* sha: df647f316651b8b9512be06ae9cb42d0f8dd8e471d33f15ba427515917cd332b */
 #if BIND_apr_proc_mutex_lock_FUNCTION
 #define apr_proc_mutex_lock_REQUIRED_ARGC 1
 #define apr_proc_mutex_lock_OPTIONAL_ARGC 0
@@ -6052,8 +6052,8 @@ mrb_APR_apr_proc_mutex_lock(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &mutex);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, mutex, AprProcMutexT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcMutexT expected");
+  if (!mrb_obj_is_kind_of(mrb, mutex, ProcMutex_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "ProcMutex expected");
     return mrb_nil_value();
   }
 
@@ -6072,7 +6072,7 @@ mrb_APR_apr_proc_mutex_lock(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_mutex_lockfile */
-/* sha: 0d7ef153851066ea9db553864b6a5a6a112aba9202d9c6d299645ffca1de3237 */
+/* sha: 1b6be338682773573d7d80e58f030ed21bc6f6fb601790f07695d0f7befcce9d */
 #if BIND_apr_proc_mutex_lockfile_FUNCTION
 #define apr_proc_mutex_lockfile_REQUIRED_ARGC 1
 #define apr_proc_mutex_lockfile_OPTIONAL_ARGC 0
@@ -6085,8 +6085,8 @@ mrb_APR_apr_proc_mutex_lockfile(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &mutex);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, mutex, AprProcMutexT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcMutexT expected");
+  if (!mrb_obj_is_kind_of(mrb, mutex, ProcMutex_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "ProcMutex expected");
     return mrb_nil_value();
   }
 
@@ -6105,7 +6105,7 @@ mrb_APR_apr_proc_mutex_lockfile(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_mutex_name */
-/* sha: 878615c22a0df0e8d8eb7dabecb1bc6a96b2d583cb4820867d1f3feaf05e05e7 */
+/* sha: 1bb555a57f72d4af5ff371c877fcc087707a1577b17bc57fc8a11366d7f1a75c */
 #if BIND_apr_proc_mutex_name_FUNCTION
 #define apr_proc_mutex_name_REQUIRED_ARGC 1
 #define apr_proc_mutex_name_OPTIONAL_ARGC 0
@@ -6118,8 +6118,8 @@ mrb_APR_apr_proc_mutex_name(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &mutex);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, mutex, AprProcMutexT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcMutexT expected");
+  if (!mrb_obj_is_kind_of(mrb, mutex, ProcMutex_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "ProcMutex expected");
     return mrb_nil_value();
   }
 
@@ -6138,7 +6138,7 @@ mrb_APR_apr_proc_mutex_name(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_mutex_trylock */
-/* sha: 52b16baf36d0cef243f852eee4773652c04aa02385b98ed21e8dc98f6f9e0993 */
+/* sha: 30ba12d4aa74c66dbe28eec95830e7def0ae8364c75307fd4e3e5c5de7adbdf8 */
 #if BIND_apr_proc_mutex_trylock_FUNCTION
 #define apr_proc_mutex_trylock_REQUIRED_ARGC 1
 #define apr_proc_mutex_trylock_OPTIONAL_ARGC 0
@@ -6151,8 +6151,8 @@ mrb_APR_apr_proc_mutex_trylock(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &mutex);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, mutex, AprProcMutexT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcMutexT expected");
+  if (!mrb_obj_is_kind_of(mrb, mutex, ProcMutex_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "ProcMutex expected");
     return mrb_nil_value();
   }
 
@@ -6171,7 +6171,7 @@ mrb_APR_apr_proc_mutex_trylock(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_mutex_unlock */
-/* sha: 657f309a3a0b3715c7b522fa118f0b973d23e08f64744c1c12ec23be84d3866a */
+/* sha: ed4e2b3bc97f6f8da98af40506b93eae509207f08c7c9afb6076edeaa9f5c1b2 */
 #if BIND_apr_proc_mutex_unlock_FUNCTION
 #define apr_proc_mutex_unlock_REQUIRED_ARGC 1
 #define apr_proc_mutex_unlock_OPTIONAL_ARGC 0
@@ -6184,8 +6184,8 @@ mrb_APR_apr_proc_mutex_unlock(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &mutex);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, mutex, AprProcMutexT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcMutexT expected");
+  if (!mrb_obj_is_kind_of(mrb, mutex, ProcMutex_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "ProcMutex expected");
     return mrb_nil_value();
   }
 
@@ -6204,7 +6204,7 @@ mrb_APR_apr_proc_mutex_unlock(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_other_child_alert */
-/* sha: 32d83ff9440e545f8e1b9b427a3f5e09cdca870947c18b153dd4be0bc015674e */
+/* sha: 0ce89e742ee0138f522505e931ea0ba09666203820ac19ef023bd96f915dcd62 */
 #if BIND_apr_proc_other_child_alert_FUNCTION
 #define apr_proc_other_child_alert_REQUIRED_ARGC 3
 #define apr_proc_other_child_alert_OPTIONAL_ARGC 0
@@ -6219,8 +6219,8 @@ mrb_APR_apr_proc_other_child_alert(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oii", &proc, &native_reason, &native_status);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, proc, AprProcT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcT expected");
+  if (!mrb_obj_is_kind_of(mrb, proc, Proc_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Proc expected");
     return mrb_nil_value();
   }
 
@@ -6239,7 +6239,7 @@ mrb_APR_apr_proc_other_child_alert(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_other_child_refresh */
-/* sha: 5e20d0382c0069d5148e898ce2bd7fcb2d35dcfcd2c6f9292c1f03cef25c2eef */
+/* sha: d07ba9b7b693e98143afbf0706f9c6945335cef38a83e4ec128ab03f4f6da359 */
 #if BIND_apr_proc_other_child_refresh_FUNCTION
 #define apr_proc_other_child_refresh_REQUIRED_ARGC 2
 #define apr_proc_other_child_refresh_OPTIONAL_ARGC 0
@@ -6253,8 +6253,8 @@ mrb_APR_apr_proc_other_child_refresh(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &ocr, &native_reason);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, ocr, AprOtherChildRecT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprOtherChildRecT expected");
+  if (!mrb_obj_is_kind_of(mrb, ocr, OtherChildRec_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "OtherChildRec expected");
     return mrb_nil_value();
   }
 
@@ -6291,7 +6291,7 @@ mrb_APR_apr_proc_other_child_refresh_all(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_other_child_register */
-/* sha: b9a97872173516ea1f2eadf3a8de003082a4e117461bd11251074b3bbd2426a0 */
+/* sha: 7785c9773b55561655a64de95535f7eccec860b026a33908848e45514ad42436 */
 #if BIND_apr_proc_other_child_register_FUNCTION
 #define apr_proc_other_child_register_REQUIRED_ARGC 5
 #define apr_proc_other_child_register_OPTIONAL_ARGC 0
@@ -6308,18 +6308,18 @@ mrb_APR_apr_proc_other_child_register(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooooo", &proc, &maintenance, &data, &write_fd, &p);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, proc, AprProcT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcT expected");
+  if (!mrb_obj_is_kind_of(mrb, proc, Proc_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Proc expected");
     return mrb_nil_value();
   }
   TODO_type_check_void_LPAREN_PTR_RPAREN_LPAREN_intCOMMA_void_PTR_COMMA_int_RPAREN(maintenance);
   TODO_type_check_void_PTR(data);
-  if (!mrb_obj_is_kind_of(mrb, write_fd, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, write_fd, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -6394,8 +6394,8 @@ mrb_APR_apr_proc_wait(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &proc, &native_waithow);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, proc, AprProcT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcT expected");
+  if (!mrb_obj_is_kind_of(mrb, proc, Proc_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Proc expected");
     return mrb_nil_value();
   }
 
@@ -6430,7 +6430,7 @@ mrb_APR_apr_proc_wait(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_proc_wait_all_procs */
-/* sha: c1a81a267f1745439ea904682488537c27805cdc13c5fe70c09657372e639ece */
+/* sha: 84515e055d9c5b9067d295ba69a76e5264740d2a8e54faa169b6e2424cbc8f64 */
 #if BIND_apr_proc_wait_all_procs_FUNCTION
 #define apr_proc_wait_all_procs_REQUIRED_ARGC 5
 #define apr_proc_wait_all_procs_OPTIONAL_ARGC 0
@@ -6447,14 +6447,14 @@ mrb_APR_apr_proc_wait_all_procs(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oooio", &proc, &exitcode, &exitwhy, &native_waithow, &p);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, proc, AprProcT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcT expected");
+  if (!mrb_obj_is_kind_of(mrb, proc, Proc_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Proc expected");
     return mrb_nil_value();
   }
   TODO_type_check_int_PTR(exitcode);
   TODO_type_check_apr_exit_why_e_PTR(exitwhy);
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -6482,7 +6482,7 @@ mrb_APR_apr_proc_wait_all_procs(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_procattr_addrspace_set */
-/* sha: f74c4e74190b70cd7f7d9eba2f6d0b553ee64a7e0df38809a17fae38714bfc63 */
+/* sha: 4f7f065931ebc2853a23e7a02405ade218c571ef2d7903ee6993508e66130571 */
 #if BIND_apr_procattr_addrspace_set_FUNCTION
 #define apr_procattr_addrspace_set_REQUIRED_ARGC 2
 #define apr_procattr_addrspace_set_OPTIONAL_ARGC 0
@@ -6496,8 +6496,8 @@ mrb_APR_apr_procattr_addrspace_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &attr, &native_addrspace);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
 
@@ -6531,16 +6531,16 @@ mrb_APR_apr_procattr_child_err_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooo", &attr, &child_err, &parent_err);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, child_err, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, child_err, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, parent_err, AprFileT_class(mrb)) && !mrb_nil_p(parent_err)) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, parent_err, File_class(mrb)) && !mrb_nil_p(parent_err)) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -6565,7 +6565,7 @@ mrb_APR_apr_procattr_child_err_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_procattr_child_errfn_set */
-/* sha: a5c0b95c17148b073073bb64dd904f421087e739ba42661c286913191e264770 */
+/* sha: 15db04c62225fa0bcc2dab2b52c14836bba788b54528de3c652aec8f4dfcf12c */
 #if BIND_apr_procattr_child_errfn_set_FUNCTION
 #define apr_procattr_child_errfn_set_REQUIRED_ARGC 2
 #define apr_procattr_child_errfn_set_OPTIONAL_ARGC 0
@@ -6579,8 +6579,8 @@ mrb_APR_apr_procattr_child_errfn_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &attr, &errfn);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
   TODO_type_check_apr_child_errfn_t_PTR(errfn);
@@ -6618,16 +6618,16 @@ mrb_APR_apr_procattr_child_in_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooo", &attr, &child_in, &parent_in);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, child_in, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, child_in, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, parent_in, AprFileT_class(mrb)) && !mrb_nil_p(parent_in)) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, parent_in, File_class(mrb)) && !mrb_nil_p(parent_in)) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -6667,16 +6667,16 @@ mrb_APR_apr_procattr_child_out_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo|o", &attr, &child_out, &parent_out);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, child_out, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, child_out, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, parent_out, AprFileT_class(mrb)) && !mrb_nil_p(parent_out)) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, parent_out, File_class(mrb)) && !mrb_nil_p(parent_out)) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
 
@@ -6701,7 +6701,7 @@ mrb_APR_apr_procattr_child_out_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_procattr_cmdtype_set */
-/* sha: d2b10ea2263fd8c2fe2762f7c6a9819617534cf181d2a638b734c3e600643c8e */
+/* sha: 612a9de8844f9771bdf167f3ad91830370f517157bae63e65f7bd4b8e6bb5965 */
 #if BIND_apr_procattr_cmdtype_set_FUNCTION
 #define apr_procattr_cmdtype_set_REQUIRED_ARGC 2
 #define apr_procattr_cmdtype_set_OPTIONAL_ARGC 0
@@ -6715,8 +6715,8 @@ mrb_APR_apr_procattr_cmdtype_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &attr, &native_cmd);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
 
@@ -6742,8 +6742,8 @@ mrb_APR_apr_procattr_cmdtype_set(mrb_state* mrb, mrb_value self) {
 /* apr_procattr_create
  *
  * Parameters:
- * - cont: AprPoolT
- * Return Type: [Fixnum, AprProcattrT]
+ * - cont: Pool
+ * Return Type: [Fixnum, Procattr]
  */
 mrb_value
 mrb_APR_apr_procattr_create(mrb_state* mrb, mrb_value self) {
@@ -6753,8 +6753,8 @@ mrb_APR_apr_procattr_create(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &cont);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, cont, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, cont, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -6787,7 +6787,7 @@ mrb_APR_apr_procattr_create(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_procattr_detach_set */
-/* sha: 719768406ffe05a09663f1fe001493ef91914dec896c8f3c0a49a4334db2c1d8 */
+/* sha: 87db020538415b0cdb3e471388dd59f2ac6cf0f7fa3db78c433b73f527e6399e */
 #if BIND_apr_procattr_detach_set_FUNCTION
 #define apr_procattr_detach_set_REQUIRED_ARGC 2
 #define apr_procattr_detach_set_OPTIONAL_ARGC 0
@@ -6801,8 +6801,8 @@ mrb_APR_apr_procattr_detach_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &attr, &native_detach);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
 
@@ -6821,7 +6821,7 @@ mrb_APR_apr_procattr_detach_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_procattr_dir_set */
-/* sha: b99977736de5e791ac2d5ae1407adf39856a07576626c3c7f94a79fd85db4501 */
+/* sha: 9843916e700a73da689dfa9b39ebb70b24ba67b4ce69cdba2c02c6a8c78af96a */
 #if BIND_apr_procattr_dir_set_FUNCTION
 #define apr_procattr_dir_set_REQUIRED_ARGC 2
 #define apr_procattr_dir_set_OPTIONAL_ARGC 0
@@ -6835,8 +6835,8 @@ mrb_APR_apr_procattr_dir_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oz", &attr, &native_dir);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
 
@@ -6855,7 +6855,7 @@ mrb_APR_apr_procattr_dir_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_procattr_error_check_set */
-/* sha: a92a7a4ad78f9a7bc34e44dea292f6b6ecdec192fd6904a6a8fa9307feed74ef */
+/* sha: 3c8954e6329e76630c54eb450c5b874a28b7e7dc548f3806504cad6cbbb74092 */
 #if BIND_apr_procattr_error_check_set_FUNCTION
 #define apr_procattr_error_check_set_REQUIRED_ARGC 2
 #define apr_procattr_error_check_set_OPTIONAL_ARGC 0
@@ -6869,8 +6869,8 @@ mrb_APR_apr_procattr_error_check_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &attr, &native_chk);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
 
@@ -6889,7 +6889,7 @@ mrb_APR_apr_procattr_error_check_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_procattr_group_set */
-/* sha: d98bc606551e394b5b2cf30494c144f87080a87f9ad2dd8cc22c135c9e496402 */
+/* sha: 72e479d85e0608aa978ceb6676a355524c4227ae32e5d27cc26e1faa0f72fda0 */
 #if BIND_apr_procattr_group_set_FUNCTION
 #define apr_procattr_group_set_REQUIRED_ARGC 2
 #define apr_procattr_group_set_OPTIONAL_ARGC 0
@@ -6903,8 +6903,8 @@ mrb_APR_apr_procattr_group_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oz", &attr, &native_groupname);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
 
@@ -6923,7 +6923,7 @@ mrb_APR_apr_procattr_group_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_procattr_io_set */
-/* sha: 694990d6e8fb6548407b6b16d603db0e3ebe00ca90e563b65d8f2d8c0d235d85 */
+/* sha: 2d74cfec5c2e0c54f28c731d81cb42a7251a2661028d36ed416b81b4547f8de2 */
 #if BIND_apr_procattr_io_set_FUNCTION
 #define apr_procattr_io_set_REQUIRED_ARGC 4
 #define apr_procattr_io_set_OPTIONAL_ARGC 0
@@ -6939,8 +6939,8 @@ mrb_APR_apr_procattr_io_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oiii", &attr, &native_in, &native_out, &native_err);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
 
@@ -6959,7 +6959,7 @@ mrb_APR_apr_procattr_io_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_procattr_limit_set */
-/* sha: dca13a5b19713b1405a77a294afed37fb24a92047a169c0ca62b89d2e3ec2415 */
+/* sha: 93c18321faebe3ed436cfb9ac8e6d356af1c99f63fb7f4aaf75a576d55ca7069 */
 #if BIND_apr_procattr_limit_set_FUNCTION
 #define apr_procattr_limit_set_REQUIRED_ARGC 3
 #define apr_procattr_limit_set_OPTIONAL_ARGC 0
@@ -6974,8 +6974,8 @@ mrb_APR_apr_procattr_limit_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oio", &attr, &native_what, &limit);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
   TODO_type_check_rlimit_PTR(limit);
@@ -6998,7 +6998,7 @@ mrb_APR_apr_procattr_limit_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_procattr_user_set */
-/* sha: ed8b0aece867e2c908b50ed44336f2347fd85105d4e90e35741c786eb5b55da0 */
+/* sha: c543465a9d234db9651af92bdafaf91af383c3a6ab5447b0c7991f1c45874251 */
 #if BIND_apr_procattr_user_set_FUNCTION
 #define apr_procattr_user_set_REQUIRED_ARGC 3
 #define apr_procattr_user_set_OPTIONAL_ARGC 0
@@ -7013,8 +7013,8 @@ mrb_APR_apr_procattr_user_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ozz", &attr, &native_username, &native_password);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprProcattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprProcattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Procattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Procattr expected");
     return mrb_nil_value();
   }
 
@@ -7033,7 +7033,7 @@ mrb_APR_apr_procattr_user_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_psprintf */
-/* sha: 34ba8b01516446989ec2a3030b965fae0fda9257ea71bcec538fbabe21766fe0 */
+/* sha: c854dbb2a460696d9bc5b5b0c961834fc3ef1a8bc3612f2fc424604914f237ba */
 #if BIND_apr_psprintf_FUNCTION
 #define apr_psprintf_REQUIRED_ARGC 2
 #define apr_psprintf_OPTIONAL_ARGC 0
@@ -7047,8 +7047,8 @@ mrb_APR_apr_psprintf(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oz", &p, &native_fmt);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -7067,7 +7067,7 @@ mrb_APR_apr_psprintf(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pstrcat */
-/* sha: dbf8ab1149dfe338ace7b976000b0614dfbe86fb2f93c9d8bb06dd92a734d574 */
+/* sha: 8841d5b6bf451dcf6d341f92df567358b3ca6ae48fdcf83519871fc1f0925d05 */
 #if BIND_apr_pstrcat_FUNCTION
 #define apr_pstrcat_REQUIRED_ARGC 1
 #define apr_pstrcat_OPTIONAL_ARGC 0
@@ -7080,8 +7080,8 @@ mrb_APR_apr_pstrcat(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &p);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -7100,7 +7100,7 @@ mrb_APR_apr_pstrcat(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pstrcatv */
-/* sha: 7ce7e7d46a322dc3e9ec054a8d839753c9571aeb0feb412a2478828ecaae3b20 */
+/* sha: 0f2965cb71ea36142eee35c2ec22c07639da3b099b9cd88a292935cffe6ff503 */
 #if BIND_apr_pstrcatv_FUNCTION
 #define apr_pstrcatv_REQUIRED_ARGC 4
 #define apr_pstrcatv_OPTIONAL_ARGC 0
@@ -7116,8 +7116,8 @@ mrb_APR_apr_pstrcatv(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooio", &p, &vec, &native_nvec, &nbytes);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
   TODO_type_check_iovec_PTR(vec);
@@ -7144,7 +7144,7 @@ mrb_APR_apr_pstrcatv(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pstrdup */
-/* sha: 6bdab8efbff7290d0461d0bca4b4eb376816da3bd716e281b1fa1a8fcd70949f */
+/* sha: 7ba968b9e72964931a974d5564a9e83e99a9d7ea470d3700880fe8197648dfc4 */
 #if BIND_apr_pstrdup_FUNCTION
 #define apr_pstrdup_REQUIRED_ARGC 2
 #define apr_pstrdup_OPTIONAL_ARGC 0
@@ -7158,8 +7158,8 @@ mrb_APR_apr_pstrdup(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oz", &p, &native_s);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -7178,7 +7178,7 @@ mrb_APR_apr_pstrdup(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pstrmemdup */
-/* sha: 41f4a509d0897814faba10d0111b74908fb4b664de63221448cbda5ef9476cfa */
+/* sha: c97aef18abb4074eb2914b3951783e0d05845b21833a0a3da9df43762ba23f51 */
 #if BIND_apr_pstrmemdup_FUNCTION
 #define apr_pstrmemdup_REQUIRED_ARGC 3
 #define apr_pstrmemdup_OPTIONAL_ARGC 0
@@ -7193,8 +7193,8 @@ mrb_APR_apr_pstrmemdup(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ozi", &p, &native_s, &native_n);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -7213,7 +7213,7 @@ mrb_APR_apr_pstrmemdup(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pstrndup */
-/* sha: 643a2fa671185d3a807131cffbcc603603d06d56b4e25255af79a47d62b453cf */
+/* sha: fe80500886d362adfe667cd181f4908f252779ab29d29e441f15b7ae09cf30e2 */
 #if BIND_apr_pstrndup_FUNCTION
 #define apr_pstrndup_REQUIRED_ARGC 3
 #define apr_pstrndup_OPTIONAL_ARGC 0
@@ -7228,8 +7228,8 @@ mrb_APR_apr_pstrndup(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ozi", &p, &native_s, &native_n);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -7248,7 +7248,7 @@ mrb_APR_apr_pstrndup(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_pvsprintf */
-/* sha: d1f1b125e1cc69797b7bd8dde462a9c07ea3f07f152a7d3e4a8e517adf41d1dd */
+/* sha: fa0ea6033e005f88eead5a155fab60ef1e869ff546e07b0344eda84e815863b6 */
 #if BIND_apr_pvsprintf_FUNCTION
 #define apr_pvsprintf_REQUIRED_ARGC 3
 #define apr_pvsprintf_OPTIONAL_ARGC 0
@@ -7263,8 +7263,8 @@ mrb_APR_apr_pvsprintf(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ozi", &p, &native_fmt, &native_ap);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -7412,7 +7412,7 @@ mrb_APR_apr_signal_description_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_signal_init */
-/* sha: 9ce8d395a582139f2de800fc84458265c751ba362378c1eda3e53bd9ad75a1d9 */
+/* sha: 0e4c8bb764c8d225521ef0fc832158fd333152113ae63fb1c8640bd47b07614f */
 #if BIND_apr_signal_init_FUNCTION
 #define apr_signal_init_REQUIRED_ARGC 1
 #define apr_signal_init_OPTIONAL_ARGC 0
@@ -7425,8 +7425,8 @@ mrb_APR_apr_signal_init(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &pglobal);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pglobal, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pglobal, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -7569,12 +7569,12 @@ mrb_APR_apr_sockaddr_equal(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &addr1, &addr2);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, addr1, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, addr1, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, addr2, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, addr2, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
 
@@ -7610,7 +7610,7 @@ mrb_APR_apr_sockaddr_equal(mrb_state* mrb, mrb_value self) {
  * - port: unsigned short
  * - flags: int
  * - p: apr_pool_t *
- * Return Type: [errno, Fixnum, sock_add, AprSockaddrT]
+ * Return Type: [errno, Fixnum, sock_add, Sockaddr]
  */
 mrb_value
 mrb_APR_apr_sockaddr_info_get(mrb_state* mrb, mrb_value self) {
@@ -7628,8 +7628,8 @@ mrb_APR_apr_sockaddr_info_get(mrb_state* mrb, mrb_value self) {
     mrb_raise(mrb, E_TYPE_ERROR, "String expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -7665,8 +7665,8 @@ mrb_APR_apr_sockaddr_ip_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &sockaddr);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sockaddr, AprSockaddrT_class(mrb))) {
-     mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, sockaddr, Sockaddr_class(mrb))) {
+     mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
      return mrb_nil_value();
   }
 
@@ -7688,7 +7688,7 @@ mrb_APR_apr_sockaddr_ip_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_sockaddr_ip_getbuf */
-/* sha: 3df09845e74400c4bc0ad71a851abe7f1c348bcfd0ba899e7a3bf6d6a422c754 */
+/* sha: 25e531398ae0d43f0a5560c55e1f05063bc50dcfd3b166d2081c82ee5f0893d6 */
 #if BIND_apr_sockaddr_ip_getbuf_FUNCTION
 #define apr_sockaddr_ip_getbuf_REQUIRED_ARGC 3
 #define apr_sockaddr_ip_getbuf_OPTIONAL_ARGC 0
@@ -7704,8 +7704,8 @@ mrb_APR_apr_sockaddr_ip_getbuf(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_char_PTR(buf);
-  if (!mrb_obj_is_kind_of(mrb, sockaddr, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, sockaddr, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
 
@@ -7747,12 +7747,12 @@ mrb_APR_apr_socket_accept(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &sock, &connection_pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, connection_pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, connection_pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -7783,8 +7783,8 @@ mrb_APR_apr_socket_accept(mrb_state* mrb, mrb_value self) {
  *
  * Parameters:
  * - which: Fixnum
- * - sock: AprSocketT
- * Return Type: [errno: Fixnum, sock_addr: AprSockaddrT]
+ * - sock: Socket
+ * Return Type: [errno: Fixnum, sock_addr: Sockaddr]
  */
 mrb_value
 mrb_APR_apr_socket_addr_get(mrb_state* mrb, mrb_value self) {
@@ -7795,8 +7795,8 @@ mrb_APR_apr_socket_addr_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "io", &native_which, &sock);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -7813,7 +7813,7 @@ mrb_APR_apr_socket_addr_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_socket_atmark */
-/* sha: 59a6192e1a8de836103a411a7acf99265d0e443e4c6bf5497763471146dcf0b6 */
+/* sha: 94189decbd77e991dc13a6ea6741ee54a0efb162ced49918f32cf8603af959f3 */
 #if BIND_apr_socket_atmark_FUNCTION
 #define apr_socket_atmark_REQUIRED_ARGC 2
 #define apr_socket_atmark_OPTIONAL_ARGC 0
@@ -7827,8 +7827,8 @@ mrb_APR_apr_socket_atmark(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &sock, &atmark);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
   TODO_type_check_int_PTR(atmark);
@@ -7859,7 +7859,7 @@ mrb_APR_apr_socket_atmark(mrb_state* mrb, mrb_value self) {
  *
  * Parameters:
  * - sock: apr_socket_t *
- * Return Type: [err: AprStatusT, at_eof: Boolean]
+ * Return Type: [err: Status, at_eof: Boolean]
  */
 mrb_value
 mrb_APR_apr_socket_atreadeof(mrb_state* mrb, mrb_value self) {
@@ -7869,8 +7869,8 @@ mrb_APR_apr_socket_atreadeof(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &sock);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -7907,12 +7907,12 @@ mrb_APR_apr_socket_bind(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &sock, &sa);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, sa, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, sa, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
 
@@ -7954,8 +7954,8 @@ mrb_APR_apr_socket_close(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &thesocket);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thesocket, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, thesocket, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -7998,12 +7998,12 @@ mrb_APR_apr_socket_connect(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &sock, &sa);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, sa, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, sa, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
 
@@ -8051,8 +8051,8 @@ mrb_APR_apr_socket_create(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "iiio", &native_family, &native_type, &native_protocol, &cont);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, cont, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, cont, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -8075,7 +8075,7 @@ mrb_APR_apr_socket_create(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_socket_data_get */
-/* sha: 42040e11c5af5353f1ca867234f54a590a2390035ff314c40544de206920212f */
+/* sha: 0e75b89d895be1ae231d0bae89302363fa3520398dac9052af937cfaac68ef00 */
 #if BIND_apr_socket_data_get_FUNCTION
 #define apr_socket_data_get_REQUIRED_ARGC 3
 #define apr_socket_data_get_OPTIONAL_ARGC 0
@@ -8091,8 +8091,8 @@ mrb_APR_apr_socket_data_get(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_void_PTR_PTR(data);
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -8114,7 +8114,7 @@ mrb_APR_apr_socket_data_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_socket_data_set */
-/* sha: 12f5c480e9df7c594b9f2e3d0b7845010d15db5be4088f721a191e42a1000e94 */
+/* sha: 2f9260c22b4e477be4baf61c82957b690da164ac50d5c0f62f65f7d297d1339b */
 #if BIND_apr_socket_data_set_FUNCTION
 #define apr_socket_data_set_REQUIRED_ARGC 4
 #define apr_socket_data_set_OPTIONAL_ARGC 0
@@ -8130,8 +8130,8 @@ mrb_APR_apr_socket_data_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oozo", &sock, &data, &native_key, &cleanup);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
   TODO_type_check_void_PTR(data);
@@ -8178,8 +8178,8 @@ mrb_APR_apr_socket_listen(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &sock, &native_backlog);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -8222,8 +8222,8 @@ mrb_APR_apr_socket_opt_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &sock, &native_opt);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -8267,8 +8267,8 @@ mrb_APR_apr_socket_opt_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oii", &sock, &native_opt, &native_on);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -8309,8 +8309,8 @@ mrb_APR_apr_socket_protocol_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &sock);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -8339,7 +8339,7 @@ mrb_APR_apr_socket_protocol_get(mrb_state* mrb, mrb_value self) {
 /* apr_socket_recv
  *
  * Parameters:
- * - sock: AprSocketT
+ * - sock: Socket
  * - len: Fixnum
  * Return Type: [errno: Fixnum, message: String]
  */
@@ -8352,8 +8352,8 @@ mrb_APR_apr_socket_recv(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &sock, &native_len);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -8393,10 +8393,10 @@ mrb_APR_apr_socket_recv(mrb_state* mrb, mrb_value self) {
 /* apr_socket_recvfrom
  *
  * Parameters:
- * - sock: AprSocketT
+ * - sock: Socket
  * - flags: Fixnum
  * - len: Fixnum
- * Return Type: [errno: Fixnum, from: AprSocketT, buffer: String]
+ * Return Type: [errno: Fixnum, from: Socket, buffer: String]
  */
 mrb_value
 mrb_APR_apr_socket_recvfrom(mrb_state* mrb, mrb_value self) {
@@ -8408,8 +8408,8 @@ mrb_APR_apr_socket_recvfrom(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oii", &sock, &native_flags, &native_len);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -8460,7 +8460,7 @@ mrb_APR_apr_socket_recvfrom(mrb_state* mrb, mrb_value self) {
 /* apr_socket_send
  *
  * Parameters:
- * - sock: AprSocketT
+ * - sock: Socket
  * - buf: String
  * - len: Fixnum
  * Return Type: [errno: Fixnum, bytes_sent: Fixnum]
@@ -8475,8 +8475,8 @@ mrb_APR_apr_socket_send(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooi", &sock, &buf, &native_len);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
   if (!mrb_obj_is_kind_of(mrb, buf, mrb->string_class)) {
@@ -8503,7 +8503,7 @@ mrb_APR_apr_socket_send(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_socket_sendfile */
-/* sha: 25112d380f59506a3bbdf22d04cab2789c99738a0ff0c29e5e7063b1bea6461a */
+/* sha: c497412e1190afe124e5be3e4da30146b183f326ef7011ee31590e13aaabd082 */
 #if BIND_apr_socket_sendfile_FUNCTION
 #define apr_socket_sendfile_REQUIRED_ARGC 6
 #define apr_socket_sendfile_OPTIONAL_ARGC 0
@@ -8521,16 +8521,16 @@ mrb_APR_apr_socket_sendfile(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oooooi", &sock, &file, &hdtr, &offset, &len, &native_flags);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, file, AprFileT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprFileT expected");
+  if (!mrb_obj_is_kind_of(mrb, file, File_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "File expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, hdtr, AprHdtrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprHdtrT expected");
+  if (!mrb_obj_is_kind_of(mrb, hdtr, Hdtr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Hdtr expected");
     return mrb_nil_value();
   }
   TODO_type_check_apr_off_t_PTR(offset);
@@ -8589,12 +8589,12 @@ mrb_APR_apr_socket_sendto(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooizi", &sock, &where, &native_flags, &native_buf, &native_len);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
-  if (!mrb_obj_is_kind_of(mrb, where, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, where, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
 
@@ -8618,7 +8618,7 @@ mrb_APR_apr_socket_sendto(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_socket_sendv */
-/* sha: 0f64b8bb81bd03b397c98a550406d89c1dbd142385624557f29a3b86d9c2ca84 */
+/* sha: 73acc72e7db7c688ed2aabcf6f77375629d83dbdf5714f1da957e736b1edeb00 */
 #if BIND_apr_socket_sendv_FUNCTION
 #define apr_socket_sendv_REQUIRED_ARGC 4
 #define apr_socket_sendv_OPTIONAL_ARGC 0
@@ -8634,8 +8634,8 @@ mrb_APR_apr_socket_sendv(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "ooio", &sock, &vec, &native_nvec, &len);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
   TODO_type_check_iovec_PTR(vec);
@@ -8682,8 +8682,8 @@ mrb_APR_apr_socket_shutdown(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &thesocket, &native_how);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thesocket, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, thesocket, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -8724,8 +8724,8 @@ mrb_APR_apr_socket_timeout_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &sock);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -8771,8 +8771,8 @@ mrb_APR_apr_socket_timeout_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &sock, &native_t);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -8815,8 +8815,8 @@ mrb_APR_apr_socket_type_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &sock, &native_type);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, sock, AprSocketT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSocketT expected");
+  if (!mrb_obj_is_kind_of(mrb, sock, Socket_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Socket expected");
     return mrb_nil_value();
   }
 
@@ -8859,8 +8859,8 @@ mrb_APR_apr_stat(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zio", &native_fname, &native_wanted, &pool);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -8953,7 +8953,7 @@ mrb_APR_apr_strfsize(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_strftime */
-/* sha: aaac83a0e043e8ec9426e6209a20ce45942d640c869087f306b48d071499cf25 */
+/* sha: 18a54688e76c0bdcf55408fd1a0934e2cbe7b68a4c7a57c3c09b4d0816304d70 */
 #if BIND_apr_strftime_FUNCTION
 #define apr_strftime_REQUIRED_ARGC 5
 #define apr_strftime_OPTIONAL_ARGC 0
@@ -8972,8 +8972,8 @@ mrb_APR_apr_strftime(mrb_state* mrb, mrb_value self) {
   /* Type checking */
   TODO_type_check_char_PTR(s);
   TODO_type_check_apr_size_t_PTR(retsize);
-  if (!mrb_obj_is_kind_of(mrb, tm, AprTimeExpT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprTimeExpT expected");
+  if (!mrb_obj_is_kind_of(mrb, tm, TimeExp_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "TimeExp expected");
     return mrb_nil_value();
   }
 
@@ -9171,8 +9171,8 @@ mrb_APR_apr_temp_dir_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &p);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -9245,7 +9245,7 @@ mrb_APR_apr_terminate2(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_thread_create */
-/* sha: ee98f5ca472216c193602dffd7b59785fe50dc03483eb7e5c4ba080e6d2b8e05 */
+/* sha: e25a910972fbfb28e045a514905a197a67c229a6799333d1dec954e8f9e6f0af */
 #if BIND_apr_thread_create_FUNCTION
 #define apr_thread_create_REQUIRED_ARGC 5
 #define apr_thread_create_OPTIONAL_ARGC 0
@@ -9263,14 +9263,14 @@ mrb_APR_apr_thread_create(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_thread_t_PTR_PTR(new_thread);
-  if (!mrb_obj_is_kind_of(mrb, attr, AprThreadattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Threadattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Threadattr expected");
     return mrb_nil_value();
   }
   TODO_type_check_apr_thread_start_t(func);
   TODO_type_check_void_PTR(data);
-  if (!mrb_obj_is_kind_of(mrb, cont, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, cont, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -9301,7 +9301,7 @@ mrb_APR_apr_thread_create(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_thread_data_get */
-/* sha: 00bbaeed593c86edd3e70fa6f1b3008325ae3ebabee597eba8262f19024d480a */
+/* sha: 4dc9e15781c8405fe16eba4ed3b97416168ee6b8bb85c8834d615e4ceedaf953 */
 #if BIND_apr_thread_data_get_FUNCTION
 #define apr_thread_data_get_REQUIRED_ARGC 3
 #define apr_thread_data_get_OPTIONAL_ARGC 0
@@ -9317,8 +9317,8 @@ mrb_APR_apr_thread_data_get(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_void_PTR_PTR(data);
-  if (!mrb_obj_is_kind_of(mrb, thread, AprThreadT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadT expected");
+  if (!mrb_obj_is_kind_of(mrb, thread, Thread_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Thread expected");
     return mrb_nil_value();
   }
 
@@ -9340,7 +9340,7 @@ mrb_APR_apr_thread_data_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_thread_data_set */
-/* sha: 9eb76f1777de86cc57c5217de128980d0607b75866e4edf848c42551cea98be2 */
+/* sha: 64eff64f990bba4d8afa2289512fc74ebf4af337673b6b42299eaf71aab933da */
 #if BIND_apr_thread_data_set_FUNCTION
 #define apr_thread_data_set_REQUIRED_ARGC 4
 #define apr_thread_data_set_OPTIONAL_ARGC 0
@@ -9358,8 +9358,8 @@ mrb_APR_apr_thread_data_set(mrb_state* mrb, mrb_value self) {
   /* Type checking */
   TODO_type_check_void_PTR(data);
   TODO_type_check_apr_status_t_LPAREN_PTR_RPAREN_LPAREN_void_PTR_RPAREN(cleanup);
-  if (!mrb_obj_is_kind_of(mrb, thread, AprThreadT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadT expected");
+  if (!mrb_obj_is_kind_of(mrb, thread, Thread_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Thread expected");
     return mrb_nil_value();
   }
 
@@ -9384,7 +9384,7 @@ mrb_APR_apr_thread_data_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_thread_detach */
-/* sha: b571fe52c66a0697adce7a10f3819d9dc9505d9f9dc58a64f9cd46a43a987126 */
+/* sha: f98c340d21e5774672d42778d54855fbc273d99fb78028887c14b2ecda4ae313 */
 #if BIND_apr_thread_detach_FUNCTION
 #define apr_thread_detach_REQUIRED_ARGC 1
 #define apr_thread_detach_OPTIONAL_ARGC 0
@@ -9397,8 +9397,8 @@ mrb_APR_apr_thread_detach(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &thd);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thd, AprThreadT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadT expected");
+  if (!mrb_obj_is_kind_of(mrb, thd, Thread_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Thread expected");
     return mrb_nil_value();
   }
 
@@ -9417,7 +9417,7 @@ mrb_APR_apr_thread_detach(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_thread_exit */
-/* sha: 8fe6a1df1ba9e092a3999ecc648da43cad5eb83a4730a111b994c7e557ad0e9f */
+/* sha: 65938c752b01cbe8a73c9e4e40cf999b0da8ee7a8aad949c2bf769df9232c19a */
 #if BIND_apr_thread_exit_FUNCTION
 #define apr_thread_exit_REQUIRED_ARGC 2
 #define apr_thread_exit_OPTIONAL_ARGC 0
@@ -9431,8 +9431,8 @@ mrb_APR_apr_thread_exit(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &thd, &native_retval);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, thd, AprThreadT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadT expected");
+  if (!mrb_obj_is_kind_of(mrb, thd, Thread_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Thread expected");
     return mrb_nil_value();
   }
 
@@ -9451,7 +9451,7 @@ mrb_APR_apr_thread_exit(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_thread_join */
-/* sha: 787e5cd1ea10a6fc7ec1ee13c0d5639fc3588c651803f8a885e727b87960992b */
+/* sha: ec158a2d014827467b1fc5f89a73130d4a86371ead2f97c71df39becd9e49dfa */
 #if BIND_apr_thread_join_FUNCTION
 #define apr_thread_join_REQUIRED_ARGC 2
 #define apr_thread_join_OPTIONAL_ARGC 0
@@ -9466,8 +9466,8 @@ mrb_APR_apr_thread_join(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_status_t_PTR(retval);
-  if (!mrb_obj_is_kind_of(mrb, thd, AprThreadT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadT expected");
+  if (!mrb_obj_is_kind_of(mrb, thd, Thread_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Thread expected");
     return mrb_nil_value();
   }
 
@@ -9489,7 +9489,7 @@ mrb_APR_apr_thread_join(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_thread_once */
-/* sha: 54c225da95326b3010b346cc86f1d2812399341944a873641cf45efd44798a42 */
+/* sha: 2472e8f9f25e07187bd03ebceb576ce88088771cefc08c164b9b4313d50099db */
 #if BIND_apr_thread_once_FUNCTION
 #define apr_thread_once_REQUIRED_ARGC 2
 #define apr_thread_once_OPTIONAL_ARGC 0
@@ -9503,8 +9503,8 @@ mrb_APR_apr_thread_once(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oo", &control, &func);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, control, AprThreadOnceT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadOnceT expected");
+  if (!mrb_obj_is_kind_of(mrb, control, ThreadOnce_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "ThreadOnce expected");
     return mrb_nil_value();
   }
   TODO_type_check_void_LPAREN_PTR_RPAREN_LPAREN_void_RPAREN(func);
@@ -9527,7 +9527,7 @@ mrb_APR_apr_thread_once(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_thread_once_init */
-/* sha: bd4ad38a0aa41b96095df346d6f2373bb5848a13316aaef9c9d7104bd8747e3f */
+/* sha: 89642c4cc0874a13310e290f2965b69d0bc405dc2b68505dda2e3aed2f061f55 */
 #if BIND_apr_thread_once_init_FUNCTION
 #define apr_thread_once_init_REQUIRED_ARGC 2
 #define apr_thread_once_init_OPTIONAL_ARGC 0
@@ -9542,8 +9542,8 @@ mrb_APR_apr_thread_once_init(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_thread_once_t_PTR_PTR(control);
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -9581,7 +9581,7 @@ mrb_APR_apr_thread_yield(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_threadattr_create */
-/* sha: bca5becbef61b97df3e86cf9f0fda70a84964abd4473e55906da39d46a6360a4 */
+/* sha: fc4102f51faabf6298f85b474793c06a7eff11f46d213b6917ac56ae70a6dbb3 */
 #if BIND_apr_threadattr_create_FUNCTION
 #define apr_threadattr_create_REQUIRED_ARGC 2
 #define apr_threadattr_create_OPTIONAL_ARGC 0
@@ -9596,8 +9596,8 @@ mrb_APR_apr_threadattr_create(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_threadattr_t_PTR_PTR(new_attr);
-  if (!mrb_obj_is_kind_of(mrb, cont, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, cont, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -9619,7 +9619,7 @@ mrb_APR_apr_threadattr_create(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_threadattr_detach_get */
-/* sha: 42306d64aa7e664747c055e3170ce1d616d2803866e3f5e8b2bd896af6101842 */
+/* sha: 702c99fbb72552c2f06f1e624da85635a8c663d8f53869fffec52844788290e1 */
 #if BIND_apr_threadattr_detach_get_FUNCTION
 #define apr_threadattr_detach_get_REQUIRED_ARGC 1
 #define apr_threadattr_detach_get_OPTIONAL_ARGC 0
@@ -9632,8 +9632,8 @@ mrb_APR_apr_threadattr_detach_get(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &attr);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprThreadattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Threadattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Threadattr expected");
     return mrb_nil_value();
   }
 
@@ -9652,7 +9652,7 @@ mrb_APR_apr_threadattr_detach_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_threadattr_detach_set */
-/* sha: d5efda4f482c7d2904e8e983b1409cd5470987b2dec334a3a302dbbfa9a272bc */
+/* sha: bc3a583223cb325d3a6b26494cf759d3c3a12aa16f670dbff41ad73a3945199a */
 #if BIND_apr_threadattr_detach_set_FUNCTION
 #define apr_threadattr_detach_set_REQUIRED_ARGC 2
 #define apr_threadattr_detach_set_OPTIONAL_ARGC 0
@@ -9666,8 +9666,8 @@ mrb_APR_apr_threadattr_detach_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &attr, &native_on);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprThreadattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Threadattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Threadattr expected");
     return mrb_nil_value();
   }
 
@@ -9686,7 +9686,7 @@ mrb_APR_apr_threadattr_detach_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_threadattr_guardsize_set */
-/* sha: d828ae69f85219a922f25aeadb66be89cee9cd83c42c5fd96e501eaf5124a0d2 */
+/* sha: 80cdddd5375127150752a61c1d32f30091b25e0b78cdd16655c68fa321038339 */
 #if BIND_apr_threadattr_guardsize_set_FUNCTION
 #define apr_threadattr_guardsize_set_REQUIRED_ARGC 2
 #define apr_threadattr_guardsize_set_OPTIONAL_ARGC 0
@@ -9700,8 +9700,8 @@ mrb_APR_apr_threadattr_guardsize_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &attr, &native_guardsize);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprThreadattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Threadattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Threadattr expected");
     return mrb_nil_value();
   }
 
@@ -9720,7 +9720,7 @@ mrb_APR_apr_threadattr_guardsize_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_threadattr_stacksize_set */
-/* sha: 058deb326942313d3bf6bc6422225f4d97b310f45e3311890d482aab3190bbed */
+/* sha: 45c4bd7b6eb5c7784cd0633dd6b0d4cf970d4a72dd348e2850db98e71a66c6d9 */
 #if BIND_apr_threadattr_stacksize_set_FUNCTION
 #define apr_threadattr_stacksize_set_REQUIRED_ARGC 2
 #define apr_threadattr_stacksize_set_OPTIONAL_ARGC 0
@@ -9734,8 +9734,8 @@ mrb_APR_apr_threadattr_stacksize_set(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &attr, &native_stacksize);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, attr, AprThreadattrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadattrT expected");
+  if (!mrb_obj_is_kind_of(mrb, attr, Threadattr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Threadattr expected");
     return mrb_nil_value();
   }
 
@@ -9754,7 +9754,7 @@ mrb_APR_apr_threadattr_stacksize_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_threadkey_data_get */
-/* sha: f5f8e678ef755d28c1c93398d010e8549305e227350936cc5540e69c6a58204e */
+/* sha: 097ab63d67f9111ba1dbc2f38f7482b38d76296bac555ac4bf931650c025b347 */
 #if BIND_apr_threadkey_data_get_FUNCTION
 #define apr_threadkey_data_get_REQUIRED_ARGC 3
 #define apr_threadkey_data_get_OPTIONAL_ARGC 0
@@ -9770,8 +9770,8 @@ mrb_APR_apr_threadkey_data_get(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_void_PTR_PTR(data);
-  if (!mrb_obj_is_kind_of(mrb, threadkey, AprThreadkeyT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadkeyT expected");
+  if (!mrb_obj_is_kind_of(mrb, threadkey, Threadkey_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Threadkey expected");
     return mrb_nil_value();
   }
 
@@ -9793,7 +9793,7 @@ mrb_APR_apr_threadkey_data_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_threadkey_data_set */
-/* sha: 5695d2d4dc0a45df16a918ce084e99bb4296f90b92dc8ece9e676fc57b80684f */
+/* sha: 73996266231c1f0f0a24d91d2036ccf34ddfe8fe24f1f56466d80372628e4946 */
 #if BIND_apr_threadkey_data_set_FUNCTION
 #define apr_threadkey_data_set_REQUIRED_ARGC 4
 #define apr_threadkey_data_set_OPTIONAL_ARGC 0
@@ -9811,8 +9811,8 @@ mrb_APR_apr_threadkey_data_set(mrb_state* mrb, mrb_value self) {
   /* Type checking */
   TODO_type_check_void_PTR(data);
   TODO_type_check_apr_status_t_LPAREN_PTR_RPAREN_LPAREN_void_PTR_RPAREN(cleanup);
-  if (!mrb_obj_is_kind_of(mrb, threadkey, AprThreadkeyT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadkeyT expected");
+  if (!mrb_obj_is_kind_of(mrb, threadkey, Threadkey_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Threadkey expected");
     return mrb_nil_value();
   }
 
@@ -9837,7 +9837,7 @@ mrb_APR_apr_threadkey_data_set(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_threadkey_private_create */
-/* sha: e20fb2176bcb5a7fecbba66943666481611a1a16dc447d4bd26138cc3187a55c */
+/* sha: 57e6fcb20c3490f7ab375f49c16ab6b6a2e33319281134c3403e5c1ad529bca8 */
 #if BIND_apr_threadkey_private_create_FUNCTION
 #define apr_threadkey_private_create_REQUIRED_ARGC 3
 #define apr_threadkey_private_create_OPTIONAL_ARGC 0
@@ -9854,8 +9854,8 @@ mrb_APR_apr_threadkey_private_create(mrb_state* mrb, mrb_value self) {
   /* Type checking */
   TODO_type_check_apr_threadkey_t_PTR_PTR(key);
   TODO_type_check_void_LPAREN_PTR_RPAREN_LPAREN_void_PTR_RPAREN(dest);
-  if (!mrb_obj_is_kind_of(mrb, cont, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, cont, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -9880,7 +9880,7 @@ mrb_APR_apr_threadkey_private_create(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_threadkey_private_delete */
-/* sha: 889143945e9820b5a686b7d06ffb959fad8bf665469c8bae1244f5a4ceb39bb0 */
+/* sha: c582baa312a6acd1c6956778b81c7fbbcb55d66fc63737598469c11e2a8f97a5 */
 #if BIND_apr_threadkey_private_delete_FUNCTION
 #define apr_threadkey_private_delete_REQUIRED_ARGC 1
 #define apr_threadkey_private_delete_OPTIONAL_ARGC 0
@@ -9893,8 +9893,8 @@ mrb_APR_apr_threadkey_private_delete(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &key);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, key, AprThreadkeyT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadkeyT expected");
+  if (!mrb_obj_is_kind_of(mrb, key, Threadkey_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Threadkey expected");
     return mrb_nil_value();
   }
 
@@ -9913,7 +9913,7 @@ mrb_APR_apr_threadkey_private_delete(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_threadkey_private_get */
-/* sha: 71f208b479459294e51501e6a1bc4f66e1715cca430d88a5722ef6467578e858 */
+/* sha: e6c31f9e23070c383457ba10ee4d9a0e2e382c49a2afdf14cae0f83b1197464a */
 #if BIND_apr_threadkey_private_get_FUNCTION
 #define apr_threadkey_private_get_REQUIRED_ARGC 2
 #define apr_threadkey_private_get_OPTIONAL_ARGC 0
@@ -9928,8 +9928,8 @@ mrb_APR_apr_threadkey_private_get(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_void_PTR_PTR(new_mem);
-  if (!mrb_obj_is_kind_of(mrb, key, AprThreadkeyT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadkeyT expected");
+  if (!mrb_obj_is_kind_of(mrb, key, Threadkey_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Threadkey expected");
     return mrb_nil_value();
   }
 
@@ -9951,7 +9951,7 @@ mrb_APR_apr_threadkey_private_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_threadkey_private_set */
-/* sha: bd9849ab0cc7fd1e3c8b0df7f0f962b59e1c3330493d48ca088af91fcc800bfd */
+/* sha: 287324293b3bf4de5b3577df6286668428dc4dc0fadbd1284adb591840281087 */
 #if BIND_apr_threadkey_private_set_FUNCTION
 #define apr_threadkey_private_set_REQUIRED_ARGC 2
 #define apr_threadkey_private_set_OPTIONAL_ARGC 0
@@ -9966,8 +9966,8 @@ mrb_APR_apr_threadkey_private_set(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_void_PTR(priv);
-  if (!mrb_obj_is_kind_of(mrb, key, AprThreadkeyT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprThreadkeyT expected");
+  if (!mrb_obj_is_kind_of(mrb, key, Threadkey_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Threadkey expected");
     return mrb_nil_value();
   }
 
@@ -10020,7 +10020,7 @@ mrb_APR_apr_time_ansi_put(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_time_clock_hires */
-/* sha: 9ab2898fe5433fef37b4de9b4d1463eee82a3cf450b9b63f504e4221c1c3ba5f */
+/* sha: 85af53743d034decbaa541dc936799881bf23f6320a54e9589beec9f3d508e2c */
 #if BIND_apr_time_clock_hires_FUNCTION
 #define apr_time_clock_hires_REQUIRED_ARGC 1
 #define apr_time_clock_hires_OPTIONAL_ARGC 0
@@ -10033,8 +10033,8 @@ mrb_APR_apr_time_clock_hires(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "o", &p);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, p, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, p, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -10050,7 +10050,7 @@ mrb_APR_apr_time_clock_hires(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_time_exp_get */
-/* sha: 8feb6e89ee548d3b38ce203117945cb1f5776e5b42202a3aa20da8c3aac86c17 */
+/* sha: 672e8ed8a106c7e42f529b396457a7b15b4086909941d12398a5bf753e6f0380 */
 #if BIND_apr_time_exp_get_FUNCTION
 #define apr_time_exp_get_REQUIRED_ARGC 2
 #define apr_time_exp_get_OPTIONAL_ARGC 0
@@ -10065,8 +10065,8 @@ mrb_APR_apr_time_exp_get(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_time_t_PTR(result);
-  if (!mrb_obj_is_kind_of(mrb, input, AprTimeExpT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprTimeExpT expected");
+  if (!mrb_obj_is_kind_of(mrb, input, TimeExp_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "TimeExp expected");
     return mrb_nil_value();
   }
 
@@ -10088,7 +10088,7 @@ mrb_APR_apr_time_exp_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_time_exp_gmt */
-/* sha: 911c1e57ee11422c00508e712de17b65b8e892156e521dd071d43d55b73567ec */
+/* sha: 22bccf28c7f65800afe7387f42696f49a37dc01021056680aa249e81799f7060 */
 #if BIND_apr_time_exp_gmt_FUNCTION
 #define apr_time_exp_gmt_REQUIRED_ARGC 2
 #define apr_time_exp_gmt_OPTIONAL_ARGC 0
@@ -10102,8 +10102,8 @@ mrb_APR_apr_time_exp_gmt(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &result, &native_input);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, result, AprTimeExpT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprTimeExpT expected");
+  if (!mrb_obj_is_kind_of(mrb, result, TimeExp_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "TimeExp expected");
     return mrb_nil_value();
   }
 
@@ -10122,7 +10122,7 @@ mrb_APR_apr_time_exp_gmt(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_time_exp_gmt_get */
-/* sha: 0f4100b1612e89c4bc9d80046a69650248dddff0055fec66679fb93826d45715 */
+/* sha: a0645836365eef8fba4e5c4717415668ba98bf7e4fb73011afbdcbe455433497 */
 #if BIND_apr_time_exp_gmt_get_FUNCTION
 #define apr_time_exp_gmt_get_REQUIRED_ARGC 2
 #define apr_time_exp_gmt_get_OPTIONAL_ARGC 0
@@ -10137,8 +10137,8 @@ mrb_APR_apr_time_exp_gmt_get(mrb_state* mrb, mrb_value self) {
 
   /* Type checking */
   TODO_type_check_apr_time_t_PTR(result);
-  if (!mrb_obj_is_kind_of(mrb, input, AprTimeExpT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprTimeExpT expected");
+  if (!mrb_obj_is_kind_of(mrb, input, TimeExp_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "TimeExp expected");
     return mrb_nil_value();
   }
 
@@ -10160,7 +10160,7 @@ mrb_APR_apr_time_exp_gmt_get(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_time_exp_lt */
-/* sha: fefd31d57439c8fe6317eb908c5eb637019920b8b29e26bc73fed2fb2f6c7dbc */
+/* sha: df79f7751cc944d914375f639e4943ba136057b81ae652be09b3f608abfef458 */
 #if BIND_apr_time_exp_lt_FUNCTION
 #define apr_time_exp_lt_REQUIRED_ARGC 2
 #define apr_time_exp_lt_OPTIONAL_ARGC 0
@@ -10174,8 +10174,8 @@ mrb_APR_apr_time_exp_lt(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oi", &result, &native_input);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, result, AprTimeExpT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprTimeExpT expected");
+  if (!mrb_obj_is_kind_of(mrb, result, TimeExp_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "TimeExp expected");
     return mrb_nil_value();
   }
 
@@ -10194,7 +10194,7 @@ mrb_APR_apr_time_exp_lt(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: apr_time_exp_tz */
-/* sha: 08848a2836f1f0af248c456125644829e4e10f051a6e1de46b0925e3098e9ac8 */
+/* sha: 133cf89aae9f2a967ea50b2e2d20fcfc64728ee38abaf10c822fd99b31222053 */
 #if BIND_apr_time_exp_tz_FUNCTION
 #define apr_time_exp_tz_REQUIRED_ARGC 3
 #define apr_time_exp_tz_OPTIONAL_ARGC 0
@@ -10209,8 +10209,8 @@ mrb_APR_apr_time_exp_tz(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "oii", &result, &native_input, &native_offs);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, result, AprTimeExpT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprTimeExpT expected");
+  if (!mrb_obj_is_kind_of(mrb, result, TimeExp_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "TimeExp expected");
     return mrb_nil_value();
   }
 
@@ -10280,7 +10280,7 @@ mrb_APR_apr_time_sec(mrb_state* mrb, mrb_value self) {
  *
  * Parameters:
  * - arg_str: String
- * - token_context: AprPoolType
+ * - token_context: Poolype
  * Return Type: [Fixnum, Array[String]]
  */
 mrb_value
@@ -10292,8 +10292,8 @@ mrb_APR_apr_tokenize_to_argv(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zo", &native_arg_str, &token_context);
 
   /* Type checking */
-  if (!mrb_obj_is_kind_of(mrb, token_context, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, token_context, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -10382,60 +10382,60 @@ void mrb_mruby_apr_gem_init(mrb_state* mrb) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: class_initializations */
-/* sha: 880ce8dd3fa44e03e75e59218c69fc4ac1cbb0fe73e7c96c6d44c921c33ac1af */
-#if BIND_AprDirT_TYPE
-  mrb_APR_AprDirT_init(mrb);
+/* sha: adcdf19fd17c9027817c2d1f0421f2943f13eac91f4cb5879dd9f89df30cb0fa */
+#if BIND_Dir_TYPE
+  mrb_APR_Dir_init(mrb);
 #endif
-#if BIND_AprFileT_TYPE
-  mrb_APR_AprFileT_init(mrb);
+#if BIND_File_TYPE
+  mrb_APR_File_init(mrb);
 #endif
-#if BIND_AprFinfoT_TYPE
-  mrb_APR_AprFinfoT_init(mrb);
+#if BIND_Finfo_TYPE
+  mrb_APR_Finfo_init(mrb);
 #endif
-#if BIND_AprGlobalMutexT_TYPE
-  mrb_APR_AprGlobalMutexT_init(mrb);
+#if BIND_GlobalMutex_TYPE
+  mrb_APR_GlobalMutex_init(mrb);
 #endif
-#if BIND_AprHdtrT_TYPE
-  mrb_APR_AprHdtrT_init(mrb);
+#if BIND_Hdtr_TYPE
+  mrb_APR_Hdtr_init(mrb);
 #endif
-#if BIND_AprIpsubnetT_TYPE
-  mrb_APR_AprIpsubnetT_init(mrb);
+#if BIND_Ipsubnet_TYPE
+  mrb_APR_Ipsubnet_init(mrb);
 #endif
-#if BIND_AprOtherChildRecT_TYPE
-  mrb_APR_AprOtherChildRecT_init(mrb);
+#if BIND_OtherChildRec_TYPE
+  mrb_APR_OtherChildRec_init(mrb);
 #endif
-#if BIND_AprPoolT_TYPE
-  mrb_APR_AprPoolT_init(mrb);
+#if BIND_Pool_TYPE
+  mrb_APR_Pool_init(mrb);
 #endif
-#if BIND_AprProcattrT_TYPE
-  mrb_APR_AprProcattrT_init(mrb);
+#if BIND_Proc_TYPE
+  mrb_APR_Proc_init(mrb);
 #endif
-#if BIND_AprProcMutexT_TYPE
-  mrb_APR_AprProcMutexT_init(mrb);
+#if BIND_Procattr_TYPE
+  mrb_APR_Procattr_init(mrb);
 #endif
-#if BIND_AprProcT_TYPE
-  mrb_APR_AprProcT_init(mrb);
+#if BIND_ProcMutex_TYPE
+  mrb_APR_ProcMutex_init(mrb);
 #endif
-#if BIND_AprSockaddrT_TYPE
-  mrb_APR_AprSockaddrT_init(mrb);
+#if BIND_Sockaddr_TYPE
+  mrb_APR_Sockaddr_init(mrb);
 #endif
-#if BIND_AprSocketT_TYPE
-  mrb_APR_AprSocketT_init(mrb);
+#if BIND_Socket_TYPE
+  mrb_APR_Socket_init(mrb);
 #endif
-#if BIND_AprThreadattrT_TYPE
-  mrb_APR_AprThreadattrT_init(mrb);
+#if BIND_Thread_TYPE
+  mrb_APR_Thread_init(mrb);
 #endif
-#if BIND_AprThreadkeyT_TYPE
-  mrb_APR_AprThreadkeyT_init(mrb);
+#if BIND_Threadattr_TYPE
+  mrb_APR_Threadattr_init(mrb);
 #endif
-#if BIND_AprThreadOnceT_TYPE
-  mrb_APR_AprThreadOnceT_init(mrb);
+#if BIND_Threadkey_TYPE
+  mrb_APR_Threadkey_init(mrb);
 #endif
-#if BIND_AprThreadT_TYPE
-  mrb_APR_AprThreadT_init(mrb);
+#if BIND_ThreadOnce_TYPE
+  mrb_APR_ThreadOnce_init(mrb);
 #endif
-#if BIND_AprTimeExpT_TYPE
-  mrb_APR_AprTimeExpT_init(mrb);
+#if BIND_TimeExp_TYPE
+  mrb_APR_TimeExp_init(mrb);
 #endif
 /* MRUBY_BINDING_END */
 

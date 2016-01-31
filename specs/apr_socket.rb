@@ -20,7 +20,7 @@ TestFixture.new('APR API: Sockets') do
     Process.wait(@client_pid)
   end
 
-  describe 'APR::apr_socket_connect(socket: AprSocketT, addr: AprSockaddrT)' do
+  describe 'APR::apr_socket_connect(socket: Socket, addr: Sockaddr)' do
     it 'Connects a client socket to a server' do
       run_server
 
@@ -41,7 +41,7 @@ TestFixture.new('APR API: Sockets') do
     end
   end
 
-  describe 'APR::apr_socket_atreadeof(socket: AprSocketT)' do
+  describe 'APR::apr_socket_atreadeof(socket: Socket)' do
     it 'Returns [APR::APR_SUCCESS, true] when the read buffer is empty and the socket has been closed by the peer' do
       run_server
 

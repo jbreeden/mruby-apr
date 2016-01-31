@@ -5,18 +5,18 @@
 
 #include "mruby_APR.h"
 
-#if BIND_AprDirT_TYPE
+#if BIND_Dir_TYPE
 
 /* MRUBY_BINDING: header */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprDirT::initialize */
-/* sha: 87fd724605866d34101ed73b88bb90bfb8b3e41bd40ab45209edaf27d4914df5 */
-#if BIND_AprDirT_INITIALIZE
+/* MRUBY_BINDING: Dir::initialize */
+/* sha: 59df0c9500b378b8231133135551efbccfb6326b700b95aefec564d7c90cd8e1 */
+#if BIND_Dir_INITIALIZE
 mrb_value
-mrb_APR_AprDirT_initialize(mrb_state* mrb, mrb_value self) {
+mrb_APR_Dir_initialize(mrb_state* mrb, mrb_value self) {
   mrb_raise(mrb, E_NOMETHOD_ERROR, "No initializer defined");
 /* 
   apr_dir_t* native_object = (apr_dir_t*)calloc(1, sizeof(apr_dir_t));
@@ -28,7 +28,7 @@ mrb_APR_AprDirT_initialize(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 
-void mrb_APR_AprDirT_init(mrb_state* mrb) {
+void mrb_APR_Dir_init(mrb_state* mrb) {
   static int initialized = 0;
   if (initialized) return;
   else initialized = 1;
@@ -38,27 +38,27 @@ void mrb_APR_AprDirT_init(mrb_state* mrb) {
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprDirT::class_definition */
-/* sha: b15c58905996754a73c36e577ee77fbe85dc0607a7b27b03ba936e765749b30d */
-  struct RClass* AprDirT_class = mrb_define_class_under(mrb, APR_module(mrb), "AprDirT", mrb->object_class);
-  MRB_SET_INSTANCE_TT(AprDirT_class, MRB_TT_DATA);
+/* MRUBY_BINDING: Dir::class_definition */
+/* sha: 2ce0af74e22b9cbf59cec741314680d7278d632acceb66e94d0a6fd9d9081b7a */
+  struct RClass* Dir_class = mrb_define_class_under(mrb, APR_module(mrb), "Dir", mrb->object_class);
+  MRB_SET_INSTANCE_TT(Dir_class, MRB_TT_DATA);
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprDirT::pre_class_method_definitions */
+/* MRUBY_BINDING: Dir::pre_class_method_definitions */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprDirT::class_method_definitions */
-/* sha: 408a414fd456f6d0e8fb900b91a9a916af99016a075ebaaf911fbbb9f2ba1ec7 */
-#if BIND_AprDirT_INITIALIZE
-  mrb_define_method(mrb, AprDirT_class, "initialize", mrb_APR_AprDirT_initialize, MRB_ARGS_NONE());
+/* MRUBY_BINDING: Dir::class_method_definitions */
+/* sha: 0a23c41cfaa5de27a056220d5e833aa3f60fc8f348ae929caa46a728bcbe4ea9 */
+#if BIND_Dir_INITIALIZE
+  mrb_define_method(mrb, Dir_class, "initialize", mrb_APR_Dir_initialize, MRB_ARGS_NONE());
 #endif
 /* MRUBY_BINDING_END */
 
 
 
-/* MRUBY_BINDING: AprDirT::post_class_definition */
+/* MRUBY_BINDING: Dir::post_class_definition */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */

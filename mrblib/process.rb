@@ -82,7 +82,7 @@ module Process
           argv = ["sh", '-c', command[0]]
         end
 
-        { env: env, argv: argv, options: options, cmd_type: APR::AprCmdtypeE::APR_PROGRAM_PATH }
+        { env: env, argv: argv, options: options, cmd_type: APR::Cmdtype::APR_PROGRAM_PATH }
       elsif command[0].class == Array
         if command[0].length != 2
           raise ArgumentError.new('wrong first argument')
@@ -91,7 +91,7 @@ module Process
         if APR::OS == 'Windows'
           argv = quote_windows_argv(argv)
         end
-        { env: env, argv: argv, options: options, cmd_type: APR::AprCmdtypeE::APR_PROGRAM_PATH }
+        { env: env, argv: argv, options: options, cmd_type: APR::Cmdtype::APR_PROGRAM_PATH }
       else
 
         # Unix is simple... the args are passed in an actual vector, so just pass them along
@@ -105,7 +105,7 @@ module Process
           # (Note that the construction of the commandline string is done with APR itself)
           argv = quote_windows_argv(command)
         end
-        { env: env, argv: argv, options: options, cmd_type: APR::AprCmdtypeE::APR_PROGRAM_PATH }
+        { env: env, argv: argv, options: options, cmd_type: APR::Cmdtype::APR_PROGRAM_PATH }
       end
     end
   end
@@ -155,7 +155,7 @@ module Process
 
   def self.wait(pid)
     proc = APR.apr_proc_from_pid(pid)
-    err, exit_code, exit_why = APR.apr_proc_wait(proc, APR::AprWaitHowE::APR_WAIT)
+    err, exit_code, exit_why = APR.apr_proc_wait(proc, APR::WaitHow::APR_WAIT)
     APR.raise_apr_errno(err, ignore: [APR::APR_CHILD_NOTDONE, APR::APR_CHILD_DONE])
     $? = Process::Status.new(pid, exit_code, exit_why)
     return pid

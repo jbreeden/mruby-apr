@@ -5,18 +5,18 @@
 
 #include "mruby_APR.h"
 
-#if BIND_AprProcMutexT_TYPE
+#if BIND_ProcMutex_TYPE
 
 /* MRUBY_BINDING: header */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprProcMutexT::initialize */
-/* sha: 65ad40f40ef87090abfb8aba6dc8ee240286e6991464ee2c0e0a233a897478d2 */
-#if BIND_AprProcMutexT_INITIALIZE
+/* MRUBY_BINDING: ProcMutex::initialize */
+/* sha: 2619695d73b69bccc0a6d3bf25cde2450ce683b21a04ba47f37ba416663cc8f6 */
+#if BIND_ProcMutex_INITIALIZE
 mrb_value
-mrb_APR_AprProcMutexT_initialize(mrb_state* mrb, mrb_value self) {
+mrb_APR_ProcMutex_initialize(mrb_state* mrb, mrb_value self) {
   mrb_raise(mrb, E_NOMETHOD_ERROR, "No initializer defined");
 /* 
   apr_proc_mutex_t* native_object = (apr_proc_mutex_t*)calloc(1, sizeof(apr_proc_mutex_t));
@@ -28,7 +28,7 @@ mrb_APR_AprProcMutexT_initialize(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 
-void mrb_APR_AprProcMutexT_init(mrb_state* mrb) {
+void mrb_APR_ProcMutex_init(mrb_state* mrb) {
   static int initialized = 0;
   if (initialized) return;
   else initialized = 1;
@@ -38,27 +38,27 @@ void mrb_APR_AprProcMutexT_init(mrb_state* mrb) {
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprProcMutexT::class_definition */
-/* sha: c7690f3b809ce2c2414cbcc657a38cf2ad9e1d6a1d50daedac6ad621556e93e9 */
-  struct RClass* AprProcMutexT_class = mrb_define_class_under(mrb, APR_module(mrb), "AprProcMutexT", mrb->object_class);
-  MRB_SET_INSTANCE_TT(AprProcMutexT_class, MRB_TT_DATA);
+/* MRUBY_BINDING: ProcMutex::class_definition */
+/* sha: b36705547566f5c49979781af8737d3646e1ed9fcd8b6cbe043c41bf306eb9f9 */
+  struct RClass* ProcMutex_class = mrb_define_class_under(mrb, APR_module(mrb), "ProcMutex", mrb->object_class);
+  MRB_SET_INSTANCE_TT(ProcMutex_class, MRB_TT_DATA);
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprProcMutexT::pre_class_method_definitions */
+/* MRUBY_BINDING: ProcMutex::pre_class_method_definitions */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprProcMutexT::class_method_definitions */
-/* sha: a735374e0f5a60d11956a5a091b70b5eb111cc559dadcc49a7d6a353a2be47a8 */
-#if BIND_AprProcMutexT_INITIALIZE
-  mrb_define_method(mrb, AprProcMutexT_class, "initialize", mrb_APR_AprProcMutexT_initialize, MRB_ARGS_NONE());
+/* MRUBY_BINDING: ProcMutex::class_method_definitions */
+/* sha: b3319f3ac53a91046d80f0e2e80c8cf2636ace82242957605bd0c0ce62eb8717 */
+#if BIND_ProcMutex_INITIALIZE
+  mrb_define_method(mrb, ProcMutex_class, "initialize", mrb_APR_ProcMutex_initialize, MRB_ARGS_NONE());
 #endif
 /* MRUBY_BINDING_END */
 
 
 
-/* MRUBY_BINDING: AprProcMutexT::post_class_definition */
+/* MRUBY_BINDING: ProcMutex::post_class_definition */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */

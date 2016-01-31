@@ -27,18 +27,18 @@ class File < IO
   # "t"  Text file mode
   def initialize(filename, mode='r', perm=APR::APR_FPROT_OS_DEFAULT, apr_pool=nil)
     # Wrapper semantics
-    if (filename.kind_of?(APR::AprFileT))
+    if (filename.kind_of?(APR::File))
       @native_file = filename
       @flags = APR::APR_FOPEN_BUFFERED # Always at least buffered
       @flags = IO::Util.mode_str_to_apr_flags(mode)
-      if perm.kind_of?(APR::AprPoolT)
+      if perm.kind_of?(APR::Pool)
         @perm_bits = APR::APR_FPROT_OS_DEFAULT
         @pool = perm
       else
         @perm_bits = perm
         @pool = apr_pool
       end
-      raise "Must pass apr pool param when wrapping an AprFileT" unless @pool
+      raise "Must pass apr pool param when wrapping an File" unless @pool
       return
     end
 

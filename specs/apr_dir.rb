@@ -10,7 +10,7 @@ TestFixture.new('APR API: Directories') do
     end
   end
 
-  describe 'APR::apr_dir_open(path: String, pool: AprPoolType): [errno: Fixnum, dir: AprDirT]' do
+  describe 'APR::apr_dir_open(path: String, pool: Pool): [errno: Fixnum, dir: Dir]' do
     it 'Gets file information for each entry in the directory' do
       err, dir = APR.apr_dir_open '.', @pool
       check_errno(err)
@@ -18,7 +18,7 @@ TestFixture.new('APR API: Directories') do
     end
   end
 
-  describe 'APR::apr_dir_read(finfo: AprFinfoT, wanted: Fixnum, dir: AprDirT): errno: Fixnum' do
+  describe 'APR::apr_dir_read(finfo: Finfo, wanted: Fixnum, dir: Dir): errno: Fixnum' do
     it 'Gets file information for each entry in the directory' do
       err, dir = APR.apr_dir_open '.', @pool
       check_errno(err)
@@ -44,7 +44,7 @@ TestFixture.new('APR API: Directories') do
     end
   end
 
-  describe 'APR::apr_dir_make(path: String, permissions: Fixnum, pool: AprPoolType): errno: Fixnum' do
+  describe 'APR::apr_dir_make(path: String, permissions: Fixnum, pool: Pool): errno: Fixnum' do
     it 'Creates a directory' do
       err = APR.apr_dir_make 'sandbox/test_create_dir', @a_rwx, @pool
       check_errno(err)
@@ -53,7 +53,7 @@ TestFixture.new('APR API: Directories') do
     end
   end
 
-  describe 'APR::apr_dir_make_recursive(path: String, permissions: Fixnum, pool: AprPoolType): errno: Fixnum' do
+  describe 'APR::apr_dir_make_recursive(path: String, permissions: Fixnum, pool: Poolype): errno: Fixnum' do
     it 'Creates a directory and any required parent directories' do
       err = APR.apr_dir_make_recursive 'sandbox/test_create_dir/some/nested/dir', @a_rwx, @pool
       check_errno(err)
@@ -63,7 +63,7 @@ TestFixture.new('APR API: Directories') do
     end
   end
 
-  describe 'APR::apr_dir_remove(path: String, pool: AprPoolType): errno: Fixnum' do
+  describe 'APR::apr_dir_remove(path: String, pool: Poolype): errno: Fixnum' do
     it 'Deletes a directory' do
       err = APR.apr_dir_remove 'sandbox/test_create_dir/some/nested/dir', @pool
       check_errno(err)

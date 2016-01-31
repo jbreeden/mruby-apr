@@ -5,18 +5,18 @@
 
 #include "mruby_APR.h"
 
-#if BIND_AprThreadT_TYPE
+#if BIND_Thread_TYPE
 
 /* MRUBY_BINDING: header */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprThreadT::initialize */
-/* sha: 31f3d1db83929d0ced3c7b8d2955bfdb5324672d9a33cdd918a48445efd136ba */
-#if BIND_AprThreadT_INITIALIZE
+/* MRUBY_BINDING: Thread::initialize */
+/* sha: eca0695fb0dc749d2c76e2f42e43a25d03d8c0d881b640a4695b4f67ea6ce432 */
+#if BIND_Thread_INITIALIZE
 mrb_value
-mrb_APR_AprThreadT_initialize(mrb_state* mrb, mrb_value self) {
+mrb_APR_Thread_initialize(mrb_state* mrb, mrb_value self) {
   mrb_raise(mrb, E_NOMETHOD_ERROR, "No initializer defined");
 /* 
   apr_thread_t* native_object = (apr_thread_t*)calloc(1, sizeof(apr_thread_t));
@@ -28,7 +28,7 @@ mrb_APR_AprThreadT_initialize(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 
-void mrb_APR_AprThreadT_init(mrb_state* mrb) {
+void mrb_APR_Thread_init(mrb_state* mrb) {
   static int initialized = 0;
   if (initialized) return;
   else initialized = 1;
@@ -38,27 +38,27 @@ void mrb_APR_AprThreadT_init(mrb_state* mrb) {
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprThreadT::class_definition */
-/* sha: 8552706d0761b6b93694d703899def3287511ea59f9774391934e0ea042274df */
-  struct RClass* AprThreadT_class = mrb_define_class_under(mrb, APR_module(mrb), "AprThreadT", mrb->object_class);
-  MRB_SET_INSTANCE_TT(AprThreadT_class, MRB_TT_DATA);
+/* MRUBY_BINDING: Thread::class_definition */
+/* sha: b1f41192ab79473ff0b5482cddfcd4fb5cdccd7a58afcabbfd158d0611535d47 */
+  struct RClass* Thread_class = mrb_define_class_under(mrb, APR_module(mrb), "Thread", mrb->object_class);
+  MRB_SET_INSTANCE_TT(Thread_class, MRB_TT_DATA);
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprThreadT::pre_class_method_definitions */
+/* MRUBY_BINDING: Thread::pre_class_method_definitions */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprThreadT::class_method_definitions */
-/* sha: a0f01ce7439ba983e48a0326aa97fab058f95ee47fb18e5dadf3678526a0a082 */
-#if BIND_AprThreadT_INITIALIZE
-  mrb_define_method(mrb, AprThreadT_class, "initialize", mrb_APR_AprThreadT_initialize, MRB_ARGS_NONE());
+/* MRUBY_BINDING: Thread::class_method_definitions */
+/* sha: 1d30cd1cd6706e0963a9cec615deb6793aa4ca9ae4bac6567b0e640e658b7d96 */
+#if BIND_Thread_INITIALIZE
+  mrb_define_method(mrb, Thread_class, "initialize", mrb_APR_Thread_initialize, MRB_ARGS_NONE());
 #endif
 /* MRUBY_BINDING_END */
 
 
 
-/* MRUBY_BINDING: AprThreadT::post_class_definition */
+/* MRUBY_BINDING: Thread::post_class_definition */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */

@@ -3,7 +3,7 @@ class UDPSocket < IPSocket
     super()
 
     # Wrapper semantics, for internal use only
-    if (address_family.class == APR::AprSocketT)
+    if (address_family.class == APR::Socket)
       @apr_socket = address_family
       @pool = pool
       return

@@ -19,15 +19,15 @@ module FileTest
   extend FileTest
 
   def blockdev?(path)
-    FileTest.is_type?(path, APR::AprFiletypeE::APR_BLK)
+    FileTest.is_type?(path, APR::Filetype::APR_BLK)
   end
 
   def chardev?(path)
-    FileTest.is_type?(path, APR::AprFiletypeE::APR_CHR)
+    FileTest.is_type?(path, APR::Filetype::APR_CHR)
   end
 
   def directory?(path)
-    FileTest.is_type?(path, APR::AprFiletypeE::APR_DIR)
+    FileTest.is_type?(path, APR::Filetype::APR_DIR)
   end
 
   # def executable?(path)
@@ -52,7 +52,7 @@ module FileTest
   alias exist? exists?
 
   def file?(path)
-    FileTest.is_type?(path, APR::AprFiletypeE::APR_REG)
+    FileTest.is_type?(path, APR::Filetype::APR_REG)
   end
 
   # def grpowned?(path)
@@ -70,7 +70,7 @@ module FileTest
   # end
 
   def pipe?(path)
-    FileTest.is_type?(path, APR::AprFiletypeE::APR_PIPE)
+    FileTest.is_type?(path, APR::Filetype::APR_PIPE)
   end
 
   # def readable?(path)
@@ -100,7 +100,7 @@ module FileTest
   alias size? size
 
   def socket?(path)
-    FileTest.is_type?(path, APR::AprFiletypeE::APR_SOCKET)
+    FileTest.is_type?(path, APR::Filetype::APR_SOCKET)
   end
 
   # def sticky?(path)
@@ -109,7 +109,7 @@ module FileTest
   # end
 
   def symlink?(path)
-    FileTest.is_type?(path, APR::AprFiletypeE::APR_LNK)
+    FileTest.is_type?(path, APR::Filetype::APR_LNK)
   end
 
   # def world_readable?(path)

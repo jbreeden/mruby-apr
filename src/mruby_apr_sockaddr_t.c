@@ -5,18 +5,18 @@
 
 #include "mruby_APR.h"
 
-#if BIND_AprSockaddrT_TYPE
+#if BIND_Sockaddr_TYPE
 
 /* MRUBY_BINDING: header */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::initialize */
-/* sha: 7c3b9841bf80b12656745d4067942f238038d16788991175eb6623cb4cf43d6d */
-#if BIND_AprSockaddrT_INITIALIZE
+/* MRUBY_BINDING: Sockaddr::initialize */
+/* sha: cbeb84a851e4d1cb2f93cc00c6d89f2c9fc1c5e0a5e929f35f25a122c7db55e6 */
+#if BIND_Sockaddr_INITIALIZE
 mrb_value
-mrb_APR_AprSockaddrT_initialize(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_initialize(mrb_state* mrb, mrb_value self) {
   mrb_raise(mrb, E_NOMETHOD_ERROR, "No initializer defined");
 /* 
   apr_sockaddr_t* native_object = (apr_sockaddr_t*)calloc(1, sizeof(apr_sockaddr_t));
@@ -31,11 +31,11 @@ mrb_APR_AprSockaddrT_initialize(mrb_state* mrb, mrb_value self) {
  * Fields
  */
 
-/* MRUBY_BINDING: AprSockaddrT::pool_reader */
-/* sha: 5a7a14169b88745d7cc92465b27d4fb1e3541c8416fe4382936be7182bb1cf0c */
-#if BIND_AprSockaddrT_pool_FIELD_READER
+/* MRUBY_BINDING: Sockaddr::pool_reader */
+/* sha: 577a821eb6dfb127874d42b34d25bc01a67c5b687bb8b9c143911d5d144f9126 */
+#if BIND_Sockaddr_pool_FIELD_READER
 mrb_value
-mrb_APR_AprSockaddrT_get_pool(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_get_pool(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
 
   apr_pool_t * native_pool = native_self->pool;
@@ -47,19 +47,19 @@ mrb_APR_AprSockaddrT_get_pool(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::pool_writer */
-/* sha: a91c4a67cb8314b4e10d35962bd6396daf618e110a2bdcd8402cfa253b3b2332 */
-#if BIND_AprSockaddrT_pool_FIELD_WRITER
+/* MRUBY_BINDING: Sockaddr::pool_writer */
+/* sha: 2aa84b83dfedcfc332a6b2dd6768e2304adebf6af39c539643e30210554401d9 */
+#if BIND_Sockaddr_pool_FIELD_WRITER
 mrb_value
-mrb_APR_AprSockaddrT_set_pool(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_set_pool(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
   mrb_value pool;
 
   mrb_get_args(mrb, "o", &pool);
 
   /* type checking */
-  if (!mrb_obj_is_kind_of(mrb, pool, AprPoolT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprPoolT expected");
+  if (!mrb_obj_is_kind_of(mrb, pool, Pool_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Pool expected");
     return mrb_nil_value();
   }
 
@@ -74,11 +74,11 @@ mrb_APR_AprSockaddrT_set_pool(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::hostname_reader */
-/* sha: ca9a221fdaa2766d46ddc98d251911f7e480063bb4d17bf5590ab9b29bc83765 */
-#if BIND_AprSockaddrT_hostname_FIELD_READER
+/* MRUBY_BINDING: Sockaddr::hostname_reader */
+/* sha: 3e6e6ba56f14b76822adb459066c71d9a4c04a94d98e2444b03a4f74fd4b9b30 */
+#if BIND_Sockaddr_hostname_FIELD_READER
 mrb_value
-mrb_APR_AprSockaddrT_get_hostname(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_get_hostname(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
 
   char * native_hostname = native_self->hostname;
@@ -90,11 +90,11 @@ mrb_APR_AprSockaddrT_get_hostname(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::hostname_writer */
-/* sha: a5223017a0488afc3230340c2f278ccc60d6a81ed5c4fa090010b0133aa865a4 */
-#if BIND_AprSockaddrT_hostname_FIELD_WRITER
+/* MRUBY_BINDING: Sockaddr::hostname_writer */
+/* sha: a1b2fcc158412088f8d8d6ad9918b7a78292ae9c000715ef94de6c5c6095de7c */
+#if BIND_Sockaddr_hostname_FIELD_WRITER
 mrb_value
-mrb_APR_AprSockaddrT_set_hostname(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_set_hostname(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
   mrb_value hostname;
 
@@ -114,11 +114,11 @@ mrb_APR_AprSockaddrT_set_hostname(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::servname_reader */
-/* sha: b40b67a8ce8ef53e3f8b6da7986ca1a6239622ce477990bebe18ba7aad9db72e */
-#if BIND_AprSockaddrT_servname_FIELD_READER
+/* MRUBY_BINDING: Sockaddr::servname_reader */
+/* sha: becf99741427d48d64b06c1d446da1d2e9a08297782aac9ddc2671991a42b7d8 */
+#if BIND_Sockaddr_servname_FIELD_READER
 mrb_value
-mrb_APR_AprSockaddrT_get_servname(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_get_servname(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
 
   char * native_servname = native_self->servname;
@@ -130,11 +130,11 @@ mrb_APR_AprSockaddrT_get_servname(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::servname_writer */
-/* sha: 6495e040235001bde93f2181a844524c8b8485d82b164c5532418fcdc68e07c6 */
-#if BIND_AprSockaddrT_servname_FIELD_WRITER
+/* MRUBY_BINDING: Sockaddr::servname_writer */
+/* sha: a90f7c4f0d0663a274088b76da34c901817ddec4aeca97eeb83fdaccd2745b19 */
+#if BIND_Sockaddr_servname_FIELD_WRITER
 mrb_value
-mrb_APR_AprSockaddrT_set_servname(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_set_servname(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
   mrb_value servname;
 
@@ -154,11 +154,11 @@ mrb_APR_AprSockaddrT_set_servname(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::port_reader */
-/* sha: 6fac2983d75b571752ca44897636dd5f44c59dcb194ee80050b8554737595937 */
-#if BIND_AprSockaddrT_port_FIELD_READER
+/* MRUBY_BINDING: Sockaddr::port_reader */
+/* sha: 7062fb53d73e63bfe3dfd3abf55847a3133c0016b61f352e5ef8493d2d112f90 */
+#if BIND_Sockaddr_port_FIELD_READER
 mrb_value
-mrb_APR_AprSockaddrT_get_port(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_get_port(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
 
   apr_port_t native_port = native_self->port;
@@ -170,11 +170,11 @@ mrb_APR_AprSockaddrT_get_port(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::port_writer */
-/* sha: dacdcc8f6fb0a57ba5618ccf602797cd43cc3af097afbd06ffbb69e6cf3b7c27 */
-#if BIND_AprSockaddrT_port_FIELD_WRITER
+/* MRUBY_BINDING: Sockaddr::port_writer */
+/* sha: 9db3530bfdaf23a132255dfc1eac9417eaf00bb29dbb39c45546487cf835a194 */
+#if BIND_Sockaddr_port_FIELD_WRITER
 mrb_value
-mrb_APR_AprSockaddrT_set_port(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_set_port(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
   mrb_int native_port;
 
@@ -189,11 +189,11 @@ mrb_APR_AprSockaddrT_set_port(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::family_reader */
-/* sha: 524b703efdedf4fd16fc2dd2f6948d40c7f23bc064905d463e08b7a7c39acc3a */
-#if BIND_AprSockaddrT_family_FIELD_READER
+/* MRUBY_BINDING: Sockaddr::family_reader */
+/* sha: 72cee73231a2fbdbb8f0f85982935bc63b5594f0bb9ea625e5b56d6993b8bcd1 */
+#if BIND_Sockaddr_family_FIELD_READER
 mrb_value
-mrb_APR_AprSockaddrT_get_family(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_get_family(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
 
   apr_int32_t native_family = native_self->family;
@@ -205,11 +205,11 @@ mrb_APR_AprSockaddrT_get_family(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::family_writer */
-/* sha: afa7fe526bc9d4bc8833e3b71af7491e380031607d0398370df90d2b4d357e4a */
-#if BIND_AprSockaddrT_family_FIELD_WRITER
+/* MRUBY_BINDING: Sockaddr::family_writer */
+/* sha: 6aca0a9f2862df3c3c902f05f082365a6dbcb3f26f8f2f55c11de9e09c1fefaa */
+#if BIND_Sockaddr_family_FIELD_WRITER
 mrb_value
-mrb_APR_AprSockaddrT_set_family(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_set_family(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
   mrb_int native_family;
 
@@ -224,11 +224,11 @@ mrb_APR_AprSockaddrT_set_family(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::salen_reader */
-/* sha: 2c73f7f7f0f60fb37e3d9a3adc098b1222f31c42c1e23dbe99a56385d4553dfa */
-#if BIND_AprSockaddrT_salen_FIELD_READER
+/* MRUBY_BINDING: Sockaddr::salen_reader */
+/* sha: e72c668b3cb899312040b6db6af0d717d29b80d8dd5a27c604c8f48936d85159 */
+#if BIND_Sockaddr_salen_FIELD_READER
 mrb_value
-mrb_APR_AprSockaddrT_get_salen(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_get_salen(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
 
   apr_socklen_t native_salen = native_self->salen;
@@ -240,11 +240,11 @@ mrb_APR_AprSockaddrT_get_salen(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::salen_writer */
-/* sha: bc0cfa94026ee85adc8d708bbab3615ad44f56b84798780746c590898cb1bf75 */
-#if BIND_AprSockaddrT_salen_FIELD_WRITER
+/* MRUBY_BINDING: Sockaddr::salen_writer */
+/* sha: 1a7ac1148cd8f95eb98884304095ee13fdf172a6b763c4d70c77d7026ddccf15 */
+#if BIND_Sockaddr_salen_FIELD_WRITER
 mrb_value
-mrb_APR_AprSockaddrT_set_salen(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_set_salen(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
   mrb_value salen;
 
@@ -264,11 +264,11 @@ mrb_APR_AprSockaddrT_set_salen(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::ipaddr_len_reader */
-/* sha: 18796056034d2df830829fc899572934e159ef1005af745b5b636d76aac71af1 */
-#if BIND_AprSockaddrT_ipaddr_len_FIELD_READER
+/* MRUBY_BINDING: Sockaddr::ipaddr_len_reader */
+/* sha: cfa224943e501fa97cddb2b981a497f88ac5da3dc95a58b10a0ada89a9ae5c44 */
+#if BIND_Sockaddr_ipaddr_len_FIELD_READER
 mrb_value
-mrb_APR_AprSockaddrT_get_ipaddr_len(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_get_ipaddr_len(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
 
   int native_ipaddr_len = native_self->ipaddr_len;
@@ -280,11 +280,11 @@ mrb_APR_AprSockaddrT_get_ipaddr_len(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::ipaddr_len_writer */
-/* sha: b4d7d80bcd3252827f7be8660dbf30a5f544ef5a67dc5ea83e17d3d1b194c92d */
-#if BIND_AprSockaddrT_ipaddr_len_FIELD_WRITER
+/* MRUBY_BINDING: Sockaddr::ipaddr_len_writer */
+/* sha: bb834d30f14c26ae53e24894401ab49b3ddea9f3f71ce1a407c3bd5963a9ca61 */
+#if BIND_Sockaddr_ipaddr_len_FIELD_WRITER
 mrb_value
-mrb_APR_AprSockaddrT_set_ipaddr_len(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_set_ipaddr_len(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
   mrb_int native_ipaddr_len;
 
@@ -299,11 +299,11 @@ mrb_APR_AprSockaddrT_set_ipaddr_len(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::addr_str_len_reader */
-/* sha: ed7b251c81bc69fe2b90e795b5392277fc6f598327552fff0d8a6ef184ea17ee */
-#if BIND_AprSockaddrT_addr_str_len_FIELD_READER
+/* MRUBY_BINDING: Sockaddr::addr_str_len_reader */
+/* sha: 12f8581fbf2ad0b0d567782998cfb22d39249aa69f35479c5dc7ec3477e7243e */
+#if BIND_Sockaddr_addr_str_len_FIELD_READER
 mrb_value
-mrb_APR_AprSockaddrT_get_addr_str_len(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_get_addr_str_len(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
 
   int native_addr_str_len = native_self->addr_str_len;
@@ -315,11 +315,11 @@ mrb_APR_AprSockaddrT_get_addr_str_len(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::addr_str_len_writer */
-/* sha: 096c4b30a0a10a5448a6cb1dbb40c696cae4142c80141667d25f47606ff3a433 */
-#if BIND_AprSockaddrT_addr_str_len_FIELD_WRITER
+/* MRUBY_BINDING: Sockaddr::addr_str_len_writer */
+/* sha: 5a0d99e0f8142501d6031d73a3c1c1694d7afe80d6cf956749e52f04ea7b5e5f */
+#if BIND_Sockaddr_addr_str_len_FIELD_WRITER
 mrb_value
-mrb_APR_AprSockaddrT_set_addr_str_len(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_set_addr_str_len(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
   mrb_int native_addr_str_len;
 
@@ -334,11 +334,11 @@ mrb_APR_AprSockaddrT_set_addr_str_len(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::ipaddr_ptr_reader */
-/* sha: da9c9b1d88407e52de6af68eb116e950f810deb6d588368db83cbe7de96b39aa */
-#if BIND_AprSockaddrT_ipaddr_ptr_FIELD_READER
+/* MRUBY_BINDING: Sockaddr::ipaddr_ptr_reader */
+/* sha: b888eaf1978d9b4e27cb0a756a465ae1d7c028aabae7ffe15e2437a8e444fcb7 */
+#if BIND_Sockaddr_ipaddr_ptr_FIELD_READER
 mrb_value
-mrb_APR_AprSockaddrT_get_ipaddr_ptr(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_get_ipaddr_ptr(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
 
   void * native_ipaddr_ptr = native_self->ipaddr_ptr;
@@ -350,11 +350,11 @@ mrb_APR_AprSockaddrT_get_ipaddr_ptr(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::ipaddr_ptr_writer */
-/* sha: 7412aadd25fa138340daf844fcee3a5839355452ca938e0f7dcc6973793f7715 */
-#if BIND_AprSockaddrT_ipaddr_ptr_FIELD_WRITER
+/* MRUBY_BINDING: Sockaddr::ipaddr_ptr_writer */
+/* sha: bca7e1031087066db75880430d211d57c046009621f7874a1cf57090c131564a */
+#if BIND_Sockaddr_ipaddr_ptr_FIELD_WRITER
 mrb_value
-mrb_APR_AprSockaddrT_set_ipaddr_ptr(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_set_ipaddr_ptr(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
   mrb_value ipaddr_ptr;
 
@@ -374,11 +374,11 @@ mrb_APR_AprSockaddrT_set_ipaddr_ptr(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::next_reader */
-/* sha: c88055a44168f6f7c73013e8edd7d01eb05e916a63ea6829c9a5b8e47763654f */
-#if BIND_AprSockaddrT_next_FIELD_READER
+/* MRUBY_BINDING: Sockaddr::next_reader */
+/* sha: 6ed70f8a568c6cf9c1e4422873df54ee543342df0a9c255c2e39588048bbfc3d */
+#if BIND_Sockaddr_next_FIELD_READER
 mrb_value
-mrb_APR_AprSockaddrT_get_next(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_get_next(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
 
   apr_sockaddr_t * native_next = native_self->next;
@@ -390,19 +390,19 @@ mrb_APR_AprSockaddrT_get_next(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::next_writer */
-/* sha: dc9dadc92beef8ed2577c9138976e107c18c78bdd70b07d8678a4534fc92ab72 */
-#if BIND_AprSockaddrT_next_FIELD_WRITER
+/* MRUBY_BINDING: Sockaddr::next_writer */
+/* sha: e02fa5db1e2e1b549108f9e4659befb6ff7387bc50b095a9a6ff9da5360548e1 */
+#if BIND_Sockaddr_next_FIELD_WRITER
 mrb_value
-mrb_APR_AprSockaddrT_set_next(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_set_next(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
   mrb_value next;
 
   mrb_get_args(mrb, "o", &next);
 
   /* type checking */
-  if (!mrb_obj_is_kind_of(mrb, next, AprSockaddrT_class(mrb))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "AprSockaddrT expected");
+  if (!mrb_obj_is_kind_of(mrb, next, Sockaddr_class(mrb))) {
+    mrb_raise(mrb, E_TYPE_ERROR, "Sockaddr expected");
     return mrb_nil_value();
   }
 
@@ -417,11 +417,11 @@ mrb_APR_AprSockaddrT_set_next(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::sa_reader */
-/* sha: 7d57d6d6e94a6e735750b36501ee4eb468219b9974050b1502944df262b511d1 */
-#if BIND_AprSockaddrT_sa_FIELD_READER
+/* MRUBY_BINDING: Sockaddr::sa_reader */
+/* sha: 7092ed2f0cd84a754beace4f6e5defaaa0fcde231b146ebb8ce5ae64a9f9eaa7 */
+#if BIND_Sockaddr_sa_FIELD_READER
 mrb_value
-mrb_APR_AprSockaddrT_get_sa(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_get_sa(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
 
   union (anonymous union at /usr/include/apr-1/apr_network_io.h:236:5) native_sa = native_self->sa;
@@ -433,11 +433,11 @@ mrb_APR_AprSockaddrT_get_sa(mrb_state* mrb, mrb_value self) {
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::sa_writer */
-/* sha: 78405149596d4ad08da5650ba7c92d60c8dae9ba67dfb8d9d352d9fd512c8753 */
-#if BIND_AprSockaddrT_sa_FIELD_WRITER
+/* MRUBY_BINDING: Sockaddr::sa_writer */
+/* sha: 3721d2f76718d5c8781354629414bf033a3786a9dccd6b28d9486f232a0deefb */
+#if BIND_Sockaddr_sa_FIELD_WRITER
 mrb_value
-mrb_APR_AprSockaddrT_set_sa(mrb_state* mrb, mrb_value self) {
+mrb_APR_Sockaddr_set_sa(mrb_state* mrb, mrb_value self) {
   apr_sockaddr_t * native_self = mruby_unbox_apr_sockaddr_t(self);
   mrb_value sa;
 
@@ -458,7 +458,7 @@ mrb_APR_AprSockaddrT_set_sa(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 
-void mrb_APR_AprSockaddrT_init(mrb_state* mrb) {
+void mrb_APR_Sockaddr_init(mrb_state* mrb) {
   static int initialized = 0;
   if (initialized) return;
   else initialized = 1;
@@ -468,104 +468,104 @@ void mrb_APR_AprSockaddrT_init(mrb_state* mrb) {
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::class_definition */
-/* sha: c1238c8169f45185f0a3c26881e80e93d2f7ade3447bd2490416d88d0bc790a4 */
-  struct RClass* AprSockaddrT_class = mrb_define_class_under(mrb, APR_module(mrb), "AprSockaddrT", mrb->object_class);
-  MRB_SET_INSTANCE_TT(AprSockaddrT_class, MRB_TT_DATA);
+/* MRUBY_BINDING: Sockaddr::class_definition */
+/* sha: c19c8ce2a34389f865038be1d9ac1c11c51fadd5e551192afff81b154cbb71c6 */
+  struct RClass* Sockaddr_class = mrb_define_class_under(mrb, APR_module(mrb), "Sockaddr", mrb->object_class);
+  MRB_SET_INSTANCE_TT(Sockaddr_class, MRB_TT_DATA);
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::pre_class_method_definitions */
+/* MRUBY_BINDING: Sockaddr::pre_class_method_definitions */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::class_method_definitions */
-/* sha: ec1a9ebad95012dca89b09cba980cd229985ee00d77f97a551a50785fb330cab */
-#if BIND_AprSockaddrT_INITIALIZE
-  mrb_define_method(mrb, AprSockaddrT_class, "initialize", mrb_APR_AprSockaddrT_initialize, MRB_ARGS_NONE());
+/* MRUBY_BINDING: Sockaddr::class_method_definitions */
+/* sha: 42bf15baf47a040a2ce1da41b7db545209353f509ab6d89f69222b30b0ef6f58 */
+#if BIND_Sockaddr_INITIALIZE
+  mrb_define_method(mrb, Sockaddr_class, "initialize", mrb_APR_Sockaddr_initialize, MRB_ARGS_NONE());
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::pre_attr_definitions */
+/* MRUBY_BINDING: Sockaddr::pre_attr_definitions */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::attr_definitions */
-/* sha: c7b1bd975e4d3dad450f2ea032b96b1601c73c7ac0938eeab54292402a33b670 */
+/* MRUBY_BINDING: Sockaddr::attr_definitions */
+/* sha: 88a0b2c5c94fd0ed6e57e879f09db3f88c9f4415dded5397259241f0be6a3fee */
   /*
    * Fields
    */
-#if BIND_AprSockaddrT_pool_FIELD_READER
-  mrb_define_method(mrb, AprSockaddrT_class, "pool", mrb_APR_AprSockaddrT_get_pool, MRB_ARGS_ARG(0, 0));
+#if BIND_Sockaddr_pool_FIELD_READER
+  mrb_define_method(mrb, Sockaddr_class, "pool", mrb_APR_Sockaddr_get_pool, MRB_ARGS_ARG(0, 0));
 #endif
-#if BIND_AprSockaddrT_pool_FIELD_WRITER
-  mrb_define_method(mrb, AprSockaddrT_class, "pool=", mrb_APR_AprSockaddrT_set_pool, MRB_ARGS_ARG(1, 0));
+#if BIND_Sockaddr_pool_FIELD_WRITER
+  mrb_define_method(mrb, Sockaddr_class, "pool=", mrb_APR_Sockaddr_set_pool, MRB_ARGS_ARG(1, 0));
 #endif
-#if BIND_AprSockaddrT_hostname_FIELD_READER
-  mrb_define_method(mrb, AprSockaddrT_class, "hostname", mrb_APR_AprSockaddrT_get_hostname, MRB_ARGS_ARG(0, 0));
+#if BIND_Sockaddr_hostname_FIELD_READER
+  mrb_define_method(mrb, Sockaddr_class, "hostname", mrb_APR_Sockaddr_get_hostname, MRB_ARGS_ARG(0, 0));
 #endif
-#if BIND_AprSockaddrT_hostname_FIELD_WRITER
-  mrb_define_method(mrb, AprSockaddrT_class, "hostname=", mrb_APR_AprSockaddrT_set_hostname, MRB_ARGS_ARG(1, 0));
+#if BIND_Sockaddr_hostname_FIELD_WRITER
+  mrb_define_method(mrb, Sockaddr_class, "hostname=", mrb_APR_Sockaddr_set_hostname, MRB_ARGS_ARG(1, 0));
 #endif
-#if BIND_AprSockaddrT_servname_FIELD_READER
-  mrb_define_method(mrb, AprSockaddrT_class, "servname", mrb_APR_AprSockaddrT_get_servname, MRB_ARGS_ARG(0, 0));
+#if BIND_Sockaddr_servname_FIELD_READER
+  mrb_define_method(mrb, Sockaddr_class, "servname", mrb_APR_Sockaddr_get_servname, MRB_ARGS_ARG(0, 0));
 #endif
-#if BIND_AprSockaddrT_servname_FIELD_WRITER
-  mrb_define_method(mrb, AprSockaddrT_class, "servname=", mrb_APR_AprSockaddrT_set_servname, MRB_ARGS_ARG(1, 0));
+#if BIND_Sockaddr_servname_FIELD_WRITER
+  mrb_define_method(mrb, Sockaddr_class, "servname=", mrb_APR_Sockaddr_set_servname, MRB_ARGS_ARG(1, 0));
 #endif
-#if BIND_AprSockaddrT_port_FIELD_READER
-  mrb_define_method(mrb, AprSockaddrT_class, "port", mrb_APR_AprSockaddrT_get_port, MRB_ARGS_ARG(0, 0));
+#if BIND_Sockaddr_port_FIELD_READER
+  mrb_define_method(mrb, Sockaddr_class, "port", mrb_APR_Sockaddr_get_port, MRB_ARGS_ARG(0, 0));
 #endif
-#if BIND_AprSockaddrT_port_FIELD_WRITER
-  mrb_define_method(mrb, AprSockaddrT_class, "port=", mrb_APR_AprSockaddrT_set_port, MRB_ARGS_ARG(1, 0));
+#if BIND_Sockaddr_port_FIELD_WRITER
+  mrb_define_method(mrb, Sockaddr_class, "port=", mrb_APR_Sockaddr_set_port, MRB_ARGS_ARG(1, 0));
 #endif
-#if BIND_AprSockaddrT_family_FIELD_READER
-  mrb_define_method(mrb, AprSockaddrT_class, "family", mrb_APR_AprSockaddrT_get_family, MRB_ARGS_ARG(0, 0));
+#if BIND_Sockaddr_family_FIELD_READER
+  mrb_define_method(mrb, Sockaddr_class, "family", mrb_APR_Sockaddr_get_family, MRB_ARGS_ARG(0, 0));
 #endif
-#if BIND_AprSockaddrT_family_FIELD_WRITER
-  mrb_define_method(mrb, AprSockaddrT_class, "family=", mrb_APR_AprSockaddrT_set_family, MRB_ARGS_ARG(1, 0));
+#if BIND_Sockaddr_family_FIELD_WRITER
+  mrb_define_method(mrb, Sockaddr_class, "family=", mrb_APR_Sockaddr_set_family, MRB_ARGS_ARG(1, 0));
 #endif
-#if BIND_AprSockaddrT_salen_FIELD_READER
-  mrb_define_method(mrb, AprSockaddrT_class, "salen", mrb_APR_AprSockaddrT_get_salen, MRB_ARGS_ARG(0, 0));
+#if BIND_Sockaddr_salen_FIELD_READER
+  mrb_define_method(mrb, Sockaddr_class, "salen", mrb_APR_Sockaddr_get_salen, MRB_ARGS_ARG(0, 0));
 #endif
-#if BIND_AprSockaddrT_salen_FIELD_WRITER
-  mrb_define_method(mrb, AprSockaddrT_class, "salen=", mrb_APR_AprSockaddrT_set_salen, MRB_ARGS_ARG(1, 0));
+#if BIND_Sockaddr_salen_FIELD_WRITER
+  mrb_define_method(mrb, Sockaddr_class, "salen=", mrb_APR_Sockaddr_set_salen, MRB_ARGS_ARG(1, 0));
 #endif
-#if BIND_AprSockaddrT_ipaddr_len_FIELD_READER
-  mrb_define_method(mrb, AprSockaddrT_class, "ipaddr_len", mrb_APR_AprSockaddrT_get_ipaddr_len, MRB_ARGS_ARG(0, 0));
+#if BIND_Sockaddr_ipaddr_len_FIELD_READER
+  mrb_define_method(mrb, Sockaddr_class, "ipaddr_len", mrb_APR_Sockaddr_get_ipaddr_len, MRB_ARGS_ARG(0, 0));
 #endif
-#if BIND_AprSockaddrT_ipaddr_len_FIELD_WRITER
-  mrb_define_method(mrb, AprSockaddrT_class, "ipaddr_len=", mrb_APR_AprSockaddrT_set_ipaddr_len, MRB_ARGS_ARG(1, 0));
+#if BIND_Sockaddr_ipaddr_len_FIELD_WRITER
+  mrb_define_method(mrb, Sockaddr_class, "ipaddr_len=", mrb_APR_Sockaddr_set_ipaddr_len, MRB_ARGS_ARG(1, 0));
 #endif
-#if BIND_AprSockaddrT_addr_str_len_FIELD_READER
-  mrb_define_method(mrb, AprSockaddrT_class, "addr_str_len", mrb_APR_AprSockaddrT_get_addr_str_len, MRB_ARGS_ARG(0, 0));
+#if BIND_Sockaddr_addr_str_len_FIELD_READER
+  mrb_define_method(mrb, Sockaddr_class, "addr_str_len", mrb_APR_Sockaddr_get_addr_str_len, MRB_ARGS_ARG(0, 0));
 #endif
-#if BIND_AprSockaddrT_addr_str_len_FIELD_WRITER
-  mrb_define_method(mrb, AprSockaddrT_class, "addr_str_len=", mrb_APR_AprSockaddrT_set_addr_str_len, MRB_ARGS_ARG(1, 0));
+#if BIND_Sockaddr_addr_str_len_FIELD_WRITER
+  mrb_define_method(mrb, Sockaddr_class, "addr_str_len=", mrb_APR_Sockaddr_set_addr_str_len, MRB_ARGS_ARG(1, 0));
 #endif
-#if BIND_AprSockaddrT_ipaddr_ptr_FIELD_READER
-  mrb_define_method(mrb, AprSockaddrT_class, "ipaddr_ptr", mrb_APR_AprSockaddrT_get_ipaddr_ptr, MRB_ARGS_ARG(0, 0));
+#if BIND_Sockaddr_ipaddr_ptr_FIELD_READER
+  mrb_define_method(mrb, Sockaddr_class, "ipaddr_ptr", mrb_APR_Sockaddr_get_ipaddr_ptr, MRB_ARGS_ARG(0, 0));
 #endif
-#if BIND_AprSockaddrT_ipaddr_ptr_FIELD_WRITER
-  mrb_define_method(mrb, AprSockaddrT_class, "ipaddr_ptr=", mrb_APR_AprSockaddrT_set_ipaddr_ptr, MRB_ARGS_ARG(1, 0));
+#if BIND_Sockaddr_ipaddr_ptr_FIELD_WRITER
+  mrb_define_method(mrb, Sockaddr_class, "ipaddr_ptr=", mrb_APR_Sockaddr_set_ipaddr_ptr, MRB_ARGS_ARG(1, 0));
 #endif
-#if BIND_AprSockaddrT_next_FIELD_READER
-  mrb_define_method(mrb, AprSockaddrT_class, "next", mrb_APR_AprSockaddrT_get_next, MRB_ARGS_ARG(0, 0));
+#if BIND_Sockaddr_next_FIELD_READER
+  mrb_define_method(mrb, Sockaddr_class, "next", mrb_APR_Sockaddr_get_next, MRB_ARGS_ARG(0, 0));
 #endif
-#if BIND_AprSockaddrT_next_FIELD_WRITER
-  mrb_define_method(mrb, AprSockaddrT_class, "next=", mrb_APR_AprSockaddrT_set_next, MRB_ARGS_ARG(1, 0));
+#if BIND_Sockaddr_next_FIELD_WRITER
+  mrb_define_method(mrb, Sockaddr_class, "next=", mrb_APR_Sockaddr_set_next, MRB_ARGS_ARG(1, 0));
 #endif
-#if BIND_AprSockaddrT_sa_FIELD_READER
-  mrb_define_method(mrb, AprSockaddrT_class, "sa", mrb_APR_AprSockaddrT_get_sa, MRB_ARGS_ARG(0, 0));
+#if BIND_Sockaddr_sa_FIELD_READER
+  mrb_define_method(mrb, Sockaddr_class, "sa", mrb_APR_Sockaddr_get_sa, MRB_ARGS_ARG(0, 0));
 #endif
-#if BIND_AprSockaddrT_sa_FIELD_WRITER
-  mrb_define_method(mrb, AprSockaddrT_class, "sa=", mrb_APR_AprSockaddrT_set_sa, MRB_ARGS_ARG(1, 0));
+#if BIND_Sockaddr_sa_FIELD_WRITER
+  mrb_define_method(mrb, Sockaddr_class, "sa=", mrb_APR_Sockaddr_set_sa, MRB_ARGS_ARG(1, 0));
 #endif
 /* MRUBY_BINDING_END */
 
 
-/* MRUBY_BINDING: AprSockaddrT::post_class_definition */
+/* MRUBY_BINDING: Sockaddr::post_class_definition */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */

@@ -1,6 +1,6 @@
 class IO
   # Pipe is essentially a File, the only difference is that
-  # it exposed a constructor that takes an AprFileT to wrap.
+  # it exposed a constructor that takes an File to wrap.
   # This was required to allow results of apr_file_pipe_create
   # to be wrapped in a File object, without changing the standard
   # API of the File class.
@@ -9,11 +9,11 @@ class IO
   # The mode & pool MUST be the same that the file was created with.
   class Pipe < File
     def initialize(apr_file, mode, pool)
-      if apr_file.class != APR::AprFileT
-        raise ArgumentError.new("AprFileT expected in first arg")
+      if apr_file.class != APR::File
+        raise ArgumentError.new("File expected in first arg")
       end
-      if pool.class != APR::AprPoolT
-        raise ArgumentError.new("AprPoolT expected in third arg")
+      if pool.class != APR::Pool
+        raise ArgumentError.new("Pool expected in third arg")
       end
       @native_file = apr_file
       @pool = pool

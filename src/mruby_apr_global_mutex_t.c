@@ -5,18 +5,18 @@
 
 #include "mruby_APR.h"
 
-#if BIND_AprGlobalMutexT_TYPE
+#if BIND_GlobalMutex_TYPE
 
 /* MRUBY_BINDING: header */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprGlobalMutexT::initialize */
-/* sha: f00c84be387afac86b2dc633846a33c8122e9fbbbaf5096a7ca8b183b74a6b57 */
-#if BIND_AprGlobalMutexT_INITIALIZE
+/* MRUBY_BINDING: GlobalMutex::initialize */
+/* sha: 0c460c6e17cae2ee552a536ea5349a51e70b3104734125f4b7c78caa084b28ca */
+#if BIND_GlobalMutex_INITIALIZE
 mrb_value
-mrb_APR_AprGlobalMutexT_initialize(mrb_state* mrb, mrb_value self) {
+mrb_APR_GlobalMutex_initialize(mrb_state* mrb, mrb_value self) {
   mrb_raise(mrb, E_NOMETHOD_ERROR, "No initializer defined");
 /* 
   apr_global_mutex_t* native_object = (apr_global_mutex_t*)calloc(1, sizeof(apr_global_mutex_t));
@@ -28,7 +28,7 @@ mrb_APR_AprGlobalMutexT_initialize(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 
-void mrb_APR_AprGlobalMutexT_init(mrb_state* mrb) {
+void mrb_APR_GlobalMutex_init(mrb_state* mrb) {
   static int initialized = 0;
   if (initialized) return;
   else initialized = 1;
@@ -38,27 +38,27 @@ void mrb_APR_AprGlobalMutexT_init(mrb_state* mrb) {
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprGlobalMutexT::class_definition */
-/* sha: c8211e202812127a157e6add73e9ae0fdcaa53e3c59375ee5cf9158c03f2a889 */
-  struct RClass* AprGlobalMutexT_class = mrb_define_class_under(mrb, APR_module(mrb), "AprGlobalMutexT", mrb->object_class);
-  MRB_SET_INSTANCE_TT(AprGlobalMutexT_class, MRB_TT_DATA);
+/* MRUBY_BINDING: GlobalMutex::class_definition */
+/* sha: 5b51c28a094b11c57462017e43966700fae02510dfbccc90fc2d9166d17dcd0f */
+  struct RClass* GlobalMutex_class = mrb_define_class_under(mrb, APR_module(mrb), "GlobalMutex", mrb->object_class);
+  MRB_SET_INSTANCE_TT(GlobalMutex_class, MRB_TT_DATA);
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprGlobalMutexT::pre_class_method_definitions */
+/* MRUBY_BINDING: GlobalMutex::pre_class_method_definitions */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprGlobalMutexT::class_method_definitions */
-/* sha: 36b95cb055bec6a88dad926a68cd3833601c242abe7505bf737c123018420ffd */
-#if BIND_AprGlobalMutexT_INITIALIZE
-  mrb_define_method(mrb, AprGlobalMutexT_class, "initialize", mrb_APR_AprGlobalMutexT_initialize, MRB_ARGS_NONE());
+/* MRUBY_BINDING: GlobalMutex::class_method_definitions */
+/* sha: f2da77931083ab470cf0d4841a37642e4bae414b5c1253488bcddc976a38f983 */
+#if BIND_GlobalMutex_INITIALIZE
+  mrb_define_method(mrb, GlobalMutex_class, "initialize", mrb_APR_GlobalMutex_initialize, MRB_ARGS_NONE());
 #endif
 /* MRUBY_BINDING_END */
 
 
 
-/* MRUBY_BINDING: AprGlobalMutexT::post_class_definition */
+/* MRUBY_BINDING: GlobalMutex::post_class_definition */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */

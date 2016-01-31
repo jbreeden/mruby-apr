@@ -5,18 +5,18 @@
 
 #include "mruby_APR.h"
 
-#if BIND_AprProcattrT_TYPE
+#if BIND_Procattr_TYPE
 
 /* MRUBY_BINDING: header */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprProcattrT::initialize */
-/* sha: 96d1acd00a2676ed0efbdc38dba712e51789108c3b67b83e98f7606af8d51e82 */
-#if BIND_AprProcattrT_INITIALIZE
+/* MRUBY_BINDING: Procattr::initialize */
+/* sha: f28c9d473065ee206f7b5eb54e026bf8d370af4a321fca9c8b00d74646f3059a */
+#if BIND_Procattr_INITIALIZE
 mrb_value
-mrb_APR_AprProcattrT_initialize(mrb_state* mrb, mrb_value self) {
+mrb_APR_Procattr_initialize(mrb_state* mrb, mrb_value self) {
   mrb_raise(mrb, E_NOMETHOD_ERROR, "No initializer defined");
 /* 
   apr_procattr_t* native_object = (apr_procattr_t*)calloc(1, sizeof(apr_procattr_t));
@@ -28,7 +28,7 @@ mrb_APR_AprProcattrT_initialize(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 
-void mrb_APR_AprProcattrT_init(mrb_state* mrb) {
+void mrb_APR_Procattr_init(mrb_state* mrb) {
   static int initialized = 0;
   if (initialized) return;
   else initialized = 1;
@@ -38,27 +38,27 @@ void mrb_APR_AprProcattrT_init(mrb_state* mrb) {
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprProcattrT::class_definition */
-/* sha: c7b030cf5fd4272dd68b7aa05ff416cdcb0dc0661ddf4f2f8d617ec52389d11a */
-  struct RClass* AprProcattrT_class = mrb_define_class_under(mrb, APR_module(mrb), "AprProcattrT", mrb->object_class);
-  MRB_SET_INSTANCE_TT(AprProcattrT_class, MRB_TT_DATA);
+/* MRUBY_BINDING: Procattr::class_definition */
+/* sha: e01959b617640fc05b2f45ce32f4a8c353d7ad541881291738ce242811e08108 */
+  struct RClass* Procattr_class = mrb_define_class_under(mrb, APR_module(mrb), "Procattr", mrb->object_class);
+  MRB_SET_INSTANCE_TT(Procattr_class, MRB_TT_DATA);
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprProcattrT::pre_class_method_definitions */
+/* MRUBY_BINDING: Procattr::pre_class_method_definitions */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprProcattrT::class_method_definitions */
-/* sha: 2a4ee637c7095ac32b7cf4c8bde9d61b6ae175cdf93521f37e0a46a19a551839 */
-#if BIND_AprProcattrT_INITIALIZE
-  mrb_define_method(mrb, AprProcattrT_class, "initialize", mrb_APR_AprProcattrT_initialize, MRB_ARGS_NONE());
+/* MRUBY_BINDING: Procattr::class_method_definitions */
+/* sha: f77f51ee019e9cf8085c28fe0c7cbeb94451a7d83bc13254d3a687cb64b502d2 */
+#if BIND_Procattr_INITIALIZE
+  mrb_define_method(mrb, Procattr_class, "initialize", mrb_APR_Procattr_initialize, MRB_ARGS_NONE());
 #endif
 /* MRUBY_BINDING_END */
 
 
 
-/* MRUBY_BINDING: AprProcattrT::post_class_definition */
+/* MRUBY_BINDING: Procattr::post_class_definition */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */

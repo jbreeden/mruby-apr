@@ -84,26 +84,26 @@ void mruby_APR_init_native_ext(mrb_state * mrb);
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: class_macros */
-/* sha: bd2e84dbc47b1834a85fd10f2b28f039c5ba99ff030c553c365db8e3492a97a8 */
+/* sha: 2ca34a3fd1c59e54ea70663b4692fae30b241463cb5c67bc780256d63c87569e */
 #define APR_module(mrb) mrb_module_get(mrb, "APR")
-#define AprDirT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprDirT")
-#define AprFileT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprFileT")
-#define AprFinfoT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprFinfoT")
-#define AprGlobalMutexT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprGlobalMutexT")
-#define AprHdtrT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprHdtrT")
-#define AprIpsubnetT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprIpsubnetT")
-#define AprOtherChildRecT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprOtherChildRecT")
-#define AprPoolT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprPoolT")
-#define AprProcattrT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprProcattrT")
-#define AprProcMutexT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprProcMutexT")
-#define AprProcT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprProcT")
-#define AprSockaddrT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprSockaddrT")
-#define AprSocketT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprSocketT")
-#define AprThreadattrT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprThreadattrT")
-#define AprThreadkeyT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprThreadkeyT")
-#define AprThreadOnceT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprThreadOnceT")
-#define AprThreadT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprThreadT")
-#define AprTimeExpT_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "AprTimeExpT")
+#define Dir_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "Dir")
+#define File_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "File")
+#define Finfo_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "Finfo")
+#define GlobalMutex_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "GlobalMutex")
+#define Hdtr_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "Hdtr")
+#define Ipsubnet_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "Ipsubnet")
+#define OtherChildRec_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "OtherChildRec")
+#define Pool_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "Pool")
+#define Proc_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "Proc")
+#define Procattr_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "Procattr")
+#define ProcMutex_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "ProcMutex")
+#define Sockaddr_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "Sockaddr")
+#define Socket_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "Socket")
+#define Thread_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "Thread")
+#define Threadattr_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "Threadattr")
+#define Threadkey_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "Threadkey")
+#define ThreadOnce_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "ThreadOnce")
+#define TimeExp_class(mrb) mrb_class_get_under(mrb, APR_module(mrb), "TimeExp")
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: post_class_macros */
@@ -122,60 +122,60 @@ void mruby_APR_init_native_ext(mrb_state * mrb);
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: pre_class_init_decls */
-/* sha: fe745ff0c87c06d518eef7358bbbbfbdee9d1ffdb0868c3b48fc1a87064e7929 */
-#if BIND_AprDirT_TYPE
-void mrb_APR_AprDirT_init(mrb_state* mrb);
+/* sha: 2704c36aefe9e99647dbb00d403d031cd881bb76fdc62c143ff0c42282fdbd5e */
+#if BIND_Dir_TYPE
+void mrb_APR_Dir_init(mrb_state* mrb);
 #endif
-#if BIND_AprFileT_TYPE
-void mrb_APR_AprFileT_init(mrb_state* mrb);
+#if BIND_File_TYPE
+void mrb_APR_File_init(mrb_state* mrb);
 #endif
-#if BIND_AprFinfoT_TYPE
-void mrb_APR_AprFinfoT_init(mrb_state* mrb);
+#if BIND_Finfo_TYPE
+void mrb_APR_Finfo_init(mrb_state* mrb);
 #endif
-#if BIND_AprGlobalMutexT_TYPE
-void mrb_APR_AprGlobalMutexT_init(mrb_state* mrb);
+#if BIND_GlobalMutex_TYPE
+void mrb_APR_GlobalMutex_init(mrb_state* mrb);
 #endif
-#if BIND_AprHdtrT_TYPE
-void mrb_APR_AprHdtrT_init(mrb_state* mrb);
+#if BIND_Hdtr_TYPE
+void mrb_APR_Hdtr_init(mrb_state* mrb);
 #endif
-#if BIND_AprIpsubnetT_TYPE
-void mrb_APR_AprIpsubnetT_init(mrb_state* mrb);
+#if BIND_Ipsubnet_TYPE
+void mrb_APR_Ipsubnet_init(mrb_state* mrb);
 #endif
-#if BIND_AprOtherChildRecT_TYPE
-void mrb_APR_AprOtherChildRecT_init(mrb_state* mrb);
+#if BIND_OtherChildRec_TYPE
+void mrb_APR_OtherChildRec_init(mrb_state* mrb);
 #endif
-#if BIND_AprPoolT_TYPE
-void mrb_APR_AprPoolT_init(mrb_state* mrb);
+#if BIND_Pool_TYPE
+void mrb_APR_Pool_init(mrb_state* mrb);
 #endif
-#if BIND_AprProcattrT_TYPE
-void mrb_APR_AprProcattrT_init(mrb_state* mrb);
+#if BIND_Proc_TYPE
+void mrb_APR_Proc_init(mrb_state* mrb);
 #endif
-#if BIND_AprProcMutexT_TYPE
-void mrb_APR_AprProcMutexT_init(mrb_state* mrb);
+#if BIND_Procattr_TYPE
+void mrb_APR_Procattr_init(mrb_state* mrb);
 #endif
-#if BIND_AprProcT_TYPE
-void mrb_APR_AprProcT_init(mrb_state* mrb);
+#if BIND_ProcMutex_TYPE
+void mrb_APR_ProcMutex_init(mrb_state* mrb);
 #endif
-#if BIND_AprSockaddrT_TYPE
-void mrb_APR_AprSockaddrT_init(mrb_state* mrb);
+#if BIND_Sockaddr_TYPE
+void mrb_APR_Sockaddr_init(mrb_state* mrb);
 #endif
-#if BIND_AprSocketT_TYPE
-void mrb_APR_AprSocketT_init(mrb_state* mrb);
+#if BIND_Socket_TYPE
+void mrb_APR_Socket_init(mrb_state* mrb);
 #endif
-#if BIND_AprThreadattrT_TYPE
-void mrb_APR_AprThreadattrT_init(mrb_state* mrb);
+#if BIND_Thread_TYPE
+void mrb_APR_Thread_init(mrb_state* mrb);
 #endif
-#if BIND_AprThreadkeyT_TYPE
-void mrb_APR_AprThreadkeyT_init(mrb_state* mrb);
+#if BIND_Threadattr_TYPE
+void mrb_APR_Threadattr_init(mrb_state* mrb);
 #endif
-#if BIND_AprThreadOnceT_TYPE
-void mrb_APR_AprThreadOnceT_init(mrb_state* mrb);
+#if BIND_Threadkey_TYPE
+void mrb_APR_Threadkey_init(mrb_state* mrb);
 #endif
-#if BIND_AprThreadT_TYPE
-void mrb_APR_AprThreadT_init(mrb_state* mrb);
+#if BIND_ThreadOnce_TYPE
+void mrb_APR_ThreadOnce_init(mrb_state* mrb);
 #endif
-#if BIND_AprTimeExpT_TYPE
-void mrb_APR_AprTimeExpT_init(mrb_state* mrb);
+#if BIND_TimeExp_TYPE
+void mrb_APR_TimeExp_init(mrb_state* mrb);
 #endif
 /* MRUBY_BINDING_END */
 

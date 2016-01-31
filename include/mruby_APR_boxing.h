@@ -41,9 +41,9 @@ typedef struct mruby_to_native_ref_ {
   void* data;
 } mruby_to_native_ref;
 
-/* MRUBY_BINDING: AprDirT::boxing_decls */
-/* sha: 954d7879d27bbaa0306426d5283a30566cc15fa27ac4838b25a68ee14348d807 */
-#if BIND_AprDirT_TYPE
+/* MRUBY_BINDING: Dir::boxing_decls */
+/* sha: c53bed8cd837462797703861a020b497f1ee2cf9cf9c9a193afcd905d1ec0956 */
+#if BIND_Dir_TYPE
 mrb_value
 mruby_box_apr_dir_t(mrb_state* mrb, apr_dir_t *unboxed);
 
@@ -61,9 +61,9 @@ mruby_unbox_apr_dir_t(mrb_value boxed);
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprFileT::boxing_decls */
-/* sha: 3e3f9ba4785ad05341a74f8994394b3d54b7438b15723e666f9567ce6223acfa */
-#if BIND_AprFileT_TYPE
+/* MRUBY_BINDING: File::boxing_decls */
+/* sha: 6e3df7ac69668179bbbe74b624cb29b07f9ca2ce33cd8fb1295febc8e7e075d1 */
+#if BIND_File_TYPE
 mrb_value
 mruby_box_apr_file_t(mrb_state* mrb, apr_file_t *unboxed);
 
@@ -81,9 +81,9 @@ mruby_unbox_apr_file_t(mrb_value boxed);
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprFinfoT::boxing_decls */
-/* sha: 7de759ae8b88e9f68254f42cf9bfb83210cd3d9fa257dc79add32cb6c1b201f8 */
-#if BIND_AprFinfoT_TYPE
+/* MRUBY_BINDING: Finfo::boxing_decls */
+/* sha: fb6e46e2a883559293f7d4126c9d61836515f9d6a1425fcf2515bb2fd4c21088 */
+#if BIND_Finfo_TYPE
 mrb_value
 mruby_box_apr_finfo_t(mrb_state* mrb, apr_finfo_t *unboxed);
 
@@ -101,9 +101,9 @@ mruby_unbox_apr_finfo_t(mrb_value boxed);
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprGlobalMutexT::boxing_decls */
-/* sha: 1f1ace420e378b9ef717cdd25d53f1e39d24371859a71fafb84299e7890073be */
-#if BIND_AprGlobalMutexT_TYPE
+/* MRUBY_BINDING: GlobalMutex::boxing_decls */
+/* sha: 19018eea66c193f2ab177e93c31a3acecfaf438891dffc83bc6676ce3b19929e */
+#if BIND_GlobalMutex_TYPE
 mrb_value
 mruby_box_apr_global_mutex_t(mrb_state* mrb, apr_global_mutex_t *unboxed);
 
@@ -121,9 +121,9 @@ mruby_unbox_apr_global_mutex_t(mrb_value boxed);
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprHdtrT::boxing_decls */
-/* sha: aac1c8d14df06772e5e7fb39470533c26bbc5cb7f9f6cac1045710c7612a7b17 */
-#if BIND_AprHdtrT_TYPE
+/* MRUBY_BINDING: Hdtr::boxing_decls */
+/* sha: 42950747f929080d2614d7aca3808675eac22b412f46a9364971ad11a744c0c0 */
+#if BIND_Hdtr_TYPE
 mrb_value
 mruby_box_apr_hdtr_t(mrb_state* mrb, apr_hdtr_t *unboxed);
 
@@ -141,9 +141,9 @@ mruby_unbox_apr_hdtr_t(mrb_value boxed);
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprIpsubnetT::boxing_decls */
-/* sha: d8f1561216cd98b95ac7445e5cf2149ba5c6c7ab469fd8b4d01782fc55445d17 */
-#if BIND_AprIpsubnetT_TYPE
+/* MRUBY_BINDING: Ipsubnet::boxing_decls */
+/* sha: ddbd817a93680b8554fc1a6ef40e3de6ab986467fb9794917c45a4c7bcb30a89 */
+#if BIND_Ipsubnet_TYPE
 mrb_value
 mruby_box_apr_ipsubnet_t(mrb_state* mrb, apr_ipsubnet_t *unboxed);
 
@@ -161,9 +161,9 @@ mruby_unbox_apr_ipsubnet_t(mrb_value boxed);
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprOtherChildRecT::boxing_decls */
-/* sha: deffc57d3fac412ab8d58cafbfaec9330d1b148cadbe350af0ed012bda7a3299 */
-#if BIND_AprOtherChildRecT_TYPE
+/* MRUBY_BINDING: OtherChildRec::boxing_decls */
+/* sha: eb749e826ba45445cf958c4c20fa58680d63aa61abee00abf60c3362c981b5df */
+#if BIND_OtherChildRec_TYPE
 mrb_value
 mruby_box_apr_other_child_rec_t(mrb_state* mrb, apr_other_child_rec_t *unboxed);
 
@@ -181,9 +181,9 @@ mruby_unbox_apr_other_child_rec_t(mrb_value boxed);
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprPoolT::boxing_decls */
-/* sha: ff483d0b0dd76af6ecc74d2db56ea3ae070571f8bab3bac4d594d6cfdcf266e9 */
-#if BIND_AprPoolT_TYPE
+/* MRUBY_BINDING: Pool::boxing_decls */
+/* sha: 9e10993189d7b7cc24cffd37a66ee62a3f5114798c5fdcb4e991740f4746c0eb */
+#if BIND_Pool_TYPE
 mrb_value
 mruby_box_apr_pool_t(mrb_state* mrb, apr_pool_t *unboxed);
 
@@ -201,49 +201,9 @@ mruby_unbox_apr_pool_t(mrb_value boxed);
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprProcattrT::boxing_decls */
-/* sha: c5eee51349df8db759cbe7970c9e1ad42edf5bb7889145b7a2924d9cf688f925 */
-#if BIND_AprProcattrT_TYPE
-mrb_value
-mruby_box_apr_procattr_t(mrb_state* mrb, apr_procattr_t *unboxed);
-
-mrb_value
-mruby_giftwrap_apr_procattr_t(mrb_state* mrb, apr_procattr_t *unboxed);
-
-void
-mruby_set_apr_procattr_t_data_ptr(mrb_value obj, apr_procattr_t *unboxed);
-
-void
-mruby_gift_apr_procattr_t_data_ptr(mrb_value obj, apr_procattr_t *unboxed);
-
-apr_procattr_t *
-mruby_unbox_apr_procattr_t(mrb_value boxed);
-#endif
-/* MRUBY_BINDING_END */
-
-/* MRUBY_BINDING: AprProcMutexT::boxing_decls */
-/* sha: 4d7c58cf258fa974193bee529b43e2e94122d4736093ad802f0890645cd60d9a */
-#if BIND_AprProcMutexT_TYPE
-mrb_value
-mruby_box_apr_proc_mutex_t(mrb_state* mrb, apr_proc_mutex_t *unboxed);
-
-mrb_value
-mruby_giftwrap_apr_proc_mutex_t(mrb_state* mrb, apr_proc_mutex_t *unboxed);
-
-void
-mruby_set_apr_proc_mutex_t_data_ptr(mrb_value obj, apr_proc_mutex_t *unboxed);
-
-void
-mruby_gift_apr_proc_mutex_t_data_ptr(mrb_value obj, apr_proc_mutex_t *unboxed);
-
-apr_proc_mutex_t *
-mruby_unbox_apr_proc_mutex_t(mrb_value boxed);
-#endif
-/* MRUBY_BINDING_END */
-
-/* MRUBY_BINDING: AprProcT::boxing_decls */
-/* sha: 794db237de393aaba45247a92f34a608d11551543b64c8cce03ac76f3eb91557 */
-#if BIND_AprProcT_TYPE
+/* MRUBY_BINDING: Proc::boxing_decls */
+/* sha: 4b2dfe6258278c53b1fdd41275ae665d45e68555a2cbe9251d5618b5bffe5dc7 */
+#if BIND_Proc_TYPE
 mrb_value
 mruby_box_apr_proc_t(mrb_state* mrb, apr_proc_t *unboxed);
 
@@ -261,9 +221,49 @@ mruby_unbox_apr_proc_t(mrb_value boxed);
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSockaddrT::boxing_decls */
-/* sha: 8d75a59b4a6a6689447136ef1bdf8d3bb1bf77beedd017e3ec331f79f1f155c2 */
-#if BIND_AprSockaddrT_TYPE
+/* MRUBY_BINDING: Procattr::boxing_decls */
+/* sha: 3b9e038601bf409c7c0f5826aa681b4c9451c87a6a157820ae2db9953c700839 */
+#if BIND_Procattr_TYPE
+mrb_value
+mruby_box_apr_procattr_t(mrb_state* mrb, apr_procattr_t *unboxed);
+
+mrb_value
+mruby_giftwrap_apr_procattr_t(mrb_state* mrb, apr_procattr_t *unboxed);
+
+void
+mruby_set_apr_procattr_t_data_ptr(mrb_value obj, apr_procattr_t *unboxed);
+
+void
+mruby_gift_apr_procattr_t_data_ptr(mrb_value obj, apr_procattr_t *unboxed);
+
+apr_procattr_t *
+mruby_unbox_apr_procattr_t(mrb_value boxed);
+#endif
+/* MRUBY_BINDING_END */
+
+/* MRUBY_BINDING: ProcMutex::boxing_decls */
+/* sha: 6ea1d894b2a128cbc5f9716273a5e4b18f6c7f001c57a12b24eb9ec7820027db */
+#if BIND_ProcMutex_TYPE
+mrb_value
+mruby_box_apr_proc_mutex_t(mrb_state* mrb, apr_proc_mutex_t *unboxed);
+
+mrb_value
+mruby_giftwrap_apr_proc_mutex_t(mrb_state* mrb, apr_proc_mutex_t *unboxed);
+
+void
+mruby_set_apr_proc_mutex_t_data_ptr(mrb_value obj, apr_proc_mutex_t *unboxed);
+
+void
+mruby_gift_apr_proc_mutex_t_data_ptr(mrb_value obj, apr_proc_mutex_t *unboxed);
+
+apr_proc_mutex_t *
+mruby_unbox_apr_proc_mutex_t(mrb_value boxed);
+#endif
+/* MRUBY_BINDING_END */
+
+/* MRUBY_BINDING: Sockaddr::boxing_decls */
+/* sha: 7ae9c964a377c6fd4ad4dd237b6ed873024f3d18fa4c1124a8d0f10409565d1c */
+#if BIND_Sockaddr_TYPE
 mrb_value
 mruby_box_apr_sockaddr_t(mrb_state* mrb, apr_sockaddr_t *unboxed);
 
@@ -281,9 +281,9 @@ mruby_unbox_apr_sockaddr_t(mrb_value boxed);
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprSocketT::boxing_decls */
-/* sha: 055d43e9cd966e5037cb9c2bafbafb16503aa2ce4ec3e8f7a650d33cd5b65d86 */
-#if BIND_AprSocketT_TYPE
+/* MRUBY_BINDING: Socket::boxing_decls */
+/* sha: a0f2a39c85fb554f2c7fd1a3ba9306bc6a9627e9428da88cf623f30100ae9e3d */
+#if BIND_Socket_TYPE
 mrb_value
 mruby_box_apr_socket_t(mrb_state* mrb, apr_socket_t *unboxed);
 
@@ -301,69 +301,9 @@ mruby_unbox_apr_socket_t(mrb_value boxed);
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprThreadattrT::boxing_decls */
-/* sha: 0949b6c3ae28bae4ff29450d6e2f7240597537d6d06d5c7a7b7088999e307138 */
-#if BIND_AprThreadattrT_TYPE
-mrb_value
-mruby_box_apr_threadattr_t(mrb_state* mrb, apr_threadattr_t *unboxed);
-
-mrb_value
-mruby_giftwrap_apr_threadattr_t(mrb_state* mrb, apr_threadattr_t *unboxed);
-
-void
-mruby_set_apr_threadattr_t_data_ptr(mrb_value obj, apr_threadattr_t *unboxed);
-
-void
-mruby_gift_apr_threadattr_t_data_ptr(mrb_value obj, apr_threadattr_t *unboxed);
-
-apr_threadattr_t *
-mruby_unbox_apr_threadattr_t(mrb_value boxed);
-#endif
-/* MRUBY_BINDING_END */
-
-/* MRUBY_BINDING: AprThreadkeyT::boxing_decls */
-/* sha: d7ac20d528290c6a2fcccd0260f83f0e335be4c718e2411f7124f687d0eff8aa */
-#if BIND_AprThreadkeyT_TYPE
-mrb_value
-mruby_box_apr_threadkey_t(mrb_state* mrb, apr_threadkey_t *unboxed);
-
-mrb_value
-mruby_giftwrap_apr_threadkey_t(mrb_state* mrb, apr_threadkey_t *unboxed);
-
-void
-mruby_set_apr_threadkey_t_data_ptr(mrb_value obj, apr_threadkey_t *unboxed);
-
-void
-mruby_gift_apr_threadkey_t_data_ptr(mrb_value obj, apr_threadkey_t *unboxed);
-
-apr_threadkey_t *
-mruby_unbox_apr_threadkey_t(mrb_value boxed);
-#endif
-/* MRUBY_BINDING_END */
-
-/* MRUBY_BINDING: AprThreadOnceT::boxing_decls */
-/* sha: fe2634ae49017e3ff93f6a424e0211625db195b724c74156cf3e6b6602f46261 */
-#if BIND_AprThreadOnceT_TYPE
-mrb_value
-mruby_box_apr_thread_once_t(mrb_state* mrb, apr_thread_once_t *unboxed);
-
-mrb_value
-mruby_giftwrap_apr_thread_once_t(mrb_state* mrb, apr_thread_once_t *unboxed);
-
-void
-mruby_set_apr_thread_once_t_data_ptr(mrb_value obj, apr_thread_once_t *unboxed);
-
-void
-mruby_gift_apr_thread_once_t_data_ptr(mrb_value obj, apr_thread_once_t *unboxed);
-
-apr_thread_once_t *
-mruby_unbox_apr_thread_once_t(mrb_value boxed);
-#endif
-/* MRUBY_BINDING_END */
-
-/* MRUBY_BINDING: AprThreadT::boxing_decls */
-/* sha: 37feb80f45f4ccf45d1895f8c04aa065e2884e0a55341c8607bddf2d88644db1 */
-#if BIND_AprThreadT_TYPE
+/* MRUBY_BINDING: Thread::boxing_decls */
+/* sha: 41f60f28b56d2ad17750fdde451b61c40c6dbf0d8a908a2b6e64d8937388c686 */
+#if BIND_Thread_TYPE
 mrb_value
 mruby_box_apr_thread_t(mrb_state* mrb, apr_thread_t *unboxed);
 
@@ -381,9 +321,69 @@ mruby_unbox_apr_thread_t(mrb_value boxed);
 #endif
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprTimeExpT::boxing_decls */
-/* sha: 62e78fd9c4e4a823d0e664f3a0aa44fe69a0b44f4e2680685dec6e0b7f512160 */
-#if BIND_AprTimeExpT_TYPE
+/* MRUBY_BINDING: Threadattr::boxing_decls */
+/* sha: 86ed610b2fb972d4a1ae859854d9344544f7f688a3f7620229d66a537ae3d70c */
+#if BIND_Threadattr_TYPE
+mrb_value
+mruby_box_apr_threadattr_t(mrb_state* mrb, apr_threadattr_t *unboxed);
+
+mrb_value
+mruby_giftwrap_apr_threadattr_t(mrb_state* mrb, apr_threadattr_t *unboxed);
+
+void
+mruby_set_apr_threadattr_t_data_ptr(mrb_value obj, apr_threadattr_t *unboxed);
+
+void
+mruby_gift_apr_threadattr_t_data_ptr(mrb_value obj, apr_threadattr_t *unboxed);
+
+apr_threadattr_t *
+mruby_unbox_apr_threadattr_t(mrb_value boxed);
+#endif
+/* MRUBY_BINDING_END */
+
+/* MRUBY_BINDING: Threadkey::boxing_decls */
+/* sha: eb8748cd4e91d7aa2dfcbf60cab35f5b1aaf8c4a9a5b2c231ddf5bcce7d52276 */
+#if BIND_Threadkey_TYPE
+mrb_value
+mruby_box_apr_threadkey_t(mrb_state* mrb, apr_threadkey_t *unboxed);
+
+mrb_value
+mruby_giftwrap_apr_threadkey_t(mrb_state* mrb, apr_threadkey_t *unboxed);
+
+void
+mruby_set_apr_threadkey_t_data_ptr(mrb_value obj, apr_threadkey_t *unboxed);
+
+void
+mruby_gift_apr_threadkey_t_data_ptr(mrb_value obj, apr_threadkey_t *unboxed);
+
+apr_threadkey_t *
+mruby_unbox_apr_threadkey_t(mrb_value boxed);
+#endif
+/* MRUBY_BINDING_END */
+
+/* MRUBY_BINDING: ThreadOnce::boxing_decls */
+/* sha: beb2f8117043e0acbf1575a23daff6b7872bee63ae13b0d64f89afd64e1b8ca5 */
+#if BIND_ThreadOnce_TYPE
+mrb_value
+mruby_box_apr_thread_once_t(mrb_state* mrb, apr_thread_once_t *unboxed);
+
+mrb_value
+mruby_giftwrap_apr_thread_once_t(mrb_state* mrb, apr_thread_once_t *unboxed);
+
+void
+mruby_set_apr_thread_once_t_data_ptr(mrb_value obj, apr_thread_once_t *unboxed);
+
+void
+mruby_gift_apr_thread_once_t_data_ptr(mrb_value obj, apr_thread_once_t *unboxed);
+
+apr_thread_once_t *
+mruby_unbox_apr_thread_once_t(mrb_value boxed);
+#endif
+/* MRUBY_BINDING_END */
+
+/* MRUBY_BINDING: TimeExp::boxing_decls */
+/* sha: 2e727f97d43d19cb368036d03a74b99bbef39251511c017d0c0a7003e6ca2c79 */
+#if BIND_TimeExp_TYPE
 mrb_value
 mruby_box_apr_time_exp_t(mrb_state* mrb, apr_time_exp_t *unboxed);
 

@@ -33,7 +33,7 @@ class File
     # end
 
     def blockdev?
-      @filetype == APR::AprFiletypeE::APR_BLK
+      @filetype == APR::Filetype::APR_BLK
     end
 
     # def blocks
@@ -41,7 +41,7 @@ class File
     # end
 
     def chardev?
-      @filetype == APR::AprFiletypeE::APR_CHR
+      @filetype == APR::Filetype::APR_CHR
     end
 
     # def dev
@@ -57,7 +57,7 @@ class File
     # end
 
     def directory?
-      @filetype == APR::AprFiletypeE::APR_DIR
+      @filetype == APR::Filetype::APR_DIR
     end
 
     # def executable?
@@ -69,7 +69,7 @@ class File
     # end
 
     def file?
-      @filetype == APR::AprFiletypeE::APR_REG
+      @filetype == APR::Filetype::APR_REG
     end
 
     def ftype
@@ -113,7 +113,7 @@ class File
     # end
 
     def pipe?
-      @filetype == APR::AprFiletypeE::APR_PIPE
+      @filetype == APR::Filetype::APR_PIPE
     end
 
     # def rdev
@@ -145,7 +145,7 @@ class File
     # end
 
     def socket?
-      @filetype == APR::AprFiletypeE::APR_SOCKET
+      @filetype == APR::Filetype::APR_SOCKET
     end
 
     # def sticky?
@@ -153,7 +153,7 @@ class File
     # end
 
     def symlink?
-      @filetype == APR::AprFiletypeE::APR_LNK
+      @filetype == APR::Filetype::APR_LNK
     end
 
     # def uid

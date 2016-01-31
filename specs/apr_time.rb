@@ -9,7 +9,7 @@ TestFixture.new('APR API: Time') do
     end
   end
 
-  describe 'APR::apr_time_now(pool: AprPoolT): time: AprTimeT' do
+  describe 'APR::apr_time_now(pool: Pool): time: Time' do
     it 'Gets the current time' do
       time = APR.apr_time_now 0
       err, time_s = APR.apr_ctime(time)

@@ -5,18 +5,18 @@
 
 #include "mruby_APR.h"
 
-#if BIND_AprThreadkeyT_TYPE
+#if BIND_Threadkey_TYPE
 
 /* MRUBY_BINDING: header */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprThreadkeyT::initialize */
-/* sha: 5cd3b3e86592d75b17ea88ef4c2ab85bc31a044aa2e7b07237a90e65930e143e */
-#if BIND_AprThreadkeyT_INITIALIZE
+/* MRUBY_BINDING: Threadkey::initialize */
+/* sha: 928a124f348d17a298ae63aa55fcafb957a6b559b71b0a8c035bbf18ecdc5bd7 */
+#if BIND_Threadkey_INITIALIZE
 mrb_value
-mrb_APR_AprThreadkeyT_initialize(mrb_state* mrb, mrb_value self) {
+mrb_APR_Threadkey_initialize(mrb_state* mrb, mrb_value self) {
   mrb_raise(mrb, E_NOMETHOD_ERROR, "No initializer defined");
 /* 
   apr_threadkey_t* native_object = (apr_threadkey_t*)calloc(1, sizeof(apr_threadkey_t));
@@ -28,7 +28,7 @@ mrb_APR_AprThreadkeyT_initialize(mrb_state* mrb, mrb_value self) {
 /* MRUBY_BINDING_END */
 
 
-void mrb_APR_AprThreadkeyT_init(mrb_state* mrb) {
+void mrb_APR_Threadkey_init(mrb_state* mrb) {
   static int initialized = 0;
   if (initialized) return;
   else initialized = 1;
@@ -38,27 +38,27 @@ void mrb_APR_AprThreadkeyT_init(mrb_state* mrb) {
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprThreadkeyT::class_definition */
-/* sha: 0ff9a73dcc50bf1dd83fa8189c1e9f225922d30c78e40e45002ec9095e8dcde2 */
-  struct RClass* AprThreadkeyT_class = mrb_define_class_under(mrb, APR_module(mrb), "AprThreadkeyT", mrb->object_class);
-  MRB_SET_INSTANCE_TT(AprThreadkeyT_class, MRB_TT_DATA);
+/* MRUBY_BINDING: Threadkey::class_definition */
+/* sha: e8f2bb5b7961e1c21644014229bc34723587f0733c281d479217b0bd74d05568 */
+  struct RClass* Threadkey_class = mrb_define_class_under(mrb, APR_module(mrb), "Threadkey", mrb->object_class);
+  MRB_SET_INSTANCE_TT(Threadkey_class, MRB_TT_DATA);
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprThreadkeyT::pre_class_method_definitions */
+/* MRUBY_BINDING: Threadkey::pre_class_method_definitions */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
 
-/* MRUBY_BINDING: AprThreadkeyT::class_method_definitions */
-/* sha: 3e653bb0a0c0fe20450d717ce5912eeb08f54605dbba362fb06682a801857ebd */
-#if BIND_AprThreadkeyT_INITIALIZE
-  mrb_define_method(mrb, AprThreadkeyT_class, "initialize", mrb_APR_AprThreadkeyT_initialize, MRB_ARGS_NONE());
+/* MRUBY_BINDING: Threadkey::class_method_definitions */
+/* sha: c4f591693005182f404b1f8dbdf4d7bc7e77fd23c21b98c2815667a53a124a24 */
+#if BIND_Threadkey_INITIALIZE
+  mrb_define_method(mrb, Threadkey_class, "initialize", mrb_APR_Threadkey_initialize, MRB_ARGS_NONE());
 #endif
 /* MRUBY_BINDING_END */
 
 
 
-/* MRUBY_BINDING: AprThreadkeyT::post_class_definition */
+/* MRUBY_BINDING: Threadkey::post_class_definition */
 /* sha: user_defined */
 
 /* MRUBY_BINDING_END */
