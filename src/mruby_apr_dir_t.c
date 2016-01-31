@@ -3,71 +3,69 @@
  * Defined in file apr_file_info.h @ line 121
  */
 
-/*
- * TODO: INCLUDES
- */
-
 #include "mruby_APR.h"
 
 #if BIND_AprDirT_TYPE
 
-/*
- * Class Methods
- */
+/* MRUBY_BINDING: header */
+/* sha: user_defined */
 
+/* MRUBY_BINDING_END */
+
+/* MRUBY_BINDING: AprDirT::initialize */
+/* sha: 87fd724605866d34101ed73b88bb90bfb8b3e41bd40ab45209edaf27d4914df5 */
 #if BIND_AprDirT_INITIALIZE
 mrb_value
 mrb_APR_AprDirT_initialize(mrb_state* mrb, mrb_value self) {
-  apr_dir_t* native_object = (apr_dir_t*)malloc(sizeof(apr_dir_t));
+  mrb_raise(mrb, E_NOMETHOD_ERROR, "No initializer defined");
+/* 
+  apr_dir_t* native_object = (apr_dir_t*)calloc(1, sizeof(apr_dir_t));
   mruby_gift_apr_dir_t_data_ptr(self, native_object);
   return self;
+*/
 }
 #endif
-
-mrb_value
-mrb_APR_AprDirT_disown(mrb_state* mrb, mrb_value self) {
-  mrb_value ruby_object;
-  mrb_get_args(mrb, "o", &ruby_object);
-
-  if (!mrb_obj_is_kind_of(mrb, ruby_object, mrb_class_ptr(self))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "APR::AprDirT.disown only accepts objects of type APR::AprDirT");
-    return mrb_nil_value();
-  }
-
-  ((mruby_to_native_ref*)(DATA_PTR(ruby_object)))->belongs_to_ruby = FALSE;
-
-  return mrb_nil_value();
-}
-
-mrb_value
-mrb_APR_AprDirT_belongs_to_ruby(mrb_state* mrb, mrb_value self) {
-  mrb_value ruby_object;
-  mrb_get_args(mrb, "o", &ruby_object);
-
-  if (!mrb_obj_is_kind_of(mrb, ruby_object, mrb_class_ptr(self))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "APR::AprDirT.disown only accepts objects of type APR::AprDirT");
-    return mrb_nil_value();
-  }
-
-  if ( ((mruby_to_native_ref*)(DATA_PTR(ruby_object)))->belongs_to_ruby ) {
-    return mrb_true_value();
-  } else {
-    return mrb_false_value();
-  }
-}
+/* MRUBY_BINDING_END */
 
 
 void mrb_APR_AprDirT_init(mrb_state* mrb) {
+  static int initialized = 0;
+  if (initialized) return;
+  else initialized = 1;
+
+/* MRUBY_BINDING: pre_class_definition */
+/* sha: user_defined */
+
+/* MRUBY_BINDING_END */
+
+/* MRUBY_BINDING: AprDirT::class_definition */
+/* sha: b15c58905996754a73c36e577ee77fbe85dc0607a7b27b03ba936e765749b30d */
   struct RClass* AprDirT_class = mrb_define_class_under(mrb, APR_module(mrb), "AprDirT", mrb->object_class);
   MRB_SET_INSTANCE_TT(AprDirT_class, MRB_TT_DATA);
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: AprDirT::pre_class_method_definitions */
+/* sha: user_defined */
+
+/* MRUBY_BINDING_END */
+
+/* MRUBY_BINDING: AprDirT::class_method_definitions */
+/* sha: 408a414fd456f6d0e8fb900b91a9a916af99016a075ebaaf911fbbb9f2ba1ec7 */
 #if BIND_AprDirT_INITIALIZE
   mrb_define_method(mrb, AprDirT_class, "initialize", mrb_APR_AprDirT_initialize, MRB_ARGS_NONE());
 #endif
-  mrb_define_class_method(mrb, AprDirT_class, "disown", mrb_APR_AprDirT_disown, MRB_ARGS_ARG(1, 0));
-  mrb_define_class_method(mrb, AprDirT_class, "belongs_to_ruby?", mrb_APR_AprDirT_belongs_to_ruby, MRB_ARGS_ARG(1, 0));
+/* MRUBY_BINDING_END */
 
 
+
+/* MRUBY_BINDING: AprDirT::post_class_definition */
+/* sha: user_defined */
+
+/* MRUBY_BINDING_END */
 }
 
+/* MRUBY_BINDING: footer */
+/* sha: user_defined */
+
+/* MRUBY_BINDING_END */
 #endif

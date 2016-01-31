@@ -3,71 +3,69 @@
  * Defined in file apr_thread_proc.h @ line 177
  */
 
-/*
- * TODO: INCLUDES
- */
-
 #include "mruby_APR.h"
 
 #if BIND_AprThreadT_TYPE
 
-/*
- * Class Methods
- */
+/* MRUBY_BINDING: header */
+/* sha: user_defined */
 
+/* MRUBY_BINDING_END */
+
+/* MRUBY_BINDING: AprThreadT::initialize */
+/* sha: 31f3d1db83929d0ced3c7b8d2955bfdb5324672d9a33cdd918a48445efd136ba */
 #if BIND_AprThreadT_INITIALIZE
 mrb_value
 mrb_APR_AprThreadT_initialize(mrb_state* mrb, mrb_value self) {
-  apr_thread_t* native_object = (apr_thread_t*)malloc(sizeof(apr_thread_t));
+  mrb_raise(mrb, E_NOMETHOD_ERROR, "No initializer defined");
+/* 
+  apr_thread_t* native_object = (apr_thread_t*)calloc(1, sizeof(apr_thread_t));
   mruby_gift_apr_thread_t_data_ptr(self, native_object);
   return self;
+*/
 }
 #endif
-
-mrb_value
-mrb_APR_AprThreadT_disown(mrb_state* mrb, mrb_value self) {
-  mrb_value ruby_object;
-  mrb_get_args(mrb, "o", &ruby_object);
-
-  if (!mrb_obj_is_kind_of(mrb, ruby_object, mrb_class_ptr(self))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "APR::AprThreadT.disown only accepts objects of type APR::AprThreadT");
-    return mrb_nil_value();
-  }
-
-  ((mruby_to_native_ref*)(DATA_PTR(ruby_object)))->belongs_to_ruby = FALSE;
-
-  return mrb_nil_value();
-}
-
-mrb_value
-mrb_APR_AprThreadT_belongs_to_ruby(mrb_state* mrb, mrb_value self) {
-  mrb_value ruby_object;
-  mrb_get_args(mrb, "o", &ruby_object);
-
-  if (!mrb_obj_is_kind_of(mrb, ruby_object, mrb_class_ptr(self))) {
-    mrb_raise(mrb, E_TYPE_ERROR, "APR::AprThreadT.disown only accepts objects of type APR::AprThreadT");
-    return mrb_nil_value();
-  }
-
-  if ( ((mruby_to_native_ref*)(DATA_PTR(ruby_object)))->belongs_to_ruby ) {
-    return mrb_true_value();
-  } else {
-    return mrb_false_value();
-  }
-}
+/* MRUBY_BINDING_END */
 
 
 void mrb_APR_AprThreadT_init(mrb_state* mrb) {
+  static int initialized = 0;
+  if (initialized) return;
+  else initialized = 1;
+
+/* MRUBY_BINDING: pre_class_definition */
+/* sha: user_defined */
+
+/* MRUBY_BINDING_END */
+
+/* MRUBY_BINDING: AprThreadT::class_definition */
+/* sha: 8552706d0761b6b93694d703899def3287511ea59f9774391934e0ea042274df */
   struct RClass* AprThreadT_class = mrb_define_class_under(mrb, APR_module(mrb), "AprThreadT", mrb->object_class);
   MRB_SET_INSTANCE_TT(AprThreadT_class, MRB_TT_DATA);
+/* MRUBY_BINDING_END */
 
+/* MRUBY_BINDING: AprThreadT::pre_class_method_definitions */
+/* sha: user_defined */
+
+/* MRUBY_BINDING_END */
+
+/* MRUBY_BINDING: AprThreadT::class_method_definitions */
+/* sha: a0f01ce7439ba983e48a0326aa97fab058f95ee47fb18e5dadf3678526a0a082 */
 #if BIND_AprThreadT_INITIALIZE
   mrb_define_method(mrb, AprThreadT_class, "initialize", mrb_APR_AprThreadT_initialize, MRB_ARGS_NONE());
 #endif
-  mrb_define_class_method(mrb, AprThreadT_class, "disown", mrb_APR_AprThreadT_disown, MRB_ARGS_ARG(1, 0));
-  mrb_define_class_method(mrb, AprThreadT_class, "belongs_to_ruby?", mrb_APR_AprThreadT_belongs_to_ruby, MRB_ARGS_ARG(1, 0));
+/* MRUBY_BINDING_END */
 
 
+
+/* MRUBY_BINDING: AprThreadT::post_class_definition */
+/* sha: user_defined */
+
+/* MRUBY_BINDING_END */
 }
 
+/* MRUBY_BINDING: footer */
+/* sha: user_defined */
+
+/* MRUBY_BINDING_END */
 #endif

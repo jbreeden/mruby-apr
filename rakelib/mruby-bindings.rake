@@ -21,6 +21,7 @@ namespace :bindings do
       #{inc}/apr_signal.h
       #{inc}/apr_strings.h
       #{inc}/apr_time.h
+      #{inc}/apr_thread_proc.h
       #{inc}/apr_want.h
     ]
     

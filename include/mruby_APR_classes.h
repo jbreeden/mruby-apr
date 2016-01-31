@@ -1,0 +1,152 @@
+#ifndef MRUBY_APR_CLASSES_HEADER
+#define MRUBY_APR_CLASSES_HEADER
+
+#define BIND_AprDirT_TYPE TRUE
+#define BIND_AprDirT_INITIALIZE TRUE
+
+#define BIND_AprFileT_TYPE TRUE
+#define BIND_AprFileT_INITIALIZE TRUE
+
+#define BIND_AprFinfoT_TYPE TRUE
+#define BIND_AprFinfoT_INITIALIZE TRUE
+#define BIND_AprFinfoT_pool_FIELD_READER TRUE
+#define BIND_AprFinfoT_pool_FIELD_WRITER TRUE
+#define BIND_AprFinfoT_valid_FIELD_READER TRUE
+#define BIND_AprFinfoT_valid_FIELD_WRITER TRUE
+#define BIND_AprFinfoT_protection_FIELD_READER TRUE
+#define BIND_AprFinfoT_protection_FIELD_WRITER TRUE
+#define BIND_AprFinfoT_filetype_FIELD_READER TRUE
+#define BIND_AprFinfoT_filetype_FIELD_WRITER TRUE
+#define BIND_AprFinfoT_user_FIELD_READER FALSE
+#define BIND_AprFinfoT_user_FIELD_WRITER FALSE
+#define BIND_AprFinfoT_group_FIELD_READER FALSE
+#define BIND_AprFinfoT_group_FIELD_WRITER FALSE
+#define BIND_AprFinfoT_inode_FIELD_READER FALSE
+#define BIND_AprFinfoT_inode_FIELD_WRITER FALSE
+#define BIND_AprFinfoT_device_FIELD_READER FALSE
+#define BIND_AprFinfoT_device_FIELD_WRITER FALSE
+#define BIND_AprFinfoT_nlink_FIELD_READER TRUE
+#define BIND_AprFinfoT_nlink_FIELD_WRITER TRUE
+#define BIND_AprFinfoT_size_FIELD_READER FALSE
+#define BIND_AprFinfoT_size_FIELD_WRITER FALSE
+#define BIND_AprFinfoT_csize_FIELD_READER FALSE
+#define BIND_AprFinfoT_csize_FIELD_WRITER FALSE
+#define BIND_AprFinfoT_atime_FIELD_READER FALSE
+#define BIND_AprFinfoT_atime_FIELD_WRITER FALSE
+#define BIND_AprFinfoT_mtime_FIELD_READER FALSE
+#define BIND_AprFinfoT_mtime_FIELD_WRITER FALSE
+#define BIND_AprFinfoT_ctime_FIELD_READER FALSE
+#define BIND_AprFinfoT_ctime_FIELD_WRITER FALSE
+#define BIND_AprFinfoT_fname_FIELD_READER TRUE
+#define BIND_AprFinfoT_fname_FIELD_WRITER TRUE
+#define BIND_AprFinfoT_name_FIELD_READER TRUE
+#define BIND_AprFinfoT_name_FIELD_WRITER TRUE
+#define BIND_AprFinfoT_filehand_FIELD_READER TRUE
+#define BIND_AprFinfoT_filehand_FIELD_WRITER TRUE
+
+#define BIND_AprGlobalMutexT_TYPE TRUE
+#define BIND_AprGlobalMutexT_INITIALIZE TRUE
+
+#define BIND_AprHdtrT_TYPE TRUE
+#define BIND_AprHdtrT_INITIALIZE TRUE
+#define BIND_AprHdtrT_headers_FIELD_READER FALSE
+#define BIND_AprHdtrT_headers_FIELD_WRITER FALSE
+#define BIND_AprHdtrT_numheaders_FIELD_READER TRUE
+#define BIND_AprHdtrT_numheaders_FIELD_WRITER TRUE
+#define BIND_AprHdtrT_trailers_FIELD_READER FALSE
+#define BIND_AprHdtrT_trailers_FIELD_WRITER FALSE
+#define BIND_AprHdtrT_numtrailers_FIELD_READER TRUE
+#define BIND_AprHdtrT_numtrailers_FIELD_WRITER TRUE
+
+#define BIND_AprIpsubnetT_TYPE TRUE
+#define BIND_AprIpsubnetT_INITIALIZE TRUE
+
+#define BIND_AprOtherChildRecT_TYPE TRUE
+#define BIND_AprOtherChildRecT_INITIALIZE TRUE
+
+#define BIND_AprPoolT_TYPE TRUE
+#define BIND_AprPoolT_INITIALIZE TRUE
+
+#define BIND_AprProcMutexT_TYPE TRUE
+#define BIND_AprProcMutexT_INITIALIZE TRUE
+
+#define BIND_AprProcT_TYPE TRUE
+#define BIND_AprProcT_INITIALIZE TRUE
+#define BIND_AprProcT_pid_FIELD_READER FALSE
+#define BIND_AprProcT_pid_FIELD_WRITER FALSE
+#define BIND_AprProcT_in_FIELD_READER TRUE
+#define BIND_AprProcT_in_FIELD_WRITER TRUE
+#define BIND_AprProcT_out_FIELD_READER TRUE
+#define BIND_AprProcT_out_FIELD_WRITER TRUE
+#define BIND_AprProcT_err_FIELD_READER TRUE
+#define BIND_AprProcT_err_FIELD_WRITER TRUE
+
+#define BIND_AprProcattrT_TYPE TRUE
+#define BIND_AprProcattrT_INITIALIZE TRUE
+
+#define BIND_AprSockaddrT_TYPE TRUE
+#define BIND_AprSockaddrT_INITIALIZE TRUE
+#define BIND_AprSockaddrT_pool_FIELD_READER TRUE
+#define BIND_AprSockaddrT_pool_FIELD_WRITER TRUE
+#define BIND_AprSockaddrT_hostname_FIELD_READER FALSE
+#define BIND_AprSockaddrT_hostname_FIELD_WRITER FALSE
+#define BIND_AprSockaddrT_servname_FIELD_READER FALSE
+#define BIND_AprSockaddrT_servname_FIELD_WRITER FALSE
+#define BIND_AprSockaddrT_port_FIELD_READER TRUE
+#define BIND_AprSockaddrT_port_FIELD_WRITER TRUE
+#define BIND_AprSockaddrT_family_FIELD_READER TRUE
+#define BIND_AprSockaddrT_family_FIELD_WRITER TRUE
+#define BIND_AprSockaddrT_salen_FIELD_READER FALSE
+#define BIND_AprSockaddrT_salen_FIELD_WRITER FALSE
+#define BIND_AprSockaddrT_ipaddr_len_FIELD_READER TRUE
+#define BIND_AprSockaddrT_ipaddr_len_FIELD_WRITER TRUE
+#define BIND_AprSockaddrT_addr_str_len_FIELD_READER TRUE
+#define BIND_AprSockaddrT_addr_str_len_FIELD_WRITER TRUE
+#define BIND_AprSockaddrT_ipaddr_ptr_FIELD_READER FALSE
+#define BIND_AprSockaddrT_ipaddr_ptr_FIELD_WRITER FALSE
+#define BIND_AprSockaddrT_next_FIELD_READER TRUE
+#define BIND_AprSockaddrT_next_FIELD_WRITER TRUE
+#define BIND_AprSockaddrT_sa_FIELD_READER FALSE
+#define BIND_AprSockaddrT_sa_FIELD_WRITER FALSE
+
+#define BIND_AprSocketT_TYPE TRUE
+#define BIND_AprSocketT_INITIALIZE TRUE
+
+#define BIND_AprThreadOnceT_TYPE TRUE
+#define BIND_AprThreadOnceT_INITIALIZE TRUE
+
+#define BIND_AprThreadT_TYPE TRUE
+#define BIND_AprThreadT_INITIALIZE TRUE
+
+#define BIND_AprThreadattrT_TYPE TRUE
+#define BIND_AprThreadattrT_INITIALIZE TRUE
+
+#define BIND_AprThreadkeyT_TYPE TRUE
+#define BIND_AprThreadkeyT_INITIALIZE TRUE
+
+#define BIND_AprTimeExpT_TYPE TRUE
+#define BIND_AprTimeExpT_INITIALIZE TRUE
+#define BIND_AprTimeExpT_tm_usec_FIELD_READER TRUE
+#define BIND_AprTimeExpT_tm_usec_FIELD_WRITER TRUE
+#define BIND_AprTimeExpT_tm_sec_FIELD_READER TRUE
+#define BIND_AprTimeExpT_tm_sec_FIELD_WRITER TRUE
+#define BIND_AprTimeExpT_tm_min_FIELD_READER TRUE
+#define BIND_AprTimeExpT_tm_min_FIELD_WRITER TRUE
+#define BIND_AprTimeExpT_tm_hour_FIELD_READER TRUE
+#define BIND_AprTimeExpT_tm_hour_FIELD_WRITER TRUE
+#define BIND_AprTimeExpT_tm_mday_FIELD_READER TRUE
+#define BIND_AprTimeExpT_tm_mday_FIELD_WRITER TRUE
+#define BIND_AprTimeExpT_tm_mon_FIELD_READER TRUE
+#define BIND_AprTimeExpT_tm_mon_FIELD_WRITER TRUE
+#define BIND_AprTimeExpT_tm_year_FIELD_READER TRUE
+#define BIND_AprTimeExpT_tm_year_FIELD_WRITER TRUE
+#define BIND_AprTimeExpT_tm_wday_FIELD_READER TRUE
+#define BIND_AprTimeExpT_tm_wday_FIELD_WRITER TRUE
+#define BIND_AprTimeExpT_tm_yday_FIELD_READER TRUE
+#define BIND_AprTimeExpT_tm_yday_FIELD_WRITER TRUE
+#define BIND_AprTimeExpT_tm_isdst_FIELD_READER TRUE
+#define BIND_AprTimeExpT_tm_isdst_FIELD_WRITER TRUE
+#define BIND_AprTimeExpT_tm_gmtoff_FIELD_READER TRUE
+#define BIND_AprTimeExpT_tm_gmtoff_FIELD_WRITER TRUE
+
+#endif
