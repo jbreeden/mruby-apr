@@ -7,12 +7,12 @@ module APR
       return if apr_errno == err
     end
     if apr_errno != APR::APR_SUCCESS
-      raise SystemCallError.new("ERROR: #{apr_errno} #{APR.apr_strerror(apr_errno)}", APR.apr_to_os_error(apr_errno))
+      raise SystemCallError.new("ERROR: #{apr_errno} #{APR.strerror(apr_errno)}", APR.to_os_error(apr_errno))
     end
   end
 
   def self.with_pool(&block)
-    err, pool = APR.apr_pool_create(nil)
+    err, pool = APR.pool_create(nil)
     return block[pool]
   end
 
@@ -88,7 +88,7 @@ module APR
 
   module Convert
     def self.apr_time_to_rb(apr_time)
-      Time.at(APR.apr_time_sec(apr_time))
+      Time.at(APR.time_sec(apr_time))
     end
   end
 end

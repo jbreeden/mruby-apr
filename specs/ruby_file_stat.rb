@@ -8,7 +8,7 @@ TestFixture.new('Ruby API: File::Stat') do
   describe 'Stat#atime' do
     it 'Gives the access time of the file as a Time' do
       # Unfortunately have to sleep for a second to guarantee atime > "now"
-      APR.apr_sleep 2000000 # micro seconds
+      APR.sleep 2000000 # micro seconds
       stat = File::Stat.new(empty_file)
       assert(stat.atime.class == Time)
     end
@@ -19,7 +19,7 @@ TestFixture.new('Ruby API: File::Stat') do
       created_file = "#{$sandbox}/created_file.txt"
       now = Time.now
       # Unfortunately have to sleep for a second to guarantee ctime > "now"
-      APR.apr_sleep 2000000 # micro seconds
+      APR.sleep 2000000 # micro seconds
       # File.delete(created_file) if File.exists?(created_file)
       File.open(created_file, 'w') do |f|
         f.puts "Created after #{now}"

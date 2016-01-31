@@ -31,13 +31,13 @@ class BasicSocket < IO
     msg = ""
 
     if length
-      err, msg = APR::apr_socket_recv(@apr_socket, length)
+      err, msg = APR.socket_recv(@apr_socket, length)
       APR::raise_apr_errno(err, ignore: APR::APR_EOF)
     else
       err = nil
       msg = ""
       while err != APR::APR_EOF
-        err, part = APR::apr_socket_recv(@apr_socket, 100)
+        err, part = APR.socket_recv(@apr_socket, 100)
         APR::raise_apr_errno(err, ignore: APR::APR_EOF)
         msg += part
       end
@@ -60,13 +60,13 @@ class BasicSocket < IO
 
     # Todo: check for socket connection
     str = str.to_s unless str.class == String
-    err, bytes_sent = APR::apr_socket_send(@apr_socket, str, str.length)
+    err, bytes_sent = APR.socket_send(@apr_socket, str, str.length)
     APR.raise_apr_errno(err)
     bytes_sent
   end
 
   def eof?
-    err, at_eof = APR::apr_socket_atreadeof(@apr_socket)
+    err, at_eof = APR.socket_atreadeof(@apr_socket)
     APR.raise_apr_errno(err)
     at_eof
   end
@@ -183,19 +183,19 @@ class BasicSocket < IO
   def close
     @can_read = false
     @can_write = false
-    err = APR::apr_socket_close(@apr_socket)
+    err = APR.socket_close(@apr_socket)
     APR.raise_apr_errno(err)
   end
 
   def close_read
     @can_read = false
-    err = APR::apr_socket_shutdown(@apr_socket, APR::ShutdownHow::APR_SHUTDOWN_READ)
+    err = APR.socket_shutdown(@apr_socket, APR::ShutdownHow::APR_SHUTDOWN_READ)
     APR.raise_apr_errno(err)
   end
 
   def close_write
     @can_write = false
-    err = APR::apr_socket_shutdown(@apr_socket, APR::ShutdownHow::APR_SHUTDOWN_WRITE)
+    err = APR.socket_shutdown(@apr_socket, APR::ShutdownHow::APR_SHUTDOWN_WRITE)
     APR.raise_apr_errno(err)
   end
 
@@ -232,7 +232,7 @@ class BasicSocket < IO
   # end
 
   def recv(maxlen)
-    err, msg = APR.apr_socket_recv(@apr_socket, maxlen)
+    err, msg = APR.socket_recv(@apr_socket, maxlen)
     APR.raise_apr_errno(err, ignore: APR::APR_EOF)
     msg
   end
@@ -257,7 +257,7 @@ class BasicSocket < IO
     assert_can_write
 
     msg = msg.to_s unless msg.class == String
-    err, bytes_sent = APR::apr_socket_send(@apr_socket, msg, msg.length)
+    err, bytes_sent = APR.socket_send(@apr_socket, msg, msg.length)
     APR.raise_apr_errno(err)
     bytes_sent
   end

@@ -23,10 +23,10 @@ CTypes.translate_type_names do |name|
   MRubyBindings.type_name_to_rb_class(name).sub(/^Apr(.*)(T|E)/, "\\1")
 end
 
-## This block is called to determine the Ruby method name to use for a C function.
-# CTypes.translate_fn_names do |name|
-#   name
-# end
+# This block is called to determine the Ruby method name to use for a C function.
+CTypes.translate_fn_names do |name|
+  name.sub(/^apr_/, '')
+end
 
 ## This block is called to determine the Ruby constant name to use for a C enum value.
 # CTypes.translate_enum_names do |name|

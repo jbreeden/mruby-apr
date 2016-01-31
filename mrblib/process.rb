@@ -115,14 +115,14 @@ module Process
     command = command.dup
 
     APR.with_stack_pool do |pool|
-      err, proc_attr = APR.apr_procattr_create pool
+      err, proc_attr = APR.procattr_create pool
       args = Util.parse_spawn_args(*command, pool)
       env = args[:env]
       argv = args[:argv]
       options = args[:options]
       cmd_type = args[:cmd_type]
 
-      APR.apr_procattr_cmdtype_set proc_attr, cmd_type
+      APR.procattr_cmdtype_set proc_attr, cmd_type
 
       # TODO: Configure environment variables from env hash
 
@@ -131,22 +131,22 @@ module Process
           # Pass nil as the parent file, or else APR tries to create a new pipe
           # between the two files. If a pipe is required for the child process,
           # it will have been created by IO.pipe already by the client.
-          err = APR.apr_procattr_child_in_set proc_attr, options[:in].native_file, nil
+          err = APR.procattr_child_in_set proc_attr, options[:in].native_file, nil
           APR.raise_apr_errno(err)
         end
         if options[:out]
-          err = APR.apr_procattr_child_out_set proc_attr, options[:out].native_file, nil
+          err = APR.procattr_child_out_set proc_attr, options[:out].native_file, nil
           APR.raise_apr_errno(err)
         end
         if options[:err]
-          err = APR.apr_procattr_child_err_set proc_attr, options[:err].native_file, nil
+          err = APR.procattr_child_err_set proc_attr, options[:err].native_file, nil
           APR.raise_apr_errno(err)
         end
       else
-        APR.apr_procattr_io_set(proc_attr, APR::APR_NO_PIPE, APR::APR_NO_PIPE, APR::APR_NO_PIPE)
+        APR.procattr_io_set(proc_attr, APR::APR_NO_PIPE, APR::APR_NO_PIPE, APR::APR_NO_PIPE)
       end
 
-      err, process = APR.apr_proc_create argv[0], argv, nil, proc_attr, pool
+      err, process = APR.proc_create argv[0], argv, nil, proc_attr, pool
       APR.raise_apr_errno(err)
 
       process.pid
@@ -154,8 +154,8 @@ module Process
   end
 
   def self.wait(pid)
-    proc = APR.apr_proc_from_pid(pid)
-    err, exit_code, exit_why = APR.apr_proc_wait(proc, APR::WaitHow::APR_WAIT)
+    proc = APR.proc_from_pid(pid)
+    err, exit_code, exit_why = APR.proc_wait(proc, APR::WaitHow::APR_WAIT)
     APR.raise_apr_errno(err, ignore: [APR::APR_CHILD_NOTDONE, APR::APR_CHILD_DONE])
     $? = Process::Status.new(pid, exit_code, exit_why)
     return pid

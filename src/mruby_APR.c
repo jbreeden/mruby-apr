@@ -10441,12 +10441,12 @@ void mrb_mruby_apr_gem_init(mrb_state* mrb) {
 
 /* MRUBY_BINDING: pre_global_function_initializations */
 /* sha: user_defined */
-  mrb_define_class_method(mrb, APR_module, "apr_dir_chdir", mrb_APR_dir_chdir, MRB_ARGS_ARG(chdir_REQUIRED_ARGC, chdir_OPTIONAL_ARGC));
-  mrb_define_class_method(mrb, APR_module, "apr_dir_getcwd", mrb_APR_dir_getcwd, MRB_ARGS_ARG(getcwd_REQUIRED_ARGC, getcwd_OPTIONAL_ARGC));
-  mrb_define_class_method(mrb, APR_module, "apr_proc_from_pid", mrb_APR_apr_proc_from_pid, MRB_ARGS_ARG(1, 0));
-  mrb_define_class_method(mrb, APR_module, "apr_pool_create", mrb_APR_apr_pool_create, MRB_ARGS_ARG(apr_pool_create_REQUIRED_ARGC, apr_pool_create_OPTIONAL_ARGC));
-  mrb_define_class_method(mrb, APR_module, "apr_to_os_error", mrb_APR_apr_to_os_error, MRB_ARGS_ARG(apr_to_os_error_REQUIRED_ARGC, apr_to_os_error_OPTIONAL_ARGC));
-  mrb_define_class_method(mrb, APR_module, "apr_file_inherit_unset", mrb_APR_apr_file_inherit_unset, MRB_ARGS_ARG(apr_file_inherit_unset_REQUIRED_ARGC, apr_file_inherit_unset_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "dir_chdir", mrb_APR_dir_chdir, MRB_ARGS_ARG(chdir_REQUIRED_ARGC, chdir_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "dir_getcwd", mrb_APR_dir_getcwd, MRB_ARGS_ARG(getcwd_REQUIRED_ARGC, getcwd_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_from_pid", mrb_APR_apr_proc_from_pid, MRB_ARGS_ARG(1, 0));
+  mrb_define_class_method(mrb, APR_module, "pool_create", mrb_APR_apr_pool_create, MRB_ARGS_ARG(apr_pool_create_REQUIRED_ARGC, apr_pool_create_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "to_os_error", mrb_APR_apr_to_os_error, MRB_ARGS_ARG(apr_to_os_error_REQUIRED_ARGC, apr_to_os_error_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_inherit_unset", mrb_APR_apr_file_inherit_unset, MRB_ARGS_ARG(apr_file_inherit_unset_REQUIRED_ARGC, apr_file_inherit_unset_OPTIONAL_ARGC));
   
   /* Error Status Checks */
 
@@ -10527,780 +10527,780 @@ void mrb_mruby_apr_gem_init(mrb_state* mrb) {
 /* MRUBY_BINDING_END */
 
 /* MRUBY_BINDING: global_function_definitions */
-/* sha: 90de25300936d01c8de58dddbd7db4dde951bd316f7dbf74e40cd032a4c7d403 */
+/* sha: 75befa84a15492bf00e42ab8f30e2cf8cc9a0c78b4cbd3acc7a779c23d9fe8c4 */
   /*
    * Global Functions
    */
 #if BIND_apr_app_initialize_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_app_initialize", mrb_APR_apr_app_initialize, MRB_ARGS_ARG(apr_app_initialize_REQUIRED_ARGC, apr_app_initialize_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "app_initialize", mrb_APR_apr_app_initialize, MRB_ARGS_ARG(apr_app_initialize_REQUIRED_ARGC, apr_app_initialize_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_atoi64_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_atoi64", mrb_APR_apr_atoi64, MRB_ARGS_ARG(apr_atoi64_REQUIRED_ARGC, apr_atoi64_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "atoi64", mrb_APR_apr_atoi64, MRB_ARGS_ARG(apr_atoi64_REQUIRED_ARGC, apr_atoi64_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_collapse_spaces_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_collapse_spaces", mrb_APR_apr_collapse_spaces, MRB_ARGS_ARG(apr_collapse_spaces_REQUIRED_ARGC, apr_collapse_spaces_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "collapse_spaces", mrb_APR_apr_collapse_spaces, MRB_ARGS_ARG(apr_collapse_spaces_REQUIRED_ARGC, apr_collapse_spaces_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_cpystrn_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_cpystrn", mrb_APR_apr_cpystrn, MRB_ARGS_ARG(apr_cpystrn_REQUIRED_ARGC, apr_cpystrn_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "cpystrn", mrb_APR_apr_cpystrn, MRB_ARGS_ARG(apr_cpystrn_REQUIRED_ARGC, apr_cpystrn_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_ctime_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_ctime", mrb_APR_apr_ctime, MRB_ARGS_ARG(apr_ctime_REQUIRED_ARGC, apr_ctime_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "ctime", mrb_APR_apr_ctime, MRB_ARGS_ARG(apr_ctime_REQUIRED_ARGC, apr_ctime_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_dir_close_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_dir_close", mrb_APR_apr_dir_close, MRB_ARGS_ARG(apr_dir_close_REQUIRED_ARGC, apr_dir_close_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "dir_close", mrb_APR_apr_dir_close, MRB_ARGS_ARG(apr_dir_close_REQUIRED_ARGC, apr_dir_close_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_dir_make_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_dir_make", mrb_APR_apr_dir_make, MRB_ARGS_ARG(apr_dir_make_REQUIRED_ARGC, apr_dir_make_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "dir_make", mrb_APR_apr_dir_make, MRB_ARGS_ARG(apr_dir_make_REQUIRED_ARGC, apr_dir_make_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_dir_make_recursive_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_dir_make_recursive", mrb_APR_apr_dir_make_recursive, MRB_ARGS_ARG(apr_dir_make_recursive_REQUIRED_ARGC, apr_dir_make_recursive_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "dir_make_recursive", mrb_APR_apr_dir_make_recursive, MRB_ARGS_ARG(apr_dir_make_recursive_REQUIRED_ARGC, apr_dir_make_recursive_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_dir_open_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_dir_open", mrb_APR_apr_dir_open, MRB_ARGS_ARG(apr_dir_open_REQUIRED_ARGC, apr_dir_open_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "dir_open", mrb_APR_apr_dir_open, MRB_ARGS_ARG(apr_dir_open_REQUIRED_ARGC, apr_dir_open_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_dir_read_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_dir_read", mrb_APR_apr_dir_read, MRB_ARGS_ARG(apr_dir_read_REQUIRED_ARGC, apr_dir_read_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "dir_read", mrb_APR_apr_dir_read, MRB_ARGS_ARG(apr_dir_read_REQUIRED_ARGC, apr_dir_read_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_dir_remove_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_dir_remove", mrb_APR_apr_dir_remove, MRB_ARGS_ARG(apr_dir_remove_REQUIRED_ARGC, apr_dir_remove_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "dir_remove", mrb_APR_apr_dir_remove, MRB_ARGS_ARG(apr_dir_remove_REQUIRED_ARGC, apr_dir_remove_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_dir_rewind_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_dir_rewind", mrb_APR_apr_dir_rewind, MRB_ARGS_ARG(apr_dir_rewind_REQUIRED_ARGC, apr_dir_rewind_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "dir_rewind", mrb_APR_apr_dir_rewind, MRB_ARGS_ARG(apr_dir_rewind_REQUIRED_ARGC, apr_dir_rewind_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_env_delete_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_env_delete", mrb_APR_apr_env_delete, MRB_ARGS_ARG(apr_env_delete_REQUIRED_ARGC, apr_env_delete_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "env_delete", mrb_APR_apr_env_delete, MRB_ARGS_ARG(apr_env_delete_REQUIRED_ARGC, apr_env_delete_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_env_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_env_get", mrb_APR_apr_env_get, MRB_ARGS_ARG(apr_env_get_REQUIRED_ARGC, apr_env_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "env_get", mrb_APR_apr_env_get, MRB_ARGS_ARG(apr_env_get_REQUIRED_ARGC, apr_env_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_env_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_env_set", mrb_APR_apr_env_set, MRB_ARGS_ARG(apr_env_set_REQUIRED_ARGC, apr_env_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "env_set", mrb_APR_apr_env_set, MRB_ARGS_ARG(apr_env_set_REQUIRED_ARGC, apr_env_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_append_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_append", mrb_APR_apr_file_append, MRB_ARGS_ARG(apr_file_append_REQUIRED_ARGC, apr_file_append_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_append", mrb_APR_apr_file_append, MRB_ARGS_ARG(apr_file_append_REQUIRED_ARGC, apr_file_append_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_attrs_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_attrs_set", mrb_APR_apr_file_attrs_set, MRB_ARGS_ARG(apr_file_attrs_set_REQUIRED_ARGC, apr_file_attrs_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_attrs_set", mrb_APR_apr_file_attrs_set, MRB_ARGS_ARG(apr_file_attrs_set_REQUIRED_ARGC, apr_file_attrs_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_buffer_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_buffer_set", mrb_APR_apr_file_buffer_set, MRB_ARGS_ARG(apr_file_buffer_set_REQUIRED_ARGC, apr_file_buffer_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_buffer_set", mrb_APR_apr_file_buffer_set, MRB_ARGS_ARG(apr_file_buffer_set_REQUIRED_ARGC, apr_file_buffer_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_buffer_size_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_buffer_size_get", mrb_APR_apr_file_buffer_size_get, MRB_ARGS_ARG(apr_file_buffer_size_get_REQUIRED_ARGC, apr_file_buffer_size_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_buffer_size_get", mrb_APR_apr_file_buffer_size_get, MRB_ARGS_ARG(apr_file_buffer_size_get_REQUIRED_ARGC, apr_file_buffer_size_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_close_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_close", mrb_APR_apr_file_close, MRB_ARGS_ARG(apr_file_close_REQUIRED_ARGC, apr_file_close_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_close", mrb_APR_apr_file_close, MRB_ARGS_ARG(apr_file_close_REQUIRED_ARGC, apr_file_close_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_copy_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_copy", mrb_APR_apr_file_copy, MRB_ARGS_ARG(apr_file_copy_REQUIRED_ARGC, apr_file_copy_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_copy", mrb_APR_apr_file_copy, MRB_ARGS_ARG(apr_file_copy_REQUIRED_ARGC, apr_file_copy_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_data_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_data_get", mrb_APR_apr_file_data_get, MRB_ARGS_ARG(apr_file_data_get_REQUIRED_ARGC, apr_file_data_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_data_get", mrb_APR_apr_file_data_get, MRB_ARGS_ARG(apr_file_data_get_REQUIRED_ARGC, apr_file_data_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_data_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_data_set", mrb_APR_apr_file_data_set, MRB_ARGS_ARG(apr_file_data_set_REQUIRED_ARGC, apr_file_data_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_data_set", mrb_APR_apr_file_data_set, MRB_ARGS_ARG(apr_file_data_set_REQUIRED_ARGC, apr_file_data_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_datasync_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_datasync", mrb_APR_apr_file_datasync, MRB_ARGS_ARG(apr_file_datasync_REQUIRED_ARGC, apr_file_datasync_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_datasync", mrb_APR_apr_file_datasync, MRB_ARGS_ARG(apr_file_datasync_REQUIRED_ARGC, apr_file_datasync_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_dup_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_dup", mrb_APR_apr_file_dup, MRB_ARGS_ARG(apr_file_dup_REQUIRED_ARGC, apr_file_dup_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_dup", mrb_APR_apr_file_dup, MRB_ARGS_ARG(apr_file_dup_REQUIRED_ARGC, apr_file_dup_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_dup2_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_dup2", mrb_APR_apr_file_dup2, MRB_ARGS_ARG(apr_file_dup2_REQUIRED_ARGC, apr_file_dup2_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_dup2", mrb_APR_apr_file_dup2, MRB_ARGS_ARG(apr_file_dup2_REQUIRED_ARGC, apr_file_dup2_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_eof_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_eof", mrb_APR_apr_file_eof, MRB_ARGS_ARG(apr_file_eof_REQUIRED_ARGC, apr_file_eof_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_eof", mrb_APR_apr_file_eof, MRB_ARGS_ARG(apr_file_eof_REQUIRED_ARGC, apr_file_eof_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_flags_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_flags_get", mrb_APR_apr_file_flags_get, MRB_ARGS_ARG(apr_file_flags_get_REQUIRED_ARGC, apr_file_flags_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_flags_get", mrb_APR_apr_file_flags_get, MRB_ARGS_ARG(apr_file_flags_get_REQUIRED_ARGC, apr_file_flags_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_flush_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_flush", mrb_APR_apr_file_flush, MRB_ARGS_ARG(apr_file_flush_REQUIRED_ARGC, apr_file_flush_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_flush", mrb_APR_apr_file_flush, MRB_ARGS_ARG(apr_file_flush_REQUIRED_ARGC, apr_file_flush_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_getc_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_getc", mrb_APR_apr_file_getc, MRB_ARGS_ARG(apr_file_getc_REQUIRED_ARGC, apr_file_getc_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_getc", mrb_APR_apr_file_getc, MRB_ARGS_ARG(apr_file_getc_REQUIRED_ARGC, apr_file_getc_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_gets_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_gets", mrb_APR_apr_file_gets, MRB_ARGS_ARG(apr_file_gets_REQUIRED_ARGC, apr_file_gets_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_gets", mrb_APR_apr_file_gets, MRB_ARGS_ARG(apr_file_gets_REQUIRED_ARGC, apr_file_gets_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_info_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_info_get", mrb_APR_apr_file_info_get, MRB_ARGS_ARG(apr_file_info_get_REQUIRED_ARGC, apr_file_info_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_info_get", mrb_APR_apr_file_info_get, MRB_ARGS_ARG(apr_file_info_get_REQUIRED_ARGC, apr_file_info_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_link_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_link", mrb_APR_apr_file_link, MRB_ARGS_ARG(apr_file_link_REQUIRED_ARGC, apr_file_link_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_link", mrb_APR_apr_file_link, MRB_ARGS_ARG(apr_file_link_REQUIRED_ARGC, apr_file_link_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_lock_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_lock", mrb_APR_apr_file_lock, MRB_ARGS_ARG(apr_file_lock_REQUIRED_ARGC, apr_file_lock_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_lock", mrb_APR_apr_file_lock, MRB_ARGS_ARG(apr_file_lock_REQUIRED_ARGC, apr_file_lock_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_mktemp_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_mktemp", mrb_APR_apr_file_mktemp, MRB_ARGS_ARG(apr_file_mktemp_REQUIRED_ARGC, apr_file_mktemp_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_mktemp", mrb_APR_apr_file_mktemp, MRB_ARGS_ARG(apr_file_mktemp_REQUIRED_ARGC, apr_file_mktemp_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_mtime_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_mtime_set", mrb_APR_apr_file_mtime_set, MRB_ARGS_ARG(apr_file_mtime_set_REQUIRED_ARGC, apr_file_mtime_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_mtime_set", mrb_APR_apr_file_mtime_set, MRB_ARGS_ARG(apr_file_mtime_set_REQUIRED_ARGC, apr_file_mtime_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_name_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_name_get", mrb_APR_apr_file_name_get, MRB_ARGS_ARG(apr_file_name_get_REQUIRED_ARGC, apr_file_name_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_name_get", mrb_APR_apr_file_name_get, MRB_ARGS_ARG(apr_file_name_get_REQUIRED_ARGC, apr_file_name_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_namedpipe_create_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_namedpipe_create", mrb_APR_apr_file_namedpipe_create, MRB_ARGS_ARG(apr_file_namedpipe_create_REQUIRED_ARGC, apr_file_namedpipe_create_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_namedpipe_create", mrb_APR_apr_file_namedpipe_create, MRB_ARGS_ARG(apr_file_namedpipe_create_REQUIRED_ARGC, apr_file_namedpipe_create_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_open_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_open", mrb_APR_apr_file_open, MRB_ARGS_ARG(apr_file_open_REQUIRED_ARGC, apr_file_open_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_open", mrb_APR_apr_file_open, MRB_ARGS_ARG(apr_file_open_REQUIRED_ARGC, apr_file_open_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_open_flags_stderr_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_open_flags_stderr", mrb_APR_apr_file_open_flags_stderr, MRB_ARGS_ARG(apr_file_open_flags_stderr_REQUIRED_ARGC, apr_file_open_flags_stderr_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_open_flags_stderr", mrb_APR_apr_file_open_flags_stderr, MRB_ARGS_ARG(apr_file_open_flags_stderr_REQUIRED_ARGC, apr_file_open_flags_stderr_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_open_flags_stdin_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_open_flags_stdin", mrb_APR_apr_file_open_flags_stdin, MRB_ARGS_ARG(apr_file_open_flags_stdin_REQUIRED_ARGC, apr_file_open_flags_stdin_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_open_flags_stdin", mrb_APR_apr_file_open_flags_stdin, MRB_ARGS_ARG(apr_file_open_flags_stdin_REQUIRED_ARGC, apr_file_open_flags_stdin_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_open_flags_stdout_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_open_flags_stdout", mrb_APR_apr_file_open_flags_stdout, MRB_ARGS_ARG(apr_file_open_flags_stdout_REQUIRED_ARGC, apr_file_open_flags_stdout_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_open_flags_stdout", mrb_APR_apr_file_open_flags_stdout, MRB_ARGS_ARG(apr_file_open_flags_stdout_REQUIRED_ARGC, apr_file_open_flags_stdout_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_open_stderr_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_open_stderr", mrb_APR_apr_file_open_stderr, MRB_ARGS_ARG(apr_file_open_stderr_REQUIRED_ARGC, apr_file_open_stderr_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_open_stderr", mrb_APR_apr_file_open_stderr, MRB_ARGS_ARG(apr_file_open_stderr_REQUIRED_ARGC, apr_file_open_stderr_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_open_stdin_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_open_stdin", mrb_APR_apr_file_open_stdin, MRB_ARGS_ARG(apr_file_open_stdin_REQUIRED_ARGC, apr_file_open_stdin_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_open_stdin", mrb_APR_apr_file_open_stdin, MRB_ARGS_ARG(apr_file_open_stdin_REQUIRED_ARGC, apr_file_open_stdin_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_open_stdout_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_open_stdout", mrb_APR_apr_file_open_stdout, MRB_ARGS_ARG(apr_file_open_stdout_REQUIRED_ARGC, apr_file_open_stdout_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_open_stdout", mrb_APR_apr_file_open_stdout, MRB_ARGS_ARG(apr_file_open_stdout_REQUIRED_ARGC, apr_file_open_stdout_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_perms_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_perms_set", mrb_APR_apr_file_perms_set, MRB_ARGS_ARG(apr_file_perms_set_REQUIRED_ARGC, apr_file_perms_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_perms_set", mrb_APR_apr_file_perms_set, MRB_ARGS_ARG(apr_file_perms_set_REQUIRED_ARGC, apr_file_perms_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_pipe_create_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_pipe_create", mrb_APR_apr_file_pipe_create, MRB_ARGS_ARG(apr_file_pipe_create_REQUIRED_ARGC, apr_file_pipe_create_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_pipe_create", mrb_APR_apr_file_pipe_create, MRB_ARGS_ARG(apr_file_pipe_create_REQUIRED_ARGC, apr_file_pipe_create_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_pipe_create_ex_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_pipe_create_ex", mrb_APR_apr_file_pipe_create_ex, MRB_ARGS_ARG(apr_file_pipe_create_ex_REQUIRED_ARGC, apr_file_pipe_create_ex_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_pipe_create_ex", mrb_APR_apr_file_pipe_create_ex, MRB_ARGS_ARG(apr_file_pipe_create_ex_REQUIRED_ARGC, apr_file_pipe_create_ex_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_pipe_timeout_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_pipe_timeout_get", mrb_APR_apr_file_pipe_timeout_get, MRB_ARGS_ARG(apr_file_pipe_timeout_get_REQUIRED_ARGC, apr_file_pipe_timeout_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_pipe_timeout_get", mrb_APR_apr_file_pipe_timeout_get, MRB_ARGS_ARG(apr_file_pipe_timeout_get_REQUIRED_ARGC, apr_file_pipe_timeout_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_pipe_timeout_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_pipe_timeout_set", mrb_APR_apr_file_pipe_timeout_set, MRB_ARGS_ARG(apr_file_pipe_timeout_set_REQUIRED_ARGC, apr_file_pipe_timeout_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_pipe_timeout_set", mrb_APR_apr_file_pipe_timeout_set, MRB_ARGS_ARG(apr_file_pipe_timeout_set_REQUIRED_ARGC, apr_file_pipe_timeout_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_printf_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_printf", mrb_APR_apr_file_printf, MRB_ARGS_ARG(apr_file_printf_REQUIRED_ARGC, apr_file_printf_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_printf", mrb_APR_apr_file_printf, MRB_ARGS_ARG(apr_file_printf_REQUIRED_ARGC, apr_file_printf_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_putc_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_putc", mrb_APR_apr_file_putc, MRB_ARGS_ARG(apr_file_putc_REQUIRED_ARGC, apr_file_putc_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_putc", mrb_APR_apr_file_putc, MRB_ARGS_ARG(apr_file_putc_REQUIRED_ARGC, apr_file_putc_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_puts_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_puts", mrb_APR_apr_file_puts, MRB_ARGS_ARG(apr_file_puts_REQUIRED_ARGC, apr_file_puts_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_puts", mrb_APR_apr_file_puts, MRB_ARGS_ARG(apr_file_puts_REQUIRED_ARGC, apr_file_puts_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_read_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_read", mrb_APR_apr_file_read, MRB_ARGS_ARG(apr_file_read_REQUIRED_ARGC, apr_file_read_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_read", mrb_APR_apr_file_read, MRB_ARGS_ARG(apr_file_read_REQUIRED_ARGC, apr_file_read_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_read_full_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_read_full", mrb_APR_apr_file_read_full, MRB_ARGS_ARG(apr_file_read_full_REQUIRED_ARGC, apr_file_read_full_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_read_full", mrb_APR_apr_file_read_full, MRB_ARGS_ARG(apr_file_read_full_REQUIRED_ARGC, apr_file_read_full_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_remove_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_remove", mrb_APR_apr_file_remove, MRB_ARGS_ARG(apr_file_remove_REQUIRED_ARGC, apr_file_remove_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_remove", mrb_APR_apr_file_remove, MRB_ARGS_ARG(apr_file_remove_REQUIRED_ARGC, apr_file_remove_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_rename_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_rename", mrb_APR_apr_file_rename, MRB_ARGS_ARG(apr_file_rename_REQUIRED_ARGC, apr_file_rename_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_rename", mrb_APR_apr_file_rename, MRB_ARGS_ARG(apr_file_rename_REQUIRED_ARGC, apr_file_rename_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_seek_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_seek", mrb_APR_apr_file_seek, MRB_ARGS_ARG(apr_file_seek_REQUIRED_ARGC, apr_file_seek_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_seek", mrb_APR_apr_file_seek, MRB_ARGS_ARG(apr_file_seek_REQUIRED_ARGC, apr_file_seek_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_setaside_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_setaside", mrb_APR_apr_file_setaside, MRB_ARGS_ARG(apr_file_setaside_REQUIRED_ARGC, apr_file_setaside_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_setaside", mrb_APR_apr_file_setaside, MRB_ARGS_ARG(apr_file_setaside_REQUIRED_ARGC, apr_file_setaside_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_sync_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_sync", mrb_APR_apr_file_sync, MRB_ARGS_ARG(apr_file_sync_REQUIRED_ARGC, apr_file_sync_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_sync", mrb_APR_apr_file_sync, MRB_ARGS_ARG(apr_file_sync_REQUIRED_ARGC, apr_file_sync_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_trunc_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_trunc", mrb_APR_apr_file_trunc, MRB_ARGS_ARG(apr_file_trunc_REQUIRED_ARGC, apr_file_trunc_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_trunc", mrb_APR_apr_file_trunc, MRB_ARGS_ARG(apr_file_trunc_REQUIRED_ARGC, apr_file_trunc_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_ungetc_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_ungetc", mrb_APR_apr_file_ungetc, MRB_ARGS_ARG(apr_file_ungetc_REQUIRED_ARGC, apr_file_ungetc_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_ungetc", mrb_APR_apr_file_ungetc, MRB_ARGS_ARG(apr_file_ungetc_REQUIRED_ARGC, apr_file_ungetc_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_unlock_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_unlock", mrb_APR_apr_file_unlock, MRB_ARGS_ARG(apr_file_unlock_REQUIRED_ARGC, apr_file_unlock_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_unlock", mrb_APR_apr_file_unlock, MRB_ARGS_ARG(apr_file_unlock_REQUIRED_ARGC, apr_file_unlock_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_write_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_write", mrb_APR_apr_file_write, MRB_ARGS_ARG(apr_file_write_REQUIRED_ARGC, apr_file_write_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_write", mrb_APR_apr_file_write, MRB_ARGS_ARG(apr_file_write_REQUIRED_ARGC, apr_file_write_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_write_full_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_write_full", mrb_APR_apr_file_write_full, MRB_ARGS_ARG(apr_file_write_full_REQUIRED_ARGC, apr_file_write_full_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_write_full", mrb_APR_apr_file_write_full, MRB_ARGS_ARG(apr_file_write_full_REQUIRED_ARGC, apr_file_write_full_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_writev_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_writev", mrb_APR_apr_file_writev, MRB_ARGS_ARG(apr_file_writev_REQUIRED_ARGC, apr_file_writev_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_writev", mrb_APR_apr_file_writev, MRB_ARGS_ARG(apr_file_writev_REQUIRED_ARGC, apr_file_writev_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_file_writev_full_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_file_writev_full", mrb_APR_apr_file_writev_full, MRB_ARGS_ARG(apr_file_writev_full_REQUIRED_ARGC, apr_file_writev_full_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "file_writev_full", mrb_APR_apr_file_writev_full, MRB_ARGS_ARG(apr_file_writev_full_REQUIRED_ARGC, apr_file_writev_full_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_filepath_encoding_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_filepath_encoding", mrb_APR_apr_filepath_encoding, MRB_ARGS_ARG(apr_filepath_encoding_REQUIRED_ARGC, apr_filepath_encoding_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "filepath_encoding", mrb_APR_apr_filepath_encoding, MRB_ARGS_ARG(apr_filepath_encoding_REQUIRED_ARGC, apr_filepath_encoding_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_filepath_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_filepath_get", mrb_APR_apr_filepath_get, MRB_ARGS_ARG(apr_filepath_get_REQUIRED_ARGC, apr_filepath_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "filepath_get", mrb_APR_apr_filepath_get, MRB_ARGS_ARG(apr_filepath_get_REQUIRED_ARGC, apr_filepath_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_filepath_list_merge_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_filepath_list_merge", mrb_APR_apr_filepath_list_merge, MRB_ARGS_ARG(apr_filepath_list_merge_REQUIRED_ARGC, apr_filepath_list_merge_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "filepath_list_merge", mrb_APR_apr_filepath_list_merge, MRB_ARGS_ARG(apr_filepath_list_merge_REQUIRED_ARGC, apr_filepath_list_merge_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_filepath_list_split_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_filepath_list_split", mrb_APR_apr_filepath_list_split, MRB_ARGS_ARG(apr_filepath_list_split_REQUIRED_ARGC, apr_filepath_list_split_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "filepath_list_split", mrb_APR_apr_filepath_list_split, MRB_ARGS_ARG(apr_filepath_list_split_REQUIRED_ARGC, apr_filepath_list_split_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_filepath_merge_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_filepath_merge", mrb_APR_apr_filepath_merge, MRB_ARGS_ARG(apr_filepath_merge_REQUIRED_ARGC, apr_filepath_merge_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "filepath_merge", mrb_APR_apr_filepath_merge, MRB_ARGS_ARG(apr_filepath_merge_REQUIRED_ARGC, apr_filepath_merge_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_filepath_root_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_filepath_root", mrb_APR_apr_filepath_root, MRB_ARGS_ARG(apr_filepath_root_REQUIRED_ARGC, apr_filepath_root_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "filepath_root", mrb_APR_apr_filepath_root, MRB_ARGS_ARG(apr_filepath_root_REQUIRED_ARGC, apr_filepath_root_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_filepath_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_filepath_set", mrb_APR_apr_filepath_set, MRB_ARGS_ARG(apr_filepath_set_REQUIRED_ARGC, apr_filepath_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "filepath_set", mrb_APR_apr_filepath_set, MRB_ARGS_ARG(apr_filepath_set_REQUIRED_ARGC, apr_filepath_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_fnmatch_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_fnmatch", mrb_APR_apr_fnmatch, MRB_ARGS_ARG(apr_fnmatch_REQUIRED_ARGC, apr_fnmatch_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "fnmatch", mrb_APR_apr_fnmatch, MRB_ARGS_ARG(apr_fnmatch_REQUIRED_ARGC, apr_fnmatch_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_fnmatch_test_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_fnmatch_test", mrb_APR_apr_fnmatch_test, MRB_ARGS_ARG(apr_fnmatch_test_REQUIRED_ARGC, apr_fnmatch_test_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "fnmatch_test", mrb_APR_apr_fnmatch_test, MRB_ARGS_ARG(apr_fnmatch_test_REQUIRED_ARGC, apr_fnmatch_test_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_generate_random_bytes_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_generate_random_bytes", mrb_APR_apr_generate_random_bytes, MRB_ARGS_ARG(apr_generate_random_bytes_REQUIRED_ARGC, apr_generate_random_bytes_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "generate_random_bytes", mrb_APR_apr_generate_random_bytes, MRB_ARGS_ARG(apr_generate_random_bytes_REQUIRED_ARGC, apr_generate_random_bytes_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_gethostname_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_gethostname", mrb_APR_apr_gethostname, MRB_ARGS_ARG(apr_gethostname_REQUIRED_ARGC, apr_gethostname_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "gethostname", mrb_APR_apr_gethostname, MRB_ARGS_ARG(apr_gethostname_REQUIRED_ARGC, apr_gethostname_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_getnameinfo_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_getnameinfo", mrb_APR_apr_getnameinfo, MRB_ARGS_ARG(apr_getnameinfo_REQUIRED_ARGC, apr_getnameinfo_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "getnameinfo", mrb_APR_apr_getnameinfo, MRB_ARGS_ARG(apr_getnameinfo_REQUIRED_ARGC, apr_getnameinfo_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_getservbyname_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_getservbyname", mrb_APR_apr_getservbyname, MRB_ARGS_ARG(apr_getservbyname_REQUIRED_ARGC, apr_getservbyname_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "getservbyname", mrb_APR_apr_getservbyname, MRB_ARGS_ARG(apr_getservbyname_REQUIRED_ARGC, apr_getservbyname_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_global_mutex_child_init_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_global_mutex_child_init", mrb_APR_apr_global_mutex_child_init, MRB_ARGS_ARG(apr_global_mutex_child_init_REQUIRED_ARGC, apr_global_mutex_child_init_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "global_mutex_child_init", mrb_APR_apr_global_mutex_child_init, MRB_ARGS_ARG(apr_global_mutex_child_init_REQUIRED_ARGC, apr_global_mutex_child_init_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_global_mutex_create_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_global_mutex_create", mrb_APR_apr_global_mutex_create, MRB_ARGS_ARG(apr_global_mutex_create_REQUIRED_ARGC, apr_global_mutex_create_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "global_mutex_create", mrb_APR_apr_global_mutex_create, MRB_ARGS_ARG(apr_global_mutex_create_REQUIRED_ARGC, apr_global_mutex_create_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_global_mutex_destroy_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_global_mutex_destroy", mrb_APR_apr_global_mutex_destroy, MRB_ARGS_ARG(apr_global_mutex_destroy_REQUIRED_ARGC, apr_global_mutex_destroy_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "global_mutex_destroy", mrb_APR_apr_global_mutex_destroy, MRB_ARGS_ARG(apr_global_mutex_destroy_REQUIRED_ARGC, apr_global_mutex_destroy_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_global_mutex_lock_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_global_mutex_lock", mrb_APR_apr_global_mutex_lock, MRB_ARGS_ARG(apr_global_mutex_lock_REQUIRED_ARGC, apr_global_mutex_lock_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "global_mutex_lock", mrb_APR_apr_global_mutex_lock, MRB_ARGS_ARG(apr_global_mutex_lock_REQUIRED_ARGC, apr_global_mutex_lock_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_global_mutex_lockfile_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_global_mutex_lockfile", mrb_APR_apr_global_mutex_lockfile, MRB_ARGS_ARG(apr_global_mutex_lockfile_REQUIRED_ARGC, apr_global_mutex_lockfile_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "global_mutex_lockfile", mrb_APR_apr_global_mutex_lockfile, MRB_ARGS_ARG(apr_global_mutex_lockfile_REQUIRED_ARGC, apr_global_mutex_lockfile_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_global_mutex_name_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_global_mutex_name", mrb_APR_apr_global_mutex_name, MRB_ARGS_ARG(apr_global_mutex_name_REQUIRED_ARGC, apr_global_mutex_name_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "global_mutex_name", mrb_APR_apr_global_mutex_name, MRB_ARGS_ARG(apr_global_mutex_name_REQUIRED_ARGC, apr_global_mutex_name_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_global_mutex_trylock_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_global_mutex_trylock", mrb_APR_apr_global_mutex_trylock, MRB_ARGS_ARG(apr_global_mutex_trylock_REQUIRED_ARGC, apr_global_mutex_trylock_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "global_mutex_trylock", mrb_APR_apr_global_mutex_trylock, MRB_ARGS_ARG(apr_global_mutex_trylock_REQUIRED_ARGC, apr_global_mutex_trylock_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_global_mutex_unlock_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_global_mutex_unlock", mrb_APR_apr_global_mutex_unlock, MRB_ARGS_ARG(apr_global_mutex_unlock_REQUIRED_ARGC, apr_global_mutex_unlock_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "global_mutex_unlock", mrb_APR_apr_global_mutex_unlock, MRB_ARGS_ARG(apr_global_mutex_unlock_REQUIRED_ARGC, apr_global_mutex_unlock_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_initialize_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_initialize", mrb_APR_apr_initialize, MRB_ARGS_ARG(apr_initialize_REQUIRED_ARGC, apr_initialize_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "initialize", mrb_APR_apr_initialize, MRB_ARGS_ARG(apr_initialize_REQUIRED_ARGC, apr_initialize_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_ipsubnet_create_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_ipsubnet_create", mrb_APR_apr_ipsubnet_create, MRB_ARGS_ARG(apr_ipsubnet_create_REQUIRED_ARGC, apr_ipsubnet_create_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "ipsubnet_create", mrb_APR_apr_ipsubnet_create, MRB_ARGS_ARG(apr_ipsubnet_create_REQUIRED_ARGC, apr_ipsubnet_create_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_ipsubnet_test_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_ipsubnet_test", mrb_APR_apr_ipsubnet_test, MRB_ARGS_ARG(apr_ipsubnet_test_REQUIRED_ARGC, apr_ipsubnet_test_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "ipsubnet_test", mrb_APR_apr_ipsubnet_test, MRB_ARGS_ARG(apr_ipsubnet_test_REQUIRED_ARGC, apr_ipsubnet_test_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_itoa_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_itoa", mrb_APR_apr_itoa, MRB_ARGS_ARG(apr_itoa_REQUIRED_ARGC, apr_itoa_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "itoa", mrb_APR_apr_itoa, MRB_ARGS_ARG(apr_itoa_REQUIRED_ARGC, apr_itoa_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_ltoa_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_ltoa", mrb_APR_apr_ltoa, MRB_ARGS_ARG(apr_ltoa_REQUIRED_ARGC, apr_ltoa_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "ltoa", mrb_APR_apr_ltoa, MRB_ARGS_ARG(apr_ltoa_REQUIRED_ARGC, apr_ltoa_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_match_glob_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_match_glob", mrb_APR_apr_match_glob, MRB_ARGS_ARG(apr_match_glob_REQUIRED_ARGC, apr_match_glob_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "match_glob", mrb_APR_apr_match_glob, MRB_ARGS_ARG(apr_match_glob_REQUIRED_ARGC, apr_match_glob_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_mcast_hops_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_mcast_hops", mrb_APR_apr_mcast_hops, MRB_ARGS_ARG(apr_mcast_hops_REQUIRED_ARGC, apr_mcast_hops_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "mcast_hops", mrb_APR_apr_mcast_hops, MRB_ARGS_ARG(apr_mcast_hops_REQUIRED_ARGC, apr_mcast_hops_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_mcast_interface_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_mcast_interface", mrb_APR_apr_mcast_interface, MRB_ARGS_ARG(apr_mcast_interface_REQUIRED_ARGC, apr_mcast_interface_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "mcast_interface", mrb_APR_apr_mcast_interface, MRB_ARGS_ARG(apr_mcast_interface_REQUIRED_ARGC, apr_mcast_interface_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_mcast_join_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_mcast_join", mrb_APR_apr_mcast_join, MRB_ARGS_ARG(apr_mcast_join_REQUIRED_ARGC, apr_mcast_join_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "mcast_join", mrb_APR_apr_mcast_join, MRB_ARGS_ARG(apr_mcast_join_REQUIRED_ARGC, apr_mcast_join_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_mcast_leave_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_mcast_leave", mrb_APR_apr_mcast_leave, MRB_ARGS_ARG(apr_mcast_leave_REQUIRED_ARGC, apr_mcast_leave_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "mcast_leave", mrb_APR_apr_mcast_leave, MRB_ARGS_ARG(apr_mcast_leave_REQUIRED_ARGC, apr_mcast_leave_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_mcast_loopback_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_mcast_loopback", mrb_APR_apr_mcast_loopback, MRB_ARGS_ARG(apr_mcast_loopback_REQUIRED_ARGC, apr_mcast_loopback_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "mcast_loopback", mrb_APR_apr_mcast_loopback, MRB_ARGS_ARG(apr_mcast_loopback_REQUIRED_ARGC, apr_mcast_loopback_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_off_t_toa_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_off_t_toa", mrb_APR_apr_off_t_toa, MRB_ARGS_ARG(apr_off_t_toa_REQUIRED_ARGC, apr_off_t_toa_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "off_t_toa", mrb_APR_apr_off_t_toa, MRB_ARGS_ARG(apr_off_t_toa_REQUIRED_ARGC, apr_off_t_toa_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_palloc_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_palloc", mrb_APR_apr_palloc, MRB_ARGS_ARG(apr_palloc_REQUIRED_ARGC, apr_palloc_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "palloc", mrb_APR_apr_palloc, MRB_ARGS_ARG(apr_palloc_REQUIRED_ARGC, apr_palloc_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_palloc_debug_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_palloc_debug", mrb_APR_apr_palloc_debug, MRB_ARGS_ARG(apr_palloc_debug_REQUIRED_ARGC, apr_palloc_debug_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "palloc_debug", mrb_APR_apr_palloc_debug, MRB_ARGS_ARG(apr_palloc_debug_REQUIRED_ARGC, apr_palloc_debug_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_parse_addr_port_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_parse_addr_port", mrb_APR_apr_parse_addr_port, MRB_ARGS_ARG(apr_parse_addr_port_REQUIRED_ARGC, apr_parse_addr_port_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "parse_addr_port", mrb_APR_apr_parse_addr_port, MRB_ARGS_ARG(apr_parse_addr_port_REQUIRED_ARGC, apr_parse_addr_port_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pcalloc_debug_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pcalloc_debug", mrb_APR_apr_pcalloc_debug, MRB_ARGS_ARG(apr_pcalloc_debug_REQUIRED_ARGC, apr_pcalloc_debug_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pcalloc_debug", mrb_APR_apr_pcalloc_debug, MRB_ARGS_ARG(apr_pcalloc_debug_REQUIRED_ARGC, apr_pcalloc_debug_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pmemdup_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pmemdup", mrb_APR_apr_pmemdup, MRB_ARGS_ARG(apr_pmemdup_REQUIRED_ARGC, apr_pmemdup_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pmemdup", mrb_APR_apr_pmemdup, MRB_ARGS_ARG(apr_pmemdup_REQUIRED_ARGC, apr_pmemdup_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_abort_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_abort_get", mrb_APR_apr_pool_abort_get, MRB_ARGS_ARG(apr_pool_abort_get_REQUIRED_ARGC, apr_pool_abort_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_abort_get", mrb_APR_apr_pool_abort_get, MRB_ARGS_ARG(apr_pool_abort_get_REQUIRED_ARGC, apr_pool_abort_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_abort_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_abort_set", mrb_APR_apr_pool_abort_set, MRB_ARGS_ARG(apr_pool_abort_set_REQUIRED_ARGC, apr_pool_abort_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_abort_set", mrb_APR_apr_pool_abort_set, MRB_ARGS_ARG(apr_pool_abort_set_REQUIRED_ARGC, apr_pool_abort_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_allocator_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_allocator_get", mrb_APR_apr_pool_allocator_get, MRB_ARGS_ARG(apr_pool_allocator_get_REQUIRED_ARGC, apr_pool_allocator_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_allocator_get", mrb_APR_apr_pool_allocator_get, MRB_ARGS_ARG(apr_pool_allocator_get_REQUIRED_ARGC, apr_pool_allocator_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_child_cleanup_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_child_cleanup_set", mrb_APR_apr_pool_child_cleanup_set, MRB_ARGS_ARG(apr_pool_child_cleanup_set_REQUIRED_ARGC, apr_pool_child_cleanup_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_child_cleanup_set", mrb_APR_apr_pool_child_cleanup_set, MRB_ARGS_ARG(apr_pool_child_cleanup_set_REQUIRED_ARGC, apr_pool_child_cleanup_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_cleanup_for_exec_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_cleanup_for_exec", mrb_APR_apr_pool_cleanup_for_exec, MRB_ARGS_ARG(apr_pool_cleanup_for_exec_REQUIRED_ARGC, apr_pool_cleanup_for_exec_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_cleanup_for_exec", mrb_APR_apr_pool_cleanup_for_exec, MRB_ARGS_ARG(apr_pool_cleanup_for_exec_REQUIRED_ARGC, apr_pool_cleanup_for_exec_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_cleanup_kill_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_cleanup_kill", mrb_APR_apr_pool_cleanup_kill, MRB_ARGS_ARG(apr_pool_cleanup_kill_REQUIRED_ARGC, apr_pool_cleanup_kill_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_cleanup_kill", mrb_APR_apr_pool_cleanup_kill, MRB_ARGS_ARG(apr_pool_cleanup_kill_REQUIRED_ARGC, apr_pool_cleanup_kill_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_cleanup_null_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_cleanup_null", mrb_APR_apr_pool_cleanup_null, MRB_ARGS_ARG(apr_pool_cleanup_null_REQUIRED_ARGC, apr_pool_cleanup_null_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_cleanup_null", mrb_APR_apr_pool_cleanup_null, MRB_ARGS_ARG(apr_pool_cleanup_null_REQUIRED_ARGC, apr_pool_cleanup_null_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_cleanup_register_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_cleanup_register", mrb_APR_apr_pool_cleanup_register, MRB_ARGS_ARG(apr_pool_cleanup_register_REQUIRED_ARGC, apr_pool_cleanup_register_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_cleanup_register", mrb_APR_apr_pool_cleanup_register, MRB_ARGS_ARG(apr_pool_cleanup_register_REQUIRED_ARGC, apr_pool_cleanup_register_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_cleanup_run_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_cleanup_run", mrb_APR_apr_pool_cleanup_run, MRB_ARGS_ARG(apr_pool_cleanup_run_REQUIRED_ARGC, apr_pool_cleanup_run_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_cleanup_run", mrb_APR_apr_pool_cleanup_run, MRB_ARGS_ARG(apr_pool_cleanup_run_REQUIRED_ARGC, apr_pool_cleanup_run_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_clear_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_clear", mrb_APR_apr_pool_clear, MRB_ARGS_ARG(apr_pool_clear_REQUIRED_ARGC, apr_pool_clear_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_clear", mrb_APR_apr_pool_clear, MRB_ARGS_ARG(apr_pool_clear_REQUIRED_ARGC, apr_pool_clear_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_clear_debug_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_clear_debug", mrb_APR_apr_pool_clear_debug, MRB_ARGS_ARG(apr_pool_clear_debug_REQUIRED_ARGC, apr_pool_clear_debug_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_clear_debug", mrb_APR_apr_pool_clear_debug, MRB_ARGS_ARG(apr_pool_clear_debug_REQUIRED_ARGC, apr_pool_clear_debug_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_create_core_ex_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_create_core_ex", mrb_APR_apr_pool_create_core_ex, MRB_ARGS_ARG(apr_pool_create_core_ex_REQUIRED_ARGC, apr_pool_create_core_ex_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_create_core_ex", mrb_APR_apr_pool_create_core_ex, MRB_ARGS_ARG(apr_pool_create_core_ex_REQUIRED_ARGC, apr_pool_create_core_ex_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_create_core_ex_debug_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_create_core_ex_debug", mrb_APR_apr_pool_create_core_ex_debug, MRB_ARGS_ARG(apr_pool_create_core_ex_debug_REQUIRED_ARGC, apr_pool_create_core_ex_debug_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_create_core_ex_debug", mrb_APR_apr_pool_create_core_ex_debug, MRB_ARGS_ARG(apr_pool_create_core_ex_debug_REQUIRED_ARGC, apr_pool_create_core_ex_debug_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_create_ex_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_create_ex", mrb_APR_apr_pool_create_ex, MRB_ARGS_ARG(apr_pool_create_ex_REQUIRED_ARGC, apr_pool_create_ex_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_create_ex", mrb_APR_apr_pool_create_ex, MRB_ARGS_ARG(apr_pool_create_ex_REQUIRED_ARGC, apr_pool_create_ex_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_create_ex_debug_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_create_ex_debug", mrb_APR_apr_pool_create_ex_debug, MRB_ARGS_ARG(apr_pool_create_ex_debug_REQUIRED_ARGC, apr_pool_create_ex_debug_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_create_ex_debug", mrb_APR_apr_pool_create_ex_debug, MRB_ARGS_ARG(apr_pool_create_ex_debug_REQUIRED_ARGC, apr_pool_create_ex_debug_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_create_unmanaged_ex_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_create_unmanaged_ex", mrb_APR_apr_pool_create_unmanaged_ex, MRB_ARGS_ARG(apr_pool_create_unmanaged_ex_REQUIRED_ARGC, apr_pool_create_unmanaged_ex_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_create_unmanaged_ex", mrb_APR_apr_pool_create_unmanaged_ex, MRB_ARGS_ARG(apr_pool_create_unmanaged_ex_REQUIRED_ARGC, apr_pool_create_unmanaged_ex_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_create_unmanaged_ex_debug_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_create_unmanaged_ex_debug", mrb_APR_apr_pool_create_unmanaged_ex_debug, MRB_ARGS_ARG(apr_pool_create_unmanaged_ex_debug_REQUIRED_ARGC, apr_pool_create_unmanaged_ex_debug_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_create_unmanaged_ex_debug", mrb_APR_apr_pool_create_unmanaged_ex_debug, MRB_ARGS_ARG(apr_pool_create_unmanaged_ex_debug_REQUIRED_ARGC, apr_pool_create_unmanaged_ex_debug_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_destroy_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_destroy", mrb_APR_apr_pool_destroy, MRB_ARGS_ARG(apr_pool_destroy_REQUIRED_ARGC, apr_pool_destroy_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_destroy", mrb_APR_apr_pool_destroy, MRB_ARGS_ARG(apr_pool_destroy_REQUIRED_ARGC, apr_pool_destroy_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_destroy_debug_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_destroy_debug", mrb_APR_apr_pool_destroy_debug, MRB_ARGS_ARG(apr_pool_destroy_debug_REQUIRED_ARGC, apr_pool_destroy_debug_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_destroy_debug", mrb_APR_apr_pool_destroy_debug, MRB_ARGS_ARG(apr_pool_destroy_debug_REQUIRED_ARGC, apr_pool_destroy_debug_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_initialize_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_initialize", mrb_APR_apr_pool_initialize, MRB_ARGS_ARG(apr_pool_initialize_REQUIRED_ARGC, apr_pool_initialize_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_initialize", mrb_APR_apr_pool_initialize, MRB_ARGS_ARG(apr_pool_initialize_REQUIRED_ARGC, apr_pool_initialize_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_is_ancestor_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_is_ancestor", mrb_APR_apr_pool_is_ancestor, MRB_ARGS_ARG(apr_pool_is_ancestor_REQUIRED_ARGC, apr_pool_is_ancestor_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_is_ancestor", mrb_APR_apr_pool_is_ancestor, MRB_ARGS_ARG(apr_pool_is_ancestor_REQUIRED_ARGC, apr_pool_is_ancestor_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_note_subprocess_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_note_subprocess", mrb_APR_apr_pool_note_subprocess, MRB_ARGS_ARG(apr_pool_note_subprocess_REQUIRED_ARGC, apr_pool_note_subprocess_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_note_subprocess", mrb_APR_apr_pool_note_subprocess, MRB_ARGS_ARG(apr_pool_note_subprocess_REQUIRED_ARGC, apr_pool_note_subprocess_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_parent_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_parent_get", mrb_APR_apr_pool_parent_get, MRB_ARGS_ARG(apr_pool_parent_get_REQUIRED_ARGC, apr_pool_parent_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_parent_get", mrb_APR_apr_pool_parent_get, MRB_ARGS_ARG(apr_pool_parent_get_REQUIRED_ARGC, apr_pool_parent_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_pre_cleanup_register_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_pre_cleanup_register", mrb_APR_apr_pool_pre_cleanup_register, MRB_ARGS_ARG(apr_pool_pre_cleanup_register_REQUIRED_ARGC, apr_pool_pre_cleanup_register_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_pre_cleanup_register", mrb_APR_apr_pool_pre_cleanup_register, MRB_ARGS_ARG(apr_pool_pre_cleanup_register_REQUIRED_ARGC, apr_pool_pre_cleanup_register_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_tag_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_tag", mrb_APR_apr_pool_tag, MRB_ARGS_ARG(apr_pool_tag_REQUIRED_ARGC, apr_pool_tag_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_tag", mrb_APR_apr_pool_tag, MRB_ARGS_ARG(apr_pool_tag_REQUIRED_ARGC, apr_pool_tag_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_terminate_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_terminate", mrb_APR_apr_pool_terminate, MRB_ARGS_ARG(apr_pool_terminate_REQUIRED_ARGC, apr_pool_terminate_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_terminate", mrb_APR_apr_pool_terminate, MRB_ARGS_ARG(apr_pool_terminate_REQUIRED_ARGC, apr_pool_terminate_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_userdata_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_userdata_get", mrb_APR_apr_pool_userdata_get, MRB_ARGS_ARG(apr_pool_userdata_get_REQUIRED_ARGC, apr_pool_userdata_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_userdata_get", mrb_APR_apr_pool_userdata_get, MRB_ARGS_ARG(apr_pool_userdata_get_REQUIRED_ARGC, apr_pool_userdata_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_userdata_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_userdata_set", mrb_APR_apr_pool_userdata_set, MRB_ARGS_ARG(apr_pool_userdata_set_REQUIRED_ARGC, apr_pool_userdata_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_userdata_set", mrb_APR_apr_pool_userdata_set, MRB_ARGS_ARG(apr_pool_userdata_set_REQUIRED_ARGC, apr_pool_userdata_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pool_userdata_setn_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pool_userdata_setn", mrb_APR_apr_pool_userdata_setn, MRB_ARGS_ARG(apr_pool_userdata_setn_REQUIRED_ARGC, apr_pool_userdata_setn_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pool_userdata_setn", mrb_APR_apr_pool_userdata_setn, MRB_ARGS_ARG(apr_pool_userdata_setn_REQUIRED_ARGC, apr_pool_userdata_setn_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_create_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_create", mrb_APR_apr_proc_create, MRB_ARGS_ARG(apr_proc_create_REQUIRED_ARGC, apr_proc_create_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_create", mrb_APR_apr_proc_create, MRB_ARGS_ARG(apr_proc_create_REQUIRED_ARGC, apr_proc_create_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_detach_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_detach", mrb_APR_apr_proc_detach, MRB_ARGS_ARG(apr_proc_detach_REQUIRED_ARGC, apr_proc_detach_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_detach", mrb_APR_apr_proc_detach, MRB_ARGS_ARG(apr_proc_detach_REQUIRED_ARGC, apr_proc_detach_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_fork_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_fork", mrb_APR_apr_proc_fork, MRB_ARGS_ARG(apr_proc_fork_REQUIRED_ARGC, apr_proc_fork_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_fork", mrb_APR_apr_proc_fork, MRB_ARGS_ARG(apr_proc_fork_REQUIRED_ARGC, apr_proc_fork_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_kill_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_kill", mrb_APR_apr_proc_kill, MRB_ARGS_ARG(apr_proc_kill_REQUIRED_ARGC, apr_proc_kill_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_kill", mrb_APR_apr_proc_kill, MRB_ARGS_ARG(apr_proc_kill_REQUIRED_ARGC, apr_proc_kill_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_mutex_child_init_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_mutex_child_init", mrb_APR_apr_proc_mutex_child_init, MRB_ARGS_ARG(apr_proc_mutex_child_init_REQUIRED_ARGC, apr_proc_mutex_child_init_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_mutex_child_init", mrb_APR_apr_proc_mutex_child_init, MRB_ARGS_ARG(apr_proc_mutex_child_init_REQUIRED_ARGC, apr_proc_mutex_child_init_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_mutex_cleanup_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_mutex_cleanup", mrb_APR_apr_proc_mutex_cleanup, MRB_ARGS_ARG(apr_proc_mutex_cleanup_REQUIRED_ARGC, apr_proc_mutex_cleanup_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_mutex_cleanup", mrb_APR_apr_proc_mutex_cleanup, MRB_ARGS_ARG(apr_proc_mutex_cleanup_REQUIRED_ARGC, apr_proc_mutex_cleanup_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_mutex_create_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_mutex_create", mrb_APR_apr_proc_mutex_create, MRB_ARGS_ARG(apr_proc_mutex_create_REQUIRED_ARGC, apr_proc_mutex_create_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_mutex_create", mrb_APR_apr_proc_mutex_create, MRB_ARGS_ARG(apr_proc_mutex_create_REQUIRED_ARGC, apr_proc_mutex_create_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_mutex_defname_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_mutex_defname", mrb_APR_apr_proc_mutex_defname, MRB_ARGS_ARG(apr_proc_mutex_defname_REQUIRED_ARGC, apr_proc_mutex_defname_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_mutex_defname", mrb_APR_apr_proc_mutex_defname, MRB_ARGS_ARG(apr_proc_mutex_defname_REQUIRED_ARGC, apr_proc_mutex_defname_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_mutex_destroy_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_mutex_destroy", mrb_APR_apr_proc_mutex_destroy, MRB_ARGS_ARG(apr_proc_mutex_destroy_REQUIRED_ARGC, apr_proc_mutex_destroy_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_mutex_destroy", mrb_APR_apr_proc_mutex_destroy, MRB_ARGS_ARG(apr_proc_mutex_destroy_REQUIRED_ARGC, apr_proc_mutex_destroy_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_mutex_lock_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_mutex_lock", mrb_APR_apr_proc_mutex_lock, MRB_ARGS_ARG(apr_proc_mutex_lock_REQUIRED_ARGC, apr_proc_mutex_lock_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_mutex_lock", mrb_APR_apr_proc_mutex_lock, MRB_ARGS_ARG(apr_proc_mutex_lock_REQUIRED_ARGC, apr_proc_mutex_lock_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_mutex_lockfile_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_mutex_lockfile", mrb_APR_apr_proc_mutex_lockfile, MRB_ARGS_ARG(apr_proc_mutex_lockfile_REQUIRED_ARGC, apr_proc_mutex_lockfile_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_mutex_lockfile", mrb_APR_apr_proc_mutex_lockfile, MRB_ARGS_ARG(apr_proc_mutex_lockfile_REQUIRED_ARGC, apr_proc_mutex_lockfile_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_mutex_name_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_mutex_name", mrb_APR_apr_proc_mutex_name, MRB_ARGS_ARG(apr_proc_mutex_name_REQUIRED_ARGC, apr_proc_mutex_name_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_mutex_name", mrb_APR_apr_proc_mutex_name, MRB_ARGS_ARG(apr_proc_mutex_name_REQUIRED_ARGC, apr_proc_mutex_name_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_mutex_trylock_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_mutex_trylock", mrb_APR_apr_proc_mutex_trylock, MRB_ARGS_ARG(apr_proc_mutex_trylock_REQUIRED_ARGC, apr_proc_mutex_trylock_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_mutex_trylock", mrb_APR_apr_proc_mutex_trylock, MRB_ARGS_ARG(apr_proc_mutex_trylock_REQUIRED_ARGC, apr_proc_mutex_trylock_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_mutex_unlock_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_mutex_unlock", mrb_APR_apr_proc_mutex_unlock, MRB_ARGS_ARG(apr_proc_mutex_unlock_REQUIRED_ARGC, apr_proc_mutex_unlock_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_mutex_unlock", mrb_APR_apr_proc_mutex_unlock, MRB_ARGS_ARG(apr_proc_mutex_unlock_REQUIRED_ARGC, apr_proc_mutex_unlock_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_other_child_alert_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_other_child_alert", mrb_APR_apr_proc_other_child_alert, MRB_ARGS_ARG(apr_proc_other_child_alert_REQUIRED_ARGC, apr_proc_other_child_alert_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_other_child_alert", mrb_APR_apr_proc_other_child_alert, MRB_ARGS_ARG(apr_proc_other_child_alert_REQUIRED_ARGC, apr_proc_other_child_alert_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_other_child_refresh_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_other_child_refresh", mrb_APR_apr_proc_other_child_refresh, MRB_ARGS_ARG(apr_proc_other_child_refresh_REQUIRED_ARGC, apr_proc_other_child_refresh_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_other_child_refresh", mrb_APR_apr_proc_other_child_refresh, MRB_ARGS_ARG(apr_proc_other_child_refresh_REQUIRED_ARGC, apr_proc_other_child_refresh_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_other_child_refresh_all_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_other_child_refresh_all", mrb_APR_apr_proc_other_child_refresh_all, MRB_ARGS_ARG(apr_proc_other_child_refresh_all_REQUIRED_ARGC, apr_proc_other_child_refresh_all_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_other_child_refresh_all", mrb_APR_apr_proc_other_child_refresh_all, MRB_ARGS_ARG(apr_proc_other_child_refresh_all_REQUIRED_ARGC, apr_proc_other_child_refresh_all_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_other_child_register_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_other_child_register", mrb_APR_apr_proc_other_child_register, MRB_ARGS_ARG(apr_proc_other_child_register_REQUIRED_ARGC, apr_proc_other_child_register_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_other_child_register", mrb_APR_apr_proc_other_child_register, MRB_ARGS_ARG(apr_proc_other_child_register_REQUIRED_ARGC, apr_proc_other_child_register_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_other_child_unregister_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_other_child_unregister", mrb_APR_apr_proc_other_child_unregister, MRB_ARGS_ARG(apr_proc_other_child_unregister_REQUIRED_ARGC, apr_proc_other_child_unregister_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_other_child_unregister", mrb_APR_apr_proc_other_child_unregister, MRB_ARGS_ARG(apr_proc_other_child_unregister_REQUIRED_ARGC, apr_proc_other_child_unregister_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_wait_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_wait", mrb_APR_apr_proc_wait, MRB_ARGS_ARG(apr_proc_wait_REQUIRED_ARGC, apr_proc_wait_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_wait", mrb_APR_apr_proc_wait, MRB_ARGS_ARG(apr_proc_wait_REQUIRED_ARGC, apr_proc_wait_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_proc_wait_all_procs_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_proc_wait_all_procs", mrb_APR_apr_proc_wait_all_procs, MRB_ARGS_ARG(apr_proc_wait_all_procs_REQUIRED_ARGC, apr_proc_wait_all_procs_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "proc_wait_all_procs", mrb_APR_apr_proc_wait_all_procs, MRB_ARGS_ARG(apr_proc_wait_all_procs_REQUIRED_ARGC, apr_proc_wait_all_procs_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_addrspace_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_addrspace_set", mrb_APR_apr_procattr_addrspace_set, MRB_ARGS_ARG(apr_procattr_addrspace_set_REQUIRED_ARGC, apr_procattr_addrspace_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_addrspace_set", mrb_APR_apr_procattr_addrspace_set, MRB_ARGS_ARG(apr_procattr_addrspace_set_REQUIRED_ARGC, apr_procattr_addrspace_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_child_err_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_child_err_set", mrb_APR_apr_procattr_child_err_set, MRB_ARGS_ARG(apr_procattr_child_err_set_REQUIRED_ARGC, apr_procattr_child_err_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_child_err_set", mrb_APR_apr_procattr_child_err_set, MRB_ARGS_ARG(apr_procattr_child_err_set_REQUIRED_ARGC, apr_procattr_child_err_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_child_errfn_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_child_errfn_set", mrb_APR_apr_procattr_child_errfn_set, MRB_ARGS_ARG(apr_procattr_child_errfn_set_REQUIRED_ARGC, apr_procattr_child_errfn_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_child_errfn_set", mrb_APR_apr_procattr_child_errfn_set, MRB_ARGS_ARG(apr_procattr_child_errfn_set_REQUIRED_ARGC, apr_procattr_child_errfn_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_child_in_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_child_in_set", mrb_APR_apr_procattr_child_in_set, MRB_ARGS_ARG(apr_procattr_child_in_set_REQUIRED_ARGC, apr_procattr_child_in_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_child_in_set", mrb_APR_apr_procattr_child_in_set, MRB_ARGS_ARG(apr_procattr_child_in_set_REQUIRED_ARGC, apr_procattr_child_in_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_child_out_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_child_out_set", mrb_APR_apr_procattr_child_out_set, MRB_ARGS_ARG(apr_procattr_child_out_set_REQUIRED_ARGC, apr_procattr_child_out_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_child_out_set", mrb_APR_apr_procattr_child_out_set, MRB_ARGS_ARG(apr_procattr_child_out_set_REQUIRED_ARGC, apr_procattr_child_out_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_cmdtype_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_cmdtype_set", mrb_APR_apr_procattr_cmdtype_set, MRB_ARGS_ARG(apr_procattr_cmdtype_set_REQUIRED_ARGC, apr_procattr_cmdtype_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_cmdtype_set", mrb_APR_apr_procattr_cmdtype_set, MRB_ARGS_ARG(apr_procattr_cmdtype_set_REQUIRED_ARGC, apr_procattr_cmdtype_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_create_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_create", mrb_APR_apr_procattr_create, MRB_ARGS_ARG(apr_procattr_create_REQUIRED_ARGC, apr_procattr_create_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_create", mrb_APR_apr_procattr_create, MRB_ARGS_ARG(apr_procattr_create_REQUIRED_ARGC, apr_procattr_create_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_detach_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_detach_set", mrb_APR_apr_procattr_detach_set, MRB_ARGS_ARG(apr_procattr_detach_set_REQUIRED_ARGC, apr_procattr_detach_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_detach_set", mrb_APR_apr_procattr_detach_set, MRB_ARGS_ARG(apr_procattr_detach_set_REQUIRED_ARGC, apr_procattr_detach_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_dir_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_dir_set", mrb_APR_apr_procattr_dir_set, MRB_ARGS_ARG(apr_procattr_dir_set_REQUIRED_ARGC, apr_procattr_dir_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_dir_set", mrb_APR_apr_procattr_dir_set, MRB_ARGS_ARG(apr_procattr_dir_set_REQUIRED_ARGC, apr_procattr_dir_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_error_check_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_error_check_set", mrb_APR_apr_procattr_error_check_set, MRB_ARGS_ARG(apr_procattr_error_check_set_REQUIRED_ARGC, apr_procattr_error_check_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_error_check_set", mrb_APR_apr_procattr_error_check_set, MRB_ARGS_ARG(apr_procattr_error_check_set_REQUIRED_ARGC, apr_procattr_error_check_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_group_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_group_set", mrb_APR_apr_procattr_group_set, MRB_ARGS_ARG(apr_procattr_group_set_REQUIRED_ARGC, apr_procattr_group_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_group_set", mrb_APR_apr_procattr_group_set, MRB_ARGS_ARG(apr_procattr_group_set_REQUIRED_ARGC, apr_procattr_group_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_io_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_io_set", mrb_APR_apr_procattr_io_set, MRB_ARGS_ARG(apr_procattr_io_set_REQUIRED_ARGC, apr_procattr_io_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_io_set", mrb_APR_apr_procattr_io_set, MRB_ARGS_ARG(apr_procattr_io_set_REQUIRED_ARGC, apr_procattr_io_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_limit_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_limit_set", mrb_APR_apr_procattr_limit_set, MRB_ARGS_ARG(apr_procattr_limit_set_REQUIRED_ARGC, apr_procattr_limit_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_limit_set", mrb_APR_apr_procattr_limit_set, MRB_ARGS_ARG(apr_procattr_limit_set_REQUIRED_ARGC, apr_procattr_limit_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_procattr_user_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_procattr_user_set", mrb_APR_apr_procattr_user_set, MRB_ARGS_ARG(apr_procattr_user_set_REQUIRED_ARGC, apr_procattr_user_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "procattr_user_set", mrb_APR_apr_procattr_user_set, MRB_ARGS_ARG(apr_procattr_user_set_REQUIRED_ARGC, apr_procattr_user_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_psprintf_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_psprintf", mrb_APR_apr_psprintf, MRB_ARGS_ARG(apr_psprintf_REQUIRED_ARGC, apr_psprintf_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "psprintf", mrb_APR_apr_psprintf, MRB_ARGS_ARG(apr_psprintf_REQUIRED_ARGC, apr_psprintf_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pstrcat_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pstrcat", mrb_APR_apr_pstrcat, MRB_ARGS_ARG(apr_pstrcat_REQUIRED_ARGC, apr_pstrcat_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pstrcat", mrb_APR_apr_pstrcat, MRB_ARGS_ARG(apr_pstrcat_REQUIRED_ARGC, apr_pstrcat_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pstrcatv_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pstrcatv", mrb_APR_apr_pstrcatv, MRB_ARGS_ARG(apr_pstrcatv_REQUIRED_ARGC, apr_pstrcatv_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pstrcatv", mrb_APR_apr_pstrcatv, MRB_ARGS_ARG(apr_pstrcatv_REQUIRED_ARGC, apr_pstrcatv_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pstrdup_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pstrdup", mrb_APR_apr_pstrdup, MRB_ARGS_ARG(apr_pstrdup_REQUIRED_ARGC, apr_pstrdup_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pstrdup", mrb_APR_apr_pstrdup, MRB_ARGS_ARG(apr_pstrdup_REQUIRED_ARGC, apr_pstrdup_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pstrmemdup_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pstrmemdup", mrb_APR_apr_pstrmemdup, MRB_ARGS_ARG(apr_pstrmemdup_REQUIRED_ARGC, apr_pstrmemdup_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pstrmemdup", mrb_APR_apr_pstrmemdup, MRB_ARGS_ARG(apr_pstrmemdup_REQUIRED_ARGC, apr_pstrmemdup_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pstrndup_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pstrndup", mrb_APR_apr_pstrndup, MRB_ARGS_ARG(apr_pstrndup_REQUIRED_ARGC, apr_pstrndup_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pstrndup", mrb_APR_apr_pstrndup, MRB_ARGS_ARG(apr_pstrndup_REQUIRED_ARGC, apr_pstrndup_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_pvsprintf_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_pvsprintf", mrb_APR_apr_pvsprintf, MRB_ARGS_ARG(apr_pvsprintf_REQUIRED_ARGC, apr_pvsprintf_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "pvsprintf", mrb_APR_apr_pvsprintf, MRB_ARGS_ARG(apr_pvsprintf_REQUIRED_ARGC, apr_pvsprintf_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_rfc822_date_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_rfc822_date", mrb_APR_apr_rfc822_date, MRB_ARGS_ARG(apr_rfc822_date_REQUIRED_ARGC, apr_rfc822_date_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "rfc822_date", mrb_APR_apr_rfc822_date, MRB_ARGS_ARG(apr_rfc822_date_REQUIRED_ARGC, apr_rfc822_date_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_setup_signal_thread_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_setup_signal_thread", mrb_APR_apr_setup_signal_thread, MRB_ARGS_ARG(apr_setup_signal_thread_REQUIRED_ARGC, apr_setup_signal_thread_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "setup_signal_thread", mrb_APR_apr_setup_signal_thread, MRB_ARGS_ARG(apr_setup_signal_thread_REQUIRED_ARGC, apr_setup_signal_thread_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_signal_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_signal", mrb_APR_apr_signal, MRB_ARGS_ARG(apr_signal_REQUIRED_ARGC, apr_signal_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "signal", mrb_APR_apr_signal, MRB_ARGS_ARG(apr_signal_REQUIRED_ARGC, apr_signal_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_signal_block_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_signal_block", mrb_APR_apr_signal_block, MRB_ARGS_ARG(apr_signal_block_REQUIRED_ARGC, apr_signal_block_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "signal_block", mrb_APR_apr_signal_block, MRB_ARGS_ARG(apr_signal_block_REQUIRED_ARGC, apr_signal_block_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_signal_description_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_signal_description_get", mrb_APR_apr_signal_description_get, MRB_ARGS_ARG(apr_signal_description_get_REQUIRED_ARGC, apr_signal_description_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "signal_description_get", mrb_APR_apr_signal_description_get, MRB_ARGS_ARG(apr_signal_description_get_REQUIRED_ARGC, apr_signal_description_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_signal_init_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_signal_init", mrb_APR_apr_signal_init, MRB_ARGS_ARG(apr_signal_init_REQUIRED_ARGC, apr_signal_init_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "signal_init", mrb_APR_apr_signal_init, MRB_ARGS_ARG(apr_signal_init_REQUIRED_ARGC, apr_signal_init_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_signal_thread_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_signal_thread", mrb_APR_apr_signal_thread, MRB_ARGS_ARG(apr_signal_thread_REQUIRED_ARGC, apr_signal_thread_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "signal_thread", mrb_APR_apr_signal_thread, MRB_ARGS_ARG(apr_signal_thread_REQUIRED_ARGC, apr_signal_thread_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_signal_unblock_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_signal_unblock", mrb_APR_apr_signal_unblock, MRB_ARGS_ARG(apr_signal_unblock_REQUIRED_ARGC, apr_signal_unblock_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "signal_unblock", mrb_APR_apr_signal_unblock, MRB_ARGS_ARG(apr_signal_unblock_REQUIRED_ARGC, apr_signal_unblock_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_sleep_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_sleep", mrb_APR_apr_sleep, MRB_ARGS_ARG(apr_sleep_REQUIRED_ARGC, apr_sleep_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "sleep", mrb_APR_apr_sleep, MRB_ARGS_ARG(apr_sleep_REQUIRED_ARGC, apr_sleep_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_snprintf_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_snprintf", mrb_APR_apr_snprintf, MRB_ARGS_ARG(apr_snprintf_REQUIRED_ARGC, apr_snprintf_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "snprintf", mrb_APR_apr_snprintf, MRB_ARGS_ARG(apr_snprintf_REQUIRED_ARGC, apr_snprintf_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_sockaddr_equal_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_sockaddr_equal", mrb_APR_apr_sockaddr_equal, MRB_ARGS_ARG(apr_sockaddr_equal_REQUIRED_ARGC, apr_sockaddr_equal_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "sockaddr_equal", mrb_APR_apr_sockaddr_equal, MRB_ARGS_ARG(apr_sockaddr_equal_REQUIRED_ARGC, apr_sockaddr_equal_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_sockaddr_info_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_sockaddr_info_get", mrb_APR_apr_sockaddr_info_get, MRB_ARGS_ARG(apr_sockaddr_info_get_REQUIRED_ARGC, apr_sockaddr_info_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "sockaddr_info_get", mrb_APR_apr_sockaddr_info_get, MRB_ARGS_ARG(apr_sockaddr_info_get_REQUIRED_ARGC, apr_sockaddr_info_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_sockaddr_ip_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_sockaddr_ip_get", mrb_APR_apr_sockaddr_ip_get, MRB_ARGS_ARG(apr_sockaddr_ip_get_REQUIRED_ARGC, apr_sockaddr_ip_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "sockaddr_ip_get", mrb_APR_apr_sockaddr_ip_get, MRB_ARGS_ARG(apr_sockaddr_ip_get_REQUIRED_ARGC, apr_sockaddr_ip_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_sockaddr_ip_getbuf_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_sockaddr_ip_getbuf", mrb_APR_apr_sockaddr_ip_getbuf, MRB_ARGS_ARG(apr_sockaddr_ip_getbuf_REQUIRED_ARGC, apr_sockaddr_ip_getbuf_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "sockaddr_ip_getbuf", mrb_APR_apr_sockaddr_ip_getbuf, MRB_ARGS_ARG(apr_sockaddr_ip_getbuf_REQUIRED_ARGC, apr_sockaddr_ip_getbuf_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_accept_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_accept", mrb_APR_apr_socket_accept, MRB_ARGS_ARG(apr_socket_accept_REQUIRED_ARGC, apr_socket_accept_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_accept", mrb_APR_apr_socket_accept, MRB_ARGS_ARG(apr_socket_accept_REQUIRED_ARGC, apr_socket_accept_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_addr_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_addr_get", mrb_APR_apr_socket_addr_get, MRB_ARGS_ARG(apr_socket_addr_get_REQUIRED_ARGC, apr_socket_addr_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_addr_get", mrb_APR_apr_socket_addr_get, MRB_ARGS_ARG(apr_socket_addr_get_REQUIRED_ARGC, apr_socket_addr_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_atmark_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_atmark", mrb_APR_apr_socket_atmark, MRB_ARGS_ARG(apr_socket_atmark_REQUIRED_ARGC, apr_socket_atmark_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_atmark", mrb_APR_apr_socket_atmark, MRB_ARGS_ARG(apr_socket_atmark_REQUIRED_ARGC, apr_socket_atmark_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_atreadeof_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_atreadeof", mrb_APR_apr_socket_atreadeof, MRB_ARGS_ARG(apr_socket_atreadeof_REQUIRED_ARGC, apr_socket_atreadeof_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_atreadeof", mrb_APR_apr_socket_atreadeof, MRB_ARGS_ARG(apr_socket_atreadeof_REQUIRED_ARGC, apr_socket_atreadeof_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_bind_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_bind", mrb_APR_apr_socket_bind, MRB_ARGS_ARG(apr_socket_bind_REQUIRED_ARGC, apr_socket_bind_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_bind", mrb_APR_apr_socket_bind, MRB_ARGS_ARG(apr_socket_bind_REQUIRED_ARGC, apr_socket_bind_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_close_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_close", mrb_APR_apr_socket_close, MRB_ARGS_ARG(apr_socket_close_REQUIRED_ARGC, apr_socket_close_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_close", mrb_APR_apr_socket_close, MRB_ARGS_ARG(apr_socket_close_REQUIRED_ARGC, apr_socket_close_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_connect_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_connect", mrb_APR_apr_socket_connect, MRB_ARGS_ARG(apr_socket_connect_REQUIRED_ARGC, apr_socket_connect_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_connect", mrb_APR_apr_socket_connect, MRB_ARGS_ARG(apr_socket_connect_REQUIRED_ARGC, apr_socket_connect_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_create_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_create", mrb_APR_apr_socket_create, MRB_ARGS_ARG(apr_socket_create_REQUIRED_ARGC, apr_socket_create_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_create", mrb_APR_apr_socket_create, MRB_ARGS_ARG(apr_socket_create_REQUIRED_ARGC, apr_socket_create_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_data_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_data_get", mrb_APR_apr_socket_data_get, MRB_ARGS_ARG(apr_socket_data_get_REQUIRED_ARGC, apr_socket_data_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_data_get", mrb_APR_apr_socket_data_get, MRB_ARGS_ARG(apr_socket_data_get_REQUIRED_ARGC, apr_socket_data_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_data_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_data_set", mrb_APR_apr_socket_data_set, MRB_ARGS_ARG(apr_socket_data_set_REQUIRED_ARGC, apr_socket_data_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_data_set", mrb_APR_apr_socket_data_set, MRB_ARGS_ARG(apr_socket_data_set_REQUIRED_ARGC, apr_socket_data_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_listen_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_listen", mrb_APR_apr_socket_listen, MRB_ARGS_ARG(apr_socket_listen_REQUIRED_ARGC, apr_socket_listen_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_listen", mrb_APR_apr_socket_listen, MRB_ARGS_ARG(apr_socket_listen_REQUIRED_ARGC, apr_socket_listen_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_opt_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_opt_get", mrb_APR_apr_socket_opt_get, MRB_ARGS_ARG(apr_socket_opt_get_REQUIRED_ARGC, apr_socket_opt_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_opt_get", mrb_APR_apr_socket_opt_get, MRB_ARGS_ARG(apr_socket_opt_get_REQUIRED_ARGC, apr_socket_opt_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_opt_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_opt_set", mrb_APR_apr_socket_opt_set, MRB_ARGS_ARG(apr_socket_opt_set_REQUIRED_ARGC, apr_socket_opt_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_opt_set", mrb_APR_apr_socket_opt_set, MRB_ARGS_ARG(apr_socket_opt_set_REQUIRED_ARGC, apr_socket_opt_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_protocol_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_protocol_get", mrb_APR_apr_socket_protocol_get, MRB_ARGS_ARG(apr_socket_protocol_get_REQUIRED_ARGC, apr_socket_protocol_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_protocol_get", mrb_APR_apr_socket_protocol_get, MRB_ARGS_ARG(apr_socket_protocol_get_REQUIRED_ARGC, apr_socket_protocol_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_recv_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_recv", mrb_APR_apr_socket_recv, MRB_ARGS_ARG(apr_socket_recv_REQUIRED_ARGC, apr_socket_recv_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_recv", mrb_APR_apr_socket_recv, MRB_ARGS_ARG(apr_socket_recv_REQUIRED_ARGC, apr_socket_recv_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_recvfrom_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_recvfrom", mrb_APR_apr_socket_recvfrom, MRB_ARGS_ARG(apr_socket_recvfrom_REQUIRED_ARGC, apr_socket_recvfrom_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_recvfrom", mrb_APR_apr_socket_recvfrom, MRB_ARGS_ARG(apr_socket_recvfrom_REQUIRED_ARGC, apr_socket_recvfrom_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_send_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_send", mrb_APR_apr_socket_send, MRB_ARGS_ARG(apr_socket_send_REQUIRED_ARGC, apr_socket_send_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_send", mrb_APR_apr_socket_send, MRB_ARGS_ARG(apr_socket_send_REQUIRED_ARGC, apr_socket_send_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_sendfile_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_sendfile", mrb_APR_apr_socket_sendfile, MRB_ARGS_ARG(apr_socket_sendfile_REQUIRED_ARGC, apr_socket_sendfile_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_sendfile", mrb_APR_apr_socket_sendfile, MRB_ARGS_ARG(apr_socket_sendfile_REQUIRED_ARGC, apr_socket_sendfile_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_sendto_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_sendto", mrb_APR_apr_socket_sendto, MRB_ARGS_ARG(apr_socket_sendto_REQUIRED_ARGC, apr_socket_sendto_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_sendto", mrb_APR_apr_socket_sendto, MRB_ARGS_ARG(apr_socket_sendto_REQUIRED_ARGC, apr_socket_sendto_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_sendv_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_sendv", mrb_APR_apr_socket_sendv, MRB_ARGS_ARG(apr_socket_sendv_REQUIRED_ARGC, apr_socket_sendv_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_sendv", mrb_APR_apr_socket_sendv, MRB_ARGS_ARG(apr_socket_sendv_REQUIRED_ARGC, apr_socket_sendv_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_shutdown_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_shutdown", mrb_APR_apr_socket_shutdown, MRB_ARGS_ARG(apr_socket_shutdown_REQUIRED_ARGC, apr_socket_shutdown_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_shutdown", mrb_APR_apr_socket_shutdown, MRB_ARGS_ARG(apr_socket_shutdown_REQUIRED_ARGC, apr_socket_shutdown_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_timeout_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_timeout_get", mrb_APR_apr_socket_timeout_get, MRB_ARGS_ARG(apr_socket_timeout_get_REQUIRED_ARGC, apr_socket_timeout_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_timeout_get", mrb_APR_apr_socket_timeout_get, MRB_ARGS_ARG(apr_socket_timeout_get_REQUIRED_ARGC, apr_socket_timeout_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_timeout_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_timeout_set", mrb_APR_apr_socket_timeout_set, MRB_ARGS_ARG(apr_socket_timeout_set_REQUIRED_ARGC, apr_socket_timeout_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_timeout_set", mrb_APR_apr_socket_timeout_set, MRB_ARGS_ARG(apr_socket_timeout_set_REQUIRED_ARGC, apr_socket_timeout_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_socket_type_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_socket_type_get", mrb_APR_apr_socket_type_get, MRB_ARGS_ARG(apr_socket_type_get_REQUIRED_ARGC, apr_socket_type_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "socket_type_get", mrb_APR_apr_socket_type_get, MRB_ARGS_ARG(apr_socket_type_get_REQUIRED_ARGC, apr_socket_type_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_stat_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_stat", mrb_APR_apr_stat, MRB_ARGS_ARG(apr_stat_REQUIRED_ARGC, apr_stat_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "stat", mrb_APR_apr_stat, MRB_ARGS_ARG(apr_stat_REQUIRED_ARGC, apr_stat_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_strerror_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_strerror", mrb_APR_apr_strerror, MRB_ARGS_ARG(apr_strerror_REQUIRED_ARGC, apr_strerror_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "strerror", mrb_APR_apr_strerror, MRB_ARGS_ARG(apr_strerror_REQUIRED_ARGC, apr_strerror_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_strfsize_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_strfsize", mrb_APR_apr_strfsize, MRB_ARGS_ARG(apr_strfsize_REQUIRED_ARGC, apr_strfsize_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "strfsize", mrb_APR_apr_strfsize, MRB_ARGS_ARG(apr_strfsize_REQUIRED_ARGC, apr_strfsize_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_strftime_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_strftime", mrb_APR_apr_strftime, MRB_ARGS_ARG(apr_strftime_REQUIRED_ARGC, apr_strftime_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "strftime", mrb_APR_apr_strftime, MRB_ARGS_ARG(apr_strftime_REQUIRED_ARGC, apr_strftime_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_strnatcasecmp_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_strnatcasecmp", mrb_APR_apr_strnatcasecmp, MRB_ARGS_ARG(apr_strnatcasecmp_REQUIRED_ARGC, apr_strnatcasecmp_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "strnatcasecmp", mrb_APR_apr_strnatcasecmp, MRB_ARGS_ARG(apr_strnatcasecmp_REQUIRED_ARGC, apr_strnatcasecmp_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_strnatcmp_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_strnatcmp", mrb_APR_apr_strnatcmp, MRB_ARGS_ARG(apr_strnatcmp_REQUIRED_ARGC, apr_strnatcmp_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "strnatcmp", mrb_APR_apr_strnatcmp, MRB_ARGS_ARG(apr_strnatcmp_REQUIRED_ARGC, apr_strnatcmp_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_strtoff_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_strtoff", mrb_APR_apr_strtoff, MRB_ARGS_ARG(apr_strtoff_REQUIRED_ARGC, apr_strtoff_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "strtoff", mrb_APR_apr_strtoff, MRB_ARGS_ARG(apr_strtoff_REQUIRED_ARGC, apr_strtoff_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_strtoi64_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_strtoi64", mrb_APR_apr_strtoi64, MRB_ARGS_ARG(apr_strtoi64_REQUIRED_ARGC, apr_strtoi64_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "strtoi64", mrb_APR_apr_strtoi64, MRB_ARGS_ARG(apr_strtoi64_REQUIRED_ARGC, apr_strtoi64_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_strtok_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_strtok", mrb_APR_apr_strtok, MRB_ARGS_ARG(apr_strtok_REQUIRED_ARGC, apr_strtok_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "strtok", mrb_APR_apr_strtok, MRB_ARGS_ARG(apr_strtok_REQUIRED_ARGC, apr_strtok_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_temp_dir_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_temp_dir_get", mrb_APR_apr_temp_dir_get, MRB_ARGS_ARG(apr_temp_dir_get_REQUIRED_ARGC, apr_temp_dir_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "temp_dir_get", mrb_APR_apr_temp_dir_get, MRB_ARGS_ARG(apr_temp_dir_get_REQUIRED_ARGC, apr_temp_dir_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_terminate_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_terminate", mrb_APR_apr_terminate, MRB_ARGS_ARG(apr_terminate_REQUIRED_ARGC, apr_terminate_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "terminate", mrb_APR_apr_terminate, MRB_ARGS_ARG(apr_terminate_REQUIRED_ARGC, apr_terminate_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_terminate2_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_terminate2", mrb_APR_apr_terminate2, MRB_ARGS_ARG(apr_terminate2_REQUIRED_ARGC, apr_terminate2_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "terminate2", mrb_APR_apr_terminate2, MRB_ARGS_ARG(apr_terminate2_REQUIRED_ARGC, apr_terminate2_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_thread_create_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_thread_create", mrb_APR_apr_thread_create, MRB_ARGS_ARG(apr_thread_create_REQUIRED_ARGC, apr_thread_create_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "thread_create", mrb_APR_apr_thread_create, MRB_ARGS_ARG(apr_thread_create_REQUIRED_ARGC, apr_thread_create_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_thread_data_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_thread_data_get", mrb_APR_apr_thread_data_get, MRB_ARGS_ARG(apr_thread_data_get_REQUIRED_ARGC, apr_thread_data_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "thread_data_get", mrb_APR_apr_thread_data_get, MRB_ARGS_ARG(apr_thread_data_get_REQUIRED_ARGC, apr_thread_data_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_thread_data_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_thread_data_set", mrb_APR_apr_thread_data_set, MRB_ARGS_ARG(apr_thread_data_set_REQUIRED_ARGC, apr_thread_data_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "thread_data_set", mrb_APR_apr_thread_data_set, MRB_ARGS_ARG(apr_thread_data_set_REQUIRED_ARGC, apr_thread_data_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_thread_detach_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_thread_detach", mrb_APR_apr_thread_detach, MRB_ARGS_ARG(apr_thread_detach_REQUIRED_ARGC, apr_thread_detach_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "thread_detach", mrb_APR_apr_thread_detach, MRB_ARGS_ARG(apr_thread_detach_REQUIRED_ARGC, apr_thread_detach_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_thread_exit_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_thread_exit", mrb_APR_apr_thread_exit, MRB_ARGS_ARG(apr_thread_exit_REQUIRED_ARGC, apr_thread_exit_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "thread_exit", mrb_APR_apr_thread_exit, MRB_ARGS_ARG(apr_thread_exit_REQUIRED_ARGC, apr_thread_exit_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_thread_join_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_thread_join", mrb_APR_apr_thread_join, MRB_ARGS_ARG(apr_thread_join_REQUIRED_ARGC, apr_thread_join_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "thread_join", mrb_APR_apr_thread_join, MRB_ARGS_ARG(apr_thread_join_REQUIRED_ARGC, apr_thread_join_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_thread_once_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_thread_once", mrb_APR_apr_thread_once, MRB_ARGS_ARG(apr_thread_once_REQUIRED_ARGC, apr_thread_once_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "thread_once", mrb_APR_apr_thread_once, MRB_ARGS_ARG(apr_thread_once_REQUIRED_ARGC, apr_thread_once_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_thread_once_init_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_thread_once_init", mrb_APR_apr_thread_once_init, MRB_ARGS_ARG(apr_thread_once_init_REQUIRED_ARGC, apr_thread_once_init_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "thread_once_init", mrb_APR_apr_thread_once_init, MRB_ARGS_ARG(apr_thread_once_init_REQUIRED_ARGC, apr_thread_once_init_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_thread_yield_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_thread_yield", mrb_APR_apr_thread_yield, MRB_ARGS_ARG(apr_thread_yield_REQUIRED_ARGC, apr_thread_yield_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "thread_yield", mrb_APR_apr_thread_yield, MRB_ARGS_ARG(apr_thread_yield_REQUIRED_ARGC, apr_thread_yield_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_threadattr_create_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_threadattr_create", mrb_APR_apr_threadattr_create, MRB_ARGS_ARG(apr_threadattr_create_REQUIRED_ARGC, apr_threadattr_create_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "threadattr_create", mrb_APR_apr_threadattr_create, MRB_ARGS_ARG(apr_threadattr_create_REQUIRED_ARGC, apr_threadattr_create_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_threadattr_detach_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_threadattr_detach_get", mrb_APR_apr_threadattr_detach_get, MRB_ARGS_ARG(apr_threadattr_detach_get_REQUIRED_ARGC, apr_threadattr_detach_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "threadattr_detach_get", mrb_APR_apr_threadattr_detach_get, MRB_ARGS_ARG(apr_threadattr_detach_get_REQUIRED_ARGC, apr_threadattr_detach_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_threadattr_detach_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_threadattr_detach_set", mrb_APR_apr_threadattr_detach_set, MRB_ARGS_ARG(apr_threadattr_detach_set_REQUIRED_ARGC, apr_threadattr_detach_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "threadattr_detach_set", mrb_APR_apr_threadattr_detach_set, MRB_ARGS_ARG(apr_threadattr_detach_set_REQUIRED_ARGC, apr_threadattr_detach_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_threadattr_guardsize_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_threadattr_guardsize_set", mrb_APR_apr_threadattr_guardsize_set, MRB_ARGS_ARG(apr_threadattr_guardsize_set_REQUIRED_ARGC, apr_threadattr_guardsize_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "threadattr_guardsize_set", mrb_APR_apr_threadattr_guardsize_set, MRB_ARGS_ARG(apr_threadattr_guardsize_set_REQUIRED_ARGC, apr_threadattr_guardsize_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_threadattr_stacksize_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_threadattr_stacksize_set", mrb_APR_apr_threadattr_stacksize_set, MRB_ARGS_ARG(apr_threadattr_stacksize_set_REQUIRED_ARGC, apr_threadattr_stacksize_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "threadattr_stacksize_set", mrb_APR_apr_threadattr_stacksize_set, MRB_ARGS_ARG(apr_threadattr_stacksize_set_REQUIRED_ARGC, apr_threadattr_stacksize_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_threadkey_data_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_threadkey_data_get", mrb_APR_apr_threadkey_data_get, MRB_ARGS_ARG(apr_threadkey_data_get_REQUIRED_ARGC, apr_threadkey_data_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "threadkey_data_get", mrb_APR_apr_threadkey_data_get, MRB_ARGS_ARG(apr_threadkey_data_get_REQUIRED_ARGC, apr_threadkey_data_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_threadkey_data_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_threadkey_data_set", mrb_APR_apr_threadkey_data_set, MRB_ARGS_ARG(apr_threadkey_data_set_REQUIRED_ARGC, apr_threadkey_data_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "threadkey_data_set", mrb_APR_apr_threadkey_data_set, MRB_ARGS_ARG(apr_threadkey_data_set_REQUIRED_ARGC, apr_threadkey_data_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_threadkey_private_create_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_threadkey_private_create", mrb_APR_apr_threadkey_private_create, MRB_ARGS_ARG(apr_threadkey_private_create_REQUIRED_ARGC, apr_threadkey_private_create_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "threadkey_private_create", mrb_APR_apr_threadkey_private_create, MRB_ARGS_ARG(apr_threadkey_private_create_REQUIRED_ARGC, apr_threadkey_private_create_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_threadkey_private_delete_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_threadkey_private_delete", mrb_APR_apr_threadkey_private_delete, MRB_ARGS_ARG(apr_threadkey_private_delete_REQUIRED_ARGC, apr_threadkey_private_delete_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "threadkey_private_delete", mrb_APR_apr_threadkey_private_delete, MRB_ARGS_ARG(apr_threadkey_private_delete_REQUIRED_ARGC, apr_threadkey_private_delete_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_threadkey_private_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_threadkey_private_get", mrb_APR_apr_threadkey_private_get, MRB_ARGS_ARG(apr_threadkey_private_get_REQUIRED_ARGC, apr_threadkey_private_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "threadkey_private_get", mrb_APR_apr_threadkey_private_get, MRB_ARGS_ARG(apr_threadkey_private_get_REQUIRED_ARGC, apr_threadkey_private_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_threadkey_private_set_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_threadkey_private_set", mrb_APR_apr_threadkey_private_set, MRB_ARGS_ARG(apr_threadkey_private_set_REQUIRED_ARGC, apr_threadkey_private_set_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "threadkey_private_set", mrb_APR_apr_threadkey_private_set, MRB_ARGS_ARG(apr_threadkey_private_set_REQUIRED_ARGC, apr_threadkey_private_set_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_time_ansi_put_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_time_ansi_put", mrb_APR_apr_time_ansi_put, MRB_ARGS_ARG(apr_time_ansi_put_REQUIRED_ARGC, apr_time_ansi_put_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "time_ansi_put", mrb_APR_apr_time_ansi_put, MRB_ARGS_ARG(apr_time_ansi_put_REQUIRED_ARGC, apr_time_ansi_put_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_time_clock_hires_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_time_clock_hires", mrb_APR_apr_time_clock_hires, MRB_ARGS_ARG(apr_time_clock_hires_REQUIRED_ARGC, apr_time_clock_hires_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "time_clock_hires", mrb_APR_apr_time_clock_hires, MRB_ARGS_ARG(apr_time_clock_hires_REQUIRED_ARGC, apr_time_clock_hires_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_time_exp_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_time_exp_get", mrb_APR_apr_time_exp_get, MRB_ARGS_ARG(apr_time_exp_get_REQUIRED_ARGC, apr_time_exp_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "time_exp_get", mrb_APR_apr_time_exp_get, MRB_ARGS_ARG(apr_time_exp_get_REQUIRED_ARGC, apr_time_exp_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_time_exp_gmt_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_time_exp_gmt", mrb_APR_apr_time_exp_gmt, MRB_ARGS_ARG(apr_time_exp_gmt_REQUIRED_ARGC, apr_time_exp_gmt_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "time_exp_gmt", mrb_APR_apr_time_exp_gmt, MRB_ARGS_ARG(apr_time_exp_gmt_REQUIRED_ARGC, apr_time_exp_gmt_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_time_exp_gmt_get_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_time_exp_gmt_get", mrb_APR_apr_time_exp_gmt_get, MRB_ARGS_ARG(apr_time_exp_gmt_get_REQUIRED_ARGC, apr_time_exp_gmt_get_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "time_exp_gmt_get", mrb_APR_apr_time_exp_gmt_get, MRB_ARGS_ARG(apr_time_exp_gmt_get_REQUIRED_ARGC, apr_time_exp_gmt_get_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_time_exp_lt_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_time_exp_lt", mrb_APR_apr_time_exp_lt, MRB_ARGS_ARG(apr_time_exp_lt_REQUIRED_ARGC, apr_time_exp_lt_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "time_exp_lt", mrb_APR_apr_time_exp_lt, MRB_ARGS_ARG(apr_time_exp_lt_REQUIRED_ARGC, apr_time_exp_lt_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_time_exp_tz_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_time_exp_tz", mrb_APR_apr_time_exp_tz, MRB_ARGS_ARG(apr_time_exp_tz_REQUIRED_ARGC, apr_time_exp_tz_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "time_exp_tz", mrb_APR_apr_time_exp_tz, MRB_ARGS_ARG(apr_time_exp_tz_REQUIRED_ARGC, apr_time_exp_tz_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_time_now_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_time_now", mrb_APR_apr_time_now, MRB_ARGS_ARG(apr_time_now_REQUIRED_ARGC, apr_time_now_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "time_now", mrb_APR_apr_time_now, MRB_ARGS_ARG(apr_time_now_REQUIRED_ARGC, apr_time_now_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_time_sec_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_time_sec", mrb_APR_apr_time_sec, MRB_ARGS_ARG(apr_time_sec_REQUIRED_ARGC, apr_time_sec_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "time_sec", mrb_APR_apr_time_sec, MRB_ARGS_ARG(apr_time_sec_REQUIRED_ARGC, apr_time_sec_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_tokenize_to_argv_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_tokenize_to_argv", mrb_APR_apr_tokenize_to_argv, MRB_ARGS_ARG(apr_tokenize_to_argv_REQUIRED_ARGC, apr_tokenize_to_argv_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "tokenize_to_argv", mrb_APR_apr_tokenize_to_argv, MRB_ARGS_ARG(apr_tokenize_to_argv_REQUIRED_ARGC, apr_tokenize_to_argv_OPTIONAL_ARGC));
 #endif
 #if BIND_apr_vsnprintf_FUNCTION
-  mrb_define_class_method(mrb, APR_module, "apr_vsnprintf", mrb_APR_apr_vsnprintf, MRB_ARGS_ARG(apr_vsnprintf_REQUIRED_ARGC, apr_vsnprintf_OPTIONAL_ARGC));
+  mrb_define_class_method(mrb, APR_module, "vsnprintf", mrb_APR_apr_vsnprintf, MRB_ARGS_ARG(apr_vsnprintf_REQUIRED_ARGC, apr_vsnprintf_OPTIONAL_ARGC));
 #endif
 /* MRUBY_BINDING_END */
 

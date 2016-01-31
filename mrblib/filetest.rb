@@ -6,7 +6,7 @@ module FileTest
   #   def self.FileTest.is_type?(path, type)
   #     result = nil
   #     APR.with_pool do |pool|
-  #       err, native_finfo = APR.apr_stat(path, APR::APR_FINFO_TYPE, pool)
+  #       err, native_finfo = APR.stat(path, APR::APR_FINFO_TYPE, pool)
   #       if err == APR::APR_SUCCESS
   #         result = native_finfo.filetype == type
   #       end
@@ -43,9 +43,9 @@ module FileTest
   def exists?(path)
     exists = true
     APR.with_stack_pool do |pool|
-      err, f = APR.apr_file_open(path, APR::APR_FOPEN_READ, 0, pool)
+      err, f = APR.file_open(path, APR::APR_FOPEN_READ, 0, pool)
       exists = false if APR::APR_STATUS_IS_ENOENT(err)
-      APR.apr_file_close(f) if f
+      APR.file_close(f) if f
     end
     exists
   end

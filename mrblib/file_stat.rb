@@ -3,7 +3,7 @@ class File
     def initialize(file_name, apr_wanted=nil)
       APR.with_stack_pool do |pool|
         APR.raise_apr_errno(APR::APR_ENOENT) unless File.exists?(file_name)
-        err, native_finfo = APR.apr_stat(file_name, apr_wanted || APR::APR_FINFO_DEFAULT, pool)
+        err, native_finfo = APR.stat(file_name, apr_wanted || APR::APR_FINFO_DEFAULT, pool)
 
         @atime = APR::Convert.apr_time_to_rb(native_finfo.atime) if (native_finfo.valid & APR::APR_FINFO_ATIME) != 0
         @ctime = APR::Convert.apr_time_to_rb(native_finfo.ctime) if (native_finfo.valid & APR::APR_FINFO_CTIME) != 0

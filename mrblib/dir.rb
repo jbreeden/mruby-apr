@@ -9,7 +9,7 @@ class Dir
 
   def self.chdir(path, &block)
     if block.nil?
-      err = APR.apr_dir_chdir(path)
+      err = APR.dir_chdir(path)
       APR.raise_apr_errno(err)
     else
       prev = pwd
@@ -28,7 +28,7 @@ class Dir
 
   def self.delete(path)
     APR.with_stack_pool do |pool|
-      err = APR.apr_dir_remove(path, pool)
+      err = APR.dir_remove(path, pool)
       APR.raise_apr_errno(err)
     end
   end
@@ -41,13 +41,13 @@ class Dir
   # def self.entries(path)
   #   results = []
   #   APR.with_stack_pool do |pool|
-  #     err, dir = APR.apr_dir_open path, pool
+  #     err, dir = APR.dir_open path, pool
   #     APR.raise_apr_errno(err)
   #
-  #     err, finfo = APR.apr_dir_read APR::APR_FINFO_NAME, dir
+  #     err, finfo = APR.dir_read APR::APR_FINFO_NAME, dir
   #     while err == 0 || err == APR::APR_INCOMPLETE
   #       results.push(finfo.name)
-  #       err, finfo = APR.apr_dir_read APR::APR_FINFO_NAME, dir
+  #       err, finfo = APR.dir_read APR::APR_FINFO_NAME, dir
   #     end
   #   end
   #   results
@@ -72,7 +72,7 @@ class Dir
 
   def self.getcwd
     # TODO May need to fix path on windows (Ruby always uses /)
-    err, path = APR.apr_dir_getcwd
+    err, path = APR.dir_getcwd
     APR.raise_apr_errno(err) # Why would this ever happen?
     path
   end
@@ -86,14 +86,14 @@ class Dir
 
   def self.mkdir(path)
     APR.with_stack_pool do |pool|
-      err = APR.apr_dir_make path, APR::APR_FPROT_OS_DEFAULT, pool
+      err = APR.dir_make path, APR::APR_FPROT_OS_DEFAULT, pool
       APR.raise_apr_errno(err)
     end
   end
 
   def self.tmpdir
     APR.with_stack_pool do |pool|
-      err, dirname = APR.apr_temp_dir_get(pool)
+      err, dirname = APR.temp_dir_get(pool)
       dirname
     end
   end

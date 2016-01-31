@@ -42,7 +42,7 @@ class File < IO
       return
     end
 
-    err, @pool = APR.apr_pool_create(nil)
+    err, @pool = APR.pool_create(nil)
     APR.raise_apr_errno(err)
     @filename = filename
 
@@ -55,7 +55,7 @@ class File < IO
 
     @perm_bits = perm
 
-    err, @native_file = APR.apr_file_open(@filename, @flags, @perm_bits, @pool)
+    err, @native_file = APR.file_open(@filename, @flags, @perm_bits, @pool)
     if err != 0
       APR.raise_apr_errno(err)
     end
@@ -87,7 +87,7 @@ class File < IO
   def self.delete(*paths)
     APR.with_stack_pool do |pool|
       paths.each do |path|
-        err = APR.apr_file_remove(path, pool)
+        err = APR.file_remove(path, pool)
         APR.raise_apr_errno(err)
       end
     end
@@ -130,7 +130,7 @@ class File < IO
   #>
   def flock(locking_constant)
     if (locking_constant & File::LOCK_UN) > 0
-      return APR::apr_file_unlock(@native_file)
+      return APR.file_unlock(@native_file)
     end
 
     apr_flags = []
@@ -145,7 +145,7 @@ class File < IO
     end
 
     apr_lock_type = apr_flags.inject(0) { |acc, cur| (acc | cur) }
-    err = APR.apr_file_lock(@native_file, apr_lock_type)
+    err = APR.file_lock(@native_file, apr_lock_type)
     APR.raise_apr_errno(err, ignore: APR::APR_EAGAIN)
 
     if err == APR::APR_EAGAIN
@@ -156,7 +156,7 @@ class File < IO
   end
 
   def close
-    APR.apr_file_close(@native_file)
+    APR.file_close(@native_file)
     @closed = true
   end
 
@@ -182,7 +182,7 @@ class File < IO
 
   def flush
     assert_can_write
-    APR.apr_file_flush(@native_file)
+    APR.file_flush(@native_file)
   end
 
   # IO Subclass Contract Implementation
@@ -194,13 +194,13 @@ class File < IO
     read = ""
     if length.nil?
       loop {
-        err, current_read = APR::apr_file_read(@native_file, 100)
+        err, current_read = APR.file_read(@native_file, 100)
         APR.raise_apr_errno(err, ignore: [APR::APR_SUCCESS, APR::APR_EOF])
         break if current_read.length == 0
         read += current_read
       }
     else
-      err, read = APR::apr_file_read(@native_file, length)
+      err, read = APR.file_read(@native_file, length)
       APR.raise_apr_errno(err, ignore: [APR::APR_SUCCESS, APR::APR_EOF])
     end
 
@@ -219,23 +219,23 @@ class File < IO
   def write(str)
     assert_can_write
     as_str = (str.class == String) ? str : str.to_s
-    err, bytes_written = APR.apr_file_write(@native_file, as_str, as_str.length)
+    err, bytes_written = APR.file_write(@native_file, as_str, as_str.length)
     APR.raise_apr_errno(err)
     bytes_written
   end
 
   def eof?
     assert_can_read
-    is_eof = (APR::APR_EOF == APR.apr_file_eof(@native_file))
+    is_eof = (APR::APR_EOF == APR.file_eof(@native_file))
     unless is_eof
       # Have to cheat since CRuby returns EOF immediately for an empty file,
       # while APR only returns EOF after you try to read past it.
       # So, we can getc -> check -> ungetc to mimick CRuby
-      err, char = APR.apr_file_getc(@native_file)
+      err, char = APR.file_getc(@native_file)
       APR.raise_apr_errno(err, ignore: APR::APR_EOF)
       is_eof = (APR::APR_EOF == err)
       unless char.nil?
-        APR.apr_file_ungetc(char, @native_file)
+        APR.file_ungetc(char, @native_file)
       end
     end
     is_eof
@@ -247,14 +247,14 @@ class File < IO
 
   def getc
     assert_can_read
-    err, char = APR.apr_file_getc(@native_file)
+    err, char = APR.file_getc(@native_file)
     APR.raise_apr_errno(err, ignore: APR::APR_EOF)
     char
   end
 
   def getbyte
     assert_can_read
-    err, char = APR.apr_file_getc(@native_file)
+    err, char = APR.file_getc(@native_file)
     APR.raise_apr_errno(err, ignore: APR::APR_EOF)
     char.nil? ? nil : char.ord
   end
@@ -263,11 +263,11 @@ class File < IO
     assert_can_read
     if byte.class == String
       byte.reverse.each_char do |ch|
-        err = APR.apr_file_ungetc(ch, @native_file)
+        err = APR.file_ungetc(ch, @native_file)
         APR.raise_apr_errno(err)
       end
     elsif byte.class == Fixnum
-      err = APR.apr_file_ungetc(byte.chr, @native_file)
+      err = APR.file_ungetc(byte.chr, @native_file)
       APR.raise_apr_errno(err)
     else
       raise ArgumentError.new("Expected a String or Fixnum")
@@ -277,7 +277,7 @@ class File < IO
 
   def seek(amount, whence=IO::SEEK_SET)
     whence = IO::Util.ruby_seek_to_apr(whence)
-    err, pos = APR.apr_file_seek(@native_file, whence, amount)
+    err, pos = APR.file_seek(@native_file, whence, amount)
     APR.raise_apr_errno(err)
     # TODO: Verify expected return value
   end

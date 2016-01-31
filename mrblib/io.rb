@@ -72,9 +72,9 @@ class IO
   # -------------
 
   def self.pipe
-    err, pool = APR.apr_pool_create(nil)
+    err, pool = APR.pool_create(nil)
 
-    err, readEnd, writeEnd = APR.apr_file_pipe_create pool
+    err, readEnd, writeEnd = APR.file_pipe_create pool
     APR.raise_apr_errno(err)
 
     read_file = Pipe.new(readEnd, 'r', pool)
@@ -118,14 +118,14 @@ class IO
       opt[:in]   = child_in_pipe_ends[READ_END]
       write_pipe = child_in_pipe_ends[WRITE_END]
       # Don't let the child inherit our side of the pipe
-      APR.apr_file_inherit_unset(write_pipe.native_file)
+      APR.file_inherit_unset(write_pipe.native_file)
     end
     if (flags & APR::APR_FOPEN_READ) != 0
       child_out_pipe_ends = IO.pipe
       opt[:out] = child_out_pipe_ends[WRITE_END]
       read_pipe = child_out_pipe_ends[READ_END]
       # Don't let the child inherit our side of the pipe
-      APR.apr_file_inherit_unset(read_pipe.native_file)
+      APR.file_inherit_unset(read_pipe.native_file)
     end
 
     pid = Process.spawn(env, *cmd, opt)
@@ -137,7 +137,7 @@ class IO
       # We're "reading" the output, so close the write end of the ouput
       child_out_pipe_ends[WRITE_END].close
       # Don't let the child inherit our side of the pipe
-      APR.apr_file_inherit_unset(read_pipe.native_file)
+      APR.file_inherit_unset(read_pipe.native_file)
     end
     if write_pipe
       # We're "writing" to the input, so close the read end of the input
