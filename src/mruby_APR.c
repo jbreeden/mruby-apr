@@ -37,8 +37,6 @@ mrb_APR_apr_allocator_alloc(mrb_state* mrb, mrb_value self) {
   /* Fetch the args */
   mrb_get_args(mrb, "oi", &allocator, &native_size);
 
-  mruby_
-
   /* Type checking */
   if (!mrb_obj_is_kind_of(mrb, allocator, AprAllocatorT_class(mrb))) {
     mrb_raise(mrb, E_TYPE_ERROR, "AprAllocatorT expected");
