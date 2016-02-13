@@ -1,6 +1,6 @@
 load 'fixture.rb'
 
-TestFixture.new('APR API: Processes') do
+APR::Spec.new('APR API: Processes') do
   err, @pool = APR.pool_create(nil)
 
   describe 'APR.proc_create(command: String, argv: Array<String>, env: Array<String>, proc_attr: Procattr, pool: Pool): [errno: Fixnum, proc: Proc]' do
@@ -17,7 +17,7 @@ TestFixture.new('APR API: Processes') do
       err = APR.procattr_cmdtype_set proc_attr, APR::Cmdtype::APR_PROGRAM_PATH
       assert(err == 0)
 
-      err, file = APR.file_open "sandbox/echo_out.txt",
+      err, file = APR.file_open "#{$sandbox}/echo_out.txt",
         APR::APR_FOPEN_CREATE | APR::APR_FOPEN_WRITE | APR::APR_FOPEN_TRUNCATE,
         APR::APR_FPROT_OS_DEFAULT,
         @pool
@@ -40,7 +40,7 @@ TestFixture.new('APR API: Processes') do
 
       APR.file_close(file)
 
-      err, file = APR.file_open "sandbox/echo_out.txt", APR::APR_FOPEN_READ, 0, @pool
+      err, file = APR.file_open "#{$sandbox}/echo_out.txt", APR::APR_FOPEN_READ, 0, @pool
       assert(err == 0)
 
       err, str = APR.file_read file, 100

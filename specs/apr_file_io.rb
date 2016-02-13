@@ -3,7 +3,7 @@ load 'fixture.rb'
 # Note:
 # I know, it's evil, but these tests are very much order dependent.
 
-TestFixture.new('APR API: File IO') do
+APR::Spec.new('APR API: File IO') do
 
   test_txt = "#{$sandbox}/test.txt"
   two_line_file = "#{$sandbox}/two_line_file.txt"

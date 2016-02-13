@@ -1,6 +1,6 @@
 load 'fixture.rb'
 
-TestFixture.new('Ruby API: File::Stat') do
+APR::Spec.new('Ruby API: File::Stat') do
   empty_file = "#{$sandbox}/empty_file.txt"
   two_line_file = "#{$sandbox}/two_line_file.txt"
   file_for_writing = "#{$sandbox}/file_for_writing.txt"
@@ -17,15 +17,18 @@ TestFixture.new('Ruby API: File::Stat') do
   describe 'Stat#ctime' do
     it 'Gives the creation time of the file as a Time' do
       created_file = "#{$sandbox}/created_file.txt"
+      File.delete(created_file) if File.exists?(created_file)
+      puts created_file
       now = Time.now
-      # Unfortunately have to sleep for a second to guarantee ctime > "now"
-      APR.sleep 2000000 # micro seconds
-      # File.delete(created_file) if File.exists?(created_file)
       File.open(created_file, 'w') do |f|
         f.puts "Created after #{now}"
+        f.puts ('*' * rand(1000)) # Change the file length
       end
+      sleep 2
       stat = File::Stat.new(created_file)
       ctime = stat.ctime
+      puts ctime
+      puts now
       assert(ctime > now)
     end
   end

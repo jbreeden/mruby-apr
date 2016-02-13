@@ -1,6 +1,6 @@
 load 'fixture.rb'
 
-TestFixture.new('APR API: Time') do
+APR::Spec.new('APR API: Time') do
   err, @pool = APR.pool_create(nil)
 
   def check_errno(errno)

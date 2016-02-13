@@ -1,6 +1,6 @@
 load 'fixture.rb'
 
-TestFixture.new('Ruby API: Dir') do
+APR::Spec.new('Ruby API: Dir') do
   sandbox_dir = "#{$GEM_DIR}/sandbox"
 
   describe 'Dir' do

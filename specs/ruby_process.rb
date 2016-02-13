@@ -1,6 +1,6 @@
 load 'fixture.rb'
 
-TestFixture.new('Ruby API: Process') do
+APR::Spec.new('Ruby API: Process') do
   file_for_writing = "#{$GEM_DIR}/sandbox/file_for_writing.txt"
 
   describe 'Process::spawn' do

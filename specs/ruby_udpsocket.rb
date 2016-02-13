@@ -7,7 +7,7 @@ rescue
   require 'socket'
 end
 
-TestFixture.new('Ruby API: UDPSocket') do
+APR::Spec.new('Ruby API: UDPSocket') do
   describe "UDPSocket::read(length=nil)" do
     it "Reads at most length bytes from a bound UDPSocket" do
       server = UDPSocket.new()

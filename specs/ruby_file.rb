@@ -1,6 +1,6 @@
 load 'fixture.rb'
 
-TestFixture.new('Ruby API: File') do
+APR::Spec.new('Ruby API: File') do
   sandbox_dir = "#{$GEM_DIR}/sandbox"
   empty_file = "#{$GEM_DIR}/sandbox/empty_file.txt"
   two_line_file = "#{$GEM_DIR}/sandbox/two_line_file.txt"
@@ -74,7 +74,7 @@ TestFixture.new('Ruby API: File') do
 
   describe 'File::delete(path[, path]...)' do
     it 'Deletes the file named by the path argument' do
-      name = 'sandbox/create_and_delete.txt'
+      name = "#{$sandbox}/create_and_delete.txt"
       f = File.open(name, 'w')
       f.close
       assert File.exists?(name)
@@ -83,8 +83,8 @@ TestFixture.new('Ruby API: File') do
     end
 
     it 'Accepts multiple path parameters and deletes them all' do
-      name1 = 'sandbox/create_and_delete1.txt'
-      name2 = 'sandbox/create_and_delete2.txt'
+      name1 = "#{$sandbox}/create_and_delete1.txt"
+      name2 = "#{$sandbox}/create_and_delete2.txt"
       names = [name1, name2]
       names.each do |name|
         f = File.open(name, 'w')
@@ -101,7 +101,7 @@ TestFixture.new('Ruby API: File') do
 
     it 'Raises a system call error if the file does not exist' do
       assert_raises(SystemCallError) do
-        File.delete('sandbox/does_not.exist')
+        File.delete("#{$sandbox}/does_not.exist")
       end
     end
   end

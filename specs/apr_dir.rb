@@ -1,6 +1,6 @@
 load 'fixture.rb'
 
-TestFixture.new('APR API: Directories') do
+APR::Spec.new('APR API: Directories') do
   err, @pool = APR.pool_create(nil)
   @a_rwx = 0x070707
 
@@ -46,18 +46,18 @@ TestFixture.new('APR API: Directories') do
 
   describe 'APR.dir_make(path: String, permissions: Fixnum, pool: Pool): errno: Fixnum' do
     it 'Creates a directory' do
-      err = APR.dir_make 'sandbox/test_create_dir', @a_rwx, @pool
+      err = APR.dir_make "#{$sandbox}/test_create_dir", @a_rwx, @pool
       check_errno(err)
-      err, dir = APR.dir_open('sandbox/test_create_dir', @pool)
+      err, dir = APR.dir_open("#{$sandbox}/test_create_dir", @pool)
       check_errno(err)
     end
   end
 
   describe 'APR.dir_make_recursive(path: String, permissions: Fixnum, pool: Poolype): errno: Fixnum' do
     it 'Creates a directory and any required parent directories' do
-      err = APR.dir_make_recursive 'sandbox/test_create_dir/some/nested/dir', @a_rwx, @pool
+      err = APR.dir_make_recursive "#{$sandbox}/test_create_dir/some/nested/dir", @a_rwx, @pool
       check_errno(err)
-      err, dir = APR.dir_open('sandbox/test_create_dir/some/nested/dir', @pool)
+      err, dir = APR.dir_open("#{$sandbox}/test_create_dir/some/nested/dir", @pool)
       check_errno(err)
       APR.dir_close(dir)
     end
@@ -65,13 +65,13 @@ TestFixture.new('APR API: Directories') do
 
   describe 'APR.dir_remove(path: String, pool: Poolype): errno: Fixnum' do
     it 'Deletes a directory' do
-      err = APR.dir_remove 'sandbox/test_create_dir/some/nested/dir', @pool
+      err = APR.dir_remove "#{$sandbox}/test_create_dir/some/nested/dir", @pool
       check_errno(err)
-      err = APR.dir_remove 'sandbox/test_create_dir/some/nested', @pool
+      err = APR.dir_remove "#{$sandbox}/test_create_dir/some/nested", @pool
       check_errno(err)
-      err = APR.dir_remove 'sandbox/test_create_dir/some/', @pool
+      err = APR.dir_remove "#{$sandbox}/test_create_dir/some/", @pool
       check_errno(err)
-      err = APR.dir_remove 'sandbox/test_create_dir', @pool
+      err = APR.dir_remove "#{$sandbox}/test_create_dir", @pool
     end
   end
 

@@ -7,7 +7,7 @@ rescue
   require 'socket'
 end
 
-TestFixture.new('Ruby API: TCPSocket, & TCPServer') do
+APR::Spec.new('Ruby API: TCPSocket, & TCPServer') do
   describe "TCPSocket::new(remote_host, remote_port, local_host=nil, local_port=nil)" do
     it "Creates a connected TCP socket when given remote host & port" do
       s = TCPSocket.new("www.google.com", 80)

@@ -1,4 +1,5 @@
 module FileTest
+  ## OPTIMIZATION: Converted to C
   # module Util
   #   # OPTIMIZATION: This is much faster than creating a fule File::Stat object
   #   #               for each test, which significantly impacts globbing with

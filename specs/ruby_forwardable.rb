@@ -23,7 +23,7 @@ class TestForwarder
   end
 end
 
-TestFixture.new('Ruby API: Forwardable') do
+APR::Spec.new('Ruby API: Forwardable') do
   describe 'Forwardable#delegate' do
     it 'Creates delegate methods on classes' do
       f = TestForwarder.new

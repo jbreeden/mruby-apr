@@ -1,6 +1,6 @@
 load 'fixture.rb'
 
-TestFixture.new('APR API: Sockets') do
+APR::Spec.new('APR API: Sockets') do
   err, @pool = APR.pool_create(nil)
 
   def run_server
