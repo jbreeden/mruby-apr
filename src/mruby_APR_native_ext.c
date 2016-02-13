@@ -30,16 +30,6 @@ extern "C" {
 #endif
 
 #define RAISE_APR_ERRNO(err) mrb_funcall(mrb, mrb_obj_value(APR_module(mrb)), "raise_apr_errno", 1, mrb_fixnum_value(err));
-#define ary_ref(ary, i) mrb_ary_ref(mrb, ary, i)
-#define ary_len(ary) mrb_ary_len(mrb, ary)
-#define get_class(name) mrb_get_class(mrb, name)
-#define funcall(...) mrb_funcall(mrb, __VA_ARGS__)
-#define intern_cstr(cstr) mrb_intern_cstr(mrb, cstr)
-#define iv_get(obj, name) mrb_iv_get(mrb, obj, mrb_intern_cstr(mrb, name))
-#define obj_value(obj) mrb_obj_value(obj)
-#define str_new_cstr(cstr) mrb_str_new_cstr(mrb, cstr)
-#define string_value_cstr(obj) mrb_string_value_cstr(mrb, obj)
-#define obj_is_kind_of(obj, cls) mrb_obj_is_kind_of(mrb, obj, cls)
 
 /*
  * Stack Pool Implementation
@@ -185,8 +175,8 @@ glob_recurse(struct glob_context *context, mrb_state* mrb, mrb_value self, char*
   stack_pool_enter();
   apr_pool_t* temp_pool;
   apr_pool_create(&temp_pool, stack_pool());
-  mrb_value segment = ary_ref(context->segments, segment_num);
-  mrb_int pattern_count = ary_len(segment);
+  mrb_value segment = mrb_ary_ref(mrb, context->segments, segment_num);
+  mrb_int pattern_count = mrb_ary_len(mrb, segment);
 
   apr_dir_t* dir;
   apr_status_t err = apr_dir_open(&dir, explicit_path(root), temp_pool);
@@ -208,8 +198,8 @@ glob_recurse(struct glob_context *context, mrb_state* mrb, mrb_value self, char*
 
 #define EACH_PATTERN(pattern) \
   for (int i = 0; i < pattern_count; ++i) { \
-    mrb_value ruby_pattern = ary_ref(segment, i); \
-    const char* pattern = string_value_cstr(&ruby_pattern); \
+    mrb_value ruby_pattern = mrb_ary_ref(mrb, segment, i); \
+    const char* pattern = mrb_string_value_cstr(mrb, &ruby_pattern); \
 
 #define END() }
 
@@ -218,7 +208,7 @@ glob_recurse(struct glob_context *context, mrb_state* mrb, mrb_value self, char*
       char* joined = path_join(root, entry);
       EACH_PATTERN(pattern)
         if (fnmatch_file(pattern, entry)) {
-          funcall(context->block, "call", 2, str_new_cstr(joined), mrb_fixnum_value(context->match_num));
+          mrb_funcall(mrb, context->block, "call", 2, mrb_str_new_cstr(mrb, joined), mrb_fixnum_value(context->match_num));
           context->match_num += 1;
           break;
         }
@@ -226,8 +216,8 @@ glob_recurse(struct glob_context *context, mrb_state* mrb, mrb_value self, char*
       free(joined);
     END()
   } else if (pattern_count == 1
-      && obj_is_kind_of(ary_ref(segment, 0), mrb->symbol_class)
-      && mrb_symbol(ary_ref(segment, 0)) == intern_cstr("**")) {
+      && mrb_obj_is_kind_of(mrb, mrb_ary_ref(mrb, segment, 0), mrb->symbol_class)
+      && mrb_symbol(mrb_ary_ref(mrb, segment, 0)) == mrb_intern_cstr(mrb, "**")) {
     EACH_ENTRY(entry, type)
       char* joined = path_join(root, entry);
       if (entry[0] != '.' && type == APR_DIR) {
@@ -260,9 +250,9 @@ mruby_Dir_Globber_glob_recurse(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zi", &dir, &segment_num);
 
   struct glob_context context;
-  context.segments = iv_get(self, "@segments");
-  context.block = iv_get(self, "@block");
-  context.segments_length = ary_len(context.segments);
+  context.segments = mrb_iv_get(mrb, self, "@segments");
+  context.block = mrb_iv_get(mrb, self, "@block");
+  context.segments_length = mrb_ary_len(mrb, context.segments);
   context.match_num = 0;
   glob_recurse(&context, mrb, self, dir, 0);
   return mrb_nil_value();
