@@ -16,20 +16,16 @@ APR::Spec.new('Ruby API: File::Stat') do
 
   describe 'Stat#ctime' do
     it 'Gives the creation time of the file as a Time' do
-      created_file = "#{$sandbox}/created_file.txt"
+      created_file = "#{$sandbox}/random_created_file_#{rand(1000000)}.txt"
       File.delete(created_file) if File.exists?(created_file)
-      puts created_file
       now = Time.now
+      sleep 2
       File.open(created_file, 'w') do |f|
         f.puts "Created after #{now}"
-        f.puts ('*' * rand(1000)) # Change the file length
       end
-      sleep 2
       stat = File::Stat.new(created_file)
-      ctime = stat.ctime
-      puts ctime
-      puts now
-      assert(ctime > now)
+      assert(stat.ctime > now)
+      File.delete(created_file)
     end
   end
 

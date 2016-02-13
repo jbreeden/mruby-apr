@@ -34,8 +34,11 @@ Building
 **1. Setup the dependencies**
 - Download libapr version 1.5.2 from [Apache's website](https://apr.apache.org/download.cgi)
 - Download `mruby-apr` [here](https://github.com/jbreeden/mruby-apr).
-- Add `conf.gem 'path/to/mruby-apr'` to your MRuby's `build_config.rb` file.
-
+- Add the following lines to your MRuby build_config.rb file.
+```Ruby
+spec.cc.flags << '-DMRB_INT64'
+conf.gem 'path/to/mruby-apr'
+```
 **2. Make & Rake**
 ```
 cd /path/to/apr
@@ -51,6 +54,7 @@ rake
 - Download `mruby-apr` [here](https://github.com/jbreeden/mruby-apr).
 - Add the following lines to your MRuby build_config.rb file.
 ```Ruby
+spec.cc.flags << '-DMRB_INT64'
 ENV['APR_HOME'] = "/path/to/your/libapr/build/dir"
 conf.gem '/path/to/mruby-apr'
 ```

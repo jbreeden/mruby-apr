@@ -43,10 +43,6 @@ def configure_mruby_apr_lin(spec)
 end
 
 def configure_mruby_apr(spec)
-  # Common include path (all platforms)
-  spec.cc.include_paths << "#{$APR_GEM_DIR}/include/apr"
-  spec.cxx.include_paths << "#{$APR_GEM_DIR}/include/apr"
-
   # This gem is only setup to build with the static apr lib.
   # To use the static lib, you need to declare this preprocessor macro.
   spec.cc.defines << "APR_DECLARE_STATIC"
@@ -64,6 +60,27 @@ MRuby::Gem::Specification.new('mruby-apr') do |spec|
   spec.author  = 'Jared Breeden'
   spec.summary = 'Bindings to the APR libraries'
   spec.add_dependency('mruby-regexp-pcre', ">= 0.0.0", github: "iij/mruby-regexp-pcre")
+
+  # Gather cflags from various locations and check for MRB_INT64
+  # TODO: There should be a better way to communicate this requirement
+  #       to the user.
+  set_flags = spec.build.cc.flags.dup.concat((ENV['CFLAGS'] || '').split).flatten
+  
+  if !(/true/i =~ ENV['MRUBY_APR_IGNORE_INT_SIZE']) && set_flags.select { |f| f =~ /-D.*MRB_INT64/i }.empty?
+    $stderr.puts <<-EOS
+ERROR:
+  mruby-apr requires 64 bit integers. 
+  Please define the MRB_INT64 macro before building.
+Options:
+  1. Set `spec.cc.flags << '-DMRB_INT64'` in build_config.rb
+  2. Invoke rake as `rake CLFAGS=-DMRB_INT64 ...` when building mruby
+Workaround:
+  If you think you're seeing this message in error, 
+  set ENV['MRUBY_APR_IGNORE_INT_SIZE'] = 'true' to bypass
+  this check (and consider submitting a bug report!)
+EOS
+  raise "MRuby-APR requires MRB_INT64 to be set"
+  end
 
   spec.rbfiles = [
     "io.rb",
