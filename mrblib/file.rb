@@ -1,4 +1,12 @@
 class File < IO
+  SEPARATOR = ?/
+
+  if APR::OS == 'Windows'
+    ALT_SEPARATOR = ?\
+  else
+    ALT_SEPARATOR = nil
+  end
+  
   # Modes:
   # "r"  Read-only, starts at beginning of file  (default mode).
   #
@@ -91,6 +99,53 @@ class File < IO
         APR.raise_apr_errno(err)
       end
     end
+    paths.length
+  end
+  class << self
+    alias unlink delete
+  end
+  
+  def self.absolute_path(path, from = nil)
+    path = Pathname.new(path)
+    if path.absolute?
+      path.cleanpath.to_s
+    else
+      Pathname.new((from || Dir.pwd) + File::SEPARATOR + path).cleanpath.to_s
+    end
+  end
+  
+  def self.basename(file_name, suffix = nil)
+    p = Pathname.new(file_name)
+    result = ''
+    p.each_filename { |f| result = f } # grab the last part of the path
+    
+    suffix_str = suffix.to_s
+    if suffix && result.end_with?(suffix_str)
+      result = result[0...(-suffix_str.length)]
+    end
+    
+    result
+  end
+
+  def self.dirname(file_name)
+    p = Pathname.new(file_name)
+    parts = p.each_filename.to_a
+    parts.pop
+    
+    if p.absolute?
+      "/#{parts.join(File::SEPARATOR)}"
+    else
+      parts.join(File::SEPARATOR)
+    end
+  end
+  
+  def self.expand_path(path, from = nil)
+    if path == '~'
+      path = Dir.home
+    elsif path.start_with?("~#{File::SEPARATOR}")
+      path = "#{Dir.home}#{File::SEPARATOR}#{path[2..-1]}"
+    end
+    self.absolute_path(path)
   end
 
   def self.extname(path)

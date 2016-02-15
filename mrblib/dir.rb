@@ -66,7 +66,7 @@ class Dir
     if block.nil?
       self.to_enum :foreach, path
     else
-      files.each &block
+      files.each(&block)
     end
   end
 
@@ -80,9 +80,13 @@ class Dir
     alias pwd getcwd
   end
 
-  # def self.home
-  #
-  # end
+  def self.home
+    if APR::OS == 'Windows'
+      ENV['HOMEPATH']
+    else
+      ENV['HOME']
+    end
+  end
 
   def self.mkdir(path)
     APR.with_stack_pool do |pool|

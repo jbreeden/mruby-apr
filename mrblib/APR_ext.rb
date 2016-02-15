@@ -2,6 +2,8 @@
 # This file contains hand-written extensions to the module.
 
 module APR
+  # If apr_errno is an error code, and it doesn't appear in `opt[:ignore]`,
+  # raise it as a Ruby exception.
   def self.raise_apr_errno(apr_errno, opt = {ignore: []})
     Array(opt[:ignore]).each do |err|
       return if apr_errno == err
@@ -11,6 +13,7 @@ module APR
     end
   end
 
+  # Use this method to get a pool via the 'loan' pattern.
   def self.with_pool(&block)
     err, pool = APR.pool_create(nil)
     return block[pool]
@@ -79,6 +82,8 @@ module APR
   APR_FINFO_LINK = APR_FINFO_DEFAULT | APR_FINFO_LINK
 
   module Convert
+    # Convert an APR representation of time
+    # into a Ruby Time object.
     def self.apr_time_to_rb(apr_time)
       Time.at(APR.time_sec(apr_time))
     end

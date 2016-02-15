@@ -1,7 +1,11 @@
-#<
-# # Module Kernel
-#>
 module Kernel
+  # Mostly for compatability with existing CRuby code.
+  # This version of `pp` simply calls `puts obj.inspect`
+  # for each object in `objs`
+  def pp(*objs)
+    objs.each { |o| puts o.inspect }
+  end
+  
   def spawn(*command)
     Process.spawn(*command)
   end
@@ -38,6 +42,8 @@ module Kernel
     end
     true
   end
+  
+  
 end
 
 class LoadError < ScriptError
