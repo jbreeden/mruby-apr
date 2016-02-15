@@ -1,4 +1,14 @@
 class Dir
+  module Private
+    # Replaces alternate path separators with the normalized version in `path`
+    def self.normalize_path(path)
+      if File::ALT_SEPARATOR
+        path.gsub!(File::ALT_SEPARATOR, File::SEPARATOR)
+      end
+      path
+    end
+  end
+  
   # def initialize(path)
   #
   # end
@@ -70,21 +80,20 @@ class Dir
     end
   end
 
-  def self.getcwd
-    # TODO May need to fix path on windows (Ruby always uses /)
+  def self.getwd
     err, path = APR.dir_getcwd
     APR.raise_apr_errno(err) # Why would this ever happen?
-    path
+    Private.normalize_path(path)    
   end
   class << self
-    alias pwd getcwd
+    alias pwd getwd
   end
 
   def self.home
     if APR::OS == 'Windows'
-      ENV['HOMEPATH']
+      Private.normalize_path(ENV['HOMEPATH'])
     else
-      ENV['HOME']
+      Private.normalize_path(ENV['HOME'])
     end
   end
 
@@ -98,7 +107,7 @@ class Dir
   def self.tmpdir
     APR.with_stack_pool do |pool|
       err, dirname = APR.temp_dir_get(pool)
-      dirname
+      Private.normalize_path(dirname)
     end
   end
 
