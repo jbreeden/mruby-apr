@@ -21,7 +21,7 @@ Instance Methods:
   - `#write`
 
 Dir
-----
+---
 
 Class Methods:
   - `::[]`
@@ -31,8 +31,9 @@ Class Methods:
   - `::exist?`
   - `::exists?`
   - `::foreach`
-  - `::getcwd`
+  - `::getwd`
   - `::glob`
+  - `::home`
   - `::mkdir`
   - `::mktmpdir`
   - `::pwd`
@@ -47,12 +48,18 @@ File
 Ancestors: `IO`
 
 Class Methods:
+  - `::absolute_path`
   - `::atime`
+  - `::basename`
   - `::ctime`
   - `::delete`
+  - `::dirname`
+  - `::expand_path`
   - `::extname`
+  - `::join`
   - `::open`
   - `::read`
+  - `::unlink`
 
 Instance Methods:
   - `#assert_can_read`
@@ -77,7 +84,6 @@ File::Stat
 ----------
 
 Instance Methods:
-  - `#<=>`
   - `#atime`
   - `#blockdev?`
   - `#chardev?`
@@ -243,7 +249,6 @@ Class Methods:
 Socket
 ------
 
-(Constants only)
 
 Process::Status
 ---------------
