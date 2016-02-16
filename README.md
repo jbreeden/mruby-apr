@@ -5,25 +5,33 @@ mruby-apr
 
 A cross-platform MRuby port of the core system libraries from CRuby.
 
-API Documentation
------------------
+API
+---
 
-[api.md](/api.md) lists all of the supported classes & methods. The interfaces match, as closely as possible, those of CRuby.
+### Specs
 
-At a glance
------------
+[See the ruby/spec results](http://jbreeden.github.io/mruby-apr)
+
+- [mruby-spec](https://github.com/jbreeden/mruby-spec) is used to run [ruby/spec](https://github.com/ruby/spec)
+  against [mruby](https://github.com/mruby/mruby).
+- The original `mruby-apr` specs are [here](./specs). 
+
+### At a glance
+
+The main components of `mruby-apr` are:
 
 - IO (read, write, pipe, popen)
 - File, FileTest, File::Stat
 - Dir
 - BasicSocket, UDPSocket, TCPSocket, TCPServer
-- ENV[], ENV[]=, & ENV.delete
+- ENV
 - Kernel ( \`backticks\`, system, spawn, & load)
 - Process (spawn & wait)
 - Process::Status (including the global $?)
 - Forwardable
 - Observer
 - OpenStruct
+- Pathname
 - Shellwords
 
 Building
