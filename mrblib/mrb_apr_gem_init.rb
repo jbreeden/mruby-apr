@@ -17,3 +17,5 @@ module Kernel
   def print(*a); $stdout.print(*a); end
   def gets(*a); $stdin.gets(*a); end
 end
+
+# Pretend we have some features loaded

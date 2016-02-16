@@ -1,5 +1,6 @@
 class File < IO
   SEPARATOR = ?/
+  Separator = SEPARATOR
 
   if APR::OS == 'Windows'
     ALT_SEPARATOR = ?\
@@ -81,10 +82,36 @@ class File < IO
       f
     end
   end
+  
+  def self.absolute_path(path, from = nil)
+    path = Pathname.new(path)
+    from = Pathname.new(from || Dir.pwd)
+    
+    if path.absolute?
+      path.cleanpath.to_s
+    elsif from.absolute?
+      (from << path).cleanpath.to_s
+    else
+      (Pathname.new(Dir.pwd) << from << path).cleanpath.to_s
+    end
+  end
 
   def self.atime(path)
     stat = File::Stat.new(path)
     stat.atime
+  end
+  
+  def self.basename(file_name, suffix = nil)
+    p = Pathname.new(file_name)
+    result = ''
+    p.each_filename { |f| result = f } # grab the last part of the path
+    
+    suffix_str = suffix.to_s
+    if suffix && result.end_with?(suffix_str)
+      result = result[0...(-suffix_str.length)]
+    end
+    
+    result
   end
 
   def self.ctime(path)
@@ -103,28 +130,6 @@ class File < IO
   end
   class << self
     alias unlink delete
-  end
-  
-  def self.absolute_path(path, from = nil)
-    path = Pathname.new(path)
-    if path.absolute?
-      path.cleanpath.to_s
-    else
-      Pathname.new((from || Dir.pwd) + File::SEPARATOR + path).cleanpath.to_s
-    end
-  end
-  
-  def self.basename(file_name, suffix = nil)
-    p = Pathname.new(file_name)
-    result = ''
-    p.each_filename { |f| result = f } # grab the last part of the path
-    
-    suffix_str = suffix.to_s
-    if suffix && result.end_with?(suffix_str)
-      result = result[0...(-suffix_str.length)]
-    end
-    
-    result
   end
 
   def self.dirname(file_name)
@@ -145,7 +150,7 @@ class File < IO
     elsif path.start_with?("~#{File::SEPARATOR}")
       path = "#{Dir.home}#{File::SEPARATOR}#{path[2..-1]}"
     end
-    self.absolute_path(path)
+    self.absolute_path(path, from)
   end
 
   def self.extname(path)
@@ -162,6 +167,10 @@ class File < IO
     return "" if dot_idx == path.length - 1
 
     return path[dot_idx..(path.length)]
+  end
+
+  def self.join(*strings)
+    strings.join(SEPARATOR)
   end
 
   def self.read(path)

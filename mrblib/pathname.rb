@@ -4,7 +4,7 @@ class Pathname
   DOT_DOT = '..'.freeze
   
   def initialize(path_str)
-    @path = path_str.to_s
+    @path = path_str.to_s.dup
   end
   
   def self.join(*parts)
@@ -24,6 +24,16 @@ class Pathname
     str
   end
   
+  def +(other)
+    Pathname.new(self.to_s + File::SEPARATOR + other.to_s)
+  end
+  
+  # Non-standard
+  def <<(other)
+    @path.concat(File::SEPARATOR).concat(other.to_s)
+    self
+  end
+  
   def absolute?
     @path.start_with?(ROOT)
   end
@@ -32,8 +42,7 @@ class Pathname
     Pathname.new(@path.dup)
   end
   
-  # Cleans the path by removing consecutive slashes, and useless dots.
-  # Replaces the contents of the current Pathname.
+  # Non-standard
   def cleanpath!
     parts = each_filename.to_a
     
@@ -77,8 +86,9 @@ class Pathname
     dup.cleanpath!
   end
   
+  # Non-standard
   def replace(new_path)
-    @path = new_path
+    @path = new_path.to_s.dup
     self
   end
   
@@ -98,7 +108,7 @@ class Pathname
   end
   
   def to_s
-    @path
+    @path.dup
   end
   alias to_str to_s
 end

@@ -10,14 +10,20 @@ mruby_APR_define_macro_constants(mrb_state* mrb) {
 /* MRUBY_BINDING: pre_macro_definitions */
 /* sha: user_defined */
 #if defined(_WIN32)
+  /* Defining RUBY_PLATFORM for running RubySpec on MRuby */
+  mrb_define_const(mrb, mrb->object_class, "RUBY_PLATFORM", mrb_str_new_cstr(mrb, "win32"));
   mrb_define_const(mrb, APR_module(mrb), "OS", mrb_str_new_cstr(mrb, "Windows"));
 #elif defined(__linux__)
+  mrb_define_const(mrb, mrb->object_class, "RUBY_PLATFORM", mrb_str_new_cstr(mrb, "linux"));
   mrb_define_const(mrb, APR_module(mrb), "OS", mrb_str_new_cstr(mrb, "Linux"));
 #elif defined(__APPLE__)
+  mrb_define_const(mrb, mrb->object_class, "RUBY_PLATFORM", mrb_str_new_cstr(mrb, "darwin"));
   mrb_define_const(mrb, APR_module(mrb), "OS", mrb_str_new_cstr(mrb, "Mac"));
 #elif defined(__unix__)
+  mrb_define_const(mrb, mrb->object_class, "RUBY_PLATFORM", mrb_str_new_cstr(mrb, "unix"));
   mrb_define_const(mrb, APR_module(mrb), "OS", mrb_str_new_cstr(mrb, "Unix"));
 #else
+  mrb_define_const(mrb, mrb->object_class, "RUBY_PLATFORM", mrb_str_new_cstr(mrb, "unidentified"));
   mrb_define_const(mrb, APR_module(mrb), "OS", mrb_str_new_cstr(mrb, "Unidentified"));
 #endif
 

@@ -217,11 +217,17 @@ class Dir
     end
 
     def glob(pattern, &block)
-      ast = GlobAST.new(pattern) rescue nil
-      return nil unless ast
-      @segments = ast.segments
+      @ast = GlobAST.new(pattern) rescue nil
+      return nil unless @ast
+      @segments = @ast.segments
       @block = block
-      glob_recurse(ast.rooted? ? '/' : '', 0, &block)
+      
+      # Call into C implementation after setting up the instance variables
+      self.glob_recurse(@ast.rooted? ? '/' : '', 0, &block)
+    end
+    
+    def inspect
+      "<Globber: #{instance_variables.map { |iv| ":#{iv} => #{instance_variable_get(iv).inspect}" }.join(" ")}>"
     end
   end
 

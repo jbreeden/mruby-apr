@@ -250,11 +250,14 @@ mruby_Dir_Globber_glob_recurse(mrb_state* mrb, mrb_value self) {
   mrb_get_args(mrb, "zi", &dir, &segment_num);
 
   struct glob_context context;
-  context.segments = mrb_iv_get(mrb, self, "@segments");
-  context.block = mrb_iv_get(mrb, self, "@block");
+
+  context.segments = mrb_iv_get(mrb, self, mrb_intern_cstr(mrb, "@segments"));
+  context.block = mrb_iv_get(mrb, self, mrb_intern_cstr(mrb, "@block"));
   context.segments_length = mrb_ary_len(mrb, context.segments);
   context.match_num = 0;
+
   glob_recurse(&context, mrb, self, dir, 0);
+
   return mrb_nil_value();
 }
 
