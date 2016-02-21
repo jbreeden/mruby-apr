@@ -19,6 +19,13 @@ class Dir
 
   def self.chdir(path = nil, &block)
     path = Dir.home unless path
+    unless path.kind_of?(String)
+      if path.respond_to?(:to_path)
+        path = path.to_path
+      else
+        path = path.to_str
+      end
+    end
     if block.nil?
       err = APR.dir_chdir(path)
       APR.raise_apr_errno(err)
