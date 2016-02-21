@@ -82,9 +82,6 @@ module Kernel
   end
   
   def require(path)
-    # trace = false
-    # trace = true if path.end_with?('classes')
-    
     unless path.kind_of?(String)
       path = path.to_str
     end

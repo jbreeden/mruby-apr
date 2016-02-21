@@ -14,7 +14,7 @@ class Pathname
     end
     parts = parts.map { |p| 
       p.to_s
-    }.select { |p| 
+    }.select { |p|
       p != File::SEPARATOR && !p.empty?
     }
     str = parts.join(File::SEPARATOR)
@@ -84,6 +84,14 @@ class Pathname
   # Cleans the path by removing consecutive slashes, and useless dots.
   def cleanpath
     dup.cleanpath!
+  end
+  
+  def parent
+    if root?
+      self
+    else
+      Pathname.new(each_filename.to_a[0..-1].join(File::SEPARATOR))
+    end
   end
   
   # Non-standard

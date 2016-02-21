@@ -2,7 +2,9 @@
 # (This allows us to run some CRuby code without pulling out `require` calls,
 #  we can simply return false for these requires.)
 $BUILTIN_FEATURES = %w[
+  find
   forwardable
+  observer
   ostruct
   pathname
   pp

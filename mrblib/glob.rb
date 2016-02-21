@@ -233,6 +233,7 @@ class Dir
 
   class << self
     def glob(pattern)
+      pattern = pattern.to_path if pattern.respond_to?(:to_path)
       results = []
       globber = Globber.new
       globber.glob(pattern) do |match, match_num|

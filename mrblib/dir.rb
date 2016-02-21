@@ -17,7 +17,8 @@ class Dir
   #
   # end
 
-  def self.chdir(path, &block)
+  def self.chdir(path = nil, &block)
+    path = Dir.home unless path
     if block.nil?
       err = APR.dir_chdir(path)
       APR.raise_apr_errno(err)
