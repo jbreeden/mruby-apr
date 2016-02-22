@@ -24,7 +24,7 @@ Specs
 
 [See the ruby/spec results](https://googledrive.com/host/0B0NNQZ6fVYyiZHlPNTk1dDA5YVE)
 
-- [mruby-spec](https://github.com/jbreeden/mruby-spec) is used to run [ruby/spec](https://github.com/ruby/spec)
+- [mruby-spec](https://github.com/jbreeden/mruby-spec) is used to run relevant portions of [ruby/spec](https://github.com/ruby/spec)
   against [mruby](https://github.com/mruby/mruby).
   + This is a recent addition. Currently working to get more of the tests passing.
 - The original `mruby-apr` specs are [here](./specs).
