@@ -426,6 +426,7 @@ mrb_APR_apr_dir_close(mrb_state* mrb, mrb_value self) {
 
   /* Invocation */
   apr_status_t result = apr_dir_close(native_thedir);
+  ((mruby_to_native_ref *)DATA_PTR(thedir))->data = NULL; /* Using pointer as an `open` flag */
 
   /* Box the return value */
   if (result > MRB_INT_MAX) {
@@ -577,7 +578,7 @@ mrb_APR_apr_dir_open(mrb_state* mrb, mrb_value self) {
   mrb_value results = mrb_ary_new(mrb);
   mrb_ary_push(mrb, results, return_value);
   if (result == 0) {
-     mrb_ary_push(mrb, results, mruby_box_apr_dir_t(mrb, native_new_dir));
+     mrb_ary_push(mrb, results, mruby_giftwrap_apr_dir_t(mrb, native_new_dir));
   }
   else {
      mrb_ary_push(mrb, results, mrb_nil_value());

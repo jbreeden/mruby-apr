@@ -49,8 +49,8 @@
 static void free_apr_dir_t(mrb_state* mrb, void* ptr) {
   mruby_to_native_ref* box = (mruby_to_native_ref*)ptr;
   if (box->belongs_to_ruby) {
-    if (box->obj != NULL) {
-      free(box->obj);
+    if (box->data) {
+      apr_dir_close(box->obj);
       box->obj = NULL;
     }
   }
@@ -74,6 +74,7 @@ mruby_giftwrap_apr_dir_t(mrb_state* mrb, apr_dir_t *unboxed) {
    mruby_to_native_ref* box = (mruby_to_native_ref*)malloc(sizeof(mruby_to_native_ref));
    box->belongs_to_ruby = TRUE;
    box->obj = unboxed;
+   box->data = unboxed; /* Will be set to NULL if closed */
    return mrb_obj_value(Data_Wrap_Struct(mrb, Dir_class(mrb), &apr_dir_t_data_type, box));
 }
 
@@ -90,6 +91,7 @@ mruby_gift_apr_dir_t_data_ptr(mrb_value obj, apr_dir_t *unboxed) {
   mruby_to_native_ref* box = (mruby_to_native_ref*)malloc(sizeof(mruby_to_native_ref));
   box->belongs_to_ruby = TRUE;
   box->obj = unboxed;
+  box->data = unboxed; /* Will be set to NULL if closed */
   mrb_data_init(obj, box, &apr_dir_t_data_type);
 }
 

@@ -1,11 +1,29 @@
 class File < IO
+  module Private
+    def self.to_path_str(path)
+      if path.kind_of?(String)
+        path
+      else
+        if path.respond_to?(:to_path)
+          path = path.to_path
+        elsif path.respond_to?(:to_str)
+          path = path.to_str
+        else
+          raise TypeError.new("String expected")
+        end
+      end
+    end
+  end
+  
   SEPARATOR = ?/
   Separator = SEPARATOR
 
   if APR::OS == 'Windows'
+    NULL = 'NUL'
     ALT_SEPARATOR = ?\
   else
     ALT_SEPARATOR = nil
+    NULL = '/dev/null'
   end
   
   # Modes:
@@ -103,11 +121,26 @@ class File < IO
   
   def self.basename(file_name, suffix = nil)
     p = Pathname.new(file_name)
+    
+    if p.root?
+      return '/'
+    end
+    
     result = ''
     p.each_filename { |f| result = f } # grab the last part of the path
     
-    suffix_str = suffix.to_s
-    if suffix && result.end_with?(suffix_str)
+    suffix_str = if suffix.kind_of?(String)
+      suffix
+    elsif suffix.respond_to?(:to_str)
+      suffix.to_str
+    elsif !suffix.nil?
+      raise TypeError.new("String expected")
+    end
+    
+    last_dot_pos = result.rindex('.')
+    if suffix_str == '.*' && last_dot_pos
+      result = result[0...last_dot_pos]
+    elsif suffix && result.end_with?(suffix_str)
       result = result[0...(-suffix_str.length)]
     end
     
@@ -154,6 +187,7 @@ class File < IO
   end
 
   def self.extname(path)
+    path = Private.to_path_str(path)
     path = path.gsub('\\', '/')
     dot_idx = path.rindex(".")
     return "" unless dot_idx
@@ -170,15 +204,20 @@ class File < IO
   end
 
   def self.join(*strings)
-    strings.join(SEPARATOR)
+    strings.flatten.join(SEPARATOR)
   end
 
   def self.read(path)
+    path = Private.to_path_str(path)
     result = nil
     File.open(path) do |f|
       result = f.read
     end
     result
+  end
+  
+  def self.stat(path)
+    Stat.new(Private.to_path_str(path))
   end
 
   #<

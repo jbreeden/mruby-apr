@@ -4,7 +4,8 @@ class Pathname
   DOT_DOT = '..'.freeze
   
   def initialize(path_str)
-    @path = path_str.to_s.dup
+    path_str = File::Private.to_path_str(path_str)
+    @path = path_str.dup
   end
   
   def self.join(*parts)
@@ -100,7 +101,12 @@ class Pathname
     self
   end
   
+  def relative?
+    @path.start_with?(ROOT)
+  end
+  
   def root?
+    return false if @path.length == 0
     @path.each_char do |c|
       return false unless c == ROOT
     end

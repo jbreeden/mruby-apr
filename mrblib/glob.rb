@@ -232,7 +232,7 @@ class Dir
   end
 
   class << self
-    def glob(pattern)
+    def glob(*patterns)
       pattern = pattern.to_path if pattern.respond_to?(:to_path)
       results = []
       globber = Globber.new

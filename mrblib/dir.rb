@@ -1,4 +1,6 @@
 class Dir
+  include Enumerable
+  
   module Private
     # Replaces alternate path separators with the normalized version in `path`
     def self.normalize_path(path)
@@ -9,23 +11,70 @@ class Dir
     end
   end
   
-  # def initialize(path)
-  #
-  # end
-  #
-  # def self.open(path, &block)
-  #
-  # end
+  def initialize(path)
+    err, @pool = APR.pool_create(nil)
+    APR.raise_apr_errno(err)
+    @path = File::Private.to_path_str(path)
+    err, @native_dir = APR.dir_open @path, @pool
+    APR.raise_apr_errno(err)
+    @closed = false
+  end
+  
+  def self.open(path, &block)
+    instance = self.new(path)
+    if block_given?
+      result = nil
+      begin
+        result = block[instance]
+      ensure
+        instance.close
+      end
+      result
+    else
+      instance
+    end
+  end
+  
+  def assert_open
+    raise IOError.new('Closed directory') if @closed
+  end
+  
+  def close
+    unless @closed
+      err = APR.dir_close(@native_dir)
+      APR.raise_apr_errno(err)
+      @closed = true
+    end
+  end
+  
+  def each(&block)
+    assert_open
+    if block_given?
+      while entry = read
+        block[entry]
+      end
+      self
+    else
+      self.class.entries(@path).enum_for(:each)
+    end
+  end
+  
+  def read
+    assert_open
+    err, finfo = APR.dir_read APR::APR_FINFO_NAME, @native_dir
+    APR.raise_apr_errno(err, ignore: [APR::APR_INCOMPLETE, APR::APR_ENOENT])
+    (err == APR::APR_ENOENT || finfo.nil?) ? nil : finfo.name
+  end
+  
+  def rewind
+    assert_open
+    err = APR.dir_rewind(@native_dir)
+    APR.raise_apr_errno(err)
+  end
 
   def self.chdir(path = nil, &block)
     path = Dir.home unless path
-    unless path.kind_of?(String)
-      if path.respond_to?(:to_path)
-        path = path.to_path
-      else
-        path = path.to_str
-      end
-    end
+    path = File::Private.to_path_str(path)
     if block.nil?
       err = APR.dir_chdir(path)
       APR.raise_apr_errno(err)
@@ -45,6 +94,7 @@ class Dir
   # end
 
   def self.delete(path)
+    path = File::Private.to_path_str(path)
     APR.with_stack_pool do |pool|
       err = APR.dir_remove(path, pool)
       APR.raise_apr_errno(err)
@@ -73,6 +123,7 @@ class Dir
   ###########################
 
   def self.exists?(path)
+    path = File::Private.to_path_str(path)
     File.directory?(path)
   end
   class << self
@@ -80,6 +131,7 @@ class Dir
   end
 
   def self.foreach(path, &block)
+    path = File::Private.to_path_str(path)
     files = entries(path)
     if block.nil?
       self.to_enum :foreach, path
@@ -106,6 +158,7 @@ class Dir
   end
 
   def self.mkdir(path)
+    path = File::Private.to_path_str(path)
     APR.with_stack_pool do |pool|
       err = APR.dir_make path, APR::APR_FPROT_OS_DEFAULT, pool
       APR.raise_apr_errno(err)
