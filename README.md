@@ -50,6 +50,9 @@ cd /path/to/mruby
 rake
 ```
 
+_Note: APR uses the off64_t type. If you're running 32-bit Linux and get errors like "Unknown type name off64_t" 
+you'll need to define the preprocessor macro `_LARGEFILE64_SOURCE`._
+
 ### Windows
 
 **1. Setup the dependencies**
