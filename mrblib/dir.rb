@@ -105,22 +105,13 @@ class Dir
     alias unlink rmdir
   end
 
-  ########################### Ported to C
-  # def self.entries(path)
-  #   results = []
-  #   APR.with_stack_pool do |pool|
-  #     err, dir = APR.dir_open path, pool
-  #     APR.raise_apr_errno(err)
-  #
-  #     err, finfo = APR.dir_read APR::APR_FINFO_NAME, dir
-  #     while err == 0 || err == APR::APR_INCOMPLETE
-  #       results.push(finfo.name)
-  #       err, finfo = APR.dir_read APR::APR_FINFO_NAME, dir
-  #     end
-  #   end
-  #   results
-  # end
-  ###########################
+
+  class << self
+    alias native_entries entries
+  end
+  def self.entries(path)
+    native_entries(File::Private.to_path_str(path, true))
+  end
 
   def self.exists?(path)
     path = File::Private.to_path_str(path)
