@@ -113,6 +113,10 @@ class Pathname
     true
   end
   
+  def sub(pattern, replacement)
+    Pathname.new(self.to_s.sub(pattern, replacement))
+  end
+  
   def each_filename
     return self.enum_for(:each_filename) unless block_given?
     

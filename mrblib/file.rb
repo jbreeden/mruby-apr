@@ -54,10 +54,10 @@ class File < IO
   #    specified.
   #
   # "t"  Text file mode
-  def initialize(filename, mode='r', perm=APR::APR_FPROT_OS_DEFAULT, apr_pool=nil)
+  def initialize(path, mode='r', perm=APR::APR_FPROT_OS_DEFAULT, apr_pool=nil)
     # Wrapper semantics
-    if (filename.kind_of?(APR::File))
-      @native_file = filename
+    if (path.kind_of?(APR::File))
+      @native_file = path
       @flags = APR::APR_FOPEN_BUFFERED # Always at least buffered
       @flags = IO::Util.mode_str_to_apr_flags(mode)
       if perm.kind_of?(APR::Pool)
@@ -73,7 +73,7 @@ class File < IO
 
     err, @pool = APR.pool_create(nil)
     APR.raise_apr_errno(err)
-    @filename = filename
+    @path = path
 
     @flags = APR::APR_FOPEN_BUFFERED # Always at least buffered
     @flags = IO::Util.mode_str_to_apr_flags(mode)
@@ -84,11 +84,13 @@ class File < IO
 
     @perm_bits = perm
 
-    err, @native_file = APR.file_open(@filename, @flags, @perm_bits, @pool)
+    err, @native_file = APR.file_open(@path, @flags, @perm_bits, @pool)
     if err != 0
       APR.raise_apr_errno(err)
     end
   end
+  
+  attr_reader :path
 
   def self.open(*args, &block)
     f = File.new(*args)
@@ -304,7 +306,7 @@ class File < IO
     assert_can_write
     APR.file_flush(@native_file)
   end
-
+  
   # IO Subclass Contract Implementation
   # -----------------------------------
 
