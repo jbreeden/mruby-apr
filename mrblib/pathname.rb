@@ -120,7 +120,7 @@ class Pathname
   end
   
   def relative?
-    @path.start_with?(ROOT)
+    !@path.start_with?(ROOT)
   end
   
   def root?
