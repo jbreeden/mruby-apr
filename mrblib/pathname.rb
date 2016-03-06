@@ -9,19 +9,29 @@ class Pathname
   end
   
   def self.join(*parts)
+    parts = parts.flatten
+    
     rooted = false
     if parts[0] == ROOT
       rooted = true
     end
-    parts = parts.map { |p| 
+    
+    parts = parts.select{ |p|
+      !p.nil? && p != File::SEPARATOR
+    }.map { |p| 
       p.to_s
-    }.select { |p|
-      p != File::SEPARATOR && !p.empty?
     }
+    
     str = parts.join(File::SEPARATOR)
     if rooted
       str = "#{ROOT}#{str}"
     end
+    
+    str = str.each_char.inject('') do |acc, cur|
+      acc.concat(cur) unless acc[acc.length - 1] == cur && cur == File::SEPARATOR
+      acc
+    end
+    
     str
   end
   
@@ -95,7 +105,11 @@ class Pathname
     if root?
       self
     else
-      Pathname.new(each_filename.to_a[0..-1].join(File::SEPARATOR))
+      names = each_filename.to_a[0...-1]
+      if self.absolute?
+        names.unshift(ROOT)
+      end
+      Pathname.new(Pathname.join(names))
     end
   end
   

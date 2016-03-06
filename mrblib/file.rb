@@ -223,7 +223,7 @@ class File < IO
   end
 
   def self.join(*strings)
-    strings.flatten.join(SEPARATOR)
+    Pathname.join(*strings)
   end
 
   def self.read(path)
