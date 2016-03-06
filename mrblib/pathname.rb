@@ -87,6 +87,10 @@ class Pathname
     dup.cleanpath!
   end
   
+  def hash
+    @path.hash
+  end
+  
   def parent
     if root?
       self
