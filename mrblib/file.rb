@@ -1,6 +1,6 @@
 class File < IO
   module Private
-    def self.to_path_str(path)
+    def self.to_path_str(path, is_optional=false)
       if path.kind_of?(String)
         path
       else
@@ -8,6 +8,8 @@ class File < IO
           path = path.to_path
         elsif path.respond_to?(:to_str)
           path = path.to_str
+        elsif is_optional && path.nil?
+          nil
         else
           raise TypeError.new("String expected")
         end
@@ -178,11 +180,26 @@ class File < IO
   end
   
   def self.expand_path(path, from = nil)
-    if path == '~'
-      path = Dir.home
-    elsif path.start_with?("~#{File::SEPARATOR}")
-      path = "#{Dir.home}#{File::SEPARATOR}#{path[2..-1]}"
+    path = Private.to_path_str(path)
+    from = Private.to_path_str(from, true)
+    
+    sub_home = proc { |str|
+      if str == '~'
+        str = Dir.home
+      elsif str.start_with?("~#{File::SEPARATOR}")
+        str = "#{Dir.home}#{File::SEPARATOR}#{str[2..-1]}"
+      end
+      str
+    }
+    
+    if path.start_with?('~') || from.kind_of?(String) && from.start_with?("~")
+      unless ENV['HOME'] && ENV['HOME'].kind_of?(String) && ENV['HOME'].length > 0
+        raise ArgumentError.new("Couldn't find HOME environment variable -- expanding #{path}")
+      end
     end
+    
+    path = sub_home[path]
+    from = from ? sub_home[from] : nil
     self.absolute_path(path, from)
   end
 
