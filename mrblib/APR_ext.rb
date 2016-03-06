@@ -5,7 +5,7 @@ module APR
   # If apr_errno is an error code, and it doesn't appear in `opt[:ignore]`,
   # raise it as a Ruby exception.
   def self.raise_apr_errno(apr_errno, opt = {ignore: []})
-    Array(opt[:ignore]).each do |err|
+    [opt[:ignore]].flatten.each do |err|
       return if apr_errno == err
     end
     if apr_errno != APR::APR_SUCCESS

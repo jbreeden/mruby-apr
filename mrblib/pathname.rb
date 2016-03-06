@@ -1,7 +1,7 @@
 class Pathname
-  ROOT = '/'.freeze
-  DOT = '.'.freeze
-  DOT_DOT = '..'.freeze
+  ROOT = '/'
+  DOT = '.'
+  DOT_DOT = '..'
   
   def initialize(path_str)
     path_str = File::Private.to_path_str(path_str)

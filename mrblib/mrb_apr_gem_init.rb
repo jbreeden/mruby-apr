@@ -1,11 +1,15 @@
 proc { # Creates a local scope (like IIFE in JavaScript)
-  err, std_streams_pool = APR.pool_create(nil)
-  err, stdin = APR.file_open_flags_stdin(APR::APR_FOPEN_READ, std_streams_pool)
-  $stdin = File.new(stdin, "r", std_streams_pool) if err == APR::APR_SUCCESS
-  err, stdout = APR.file_open_flags_stdout(APR::APR_FOPEN_WRITE, std_streams_pool)
-  $stdout = File.new(stdout, "w", std_streams_pool) if err == APR::APR_SUCCESS
-  err, stderr = APR.file_open_flags_stderr(APR::APR_FOPEN_WRITE, std_streams_pool)
-  $stderr = File.new(stderr, "w", std_streams_pool) if err == APR::APR_SUCCESS
+  err, stdin_pool = APR.pool_create(nil)
+  err, stdin = APR.file_open_flags_stdin(APR::APR_FOPEN_READ, stdin_pool)
+  $stdin = File.new(stdin, "r", stdin_pool) if err == APR::APR_SUCCESS
+  
+  err, stdout_pool = APR.pool_create(nil)
+  err, stdout = APR.file_open_flags_stdout(APR::APR_FOPEN_WRITE, stdout_pool)
+  $stdout = File.new(stdout, "w", stdout_pool) if err == APR::APR_SUCCESS
+  
+  err, stderr_pool = APR.pool_create(nil)
+  err, stderr = APR.file_open_flags_stderr(APR::APR_FOPEN_WRITE, stderr_pool)
+  $stderr = File.new(stderr, "w", stderr_pool) if err == APR::APR_SUCCESS
 }[]
 
 STDIN = $stdin
@@ -17,5 +21,3 @@ module Kernel
   def print(*a); $stdout.print(*a); end
   def gets(*a); $stdin.gets(*a); end
 end
-
-# Pretend we have some features loaded

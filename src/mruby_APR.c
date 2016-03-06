@@ -86,6 +86,12 @@ mrb_APR_apr_pool_create(mrb_state* mrb, mrb_value self) {
    apr_pool_t * native_newpool = NULL;
    apr_status_t result = apr_pool_create_ex(&native_newpool, native_parent, NULL, NULL);
 
+   apr_allocator_t* pa = apr_pool_allocator_get(native_newpool);
+   if (pa) {
+     /* Don't let the pool size grow unbounded. */
+     apr_allocator_max_free_set(pa, 2);
+   }
+
    /* Box the return value */
    mrb_value return_value = mrb_fixnum_value(result);
 
@@ -374,10 +380,6 @@ mrb_APR_apr_ctime(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_ctime(native_date_str, native_t);
   
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
@@ -429,10 +431,6 @@ mrb_APR_apr_dir_close(mrb_state* mrb, mrb_value self) {
   ((mruby_to_native_ref *)DATA_PTR(thedir))->data = NULL; /* Using pointer as an `open` flag */
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -476,10 +474,6 @@ mrb_APR_apr_dir_make(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_dir_make(native_path, native_perm, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -523,10 +517,6 @@ mrb_APR_apr_dir_make_recursive(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_dir_make_recursive(native_path, native_perm, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -569,10 +559,6 @@ mrb_APR_apr_dir_open(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_dir_open(&native_new_dir, native_dirname, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
@@ -677,10 +663,6 @@ mrb_APR_apr_dir_remove(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_dir_remove(native_path, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -719,10 +701,6 @@ mrb_APR_apr_dir_rewind(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_dir_rewind(native_thedir);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -764,10 +742,6 @@ mrb_APR_apr_env_delete(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_env_delete(native_envvar, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -810,10 +784,6 @@ mrb_APR_apr_env_get(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_env_get(&native_value, native_envvar, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
@@ -866,10 +836,6 @@ mrb_APR_apr_env_set(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_env_set(native_envvar, native_value, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -915,10 +881,6 @@ mrb_APR_apr_file_append(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_append(native_from_path, native_to_path, native_perms, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -964,10 +926,6 @@ mrb_APR_apr_file_attrs_set(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_attrs_set(native_fname, native_attributes, native_attr_mask, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -1045,10 +1003,6 @@ mrb_APR_apr_file_buffer_size_get(mrb_state* mrb, mrb_value self) {
   apr_size_t result = apr_file_buffer_size_get(native_thefile);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -1087,10 +1041,6 @@ mrb_APR_apr_file_close(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_close(native_file);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -1136,10 +1086,6 @@ mrb_APR_apr_file_copy(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_copy(native_from_path, native_to_path, native_perms, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -1261,10 +1207,6 @@ mrb_APR_apr_file_datasync(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_datasync(native_thefile);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -1398,10 +1340,6 @@ mrb_APR_apr_file_eof(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_eof(native_fptr);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -1440,10 +1378,6 @@ mrb_APR_apr_file_flags_get(mrb_state* mrb, mrb_value self) {
   apr_int32_t result = apr_file_flags_get(native_f);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -1482,10 +1416,6 @@ mrb_APR_apr_file_flush(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_flush(native_thefile);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -1561,10 +1491,6 @@ mrb_APR_apr_file_gets(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_gets(native_str, native_len + 1, native_thefile); /* len argument is length of buffer, NOT the string, so add one for null */
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
@@ -1656,10 +1582,6 @@ mrb_APR_apr_file_link(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_link(native_from_path, native_to_path);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -1700,10 +1622,6 @@ mrb_APR_apr_file_lock(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_lock(native_thefile, native_type);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -1864,10 +1782,6 @@ mrb_APR_apr_file_namedpipe_create(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_namedpipe_create(native_filename, native_perm, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -1914,10 +1828,6 @@ mrb_APR_apr_file_open(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_open(&native_newf, native_fname, native_flag, native_perm, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
@@ -1979,7 +1889,7 @@ mrb_APR_apr_file_open_flags_stderr(mrb_state* mrb, mrb_value self) {
 #if BIND_apr_file_open_flags_stdin_FUNCTION
 #define apr_file_open_flags_stdin_REQUIRED_ARGC 2
 #define apr_file_open_flags_stdin_OPTIONAL_ARGC 0
-/* apr_file_open_flags_stderr
+/* apr_file_open_flags_stdin
  *
  * Parameters:
  * - flags: int
@@ -2086,10 +1996,6 @@ mrb_APR_apr_file_open_stderr(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_open_stderr(&native_thefile, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
@@ -2139,10 +2045,6 @@ mrb_APR_apr_file_open_stdin(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_open_stdin(&native_thefile, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-     mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-     return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
@@ -2192,10 +2094,6 @@ mrb_APR_apr_file_open_stdout(mrb_state* mrb, mrb_value self) {
    apr_status_t result = apr_file_open_stdout(&native_thefile, native_pool);
 
    /* Box the return value */
-   if (result > MRB_INT_MAX) {
-      mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-      return mrb_nil_value();
-   }
    mrb_value return_value = mrb_fixnum_value(result);
 
    mrb_value results = mrb_ary_new(mrb);
@@ -2236,10 +2134,6 @@ mrb_APR_apr_file_perms_set(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_perms_set(native_fname, native_perms);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -2280,10 +2174,6 @@ mrb_APR_apr_file_pipe_create(mrb_state* mrb, mrb_value self) {
    apr_status_t result = apr_file_pipe_create(&native_in, &native_out, native_pool);
 
    /* Box the return value */
-   if (result > MRB_INT_MAX) {
-      mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-      return mrb_nil_value();
-   }
    mrb_value return_value = mrb_fixnum_value(result);
 
    mrb_value results = mrb_ary_new(mrb);
@@ -2524,10 +2414,6 @@ mrb_APR_apr_file_puts(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_puts(native_str, native_thefile);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -2570,10 +2456,6 @@ mrb_APR_apr_file_read(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_read(native_thefile, native_buf, &size);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value ruby_buf = mrb_str_new(mrb, native_buf, size);
@@ -2667,10 +2549,6 @@ mrb_APR_apr_file_remove(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_remove(native_path, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -2714,10 +2592,6 @@ mrb_APR_apr_file_rename(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_rename(native_from_path, native_to_path, native_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -2761,10 +2635,6 @@ mrb_APR_apr_file_seek(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_seek(native_thefile, native_where, &offset);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
@@ -2853,10 +2723,6 @@ mrb_APR_apr_file_sync(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_sync(native_thefile);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -2897,10 +2763,6 @@ mrb_APR_apr_file_trunc(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_trunc(native_fp, native_offset);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -2984,10 +2846,6 @@ mrb_APR_apr_file_unlock(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_unlock(native_thefile);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -3038,10 +2896,6 @@ mrb_APR_apr_file_write(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_file_write(native_thefile, native_buf, &size);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
@@ -3518,10 +3372,6 @@ mrb_APR_apr_fnmatch_test(mrb_state* mrb, mrb_value self) {
   int result = apr_fnmatch_test(native_pattern);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -3965,10 +3815,6 @@ mrb_APR_apr_initialize(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_initialize();
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -5758,10 +5604,6 @@ mrb_APR_apr_proc_create(mrb_state* mrb, mrb_value self) {
   if (native_env != NULL) free(native_env);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
@@ -6409,10 +6251,6 @@ mrb_APR_apr_proc_wait(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_proc_wait(native_proc, &native_exitcode, &native_exitwhy, native_waithow);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
 
   mrb_value results = mrb_ary_new(mrb);
   mrb_ary_push(mrb, results, mrb_fixnum_value(result));
@@ -6767,10 +6605,6 @@ mrb_APR_apr_procattr_create(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_procattr_create(&native_new_attr, native_cont);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
@@ -7587,10 +7421,6 @@ mrb_APR_apr_sockaddr_equal(mrb_state* mrb, mrb_value self) {
   int result = apr_sockaddr_equal(native_addr1, native_addr2);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -7766,10 +7596,6 @@ mrb_APR_apr_socket_accept(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_accept(&native_new_sock, native_sock, native_connection_pool);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   RETURN_ERRNO_AND_OUTPUT(result, mruby_box_apr_socket_t(mrb, native_new_sock));
 }
 #endif
@@ -7925,10 +7751,6 @@ mrb_APR_apr_socket_bind(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_bind(native_sock, native_sa);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -7967,10 +7789,6 @@ mrb_APR_apr_socket_close(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_close(native_thesocket);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -8016,10 +7834,6 @@ mrb_APR_apr_socket_connect(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_connect(native_sock, native_sa);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -8066,10 +7880,6 @@ mrb_APR_apr_socket_create(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_create(&native_new_sock, native_family, native_type, native_protocol, native_cont);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   RETURN_ERRNO_AND_OUTPUT(result, mruby_box_apr_socket_t(mrb, native_new_sock));
 }
 #endif
@@ -8191,10 +8001,6 @@ mrb_APR_apr_socket_listen(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_listen(native_sock, native_backlog);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -8236,10 +8042,6 @@ mrb_APR_apr_socket_opt_get(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_opt_get(native_sock, native_opt, &native_on);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   RETURN_ERRNO_AND_OUTPUT(result, mrb_fixnum_value(native_on));
 }
 #endif
@@ -8280,10 +8082,6 @@ mrb_APR_apr_socket_opt_set(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_opt_set(native_sock, native_opt, native_on);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -8323,10 +8121,6 @@ mrb_APR_apr_socket_protocol_get(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_protocol_get(native_sock, &native_protocol);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   RETURN_ERRNO_AND_OUTPUT(result, mrb_fixnum_value(native_protocol));
 }
 #endif
@@ -8367,10 +8161,6 @@ mrb_APR_apr_socket_recv(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_recv(native_sock, native_buf, &size);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
 
   mrb_value result_string = mrb_str_new(mrb, native_buf, size);
   free(native_buf);
@@ -8424,10 +8214,6 @@ mrb_APR_apr_socket_recvfrom(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_recvfrom(native_from, native_sock, native_flags, native_buf, &size);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value buffer = mrb_str_new(mrb, native_buf, size);
@@ -8494,10 +8280,6 @@ mrb_APR_apr_socket_send(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_send(native_sock, native_buf, &size);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   RETURN_ERRNO_AND_OUTPUT(result, mrb_fixnum_value(size));
 }
 #endif
@@ -8608,10 +8390,6 @@ mrb_APR_apr_socket_sendto(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_sendto(native_sock, native_where, native_flags, native_buf, &size);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
 
   RETURN_ERRNO_AND_OUTPUT(result, mrb_fixnum_value(size));
 }
@@ -8695,10 +8473,6 @@ mrb_APR_apr_socket_shutdown(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_shutdown(native_thesocket, native_how);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -8738,10 +8512,6 @@ mrb_APR_apr_socket_timeout_get(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_timeout_get(native_sock, &native_t);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   if (native_t > MRB_INT_MAX) {
      mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
      return mrb_nil_value();
@@ -8784,10 +8554,6 @@ mrb_APR_apr_socket_timeout_set(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_timeout_set(native_sock, native_t);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   return return_value;
@@ -8828,10 +8594,6 @@ mrb_APR_apr_socket_type_get(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_socket_type_get(native_sock, &native_type);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   RETURN_ERRNO_AND_OUTPUT(result, mrb_fixnum_value(native_type));
 }
 #endif
@@ -9185,10 +8947,6 @@ mrb_APR_apr_temp_dir_get(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_temp_dir_get(&native_temp_dir, native_p);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
@@ -10307,10 +10065,6 @@ mrb_APR_apr_tokenize_to_argv(mrb_state* mrb, mrb_value self) {
   apr_status_t result = apr_tokenize_to_argv(native_arg_str, &native_argv_out, native_token_context);
 
   /* Box the return value */
-  if (result > MRB_INT_MAX) {
-    mrb_raise(mrb, mrb->eStandardError_class, "MRuby cannot represent integers greater than MRB_INT_MAX");
-    return mrb_nil_value();
-  }
   mrb_value return_value = mrb_fixnum_value(result);
 
   mrb_value results = mrb_ary_new(mrb);
