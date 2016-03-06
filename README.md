@@ -22,11 +22,10 @@ A cross-platform MRuby port of the core system libraries from CRuby:
 Specs
 -----
 
-[See the ruby/spec results](https://googledrive.com/host/0B0NNQZ6fVYyiZHlPNTk1dDA5YVE)
+[See the ruby/spec results](https://googledrive.com/host/0B0NNQZ6fVYyiSzNlREV1ODZIWEU)
 
 - [mruby-spec](https://github.com/jbreeden/mruby-spec) is used to run relevant portions of [ruby/spec](https://github.com/ruby/spec)
   against [mruby](https://github.com/mruby/mruby).
-  + This is a recent addition. Currently working to get more of the tests passing.
 - The original `mruby-apr` specs are [here](./specs).
 
 Building
