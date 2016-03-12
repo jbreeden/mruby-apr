@@ -83,18 +83,19 @@ EOS
   end
 
   spec.rbfiles = %w[
-    io.rb
-    file.rb
-    dir.rb
-    glob.rb
-    basic_socket.rb
-    ipsocket.rb
-    tcpsocket.rb
-    tcpserver.rb
-    udpsocket.rb
-    socket_error.rb
-    kernel.rb
-  ].map { |name| "#{$APR_GEM_DIR}/mrblib/#{name}" }
+    mruby_backport_utils
+    io
+    file
+    dir
+    glob
+    basic_socket
+    ipsocket
+    tcpsocket
+    tcpserver
+    udpsocket
+    socket_error
+    kernel
+  ].map { |name| "#{$APR_GEM_DIR}/mrblib/#{name}.rb" }
     .concat(Dir["#{$APR_GEM_DIR}/mrblib/**/*.rb"])
     .map { |f| File.expand_path(f) }
     .uniq

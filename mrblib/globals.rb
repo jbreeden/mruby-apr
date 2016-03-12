@@ -3,6 +3,7 @@
 #  we can simply return false for these requires.)
 $BUILTIN_FEATURES = %w[
   find
+  fileutils
   forwardable
   observer
   ostruct
