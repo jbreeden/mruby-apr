@@ -226,6 +226,10 @@ class File < IO
     Pathname.join(*strings)
   end
 
+  def self.path(str)
+    Private::to_path_str(str)
+  end
+
   def self.read(path)
     path = Private.to_path_str(path)
     result = nil

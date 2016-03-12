@@ -78,6 +78,7 @@ class Dir
     if block.nil?
       err = APR.dir_chdir(path)
       APR.raise_apr_errno(err)
+      0
     else
       prev = pwd
       begin

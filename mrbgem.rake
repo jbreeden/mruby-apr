@@ -82,17 +82,18 @@ EOS
   raise "MRuby-APR requires MRB_INT64 to be set"
   end
 
-  spec.rbfiles = [
-    "io.rb",
-    "file.rb",
-    "dir.rb",
-    "glob.rb",
-    "basic_socket.rb",
-    "ipsocket.rb",
-    "tcpsocket.rb",
-    "tcpserver.rb",
-    "udpsocket.rb",
-    "socket_error.rb"
+  spec.rbfiles = %w[
+    io.rb
+    file.rb
+    dir.rb
+    glob.rb
+    basic_socket.rb
+    ipsocket.rb
+    tcpsocket.rb
+    tcpserver.rb
+    udpsocket.rb
+    socket_error.rb
+    kernel.rb
   ].map { |name| "#{$APR_GEM_DIR}/mrblib/#{name}" }
     .concat(Dir["#{$APR_GEM_DIR}/mrblib/**/*.rb"])
     .map { |f| File.expand_path(f) }

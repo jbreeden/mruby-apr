@@ -16,9 +16,6 @@ module FileTest
   #   end
   # end
 
-  # Define module's own methods as module functions
-  extend FileTest
-
   def blockdev?(path)
     path = File::Private.to_path_str(path)
     FileTest.is_type?(path, APR::Filetype::APR_BLK)
@@ -158,6 +155,10 @@ module FileTest
     path = File::Private.to_path_str(path)
     stat = File::Stat.new(path) rescue nil
     !stat.nil? && stat.zero?
+  end
+  
+  instance_methods.each do |m|
+    self.module_function m
   end
 end
 
