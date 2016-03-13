@@ -177,7 +177,7 @@ class File < IO
     if p.absolute?
       "/#{parts.join(File::SEPARATOR)}"
     else
-      parts.join(File::SEPARATOR)
+      (result = parts.join(File::SEPARATOR)) == '' ? '.' : result
     end
   end
   

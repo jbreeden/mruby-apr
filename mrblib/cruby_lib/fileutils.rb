@@ -261,7 +261,7 @@ module FileUtils
     fu_output_message "rmdir #{parents ? '-p ' : ''}#{list.join ' '}" if verbose
     return if noop
     list.each do |dir|
-      p = proc {
+      begin
         Dir.rmdir(dir = remove_trailing_slash(dir))
         if parents
           until (parent = File.dirname(dir)) == '.' or parent == dir
@@ -269,18 +269,7 @@ module FileUtils
             Dir.rmdir(dir)
           end
         end
-      }
-      unless on_mruby?
-        begin
-          p[]
-        rescue Errno::ENOTEMPTY, Errno::EEXIST, Errno::ENOENT
-        end
-      end
-      if on_mruby?
-        begin
-          p[]
-        rescue SystemCallError
-        end
+      rescue Errno::ENOTEMPTY, Errno::EEXIST, Errno::ENOENT => ex
       end
     end
   end

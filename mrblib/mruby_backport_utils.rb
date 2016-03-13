@@ -31,21 +31,20 @@ end
 class Module
   def def_with_kwargs(name, kwargs, &implementation)
     self.define_method(name) do |*args, &block|
-      expected_argc = implementation.arity - kwargs.keys.length
-      
-      if args.last.kind_of?(Hash)
-        expected_argc += 1
-      end
-        
-      if args.length != expected_argc
-        raise ArgumentError.new("Wrong number of arguments: Expected #{expected_argc}, got #{args.length}")
-      end
-      
       overrides = {}
       overrides = args.pop if args.last.kind_of?(Hash)
-      kwargs.keys.inject(args) { |args, k| args.push(overrides[k] || kwargs[k]) }
       
-      implementation.call(*args, &block)
+      kwargs.keys.each { |k| args.push(overrides[k] || kwargs[k]) }
+      
+      unless self.respond_to?("#{name}_implementation".to_sym)
+        if self.class == Class
+          self.class.define_method("#{name}_implementation", &implementation)
+        else
+          (class << self; self; end).define_method("#{name}_implementation", &implementation)
+        end
+      end
+      
+      self.send("#{name}_implementation", *args, &block)
     end
   end
 end

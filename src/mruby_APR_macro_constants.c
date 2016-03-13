@@ -9,6 +9,9 @@ void
 mruby_APR_define_macro_constants(mrb_state* mrb) {
 /* MRUBY_BINDING: pre_macro_definitions */
 /* sha: user_defined */
+
+#include "./mruby_APR_macro_constants_errnos.h"
+
 #if defined(_WIN32)
   /* Defining RUBY_PLATFORM for running RubySpec on MRuby */
   mrb_define_const(mrb, mrb->object_class, "RUBY_PLATFORM", mrb_str_new_cstr(mrb, "win32"));

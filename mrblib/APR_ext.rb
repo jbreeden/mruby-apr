@@ -9,7 +9,7 @@ module APR
       return if apr_errno == err
     end
     if apr_errno != APR::APR_SUCCESS
-      raise SystemCallError.new("ERROR: #{apr_errno} #{APR.strerror(apr_errno)}", APR.to_os_error(apr_errno))
+      raise SystemCallError.new(APR.strerror(apr_errno), APR.to_os_error(apr_errno))
     end
   end
 

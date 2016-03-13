@@ -1,7 +1,27 @@
 class SystemCallError < StandardError
-  def initialize(msg, errno = nil)
-    super(msg)
+  class << self
+    alias _new new
+  end
+  
+  def self.new(msg, errno)
+    if (subclass = Errno.lookup(errno))
+      subclass.new(msg)
+    else
+      self._new(msg, errno)
+    end
+  end
+  
+  def initialize(msg, errno)
+    if self.class == ::SystemCallError
+      super("Unkown Error (#{errno}) - #{msg}")
+    else
+      super("#{self.class.name} (#{errno}) - #{msg}")
+    end
     @errno = errno
+  end
+  
+  def inspect
+    "#<#{self.class.name}>: #{message}"
   end
 
   def errno
@@ -9,21 +29,34 @@ class SystemCallError < StandardError
   end
 end
 
-# A mock Errno module, mostly for API compatability until
-# real Errno support is added.
 module Errno
-  def self.const_missing(const)
+  @lookup = {}
+  
+  def self.define(name, errno)
     errClass = Class.new(SystemCallError)
-    errClass.class_eval do
-      class << self
-        attr_reader :name
-      end
-      @name = const.to_s
-      def initialize(msg)
-        super("#{self.class.name} msg")
-      end
+    
+    errClass.define_singleton_method(:new) do |*args|
+      self._new(*args)
     end
-    Errno.const_set(const, errClass)
+    
+    errClass.define_singleton_method(:name) do
+      @name ||= name.to_s
+    end
+    
+    errClass.define_method(:initialize) do |msg|
+      super(msg, errno)
+    end
+    
+    Errno.const_set(name, errClass)
+    @lookup[errno] = errClass
     errClass
+  end
+  
+  def self.lookup(errno)
+    @lookup[errno]
+  end
+  
+  APR::Errno.constants(false).each do |const|
+    ::Errno.define(const, APR::Errno.const_get(const))
   end
 end
