@@ -18,6 +18,7 @@ class Dir
     err, @native_dir = APR.dir_open @path, @pool
     APR.raise_apr_errno(err)
     @closed = false
+    @pos = 0
   end
   
   def self.open(path, &block)
@@ -40,11 +41,10 @@ class Dir
   end
   
   def close
-    unless @closed
-      err = APR.dir_close(@native_dir)
-      APR.raise_apr_errno(err)
-      @closed = true
-    end
+    assert_open
+    err = APR.dir_close(@native_dir)
+    APR.raise_apr_errno(err)
+    @closed = true
   end
   
   def each(&block)
@@ -63,14 +63,22 @@ class Dir
     assert_open
     err, finfo = APR.dir_read APR::APR_FINFO_NAME, @native_dir
     APR.raise_apr_errno(err, ignore: [APR::APR_INCOMPLETE, APR::APR_ENOENT])
+    @pos += 1
     (err == APR::APR_ENOENT || finfo.nil?) ? nil : finfo.name
   end
   
   def rewind
     assert_open
+    @pos = 0
     err = APR.dir_rewind(@native_dir)
     APR.raise_apr_errno(err)
   end
+  
+  def tell
+    assert_open
+    @pos
+  end
+  alias pos tell
 
   def self.chdir(path = nil, &block)
     path = Dir.home unless path
@@ -100,6 +108,7 @@ class Dir
       err = APR.dir_remove(path, pool)
       APR.raise_apr_errno(err)
     end
+    0
   end
   class << self
     alias rmdir delete

@@ -221,6 +221,13 @@ class File < IO
 
     return path[dot_idx..(path.length)]
   end
+  
+  def self.fnmatch(pattern, file, flags = 0)
+    APR.fnmatch(pattern, file, flags) == 0
+  end
+  class << self
+    alias fnmatch? fnmatch
+  end
 
   def self.join(*strings)
     Pathname.join(*strings)

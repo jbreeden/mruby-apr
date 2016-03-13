@@ -250,7 +250,13 @@ class Dir
         end
         acc.concat(results)
       end
-      acc
+      
+      if block_given?
+        acc.each { |el| yield el }
+        nil
+      else
+        acc
+      end
     end
     alias [] glob
   end
