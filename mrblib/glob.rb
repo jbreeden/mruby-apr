@@ -233,13 +233,17 @@ class Dir
 
   class << self
     def glob(*patterns)
-      pattern = pattern.to_path if pattern.respond_to?(:to_path)
-      results = []
-      globber = Globber.new
-      globber.glob(pattern) do |match, match_num|
-        results.push(match)
+      acc = []
+      patterns.each do |pattern|
+        pattern = pattern.to_path if pattern.respond_to?(:to_path)
+        results = []
+        globber = Globber.new
+        globber.glob(pattern) do |match, match_num|
+          results.push(match)
+        end
+        acc.concat(results)
       end
-      results
+      acc
     end
     alias [] glob
   end
