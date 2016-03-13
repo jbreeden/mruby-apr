@@ -249,6 +249,25 @@ class File < IO
   def self.stat(path)
     Stat.new(Private.to_path_str(path))
   end
+  
+  def self.truncate(path, length)
+    raise TypeError.new("Expected length to be a Fixnum") unless length.kind_of?(Fixnum)
+    raise Errno::EINVAL.new(length) if length < 0
+    
+    path = Private.to_path_str(path)
+    new_contents = length == 0 ?
+      '' :
+      File.read(path)[0...length]
+      
+    File.open(path, 'w') do |f|
+      f.write(new_contents)
+      if new_contents.length < length
+        f.write("\000" * (length - new_contents.length))
+      end
+    end
+    
+    length
+  end
 
   #<
   # ## `#flock(locking_constant)`

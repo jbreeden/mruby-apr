@@ -157,6 +157,19 @@ class IO
       return bidirectional_pipe
     end
   end
+  
+  def self.read(path, length = nil, offset = nil)
+    result = nil
+    File.open(path, 'r') do |f|
+      f.seek(offset) if offset
+      if length
+        result = f.read(length)
+      else
+        result = f.read()
+      end
+    end
+    result
+  end
 
   # Default Implementation of IO Instance Methods
   # ---------------------------------------------
