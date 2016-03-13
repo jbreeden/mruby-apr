@@ -1,4 +1,39 @@
 class File < IO
+  module Constants
+    RDONLY = 0
+    WRONLY = 1
+    RDWR = 2
+    APPEND = 8
+    CREAT = 512
+    EXCL = 2048
+    NONBLOCK = 4
+    TRUNC = 1024
+    NOCTTY = 131072
+    BINARY = 0
+    SYNC = 128
+    DSYNC = 4194304
+    NOFOLLOW = 256
+    LOCK_SH = 1
+    LOCK_EX = 2
+    LOCK_UN = 8
+    LOCK_NB = 4
+    if APR::OS == 'Windows'
+      NULL = 'NUL'
+      ALT_SEPARATOR = ?\
+    else
+      ALT_SEPARATOR = nil
+      NULL = '/dev/null'
+    end
+    FNM_NOESCAPE = 1
+    FNM_PATHNAME = 2
+    FNM_DOTMATCH = 4
+    FNM_CASEFOLD = 8
+    FNM_EXTGLOB = 16
+    FNM_SYSCASE = 0
+  end
+  
+  include Constants
+  
   module Private
     def self.to_path_str(path, is_optional=false)
       if path.kind_of?(String)
@@ -19,14 +54,6 @@ class File < IO
   
   SEPARATOR = ?/
   Separator = SEPARATOR
-
-  if APR::OS == 'Windows'
-    NULL = 'NUL'
-    ALT_SEPARATOR = ?\
-  else
-    ALT_SEPARATOR = nil
-    NULL = '/dev/null'
-  end
   
   # Modes:
   # "r"  Read-only, starts at beginning of file  (default mode).
