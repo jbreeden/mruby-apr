@@ -234,6 +234,13 @@ class Dir
   class << self
     def glob(*patterns)
       acc = []
+      patterns = patterns.flatten
+      first = patterns.first
+      
+      if patterns.length == 1 && first.kind_of?(String) && first.include?("\0")
+        patterns = first.split("\0")
+      end
+      
       patterns.each do |pattern|
         pattern = pattern.to_path if pattern.respond_to?(:to_path)
         results = []
