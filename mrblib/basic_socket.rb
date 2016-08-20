@@ -181,22 +181,34 @@ class BasicSocket < IO
   # ----------------
 
   def close
+    assert_can_read
     @can_read = false
     @can_write = false
-    err = APR.socket_close(@apr_socket)
-    APR.raise_apr_errno(err)
+    ignored_err = APR.socket_close(@apr_socket)
   end
 
   def close_read
+    assert_can_read
     @can_read = false
-    err = APR.socket_shutdown(@apr_socket, APR::ShutdownHow::APR_SHUTDOWN_READ)
-    APR.raise_apr_errno(err)
+    ignored_err = APR.socket_shutdown(@apr_socket, APR::ShutdownHow::APR_SHUTDOWN_READ)
   end
 
   def close_write
+    assert_can_write
     @can_write = false
-    err = APR.socket_shutdown(@apr_socket, APR::ShutdownHow::APR_SHUTDOWN_WRITE)
-    APR.raise_apr_errno(err)
+    ignored_err = APR.socket_shutdown(@apr_socket, APR::ShutdownHow::APR_SHUTDOWN_WRITE)
+  end
+  
+  def closed?
+    !(@can_read || @can_write)
+  end
+  
+  def read_closed?
+    !@can_read
+  end
+  
+  def write_closed?
+    !@can_write
   end
 
   # def connect_address

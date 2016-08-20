@@ -47,6 +47,10 @@ module Errno
       super(msg, errno)
     end
     
+    errClass.define_method(:inspect) do |msg|
+      "#<#{self.class.name}>: #{self.message}"
+    end
+    
     Errno.const_set(name, errClass)
     @lookup[errno] = errClass
     errClass

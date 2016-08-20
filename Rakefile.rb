@@ -1,3 +1,5 @@
+require 'mruby/rake/tasks'
+
 # Util Functions
 # --------------
 

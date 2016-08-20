@@ -234,15 +234,10 @@ module FileUtils
 
   def fu_mkdir(path, mode)   #:nodoc:
     path = remove_trailing_slash(path)
-    unless on_mruby?
-      if mode
-        Dir.mkdir path, mode
-        File.chmod mode, path
-      else
-        Dir.mkdir path
-      end
-    end
-    if on_mruby?
+    if mode && !on_mruby?
+      Dir.mkdir path, mode
+      File.chmod mode, path
+    else
       Dir.mkdir path
     end
   end

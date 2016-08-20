@@ -35,6 +35,7 @@ $, = nil
 module RbConfig
   CONFIG = Hash.new do |h, k|
     if k == 'bindir'
+      # TODO: WINDOWS SUPPORT?
       h['bindir'] = File.dirname(`which mruby`.strip)
     else
       raise "RbConfig[#{k} : #{k.class}]"
