@@ -1,7 +1,4 @@
+.bundle/
+bin/
 build/
-spec.txt
-functions.txt
-mirb
-declarations.json
-bindings/
-mruby-bindings.out/
+vendor/

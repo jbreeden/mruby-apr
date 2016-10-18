@@ -25,21 +25,25 @@ def configure_mruby_apr_win(spec)
 end
 
 def configure_mruby_apr_lin(spec)
-  unless Dir.exists? '/usr/local/apr'
-    $stderr.puts 'Expected to find APR installed in /usr/local.'
-    $stderr.puts 'To install APR, download the source and run `configure && make && sudo make install`'
+  apr_1_config = '/usr/local/apr/bin/apr-1-config'
+  global_apr_1_config = `which apr-1-config`.strip
+
+  if File.exists?(global_apr_1_config)
+    apr_1_config = global_apr_1_config
+  end
+
+  unless File.exists?(apr_1_config)
+    $stderr.puts 'Could not find apr-1-config executable on PATH or in /usr/local/apr/bin (the default make install target).'
+    $stderr.puts 'Please download and install APR. (Or build from source with a  `configure && make && sudo make install`.)'
     raise 'APR not found'
   end
-  apr_include_dir = `/usr/local/apr/bin/apr-1-config --includes`.sub('-I', '').strip
+
+  apr_include_dir = `#{apr_1_config} --includes`.sub('-I', '').strip
   spec.cc.include_paths << apr_include_dir
   spec.cxx.include_paths << apr_include_dir
-  spec.linker.library_paths << '/usr/local/apr/lib'
-  spec.linker.libraries = spec.linker.libraries.concat `/usr/local/apr/bin/apr-1-config --libs`.
-    split(' ').
-    map { |flag|
-      flag.gsub(/^-l/, '').strip
-    }
-  spec.linker.flags_before_libraries << '/usr/local/apr/lib/libapr-1.a'
+
+  apr_ldflags = `#{apr_1_config} --link-ld --libs`.strip
+  spec.linker.flags_after_libraries << apr_ldflags
 end
 
 def configure_mruby_apr(spec)

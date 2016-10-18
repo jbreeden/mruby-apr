@@ -1,5 +1,3 @@
-require 'mruby_bindings'
-
 namespace :bindings do
   desc 'Extract type information from C files'
   task :scrape do
@@ -39,6 +37,7 @@ namespace :bindings do
   desc 'Inspect all declarations in an interactive Pry shell (require pry gem)'
   task :pry do
     require 'pry'
+    require 'mruby_bindings'
     MRubyBindings.read_declarations("declarations.json") do |lib|
       binding.pry
     end
